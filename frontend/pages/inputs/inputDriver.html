@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                font-family: Arial,sans-serif;
+            }
+            fieldset{
+                margin: auto;
+                width: 90%;
+                max-width: 500px;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                padding: 8px;
+                border: 1px solid darkgrey;
+                border-radius: 5px;
+            }
+            div{
+                display: block;
+                width: 100%;
+                gap: 5px;
+                margin-bottom: 10px;
+            }
+            label{
+                color: gainsboro;
+                font-weight: bold;
+                width: 50%;
+                text-align: left;
+            }
+            #id,#name,#address,#phone{
+                border-top: hidden;
+                border-left: hidden;
+                border-right: hidden;
+                border-color: black;
+                border-bottom: solid 0.5px;
+                
+            }
+            #district{
+                width: 25%;
+                border: 1px solid darkgrey;
+                border-radius: 3px;
+            }
+            fieldset div:last-child{
+                display: flex;
+                justify-content: right;
+            }
+            #send,#clear{
+                width: 25%;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                padding: 5px;
+            }
+            h2{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+            <h2>Insert Driver</h2>
+            <form action="">
+                <fieldset>
+                    <div>
+                        <label for="id">ID:</label>
+                        <input type="text" id="id">
+                    </div>
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name">
+                    </div>
+                    <div>
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone">
+                    </div>
+                    <div>
+                        <label for="address">Address:</label>
+                        <input type="text" id="address">
+                    </div>
+                    <div>
+                        <select id="district">
+                            <option value="selected hidden">District</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="submit" name="Send" id="send">
+                        <input type="reset" value="Clear" id="clear">
+                    </div>                
+                </fieldset>
+            </form>
+    </body>
+</html>
