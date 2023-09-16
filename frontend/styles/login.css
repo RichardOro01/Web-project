@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    background: linear-gradient(106.85deg, #009FA3 3.96%, #607dff 96.25%);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#form-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding: 18px 24px;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+    height: max-content;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid grey;
+    width: 100%;
+}
+
+button {
+    color: white;
+    background-color: #607dff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px;
+    margin-top: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 0px 0px royalblue;
+    transition: all .2s linear;
+}
+
+button:hover {
+    box-shadow: 0 0 5px 0px royalblue;
+}
+
+#bus-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    width: 256px;
+}
+
+.street {
+    height: 4px;
+    border-radius: 5px;
+    background-color: black;
+    position: absolute;
+    bottom: 30px;
+    left: 450px;
+    animation: street-move 1s infinite linear;
+    
+}
+
+#street-1 {
+    width: 10px;
+}
+#street-2 {
+    width: 6px;
+    animation-delay: 50ms;
+}
+#street-3 {
+    width: 40px;
+    animation-delay: 200ms;
+}
+#street-4 {
+    width: 20px;
+    animation-delay: 330ms;
+}
+#street-5 {
+    width: 10px;
+    animation-delay: 590ms;
+}
+#street-6 {
+    width: 30px;
+    animation-delay: 870ms;
+}
+#street-7 {
+    width: 6px;
+    animation-delay: 1150ms;
+}
+
+#bus {
+    position: absolute;
+    animation: bus-move .6s infinite ease-in-out;
+    transform-origin: 50% 100%;
+}
+
+h1, h4 {
+    margin: 0;
+}
+h1 {
+    color: rgb(12, 12, 12);
+}
+h4 {
+    color: gray;
+}
+
+@keyframes street-move {
+    from {
+        left: 480px;
+    }
+    to {
+        left: -40px;
+    }
+}
+
+@keyframes bus-move {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.02);
+    }
+}
