@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,7 +9,7 @@
     <body>
         <main id="form-container">
             <h1>Transbus</h1>
-            <h4>Control de acceso</h4>
+            <h4>Access control</h4>
             <section id="bus-container">
                 <img src="../assets/bus.svg" alt="bus" width="148px" id="bus"/>
                 <span class="street" id="street-1"></span>
@@ -23,13 +23,13 @@
             <form method="post">
                 <div class="form-item">
                     <img src="../assets/icons/user.svg" alt="user" />
-                    <input name="user" type="text" placeholder="user" maxlength="100" />
+                    <input name="user" type="text" placeholder="user" maxlength="100" required/>
                 </div>
                 <div class="form-item">
                     <img src="../assets/icons/lock.svg" alt="user" />
-                    <input name="password" type="password" placeholder="********" maxlength="100" />
+                    <input name="password" type="password" placeholder="********" maxlength="100" required/>
                 </div>
-                <button type="submit">Acceder</button>
+                <button type="submit">Login</button>
             </form>
         </main>
     </body>
