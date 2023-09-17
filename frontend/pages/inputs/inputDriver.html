@@ -1,95 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/Web-project/frontend/styles/driver.CSS">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body{
-                font-family: Arial,sans-serif;
-            }
-            fieldset{
-                margin: auto;
-                width: 90%;
-                max-width: 500px;
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                padding: 8px;
-                border: 1px solid darkgrey;
-                border-radius: 5px;
-            }
-            div{
-                display: block;
-                width: 100%;
-                gap: 5px;
-                margin-bottom: 10px;
-            }
-            label{
-                color: gainsboro;
-                font-weight: bold;
-                width: 50%;
-                text-align: left;
-            }
-            #id,#name,#address,#phone{
-                border-top: hidden;
-                border-left: hidden;
-                border-right: hidden;
-                border-color: black;
-                border-bottom: solid 0.5px;
-                
-            }
-            #district{
-                width: 25%;
-                border: 1px solid darkgrey;
-                border-radius: 3px;
-            }
-            fieldset div:last-child{
-                display: flex;
-                justify-content: right;
-            }
-            #send,#clear{
-                width: 25%;
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                border-radius: 10px;
-                cursor: pointer;
-                padding: 5px;
-            }
-            h2{
-                text-align: center;
-            }
-        </style>
+        <title>Driver</title>
     </head>
     <body>
-            <h2>Insert Driver</h2>
-            <form action="">
-                <fieldset>
-                    <div>
-                        <label for="id">ID:</label>
-                        <input type="text" id="id">
-                    </div>
-                    <div>
-                        <label for="name">Name:</label>
-                        <input type="text" id="name">
-                    </div>
-                    <div>
-                        <label for="phone">Phone:</label>
-                        <input type="text" id="phone">
-                    </div>
-                    <div>
-                        <label for="address">Address:</label>
-                        <input type="text" id="address">
-                    </div>
-                    <div>
-                        <select id="district">
-                            <option value="selected hidden">District</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="submit" name="Send" id="send">
-                        <input type="reset" value="Clear" id="clear">
-                    </div>                
-                </fieldset>
-            </form>
-    </body>
+        <form action="" class="form">
+            <h2 class="form_title">Insert Driver</h2>
+            <div class="form_container">
+                <div class="form_group">
+                    <input type="text" id="id" class="form_input" placeholder=" " required>
+                    <label for="id" class="form_label">ID:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <input type="text" id="name" class="form_input" placeholder=" " required>
+                    <label for="id" class="form_label">Name:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <input type="text" id="phone" class="form_input" placeholder=" " required>
+                    <label for="phone" class="form_label">Phone:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="form_group">
+                    <input type="text" id="address" class="form_input" placeholder=" " required>
+                    <label for="address" class="form_label">Address:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div>
+                    <select name="district" id="district" class="select-box" required>
+                        <option value="" selected hidden>District</option>
+                    </select>
+                </div>
+                <input type="submit" value="Send" class="buttom">
+                <input type="reset" value="Clear" class="buttom">
+            </div>
+        </form>
+    </body>    
 </html>
