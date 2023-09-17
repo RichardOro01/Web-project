@@ -114,7 +114,6 @@ select option:hover {
 }
 .district{
     color: var(--color);
-    cursor: pointer;
     position: absolute;
     top: 0;
     left: 5px;
