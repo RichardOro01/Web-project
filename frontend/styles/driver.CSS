@@ -99,17 +99,17 @@ select {
     font-size: 16px;
     text-align: center;
     cursor: pointer; 
-  }
-  select:focus {
+}
+select:focus {
     outline: none; 
     border-color: #007bff; 
-  }
-  select option {
+}
+select option {
     background-color: #fff; 
     color: #333; 
-  }
-  select option:hover {
+}
+select option:hover {
     background-color: #007bff; 
     color: #fff; 
-  }
+}
 
