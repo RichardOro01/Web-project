@@ -82,18 +82,34 @@ body{
     background-color: #3866f2;
     transform: scale(0);
     transform: left bottom;
-    transition: transform .4s;
+    transition: transform .3s;
 }
 .form_input:focus ~ .form_line,
 .form_input:not(:placeholder-shown) ~ .form_line{
     transform: scale(1);
 }
-.select-box{
-    border: none;
-    padding: 0 30px 0 15px;
+select {
     width: 50%;
-    color: #fff;
-    background-color: #3866f2;
-    font-size: 20px;
-    border-radius: .5em;
-}
+    appearance: none; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #fff; 
+    color: #333; 
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer; 
+  }
+  select:focus {
+    outline: none; 
+    border-color: #007bff; 
+  }
+  select option {
+    background-color: #fff; 
+    color: #333; 
+  }
+  select option:hover {
+    background-color: #007bff; 
+    color: #fff; 
+  }
+
