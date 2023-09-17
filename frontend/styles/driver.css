@@ -112,3 +112,10 @@ select option:hover {
     background-color: #007bff; 
     color: #fff; 
 }
+.district{
+    color: var(--color);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
