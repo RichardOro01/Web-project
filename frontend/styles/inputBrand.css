@@ -1,0 +1,72 @@
+body{
+    background-color: #e5e5f7;
+    
+   
+}
+
+form{
+    width: 600px;
+    background-color: #fff;
+    margin: auto;
+    margin-top: 50px;
+    border: solid 2px;
+    border-radius: 2px;
+    border-color: lightgrey;
+    
+
+}
+
+
+
+.item1{
+    grid-area: item1;
+    display: flex;
+    flex-direction: column;
+}
+
+.item2{
+    grid-area: item2;
+}
+
+.item3{
+    grid-area: item3;
+    margin-top: 10px;
+}
+
+.item4{
+    grid-area: item4;
+    margin-top: 10px;
+}
+
+footer{
+    grid-area: footer;
+    display: flex;
+    justify-content: end;
+    margin-top: 100px;
+    border-top: solid 1px;
+    padding-top: 5px;
+}
+
+select{
+   width: 100%;
+   margin-top: 2px;
+}
+
+input{
+    width: 96%;
+    margin-top: 2px;
+}
+
+div{
+    padding: 10px;
+
+}
+
+.container{
+    margin: 20px;
+    display: grid;
+    grid-template-areas:
+    "item1 item2"
+    "item3 item4"
+    "footer footer";
+}
