@@ -31,7 +31,7 @@ body{
 }
 .form_group{
     position: relative;
-    --color: #57575773;   
+    --color: #575757;   
 }
 .form_input{
     width: 100%;
@@ -49,7 +49,7 @@ body{
 }
 .form_input:focus + .form_label,
 .form_input:not(:placeholder-shown)+.form_label{
-    transform: translateY(-12px) scale(.7);
+    transform: translateY(-12px) scale(.85);
     transform-origin: left top;
     color: #3866f2;
 }
