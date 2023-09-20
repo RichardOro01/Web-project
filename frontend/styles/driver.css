@@ -29,7 +29,7 @@ body{
     display: grid;
     gap: 2.5em;
 }
-.form_group{
+.text_group{
     position: relative;
     --color: #57575773;   
 }
@@ -88,17 +88,17 @@ body{
 .form_input:not(:placeholder-shown) ~ .form_line{
     transform: scale(1);
 }
-select {
-    width: 50%;
-    appearance: none; 
-    padding: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    background-color: #fff; 
-    color: #333; 
-    font-size: 16px;
-    text-align: center;
-    cursor: pointer; 
+select{
+    width: 100%;
+    background: none;
+    color: #706c6c;
+    font-size: 1rem;
+    padding: .6em .3em;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color) !important;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: left;
 }
 select:focus {
     outline: none; 
@@ -112,9 +112,23 @@ select option:hover {
     background-color: #007bff; 
     color: #fff; 
 }
-.district{
-    color: var(--color);
+.select{
+    color: #57575773;
+    cursor: pointer;
     position: absolute;
     top: 0;
     left: 5px;
+    transform: translateY(-10px);
+    transition: transform .5s, color .3s;
 }
+.select_group{
+    --color: #57575773;
+    color: var(--color);
+    position: relative;
+}
+
+
+
+
+
+
