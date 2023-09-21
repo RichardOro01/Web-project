@@ -10,35 +10,40 @@
         <form class="form" method="post">
             <h2 class="form_title">Insert Driver</h2>
             <div class="form_container">
-                <div class="form_group">
+                <div class="text_group">
                     <input type="text" id="id" class="form_input" placeholder=" " required>
                     <label for="id" class="form_label">ID:</label>
                     <span class="form_line"></span>
                 </div>
-                <div class="form_group">
+                <div class="text_group">
                     <input type="text" id="name" class="form_input" placeholder=" " required>
                     <label for="name" class="form_label">Name:</label>
                     <span class="form_line"></span>
                 </div>
-                <div class="form_group">
+                <div class="text_group">
                     <input type="text" id="phone" class="form_input" placeholder=" " required>
                     <label for="phone" class="form_label">Phone:</label>
                     <span class="form_line"></span>
                 </div>
-                <div class="form_group">
+                <div class="text_group">
                     <input type="text" id="address" class="form_input" placeholder=" " required>
                     <label for="address" class="form_label">Address:</label>
                     <span class="form_line"></span>
                 </div>
-                <div class="form_group">
-                    <label for="dst" class="district">District: </label>
+                <div class="select_group">
                     <select id="dst" required>
-                        <option value="" selected hidden>Select</option>
+                        <option value="null" selected hidden></option>
+                        <option value="op2">hola</option>
                     </select>
+                    <label for="dst" class="form_label_select">District: </label>
+                    <span class="form_line"></span>
+                    <div class="form_static_line"></div>
+                    <img src="../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
                 </div>
                 <input type="submit" value="Send" class="buttom">
                 <input type="reset" value="Clear" class="buttom">
             </div>
         </form>
-    </body>    
+        <script src="../../scripts/selectAnimation.js"></script>
+    </body>
 </html>
