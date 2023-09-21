@@ -11,22 +11,22 @@
             <h2 class="form_title">Insert Driver</h2>
             <div class="form_container">
                 <div class="text_group">
-                    <input type="text" id="id" class="form_input" placeholder=" " maxlength="11" required>
+                    <input type="text" id="id" class="form_input" placeholder=" " required>
                     <label for="id" class="form_label">ID:</label>
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="text" id="name" class="form_input" placeholder=" " maxlength="35" onkeypress='return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122' required>
+                    <input type="text" id="name" class="form_input" placeholder=" " required>
                     <label for="name" class="form_label">Name:</label>
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group" >
-                    <input type="text" id="phone" class="form_input" placeholder=" " maxlength="8" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                    <input type="text" id="phone" class="form_input" placeholder=" "  required>
                     <label for="phone" class="form_label">Phone:</label>
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="text" id="address" class="form_input" placeholder=" " maxlength="35" required>
+                    <input type="text" id="address" class="form_input" placeholder=" " required>
                     <label for="address" class="form_label">Address:</label>
                     <span class="form_line"></span>
                 </div>
@@ -44,6 +44,7 @@
                 <input type="reset" value="Clear" class="buttom">
             </div>
         </form>
+        <script src="../../scripts/regularPhrase.js"></script>
         <script src="../../scripts/selectAnimation.js"></script>
         <script src="../../scripts/driverValid.js"></script>
     </body>
