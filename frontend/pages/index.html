@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../styles/index.css">
     </head>
     <body>
-        <header>
+        <header id="header">
             <div id="header-main">
                 <img src="../assets/bus.svg" alt="bus" width="50px" />
                 <div>
@@ -16,75 +16,89 @@
                     <h5>An effective bus</h5>
                 </div>
             </div>
-            <nav>
-                User
-            </nav>
+            <div id="header-secondary">
+                <nav>
+                    <span onclick="scrollToId('management')">
+                        Management
+                    </span>
+                    <span onclick="scrollToId('services')">
+                        Services
+                    </span>
+                    <span onclick="scrollToId('others')">
+                        Others
+                    </span>
+                </nav>
+                <span>
+                    User
+                </span>
+            </div>
 
         </header>
         <main>
-            <section>
-                <h1>Managmment</h1>
+            <section id="management">
+                <h1>Management</h1>
                 <div class="box-container">
                     <div>
-                        <img src="../assets/bus.svg" alt="Contract"/>
+                        <img src="../assets/icons/items/contract-sign-line.svg" alt="Contract"/>
                         <h2>Contract</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Service" />
+                        <img src="../assets/icons/items/service.svg" alt="Service" />
                         <h2>Service</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Discrepancy" />
+                        <img src="../assets/icons/items/report-text.svg" alt="Discrepancy" />
                         <h2>Discrepancy</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Roadmap" />
+                        <img src="../assets/icons/items/road-map-and-pin.svg" alt="Roadmap" />
                         <h2>Roadmap</h2>
                     </div>
                 </div>
             </section>
-            <section>
+            <section id="services">
                 <h1>Services</h1>
                 <div class="box-container">
                     <div>
-                        <img src="../assets/bus.svg" alt="Brands" />
+                        <img src="../assets/icons/items/brand.svg" alt="Brands" />
                         <h2>Brands</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Cars" />
+                        <img src="../assets/icons/items/car.svg" alt="Cars" />
                         <h2>Cars</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Drivers" />
+                        <img src="../assets/icons/items/id-card.svg" alt="Drivers" />
                         <h2>Drivers</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Couples" />
+                        <img src="../assets/icons/items/couple-user.svg" alt="Couples" />
                         <h2>Couples</h2>
                     </div>
                 </div>
             </section>
-            <section>
-                <h1>Services</h1>
+            <section id="others">
+                <h1>Others</h1>
                 <div class="box-container">
                     <div>
-                        <img src="../assets/bus.svg" alt="District" />
+                        <img src="../assets/icons/items/city.svg" alt="District" />
                         <h2>District</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Fuel" />
+                        <img src="../assets/icons/items/fuel-gas-station.svg" alt="Fuel" />
                         <h2>Fuel</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Country" />
+                        <img src="../assets/icons/items/geography.svg" alt="Country" />
                         <h2>Country</h2>
                     </div>
                     <div>
-                        <img src="../assets/bus.svg" alt="Tour group" />
+                        <img src="../assets/icons/items/tourist.svg" alt="Tour group" />
                         <h2>Tour group</h2>
                     </div>
                 </div>
             </section>
         </main>
+        <script src="../scripts/utils/scroll.js"></script>
     </body>
 </html>
