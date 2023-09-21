@@ -15,6 +15,7 @@ header {
     z-index: 10;
     position: sticky;
     top: 0;
+    color: white;
 }
 
 #header-main {
@@ -32,12 +33,22 @@ header {
     filter: invert(1);
 }
 
-h3, h5 {
-    margin: 0;
+#header-secondary {
+    display: flex;
+    gap: 18px;
 }
 
-h3 {
-    color: white
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+nav > span {
+    cursor: pointer;
+}
+
+h3, h5 {
+    margin: 0;
 }
 
 h5 {

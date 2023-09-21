@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../styles/index.css">
     </head>
     <body>
-        <header>
+        <header id="header">
             <div id="header-main">
                 <img src="../assets/bus.svg" alt="bus" width="50px" />
                 <div>
@@ -16,14 +16,27 @@
                     <h5>An effective bus</h5>
                 </div>
             </div>
-            <nav>
-                User
-            </nav>
+            <div id="header-secondary">
+                <nav>
+                    <span onclick="scrollToId('management')">
+                        Management
+                    </span>
+                    <span onclick="scrollToId('services')">
+                        Services
+                    </span>
+                    <span onclick="scrollToId('others')">
+                        Others
+                    </span>
+                </nav>
+                <span>
+                    User
+                </span>
+            </div>
 
         </header>
         <main>
-            <section>
-                <h1>Managmment</h1>
+            <section id="management">
+                <h1>Management</h1>
                 <div class="box-container">
                     <div>
                         <img src="../assets/bus.svg" alt="Contract"/>
@@ -43,7 +56,7 @@
                     </div>
                 </div>
             </section>
-            <section>
+            <section id="services">
                 <h1>Services</h1>
                 <div class="box-container">
                     <div>
@@ -64,8 +77,8 @@
                     </div>
                 </div>
             </section>
-            <section>
-                <h1>Services</h1>
+            <section id="others">
+                <h1>Others</h1>
                 <div class="box-container">
                     <div>
                         <img src="../assets/bus.svg" alt="District" />
@@ -86,5 +99,6 @@
                 </div>
             </section>
         </main>
+        <script src="../scripts/utils/scroll.js"></script>
     </body>
 </html>
