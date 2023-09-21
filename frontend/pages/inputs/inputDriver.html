@@ -16,7 +16,7 @@
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="text" id="name" class="form_input" placeholder=" " maxlength="35"required>
+                    <input type="text" id="name" class="form_input" placeholder=" " maxlength="35" onkeypress='return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122' required>
                     <label for="name" class="form_label">Name:</label>
                     <span class="form_line"></span>
                 </div>
