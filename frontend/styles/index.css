@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    background: linear-gradient(106.85deg, #009FA3 3.96%, #607dff 96.25%);
+    padding: 10px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-main {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#header-main div {
+    display: flex;
+    flex-direction: column;
+}
+
+#header-main img {
+    filter: invert(1);
+}
+
+h3, h5 {
+    margin: 0;
+}
+
+h3 {
+    color: white
+}
+
+h5 {
+    color: lightcyan
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section > h1 {
+    color: grey;
+    border-bottom: 1px solid gray;
+}
+
+.box-container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.box-container > div {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    border: 1px solid grey;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 3px 5px 15px 1px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.box-container > div:hover {
+    transform: scale(1.05);
+}
+
+.box-container > div > img {
+    width: 140px;
+}
+
+.box-container>div>h2 {
+    position: absolute;
+    bottom: 0px;
+}

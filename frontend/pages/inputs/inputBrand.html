@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Insert brand</title>
 
-<head>
-    <title>Insert brand</title>
-    <link rel="stylesheet" href="/styles/inputBrand.css">
-</head>
-
-<body>
-    <form>
-        <div class="container">
-            <div class="container2">
-                <div class="grid-item item1">
-                    <label for="name">Brand name:</label>
-                    <input type="text" id="name" m>
+        <link rel="stylesheet" href="../../styles/inputBrand.css">
+    </head>
+    <body>
+        <form>
+            <div class="container">
+                <div class="container2">
+                    <div class="grid-item item1">
+                        <label for="name">Brand name:</label>
+                        <input type="text" id="name" m>
+                    </div>
+                    <div class="grid-item item2">
+                        <label for="Seats">Seats amount:</label>
+                        <input type="number" id="Seats" min="1" max="50" value="25" required>
+                    </div>
                 </div>
-                <div class="grid-item item2">
-                    <label for="Seats">Seats amount:</label>
-                    <input type="number" id="Seats min=" 1" max="50" value="25" required>
+                <div class="container3">
+                    <div class="grid-item item3">
+                        <label for="Spending">Spending:</label>
+                        <input type="text" id="Spending" required>
+                    </div>
+                    <div class="grid-item item4">
+                        <label for="select">Fuel type:</label>
+                        <select id="select" required>
+                            <option>Select</option>
+                        </select>
+                    </div>
                 </div>
+                <footer>
+                    <button onclick="alert('hola')">Insertar</button>
+                </footer>
             </div>
-            <div class="container3">
-                <div class="grid-item item3">
-                    <label for="Spending">Spending:</label>
-                    <input type="text" id="Spending" required>
-                </div>
-                <div class="grid-item item4">
-                    <label for="select">Fuel type:</label>
-                    <select id="select" required>
-                        <option>Select</option>
-                    </select>
-                </div>
-            </div>
-            <footer>
-                <button onclick="alert('hola')">Insertar</button>
-            </footer>
-        </div>
-    </form>
-</body>
-
+        </form>
+    </body>
 </html>
