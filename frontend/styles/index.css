@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(106.85deg, #e0e8e8 3.96%, #cdd1df 96.25%);
+}
+
+header {
+    background: linear-gradient(106.85deg, #009FA3 3.96%, #607dff 96.25%);
+    padding: 10px;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    color: white;
+}
+
+#header-main {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+#header-main div {
+    display: flex;
+    flex-direction: column;
+}
+
+#header-main img {
+    filter: invert(1);
+}
+
+#header-secondary {
+    display: flex;
+    gap: 18px;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+nav > span {
+    cursor: pointer;
+}
+
+h3, h5 {
+    margin: 0;
+}
+
+h5 {
+    color: lightcyan
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 10px;
+    align-items: center;
+}
+
+section {
+    max-width: 1050px;
+    width: 100%;
+}
+
+section > div{
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    justify-content: start;
+}
+
+section > h1 {
+    padding: 10px 30px 10px 30px;
+    background-color: white;
+    color: grey;
+    /* border-top-left-radius:  10px;
+    border-top-right-radius: 10px; */
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: max-content;
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.box-container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.box-container > div {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    border: 1px solid grey;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 3px 5px 15px 1px rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.box-container > div:hover {
+    transform: scale(1.05);
+}
+
+.box-container > div > img {
+    width: 100px;
+}
+
+.box-container>div>h2 {
+    position: absolute;
+    bottom: 0px;
+}
