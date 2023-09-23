@@ -16,7 +16,7 @@
 }
 {
     let service = document.getElementById("service");
-    verifyName(service)
+    verifyNumber(service)
 }
 {
     let amount = document.getElementById("amount");
