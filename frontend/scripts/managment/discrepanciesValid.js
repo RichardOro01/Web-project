@@ -1,4 +1,4 @@
-import { verifyDate, verifyDirection, verifyName, verifyNumber } from "../utils/verify";
+
 
 {
     let month = document.getElementById("month");
