@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../../styles/globals.css">
+        <link rel="stylesheet" href="../../../styles/inputs.css">
+        <title>Brand</title>
+    </head>
+    <body>
+        <form class="form" method="post">
+            <h2 class="form_title">Insert Service</h2>
+            <div class="form_container">
+                <div class="text_group">
+                    <input type="text" id="name" class="form_input" placeholder=" " required>
+                    <label for="name" class="form_label">Service name:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="group" class="form_input" placeholder=" " required>
+                    <label for="group" class="form_label">Tour Group:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="country" class="form_input" placeholder=" " required>
+                    <label for="country" class="form_label">Country:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="place" class="form_input" placeholder=" " required>
+                    <label for="place" class="form_label">Pickup place:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="time" class="form_input" placeholder=" " required>
+                    <label for="time" class="form_label">Pickup time:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="pax" class="form_input" placeholder=" " required>
+                    <label for="pax" class="form_label">Pax:</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="service" class="form_input" placeholder=" " required>
+                    <label for="service" class="form_label">Service(kms):</label>
+                    <span class="form_line"></span>
+                </div>
+                <div class="text_group">
+                    <input type="text" id="amount" class="form_input" placeholder=" " required>
+                    <label for="amount" class="form_label">Amount:</label>
+                    <span class="form_line"></span>
+                </div>
+                <input type="submit" value="Send" class="buttom">
+                <input type="reset" value="Clear" class="buttom">
+            </div>    
+        </form>
+        <script src="../../../scripts/utils/verify.js"></script>
+        <script src="../../../scripts/selectAnimation.js"></script>
+        <script src="../../../scripts/managment/serviceValid.js"></script>
+    </body>
+</html>
