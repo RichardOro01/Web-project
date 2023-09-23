@@ -1,16 +1,10 @@
-function validarNumeros(){
+{
+    let fleet_number = document.getElementById("fleet_number");
 
-    let plate = document.querySelector("#plate").value;
-    let n = document.querySelector("#fleet_number").value;
-
-    if(plate === "2"){
-        alert("error");
-        event.preventDefault();
-    }
-
-    if (isNaN(n)) {
-        alert("Fleet Number must be a number");
-        event.preventDefault();
-    } 
+    fleet_number.addEventListener("keypress", function(event){
+        const charCode = event.charCode;
+        if(!(charCode >= 48 && charCode <= 57)){
+            event.preventDefault();
+        }
+    })
 }
-
