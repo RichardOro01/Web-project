@@ -39,5 +39,3 @@ function verifyDirection(dir){
         }    
     })
 }
-
-export {verifyDate,verifyName,verifyNumber,verifyDirection}
