@@ -1,6 +1,6 @@
 {
     let month = document.getElementById("month");
-    verifyName(month)
+    verifyMonth(month)
 }
 {
     let fleet = document.getElementById("fleet");

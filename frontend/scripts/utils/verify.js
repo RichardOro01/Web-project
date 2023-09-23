@@ -25,6 +25,14 @@ function validateInput(element, minCharCode, maxCharCode, maxLength) {
     });
 }
 
+function verifyMonth(element) {
+    element.addEventListener("keypress", (event)=>{
+        if (isNaN(event.key)) event.preventDefault();
+        const number = event.target.value + event.key;
+        if (parseInt(number)>12) event.preventDefault();
+    })
+}
+
 function validateCI(ci){
     const aa = parseInt(ID.slice(0,2), 10);
     const mm = parseInt(ID.slice(2, 4), 10);
