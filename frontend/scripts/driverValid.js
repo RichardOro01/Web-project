@@ -22,46 +22,24 @@
         
     });
 }
-{
-    let name = document.getElementById("name");
-    name.addEventListener("keypress", function(event){
+function validateInput(element, minCharCode, maxCharCode, maxLength) {
+    element.addEventListener("keypress", function(event) {
         const charCode = event.charCode;
-        if(!((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122))) {
+        if (!(charCode >= minCharCode && charCode <= maxCharCode) || element.value.length >= maxLength) {
             event.preventDefault();
-        }else if (name.value.length > 35){
-            event.preventDefault();
-        }    
-    })
+        }
+    });
 }
-{
-    let id = document.getElementById("id");
-    id.addEventListener("keypress", function(event){
-        const charCode = event.charCode;
-        if(!(charCode >= 48 && charCode <= 57)){
-            event.preventDefault();
-        }else if (id.value.length > 10){
-            event.preventDefault();
-        }    
-    })
-}
-{
-    let phone = document.getElementById("phone");
-    phone.addEventListener("keypress", function(event){
-        const charCode = event.charCode;
-        if(!(charCode >= 48 && charCode <= 57)){
-            event.preventDefault();
-        }else if (phone.value.length > 8){
-            event.preventDefault();
-        }    
-    })
-}
-{
-    let address = document.getElementById("address");
-    address.addEventListener("keypress", function(event){
-        const charCode = event.charCode;
-        if (address.value.length > 35){
-            event.preventDefault();
-        }    
-    })
-}
+
+let nameField = document.getElementById("name");
+validateInput(nameField, 65, 122, 35);
+
+let idField = document.getElementById("id");
+validateInput(idField, 48, 57, 10);
+
+let phoneField = document.getElementById("phone");
+validateInput(phoneField, 48, 57, 8);
+
+let addressField = document.getElementById("address");
+validateInput(addressField, 0, 65535, 35);
 
