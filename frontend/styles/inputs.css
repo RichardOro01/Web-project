@@ -12,13 +12,14 @@ body{
     opacity: 0.8;
     display: flex;
     min-height: 100vh;
+    padding: 20px;
 }
 .form{
     background-color: #fff;
     margin: auto;
     width: 90%;
     max-width: 400px;
-    padding: 4.5em 3em;
+    padding: 2.5em 3em;
     border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
     text-align: center;
@@ -66,15 +67,8 @@ body{
     transition: transform .5s, color .3s;
 }
 .buttom{
-    background-color: #3866f2;
-    color: #fff;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 300;
     font-size: 1rem;
     padding: 0.8em 0;
-    border: none;
-    border-radius: .5em;
-    cursor: pointer;
 }
 .form_line{
     position: absolute;
@@ -138,4 +132,14 @@ select:focus {
     position: absolute;
     top: 7px;
     right: 1px;
+}
+
+footer {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+footer > button {
+    flex: 1;
 }
