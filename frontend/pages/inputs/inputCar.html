@@ -12,12 +12,12 @@
             <h2 class="form_title">Insert Car</h2>
             <div class="form_container">
                 <div class="text_group">
-                    <input type="text" class="form_input" id="plate" placeholder=" " required>
+                    <input type="text" class="form_input" id="plate" placeholder=" " required maxlength="10" >
                     <label for="plate" class="form_label">Plate:</label>
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="text" class="form_input" id="fleet_number" placeholder=" " required>
+                    <input type="text" class="form_input" id="fleet_number" placeholder=" " required maxlength="10">
                     <label for="fleet_number" class="form_label">Fleet Number:</label>
                     <span class="form_line"></span>
                 </div>
@@ -41,10 +41,11 @@
                     <div class="form_static_line"></div>
                     <img src="../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
                 </div>
-                <input type="submit" value="Send" class="buttom">
+                <input type="submit" value="Send" class="buttom" onclick="validarNumeros()">
                 <input type="reset" value="Clear" class="buttom">
             </div>
         </form>
         <script src="../../scripts/selectAnimation.js"></script>
+        <script src="../../scripts/carValid.js"></script>
     </body>
 </html>
