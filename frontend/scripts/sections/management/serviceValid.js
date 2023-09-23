@@ -1,5 +1,3 @@
-
-
 {
     let name = document.getElementById("name");
     verifyName(name)
@@ -11,14 +9,6 @@
 {
     let country = document.getElementById("country");
     verifyName(country)
-}
-{
-    let address = document.getElementById("place");
-    verifyDirection(address)
-}
-{
-    let time = document.getElementById("time");
-    verifyDate(time)
 }
 {
     let pax = document.getElementById("pax");

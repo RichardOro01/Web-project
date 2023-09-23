@@ -1,9 +1,3 @@
-
-
-{
-    let date = document.getElementById("date");
-    verifyDate(date)
-}
 {
     let fleet = document.getElementById("fleet");
     verifyNumber(fleet)

@@ -1,5 +1,3 @@
-
-
 {
     let month = document.getElementById("month");
     verifyName(month)

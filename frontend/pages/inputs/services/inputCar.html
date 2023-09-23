@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../styles/globals.css">
-        <link rel="stylesheet" href="../../styles/inputs.css">
+        <link rel="stylesheet" href="../../../styles/globals.css">
+        <link rel="stylesheet" href="../../../styles/inputs.css">
         <title>Car</title>
     </head>
     <body>
@@ -29,7 +29,7 @@
                     <label for="couple" class="form_label_select">Couple: </label>
                     <span class="form_line"></span>
                     <div class="form_static_line"></div>
-                    <img src="../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
+                    <img src="../../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
                 </div>
                 <div class="select_group">
                     <select id="brand" required>
@@ -39,13 +39,14 @@
                     <label for="brand" class="form_label_select">Brand: </label>
                     <span class="form_line"></span>
                     <div class="form_static_line"></div>
-                    <img src="../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
+                    <img src="../../../assets/icons/chevron-down.svg" alt="chevron-down" class="arrow_select">
                 </div>
                 <input type="submit" value="Send" class="buttom" onclick="validarNumeros()">
                 <input type="reset" value="Clear" class="buttom">
             </div>
         </form>
-        <script src="../../scripts/selectAnimation.js"></script>
-        <script src="../../scripts/carValid.js"></script>
+        <script src="../../../scripts/utils/verify.js"></script>
+        <script src="../../../scripts/utils/selectAnimation.js"></script>
+        <script src="../../../scripts/sections/services/carValid.js"></script>
     </body>
 </html>
