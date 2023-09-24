@@ -12,7 +12,7 @@
             <h2 class="form_title">Insert Roadmap</h2>
             <div class="form_container">
                 <div class="text_group">
-                    <input type="text" id="date" class="form_input" placeholder=" " required>
+                    <input type="text" id="date" class="form_input" onfocus="switchInputTypeDate(this)" onblur="switchBackToText(this)" placeholder=" " required>
                     <label for="date" class="form_label">Date:</label>
                     <span class="form_line"></span>
                 </div>
@@ -27,7 +27,7 @@
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="time" id="departure" class="form_input" placeholder=" " required>
+                    <input type="text" id="departure" class="form_input" onfocus="switchInputTypeTime(this)" onblur="switchBackToText(this)" placeholder=" " required>
                     <label for="departure" class="form_label">Departure time:</label>
                     <span class="form_line"></span>
                 </div>
@@ -40,5 +40,6 @@
         <script src="../../../scripts/utils/verify.js"></script>
         <script src="../../../scripts/utils/selectAnimation.js"></script>
         <script src="../../../scripts/sections/management/roadmapsValid.js"></script>
+        <script src="../../../scripts/utils/switchInput.js"></script>
     </body>
 </html>

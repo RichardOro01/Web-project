@@ -17,12 +17,12 @@
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="date" id="start" class="form_input" placeholder=" " required>
+                    <input type="text" id="start" class="form_input" onfocus="switchInputTypeDate(this)" onblur="switchBackToText(this)" placeholder=" " required>
                     <label for="start" class="form_label">Start date:</label>
                     <span class="form_line"></span>
                 </div>
                 <div class="text_group">
-                    <input type="date" id="end" class="form_input" placeholder=" " required>
+                    <input type="text" id="end" class="form_input" onfocus="switchInputTypeDate(this)" onblur="switchBackToText(this)" placeholder=" " required>
                     <label for="end" class="form_label">End date:</label>
                     <span class="form_line"></span>
                 </div>
@@ -55,5 +55,6 @@
         <script src="../../../scripts/utils/verify.js"></script>
         <script src="../../../scripts/utils/selectAnimation.js"></script>
         <script src="../../../scripts/sections/management/contractValid.js"></script>
+        <script src="../../../scripts/utils/switchInput.js"></script>
     </body>
 </html>
