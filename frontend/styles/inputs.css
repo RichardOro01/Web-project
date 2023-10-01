@@ -82,7 +82,7 @@ body{
     transition: transform .3s;
 }
 .form_input:focus ~ .form_line,
-.form_input:not(:placeholder-shown) ~ .form_line, .select_group .select_selected ~ .form_line  {
+.form_input:not(:placeholder-shown) ~ .form_line, .select_group .select_selected ~ .form_line{
     transform: scale(1);
 }
 select{
@@ -142,4 +142,18 @@ footer {
 
 footer > button {
     flex: 1;
+}
+
+input[type=date], input[type=time] {
+    opacity: 0;
+    animation: fadeIn .5s linear forwards;
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
