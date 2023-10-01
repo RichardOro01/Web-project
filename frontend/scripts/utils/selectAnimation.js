@@ -12,7 +12,10 @@
             selects.forEach(select => {
                 select.classList.remove("select_selected");
             })
+            let dates= form.querySelectorAll("input[type=date], input[type=time]")
+            dates.forEach(date => {
+                switchBackToText(date, true);
+            })
         });
     });
-}    
-
+}   
