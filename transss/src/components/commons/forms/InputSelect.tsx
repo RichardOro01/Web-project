@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import arrow from "@/assets/icons/chevron-down.svg";
 import Image from "next/image";
 import styles from "@/styles/inputs.module.css";
@@ -12,22 +12,47 @@ interface InputSelectProps {
   id: string;
   options: Option[];
   label: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLSelectElement>;
+  onBlur?: React.FocusEventHandler<HTMLSelectElement>;
 }
 
 export const InputSelect: React.FC<InputSelectProps> = ({
   options,
   id,
   label,
+  onBlur,
+  onChange,
+  onFocus,
 }) => {
   const [selectSelected, setSelectSelected] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleValueChange: React.ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
+    const { value } = event.target;
+    setSelectSelected(!!value);
+    if (inputRef.current) inputRef.current.value = value;
+    onChange &&
+      onChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
+  };
+
   return (
     <div className={styles.select_group}>
+      <input
+        type="hidden"
+        id="input"
+        ref={inputRef}
+        {...{ onChange }}
+        onChange={(e) => console.log(e)}
+      />
       <select
-        {...{ id }}
+        {...{ id, onFocus, onBlur }}
         className={`${styles.form_select} ${
           selectSelected && styles.select_selected
         }`}
-        onChange={() => setSelectSelected(true)}
+        onChange={handleValueChange}
       >
         <option value="null" selected hidden></option>
         {options.map(({ value, label }) => (

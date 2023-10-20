@@ -15,7 +15,7 @@
 .form_container {
   margin: 1em 0 3em;
   display: grid;
-  gap: 2.5em;
+  gap: 1em;
 }
 .text_group {
   position: relative;

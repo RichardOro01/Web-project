@@ -10,6 +10,8 @@ export interface InputTextProps {
   maxLength?: number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -21,11 +23,23 @@ const InputText: React.FC<InputTextProps> = ({
   min,
   onChange,
   onKeyDown,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <div className={styles.text_group}>
       <input
-        {...{ id, type, max, min, maxLength, onChange, onKeyDown }}
+        {...{
+          id,
+          type,
+          max,
+          min,
+          maxLength,
+          onChange,
+          onKeyDown,
+          onFocus,
+          onBlur,
+        }}
         className={styles.form_input}
         placeholder=" "
         maxLength={20}
