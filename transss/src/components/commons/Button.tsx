@@ -3,7 +3,7 @@ import styles from "@/styles/button.module.css";
 
 interface ButtonProps {
   children: React.ReactElement | string;
-  type: "submit" | "reset" | "button";
+  type?: "submit" | "reset" | "button";
 }
 const Button: React.FC<ButtonProps> = ({ children, type }) => {
   return (

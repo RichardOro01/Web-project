@@ -26,7 +26,7 @@ function Login() {
           <div className="flex gap-1">
             <Image src={user} alt="user" />
             <input
-              className=" outline-none border-b border-solid border-b-gray-500 w-full"
+              className="outline-none border-none border-b  border-b-gray-500 w-full"
               name="user"
               type="text"
               placeholder="user"
@@ -37,7 +37,7 @@ function Login() {
           <div className="flex gap-1">
             <Image src={lock} alt="user" />
             <input
-              className=" outline-none border-b border-solid border-b-gray-500 w-full"
+              className=" outline-none border-b border-none border-b-gray-500 w-full"
               name="password"
               type="password"
               placeholder="********"

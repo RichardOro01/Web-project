@@ -2,6 +2,8 @@ import Header from "@/components/layouts/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ConfigProvider } from "antd";
+import "@/styles/global.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        {children}
+      <body className={`font-sans m-0`}>
+        <ConfigProvider>
+          <Header />
+          {children}
+        </ConfigProvider>
       </body>
     </html>
   );

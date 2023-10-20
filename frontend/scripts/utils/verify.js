@@ -38,7 +38,7 @@ function validateCI(ci){
     const mm = parseInt(ID.slice(2, 4), 10);
     const dd = parseInt(ID.slice(4, 6), 10);
     if (!CIvalidate.test(ID)) {
-        alert("El septimo dígito del CI no puede ser 9");
+        alert("El séptimo dígito del CI no puede ser 9");
         return false;
     }
     if (mm < 1 || mm > 12){
