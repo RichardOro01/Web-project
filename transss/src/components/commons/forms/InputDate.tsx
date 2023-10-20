@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styles from "@/styles/inputs.module.css";
 import InputText, { InputTextProps } from "./InputText";
 
 const InputDate: React.FC<InputTextProps> = (props) => {

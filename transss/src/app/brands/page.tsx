@@ -5,6 +5,7 @@ import { Brand } from "@/interfaces/Brand";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import Title from "antd/es/typography/Title";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const columns: ColumnsType<Brand> = [
@@ -32,6 +33,7 @@ const columns: ColumnsType<Brand> = [
 
 const BrandPage = () => {
   const [modal, setModal] = useState(false);
+  const router = useRouter();
 
   const hideModal = () => {
     setModal(false);
@@ -41,8 +43,13 @@ const BrandPage = () => {
       <Title>Brands</Title>
       <Table {...{ columns }} />
 
-      <footer>
-        <Button onClick={() => setModal(true)}>Insertar</Button>
+      <footer className="flex justify-end gap-2">
+        <Button onClick={() => router.push("/", { scroll: false })}>
+          Back
+        </Button>
+        <Button onClick={() => setModal(true)} type="primary">
+          Insert
+        </Button>
       </footer>
       {modal && <BrandModal {...{ hideModal }} />}
     </main>

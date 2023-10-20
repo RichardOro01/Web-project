@@ -23,26 +23,28 @@ const Header = () => {
             </div>
           </div>
           <div className="flex gap-4">
-            <nav className="flex gap-2">
-              <span
-                className="cursor-pointer"
-                onClick={() => scrollToId("management")}
-              >
-                Management
-              </span>
-              <span
-                className="cursor-pointer"
-                onClick={() => scrollToId("services")}
-              >
-                Services
-              </span>
-              <span
-                className="cursor-pointer"
-                onClick={() => scrollToId("others")}
-              >
-                Others
-              </span>
-            </nav>
+            {pathname === "/" && (
+              <nav className="flex gap-2">
+                <span
+                  className="cursor-pointer"
+                  onClick={() => scrollToId("management")}
+                >
+                  Management
+                </span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => scrollToId("services")}
+                >
+                  Services
+                </span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => scrollToId("others")}
+                >
+                  Others
+                </span>
+              </nav>
+            )}
             <span>User</span>
           </div>
         </header>
