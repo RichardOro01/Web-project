@@ -3,7 +3,7 @@ import React from "react";
 import bus from "@/assets/bus.svg";
 import user from "@/assets/icons/user.svg";
 import lock from "@/assets/icons/lock.svg";
-import styles from "@/styles/loging.module.css";
+import styles from "@/styles/login.module.css";
 import Button from "@/components/commons/Button";
 
 function Login() {
