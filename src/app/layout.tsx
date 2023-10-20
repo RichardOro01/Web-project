@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ConfigProvider } from "antd";
 import "@/styles/global.css";
+import StyledComponentsRegistry from "@/components/antd/AntdRegistry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className={`font-sans m-0`}>
         <ConfigProvider>
           <Header />
-          {children}
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </ConfigProvider>
       </body>
     </html>
