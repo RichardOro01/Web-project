@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import InputText, { InputTextProps } from "./InputText";
 
-const InputDate: React.FC<InputTextProps> = (props) => {
+interface InputDateProps {
+  dateType: "time" | "date";
+}
+
+const InputDate: React.FC<InputTextProps & InputDateProps> = ({
+  dateType = "date",
+  ...props
+}) => {
+  const [value, setValue] = useState("");
   const [type, setType] = useState("text");
-  function switchInputTypeDate() {
+  const switchInputTypeDate = () => {
     if (type === "text") {
-      setType("date");
+      setType(dateType);
     }
-  }
-  function switchBackToText(force = false) {
-    //   if (!inputElement.value || force) {
-    setType("text");
-    //   }
-  }
+  };
+  const switchBackToText = (force = false) => {
+    if (!value || force) setType("text");
+  };
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setValue(event.target.value);
+  };
 
   return (
     <InputText
       {...{ type }}
       onFocus={switchInputTypeDate}
-      onBlur={() => switchBackToText}
+      onBlur={() => switchBackToText()}
+      onChange={handleChange}
       maxLength={50}
       {...props}
     />
