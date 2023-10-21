@@ -4,6 +4,6 @@ import { TableData } from "./TableData";
 export interface Brand extends TableData {
   name: string;
   seats: number;
-  fuelType: Fuel;
+  fuel: Fuel;
   spending: number;
 }

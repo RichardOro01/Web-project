@@ -6,14 +6,17 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
+import { addBrand } from "@/services/brands";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
   const form = useRef<FormInstance>(null);
-  const handleOk = () => {
+  const handleOk = async () => {
     form.current
       ?.validateFields()
-      .then((data) => console.log(data))
+      .then((data) => {
+        addBrand(data);
+      })
       .catch((error) => console.log(error));
   };
   return (
@@ -27,18 +30,18 @@ const BrandModal: React.FC = () => {
         <h2 className="form_title">Insert Brand</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="brand_name"
+            name="name"
             rules={[{ required: true, message: "Brand name required" }]}
           >
-            <InputText label="Brand" id="brand_name" maxLength={50} />
+            <InputText label="Brand" id="name" maxLength={50} />
           </Form.Item>
           <Form.Item
-            name="seats_amount"
+            name="seats"
             rules={[{ required: true, message: "Seats required" }]}
           >
             <InputText
               label="Seats"
-              id="seats_amount"
+              id="seats"
               type="number"
               min={1}
               max={200}
