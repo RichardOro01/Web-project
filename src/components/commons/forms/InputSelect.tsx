@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState } from "react";
 import arrow from "@/assets/icons/chevron-down.svg";
 import Image from "next/image";

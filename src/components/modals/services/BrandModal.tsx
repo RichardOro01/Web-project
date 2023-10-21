@@ -5,9 +5,11 @@ import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
 import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
-import InputDate from "@/components/commons/forms/InputDate";
+import { useDispatch } from "react-redux";
+import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 
-const BrandModal: React.FC<ModalProps> = ({ hideModal }) => {
+const BrandModal: React.FC = () => {
+  const dispatch = useDispatch();
   const form = useRef<FormInstance>(null);
   const handleOk = () => {
     form.current
@@ -16,7 +18,12 @@ const BrandModal: React.FC<ModalProps> = ({ hideModal }) => {
       .catch((error) => console.log(error));
   };
   return (
-    <Modal centered open onCancel={hideModal} onOk={handleOk}>
+    <Modal
+      centered
+      open
+      onCancel={() => dispatch(hideCurrentModal())}
+      onOk={handleOk}
+    >
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">Insert Brand</h2>
         <div className={styles.form_container}>

@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { ConfigProvider } from "antd";
 import "@/styles/global.css";
 import StyledComponentsRegistry from "@/components/antd/AntdRegistry";
+import StoreProvider from "@/components/core/stores/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans m-0`}>
-        <ConfigProvider>
-          <Header />
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </ConfigProvider>
+        <StoreProvider>
+          <ConfigProvider>
+            <Header />
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </ConfigProvider>
+        </StoreProvider>
       </body>
     </html>
   );
