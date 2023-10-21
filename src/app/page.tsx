@@ -18,16 +18,8 @@ export default function Home() {
     <main className="flex flex-col items-center gap-6 ml-3  p-5">
       <OptionSection name="Management">
         <>
-          <OptionItem
-            name="Contract"
-            img={contract}
-            link="./tables/contracts.html"
-          />
-          <OptionItem
-            name="Service"
-            img={service}
-            link="./tables/services.html"
-          />
+          <OptionItem name="Contract" img={contract} link="./contracts" />
+          <OptionItem name="Service" img={service} link="./services" />
           <OptionItem
             name="Discrepancy"
             img={report}
