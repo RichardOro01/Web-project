@@ -1,1 +1,1 @@
-export type CRUD_ModalsType = "brand";
+export type CRUD_ModalsType = "brands";

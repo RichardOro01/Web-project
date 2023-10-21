@@ -6,7 +6,7 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import { addBrand } from "@/services/brands";
+import brandService from "@/services/brands";
 import { useRouter } from "next/navigation";
 
 const BrandModal: React.FC = () => {
@@ -17,7 +17,8 @@ const BrandModal: React.FC = () => {
     form.current
       ?.validateFields()
       .then((data) => {
-        addBrand(data)
+        brandService
+          .add(data)
           .then(() => {
             dispatch(hideCurrentModal());
             router.refresh();

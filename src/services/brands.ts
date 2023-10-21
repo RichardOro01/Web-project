@@ -1,10 +1,11 @@
 import { Brand } from "@/interfaces/Brand";
-import { GET, POST } from ".";
+import { DELETE, GET, POST } from ".";
+import { Service } from "./IService";
 
-export const getBrands = async () => {
-  return GET("brands");
+const brandService: Service = {
+  get: async () => GET("brands"),
+  add: async (data: Brand) => POST("brands", data),
+  delete: async (key: string) => DELETE("brands", key),
 };
 
-export const addBrand = async (data: Brand) => {
-  return POST("brands", data);
-};
+export default brandService;

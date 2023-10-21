@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import TableData from "@/components/commons/tables/TableData";
 
 const createFileIfNotExists = () => {
   let filePath = path.join(process.cwd(), "src/mockdb");
@@ -28,6 +29,20 @@ export const writeDB = (column: string, data: any) => {
     fileData[column] = [];
   }
   fileData[column].push({ key: Math.random().toString(), ...data });
+  const newContent = JSON.stringify(fileData);
+  return fs.writeFileSync(filePath, newContent, "utf-8");
+};
+
+export const deleteElementDB = (column: string, key: string) => {
+  const filePath = createFileIfNotExists();
+  const content = fs.readFileSync(filePath, "utf-8");
+  let fileData = JSON.parse(content);
+  if (!fileData[column]) {
+    return false;
+  }
+  fileData[column] = fileData[column].filter(
+    (element: TableData) => key !== element.key
+  );
   const newContent = JSON.stringify(fileData);
   return fs.writeFileSync(filePath, newContent, "utf-8");
 };

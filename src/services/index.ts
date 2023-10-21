@@ -14,3 +14,13 @@ export const POST = async (url: string, data: any) => {
     body: JSON.stringify(data),
   });
 };
+
+export const DELETE = async (url: string, key: string) => {
+  return fetch(`http://localhost:3000/api/${url}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(key),
+  });
+};
