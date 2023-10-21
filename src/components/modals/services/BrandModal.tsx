@@ -1,4 +1,4 @@
-import { Form, FormInstance, Modal } from "antd";
+import { Form, FormInstance, Modal, notification } from "antd";
 import React, { useRef } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
@@ -7,15 +7,22 @@ import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { addBrand } from "@/services/brands";
+import { useRouter } from "next/navigation";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const form = useRef<FormInstance>(null);
   const handleOk = async () => {
     form.current
       ?.validateFields()
       .then((data) => {
-        addBrand(data);
+        addBrand(data)
+          .then(() => {
+            dispatch(hideCurrentModal());
+            router.refresh();
+          })
+          .catch((error) => notification.error({ message: error }));
       })
       .catch((error) => console.log(error));
   };
