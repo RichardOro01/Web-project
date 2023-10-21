@@ -1,4 +1,3 @@
-import { ModalProps } from "@/interfaces/modal";
 import { Form, FormInstance, Modal } from "antd";
 import React, { useRef } from "react";
 import styles from "@/styles/inputs.module.css";

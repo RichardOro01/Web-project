@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans m-0`}>
+      <body className={`font-sans m-0 min-h-screen flex flex-col`}>
         <StoreProvider>
           <ConfigProvider>
             <Header />

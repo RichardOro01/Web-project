@@ -3,7 +3,7 @@
 import { Button, Table } from "antd";
 import Title from "antd/es/typography/Title";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/components/core/stores/store";
@@ -15,9 +15,15 @@ interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
+  data: any[];
 }
 
-const TableData: React.FC<TableDataProps> = ({ columns, title, modal }) => {
+const TableData: React.FC<TableDataProps> = ({
+  columns,
+  title,
+  modal,
+  data,
+}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentModal = useSelector((state: RootState) => state.modal.current);
@@ -25,7 +31,7 @@ const TableData: React.FC<TableDataProps> = ({ columns, title, modal }) => {
   return (
     <>
       <Title>{title}</Title>
-      <Table {...{ columns }} />
+      <Table {...{ columns }} dataSource={data} />
       <footer className="flex justify-end gap-2">
         <Button onClick={() => router.push("/", { scroll: false })}>
           Back
