@@ -1,0 +1,74 @@
+.container {
+    background: linear-gradient(106.85deg, #009FA3 3.96%, #607dff 96.25%);
+
+}
+
+.street {
+    height: 4px;
+    border-radius: 5px;
+    background-color: black;
+    position: absolute;
+    bottom: 30px;
+    left: 450px;
+    animation: street-move 1s infinite linear;
+}
+
+.street-1 {
+    width: 10px;
+}
+
+.street-2 {
+    width: 6px;
+    animation-delay: 50ms;
+}
+
+.street-3 {
+    width: 40px;
+    animation-delay: 200ms;
+}
+
+.street-4 {
+    width: 20px;
+    animation-delay: 330ms;
+}
+
+.street-5 {
+    width: 10px;
+    animation-delay: 590ms;
+}
+
+.street-6 {
+    width: 30px;
+    animation-delay: 870ms;
+}
+
+.street-7 {
+    width: 6px;
+    animation-delay: 1150ms;
+}
+
+.bus {
+    animation: bus-move .6s infinite ease-in-out;
+    transform-origin: 50% 100%;
+}
+
+
+@keyframes street-move {
+    from {
+        left: 480px;
+    }
+
+    to {
+        left: -40px;
+    }
+}
+
+@keyframes bus-move {
+    0%,
+    100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.02);
+    }
+}

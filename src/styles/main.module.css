@@ -1,0 +1,27 @@
+.box-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  border: 1px solid grey;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 3px 5px 15px 1px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.box-container:hover {
+  transform: scale(1.05);
+}
+
+.box-container > img {
+  width: 100px;
+}
+
+.box-container > h2 {
+  position: absolute;
+  bottom: 8px;
+}
