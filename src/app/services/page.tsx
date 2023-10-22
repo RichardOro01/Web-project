@@ -1,28 +1,24 @@
-"use client";
-
-import ServiceModal from "@/components/modals/management/ServiceModal";
-import { Service } from "@/interfaces/Service";
-import { Button, Table } from "antd";
+import TableData from "@/components/commons/tables/TableData";
+import { ServiceApp } from "@/interfaces/Service";
+import serviceAppService from "@/services/servicesApp";
 import { ColumnsType } from "antd/es/table";
-import Title from "antd/es/typography/Title";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 
-const columns: ColumnsType<Service> = [
+const columns: ColumnsType<ServiceApp> = [
   {
     title: "Request number",
-    dataIndex: "requestNumber",
-    key: "requestNumber",
+    dataIndex: "request_number",
+    key: "request_number",
   },
   {
     title: "Service name",
-    dataIndex: "serviceName",
-    key: "serviceName",
+    dataIndex: "service_name",
+    key: "service_name",
   },
   {
     title: "Tour group",
-    dataIndex: "tourGroup",
-    key: "tourGroup",
+    dataIndex: "tour_group",
+    key: "tour_group",
   },
   {
     title: "Country",
@@ -31,8 +27,8 @@ const columns: ColumnsType<Service> = [
   },
   {
     title: "Pickup place",
-    dataIndex: "pickupPlace",
-    key: "ampickupPlaceount",
+    dataIndex: "pickup_place",
+    key: "pickup_place",
   },
   {
     title: "Pax",
@@ -41,8 +37,8 @@ const columns: ColumnsType<Service> = [
   },
   {
     title: "Service(km)",
-    dataIndex: "service",
-    key: "service",
+    dataIndex: "service_kms",
+    key: "service_kms",
   },
   {
     title: "Amount",
@@ -51,27 +47,21 @@ const columns: ColumnsType<Service> = [
   },
 ];
 
-const ServicePage = () => {
-  const [modal, setModal] = useState(false);
-  const router = useRouter();
-
-  const hideModal = () => {
-    setModal(false);
-  };
+const ServicePage = async () => {
+  let services: ServiceApp[] = [];
+  try {
+    services = await serviceAppService.get();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <Title>Services</Title>
-      <Table {...{ columns }} />
-
-      <footer className="flex justify-end gap-2">
-        <Button onClick={() => router.push("/", { scroll: false })}>
-          Back
-        </Button>
-        <Button onClick={() => setModal(true)} type="primary">
-          Insert
-        </Button>
-      </footer>
-      {modal && <ServiceModal />}
+      <TableData
+        title="Services"
+        modal="services"
+        data={services}
+        {...{ columns }}
+      />
     </main>
   );
 };

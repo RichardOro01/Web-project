@@ -125,6 +125,7 @@ const ContractModal: React.FC = () => {
               currentValue={data.kms}
               onChange={(e) =>
                 setData((data) => {
+                  console.log(data);
                   return { ...data, kms: e.target.value };
                 })
               }

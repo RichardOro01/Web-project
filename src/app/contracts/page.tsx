@@ -12,17 +12,17 @@ const columns: ColumnsType<Contract> = [
   },
   {
     title: "Start date",
-    dataIndex: "startDate",
-    key: "startDate",
+    dataIndex: "start_date",
+    key: "start_date",
   },
   {
     title: "End date",
-    dataIndex: "endDate",
-    key: "endDate",
+    dataIndex: "end_date",
+    key: "end_date",
   },
   {
     title: "Kms",
-    dataIndex: "ksm",
+    dataIndex: "kms",
     key: "kms",
   },
   {
@@ -37,8 +37,8 @@ const columns: ColumnsType<Contract> = [
   },
   {
     title: "Fleet number",
-    dataIndex: "fleetNumber",
-    key: "fleetNumber",
+    dataIndex: "fleet_number",
+    key: "fleet_number",
   },
 ];
 
