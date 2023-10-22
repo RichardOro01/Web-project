@@ -3,7 +3,11 @@ import fs from "fs";
 import TableData from "@/components/commons/tables/TableData";
 
 const createFileIfNotExists = async () => {
-  let filePath = path.join(process.cwd(), "src/mockdb");
+  let filePath = "/tmp";
+  if (!fs.existsSync(filePath)) {
+    fs.mkdirSync(filePath);
+  }
+  filePath += "/mockdb";
   if (!fs.existsSync(filePath)) {
     fs.mkdirSync(filePath);
   }
