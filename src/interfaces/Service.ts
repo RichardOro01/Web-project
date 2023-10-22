@@ -2,6 +2,7 @@ import { Country } from "./Country";
 import { TourGroup } from "./TourGroup";
 import { TableData } from "./TableData";
 export interface ServiceApp extends TableData {
+  request_number: number;
   service_name: string;
   tour_group: TourGroup;
   country: Country;
