@@ -7,6 +7,6 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  updateElementDB(COLUMN_NAME, params.id, data);
+  await updateElementDB(COLUMN_NAME, params.id, data);
   return NextResponse.json({ ok: true });
 };

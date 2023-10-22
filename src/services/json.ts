@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs";
 import TableData from "@/components/commons/tables/TableData";
 
-const createFileIfNotExists = () => {
+const createFileIfNotExists = async () => {
   let filePath = path.join(process.cwd(), "src/mockdb");
   if (!fs.existsSync(filePath)) {
     fs.mkdirSync(filePath);
@@ -14,15 +14,15 @@ const createFileIfNotExists = () => {
   return filePath;
 };
 
-export const readDB = () => {
-  const filePath = createFileIfNotExists();
+export const readDB = async () => {
+  const filePath = await createFileIfNotExists();
   const content = fs.readFileSync(filePath, "utf-8");
   const data = JSON.parse(content);
   return data;
 };
 
-export const writeDB = (column: string, data: any) => {
-  const filePath = createFileIfNotExists();
+export const writeDB = async (column: string, data: any) => {
+  const filePath = await createFileIfNotExists();
   const content = fs.readFileSync(filePath, "utf-8");
   const fileData = JSON.parse(content);
   if (!fileData[column]) {
@@ -33,8 +33,8 @@ export const writeDB = (column: string, data: any) => {
   return fs.writeFileSync(filePath, newContent, "utf-8");
 };
 
-export const deleteElementDB = (column: string, key: string) => {
-  const filePath = createFileIfNotExists();
+export const deleteElementDB = async (column: string, key: string) => {
+  const filePath = await createFileIfNotExists();
   const content = fs.readFileSync(filePath, "utf-8");
   let fileData = JSON.parse(content);
   if (!fileData[column]) {
@@ -47,8 +47,12 @@ export const deleteElementDB = (column: string, key: string) => {
   return fs.writeFileSync(filePath, newContent, "utf-8");
 };
 
-export const updateElementDB = (column: string, key: string, body: any) => {
-  const filePath = createFileIfNotExists();
+export const updateElementDB = async (
+  column: string,
+  key: string,
+  body: any
+) => {
+  const filePath = await createFileIfNotExists();
   const content = fs.readFileSync(filePath, "utf-8");
   let fileData = JSON.parse(content);
   if (!fileData[column]) {
@@ -58,7 +62,7 @@ export const updateElementDB = (column: string, key: string, body: any) => {
     (element: TableData) => key == element.key
   );
   const index = (fileData[column] as Array<any>).indexOf(element);
-  if (index && index >= 0) {
+  if (index >= 0) {
     fileData[column][index] = { key: fileData[column][index].key, ...body };
   }
   const newContent = JSON.stringify(fileData);
