@@ -1,12 +1,8 @@
-"use client";
-
-import ContractModal from "@/components/modals/management/ContractModal";
+import TableData from "@/components/commons/tables/TableData";
 import { Contract } from "@/interfaces/Contract";
-import { Button, Table } from "antd";
+import contractService from "@/services/contracts";
 import { ColumnsType } from "antd/es/table";
-import Title from "antd/es/typography/Title";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 
 const columns: ColumnsType<Contract> = [
   {
@@ -46,27 +42,21 @@ const columns: ColumnsType<Contract> = [
   },
 ];
 
-const ContractPage = () => {
-  const [modal, setModal] = useState(false);
-  const router = useRouter();
-
-  const hideModal = () => {
-    setModal(false);
-  };
+const ContractPage = async () => {
+  let contracts: Contract[] = [];
+  try {
+    contracts = await contractService.get();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <Title>Contracts</Title>
-      <Table {...{ columns }} />
-
-      <footer className="flex justify-end gap-2">
-        <Button onClick={() => router.push("/", { scroll: false })}>
-          Back
-        </Button>
-        <Button onClick={() => setModal(true)} type="primary">
-          Insert
-        </Button>
-      </footer>
-      {modal && <ContractModal />}
+      <TableData
+        title="Contracts"
+        modal="contracts"
+        data={contracts}
+        {...{ columns }}
+      />
     </main>
   );
 };

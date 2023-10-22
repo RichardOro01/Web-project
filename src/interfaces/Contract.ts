@@ -1,5 +1,6 @@
 import { Country } from "./Country";
-export interface Contract {
+import { TableData } from "./TableData";
+export interface Contract extends TableData {
   applicant: string;
   start_date: Date;
   end_date: Date;
