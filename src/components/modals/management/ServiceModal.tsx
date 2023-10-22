@@ -20,6 +20,7 @@ const ServiceModal: React.FC = () => {
   const [data, setData] = useState<
     Omit<{ [key in keyof ServiceApp]: string }, "key">
   >({
+    request_number: "",
     service_name: "",
     tour_group: "",
     country: "",
@@ -67,6 +68,22 @@ const ServiceModal: React.FC = () => {
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Service</h2>
         <div className={styles.form_container}>
+          <Form.Item
+            name="request_number"
+            rules={[{ required: true, message: "Request number required" }]}
+          >
+            <InputNum
+              label="Request number"
+              id="request_number"
+              maxLength={50}
+              currentValue={data.request_number}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, request_number: e.target.value };
+                })
+              }
+            />
+          </Form.Item>
           <Form.Item
             name="service_name"
             rules={[{ required: true, message: "Service name required" }]}
