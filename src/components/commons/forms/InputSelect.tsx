@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import arrow from "@/assets/icons/chevron-down.svg";
 import Image from "next/image";
 import styles from "@/styles/inputs.module.css";
@@ -14,6 +14,7 @@ interface InputSelectProps {
   id: string;
   options: Option[];
   label: string;
+  currentValue?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onFocus?: React.FocusEventHandler<HTMLSelectElement>;
   onBlur?: React.FocusEventHandler<HTMLSelectElement>;
@@ -23,13 +24,13 @@ export const InputSelect: React.FC<InputSelectProps> = ({
   options,
   id,
   label,
+  currentValue,
   onBlur,
   onChange,
   onFocus,
 }) => {
   const [selectSelected, setSelectSelected] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const handleValueChange: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
@@ -39,6 +40,14 @@ export const InputSelect: React.FC<InputSelectProps> = ({
     onChange &&
       onChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
   };
+  useEffect(() => {
+    const { current } = inputRef;
+    if (inputRef.current && currentValue) {
+      inputRef.current.value = currentValue ?? "";
+      onChange && onChange && onChange({ target: current } as any);
+      setSelectSelected(!!currentValue);
+    }
+  }, [currentValue]);
 
   return (
     <div className={styles.select_group}>
@@ -54,8 +63,8 @@ export const InputSelect: React.FC<InputSelectProps> = ({
         className={`${styles.form_select} ${
           selectSelected && styles.select_selected
         }`}
+        value={currentValue}
         onChange={handleValueChange}
-        defaultValue={""}
       >
         <option value="" hidden></option>
         {options.map(({ value, label }) => (

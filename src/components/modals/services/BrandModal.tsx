@@ -1,5 +1,5 @@
 import { Form, FormInstance, Modal, notification } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
 import InputNum from "@/components/commons/forms/InputNum";
@@ -9,12 +9,21 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import brandService from "@/services/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
+import { Brand } from "@/interfaces/Brand";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing);
+  const [data, setData] = useState<
+    Omit<{ [key in keyof Brand]: string }, "key">
+  >({
+    name: "",
+    seats: "",
+    fuel: "",
+    spending: "",
+  });
   const handleOk = async () => {
     form.current
       ?.validateFields()
@@ -34,6 +43,15 @@ const BrandModal: React.FC = () => {
       })
       .catch((error) => console.log(error));
   };
+
+  useEffect(() => {
+    if (editing) {
+      brandService.get(editing).then((data) => {
+        setData(data);
+      });
+    }
+  }, [editing]);
+
   return (
     <Modal
       centered
@@ -48,7 +66,17 @@ const BrandModal: React.FC = () => {
             name="name"
             rules={[{ required: true, message: "Brand name required" }]}
           >
-            <InputText label="Brand" id="name" maxLength={50} />
+            <InputText
+              label="Brand"
+              id="name"
+              maxLength={50}
+              currentValue={data.name}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, name: e.target.value };
+                })
+              }
+            />
           </Form.Item>
           <Form.Item
             name="seats"
@@ -60,13 +88,29 @@ const BrandModal: React.FC = () => {
               type="number"
               min={1}
               max={200}
+              currentValue={data.seats}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, seats: e.target.value };
+                })
+              }
             />
           </Form.Item>
           <Form.Item
             name="spending"
             rules={[{ required: true, message: "Spending required" }]}
           >
-            <InputNum label="Spending" id="spending" maxLength={6} />
+            <InputNum
+              label="Spending"
+              id="spending"
+              maxLength={6}
+              currentValue={data.spending}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, spending: e.target.value };
+                })
+              }
+            />
           </Form.Item>
           <Form.Item
             name="fuel"
@@ -76,6 +120,12 @@ const BrandModal: React.FC = () => {
               id="fuel"
               label="Gasoline"
               options={[{ label: "Gasoline", value: "gasoline" }]}
+              currentValue={data.fuel}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, fuel: e.target.value };
+                })
+              }
             />
           </Form.Item>
         </div>
