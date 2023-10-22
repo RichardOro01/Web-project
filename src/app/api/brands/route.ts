@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { deleteElementDB, readDB, writeDB } from "@/services/json";
 
-const COLUMN_NAME = "brands";
+export const COLUMN_NAME = "brands";
 
 export const GET = async () => {
   const db = readDB();

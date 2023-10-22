@@ -40,9 +40,27 @@ export const deleteElementDB = (column: string, key: string) => {
   if (!fileData[column]) {
     return false;
   }
-  fileData[column] = fileData[column].filter(
+  fileData[column] = (fileData[column] as Array<any>).filter(
     (element: TableData) => key !== element.key
   );
+  const newContent = JSON.stringify(fileData);
+  return fs.writeFileSync(filePath, newContent, "utf-8");
+};
+
+export const updateElementDB = (column: string, key: string, body: any) => {
+  const filePath = createFileIfNotExists();
+  const content = fs.readFileSync(filePath, "utf-8");
+  let fileData = JSON.parse(content);
+  if (!fileData[column]) {
+    return false;
+  }
+  const element = (fileData[column] as Array<any>).find(
+    (element: TableData) => key == element.key
+  );
+  const index = (fileData[column] as Array<any>).indexOf(element);
+  if (index && index >= 0) {
+    fileData[column][index] = { key: fileData[column][index].key, ...body };
+  }
   const newContent = JSON.stringify(fileData);
   return fs.writeFileSync(filePath, newContent, "utf-8");
 };

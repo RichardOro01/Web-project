@@ -4,10 +4,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface ModalSlice {
   current: CRUD_ModalsType | undefined;
+  editing: string;
 }
 
 const initialState: ModalSlice = {
   current: void 0,
+  editing: "",
 };
 
 export const formSlice = createSlice({
@@ -19,10 +21,15 @@ export const formSlice = createSlice({
     },
     hideCurrentModal: (state) => {
       state.current = void 0;
+      state.editing = "";
+    },
+    setEditingModal: (state, action: PayloadAction<string>) => {
+      state.editing = action.payload;
     },
   },
 });
 
-export const { setCurrentModal, hideCurrentModal } = formSlice.actions;
+export const { setCurrentModal, hideCurrentModal, setEditingModal } =
+  formSlice.actions;
 
 export default formSlice.reducer;

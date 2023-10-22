@@ -7,9 +7,12 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/components/core/stores/store";
-import { setCurrentModal } from "@/components/core/stores/modalSlice";
+import {
+  setCurrentModal,
+  setEditingModal,
+} from "@/components/core/stores/modalSlice";
 import { CRUD_ModalsType } from "@/components/modals";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
 import { TableData } from "@/interfaces/TableData";
@@ -36,14 +39,25 @@ const TableData: React.FC<TableDataProps> = ({
     router.refresh();
   };
 
+  const handleEdit = (value: TableData) => {
+    dispatch(setEditingModal(value.key));
+    dispatch(setCurrentModal(modal));
+  };
+
   const columnsAdapted: ColumnsType<any> = [
     ...columns,
     {
       render: (value) => (
-        <DeleteOutlined
-          className="cursor-pointer"
-          onClick={() => handleDelete(value)}
-        />
+        <div className="flex items-center justify-end gap-2">
+          <DeleteOutlined
+            className="cursor-pointer"
+            onClick={() => handleDelete(value)}
+          />
+          <EditOutlined
+            className="cursor-pointer"
+            onClick={() => handleEdit(value)}
+          />
+        </div>
       ),
     },
   ];

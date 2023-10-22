@@ -6,6 +6,7 @@ const brandService: Service = {
   get: async () => GET("brands"),
   add: async (data: Brand) => POST("brands", data),
   delete: async (key: string) => DELETE("brands", key),
+  update: async (key: string, body: Brand) => POST(`brands/${key}`, body),
 };
 
 export default brandService;

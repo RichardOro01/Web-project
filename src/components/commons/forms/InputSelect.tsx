@@ -55,8 +55,9 @@ export const InputSelect: React.FC<InputSelectProps> = ({
           selectSelected && styles.select_selected
         }`}
         onChange={handleValueChange}
+        defaultValue={""}
       >
-        <option value="null" selected hidden></option>
+        <option value="" hidden></option>
         {options.map(({ value, label }) => (
           <option key={value} {...{ value }}>
             {label}
