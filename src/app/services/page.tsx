@@ -71,7 +71,7 @@ const ServicePage = () => {
           Insert
         </Button>
       </footer>
-      {modal && <ServiceModal {...{ hideModal }} />}
+      {modal && <ServiceModal />}
     </main>
   );
 };

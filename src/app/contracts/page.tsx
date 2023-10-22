@@ -66,7 +66,7 @@ const ContractPage = () => {
           Insert
         </Button>
       </footer>
-      {modal && <ContractModal {...{ hideModal }} />}
+      {modal && <ContractModal />}
     </main>
   );
 };

@@ -1,4 +1,3 @@
-import { ModalProps } from "@/interfaces/modal";
 import { Form, FormInstance, Modal } from "antd";
 import React, { useRef } from "react";
 import styles from "@/styles/inputs.module.css";
@@ -7,7 +6,7 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import InputDate from "@/components/commons/forms/InputDate";
 
-const ServiceModal: React.FC<ModalProps> = ({ hideModal }) => {
+const ServiceModal: React.FC = () => {
   const form = useRef<FormInstance>(null);
   const handleOk = () => {
     form.current
@@ -16,7 +15,7 @@ const ServiceModal: React.FC<ModalProps> = ({ hideModal }) => {
       .catch((error) => console.log(error));
   };
   return (
-    <Modal centered open onCancel={hideModal} onOk={handleOk}>
+    <Modal centered open onOk={handleOk}>
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">Insert Service</h2>
         <div className={styles.form_container}>

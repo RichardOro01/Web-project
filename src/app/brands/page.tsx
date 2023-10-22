@@ -28,7 +28,12 @@ const columns: ColumnsType<Brand> = [
 ];
 
 const BrandPage = async () => {
-  const brands = await brandService.get();
+  let brands: Brand[] = [];
+  try {
+    brands = await brandService.get();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData title="Brands" modal="brands" data={brands} {...{ columns }} />
