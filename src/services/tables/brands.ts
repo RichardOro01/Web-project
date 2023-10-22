@@ -1,6 +1,6 @@
 import { Brand } from "@/interfaces/Brand";
-import { DELETE, GET, POST } from ".";
-import { Service } from "./IService";
+import { DELETE, GET, POST } from "..";
+import { Service } from "../IService";
 
 const brandService: Service = {
   get: async (key?: string) => GET(`brands${key ? `/${key}` : ""}`),

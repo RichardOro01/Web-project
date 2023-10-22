@@ -6,7 +6,7 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import contractService from "@/services/contracts";
+import contractService from "@/services/tables/contracts";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Contract } from "@/interfaces/Contract";

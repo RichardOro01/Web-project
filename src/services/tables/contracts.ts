@@ -1,6 +1,6 @@
 import { Contract } from "@/interfaces/Contract";
-import { DELETE, GET, POST } from ".";
-import { Service } from "./IService";
+import { DELETE, GET, POST } from "..";
+import { Service } from "../IService";
 
 const contractService: Service = {
   get: async (key?: string) => GET(`contracts${key ? `/${key}` : ""}`),

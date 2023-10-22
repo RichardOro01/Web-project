@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Contract } from "@/interfaces/Contract";
-import contractService from "@/services/contracts";
+import contractService from "@/services/tables/contracts";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 

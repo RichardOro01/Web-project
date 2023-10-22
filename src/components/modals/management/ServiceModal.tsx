@@ -6,7 +6,7 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import serviceAppService from "@/services/servicesApp";
+import servicesService from "@/services/tables/services";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { ServiceApp } from "@/interfaces/Service";
@@ -35,9 +35,9 @@ const ServiceModal: React.FC = () => {
       .then(async (data) => {
         try {
           if (editing) {
-            await serviceAppService.update(editing, data);
+            await servicesService.update(editing, data);
           } else {
-            await serviceAppService.add(data);
+            await servicesService.add(data);
           }
         } catch (error) {
           notification.error({ message: error as string });
@@ -51,7 +51,7 @@ const ServiceModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      serviceAppService.get(editing).then((data) => {
+      servicesService.get(editing).then((data) => {
         setData(data);
       });
     }

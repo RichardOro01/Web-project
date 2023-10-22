@@ -1,6 +1,6 @@
 import { ServiceApp } from "@/interfaces/Service";
-import { DELETE, GET, POST } from ".";
-import { Service } from "./IService";
+import { DELETE, GET, POST } from "..";
+import { Service } from "../IService";
 
 const serviceAppService: Service = {
   get: async (key?: string) => GET(`services${key ? `/${key}` : ""}`),

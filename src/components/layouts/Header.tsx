@@ -18,8 +18,8 @@ const items: MenuProps["items"] = [
         key: "management",
         label: "Management",
         children: [
-          { key: "contract", label: "Contract" },
-          { key: "service", label: "Service" },
+          { key: "contracts", label: "Contract" },
+          { key: "services", label: "Service" },
           { key: "discrepancy", label: "Discrepancy" },
           { key: "roadmap", label: "Roadmap" },
         ],
@@ -61,7 +61,7 @@ const Header = () => {
       {pathname !== "/login" && (
         <header
           id="header"
-          className="flex justify-between items-center p-2 shadow-2xl sticky top-0 bg-gradient-to-tr from-primary to-secondary z-10 text-white"
+          className="flex justify-between items-center py-2 px-4 shadow-2xl sticky top-0 bg-gradient-to-tr from-primary to-secondary z-10 text-white"
         >
           <div className="flex items-center gap-1">
             <Image src={bus} alt="bus" width={50} className="invert-[1]" />

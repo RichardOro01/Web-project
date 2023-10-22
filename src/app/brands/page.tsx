@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Brand } from "@/interfaces/Brand";
-import brandService from "@/services/brands";
+import brandService from "@/services/tables/brands";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 

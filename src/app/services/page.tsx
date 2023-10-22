@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { ServiceApp } from "@/interfaces/Service";
-import serviceAppService from "@/services/servicesApp";
+import servicesService from "@/services/tables/services";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
@@ -50,7 +50,7 @@ const columns: ColumnsType<ServiceApp> = [
 const ServicePage = async () => {
   let services: ServiceApp[] = [];
   try {
-    services = await serviceAppService.get();
+    services = await servicesService.get();
   } catch (error) {
     console.log(error);
   }
