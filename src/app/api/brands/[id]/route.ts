@@ -1,4 +1,4 @@
-import { readDB, updateElementDB, writeDB } from "@/services/json";
+import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
 import { COLUMN_NAME } from "../route";
 import { Brand } from "@/interfaces/Brand";

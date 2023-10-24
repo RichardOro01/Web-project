@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
 import InputNum from "@/components/commons/forms/InputNum";
-import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import roadmapService from "@/services/tables/roadmaps";
@@ -26,7 +25,6 @@ const RoadmapModal: React.FC = () => {
     departure_time: "",
   });
   const handleOk = async () => {
-    console.log(data)
     form.current
       ?.validateFields()
       .then(async (data) => {
@@ -48,7 +46,7 @@ const RoadmapModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-        roadmapService.get(editing).then((data) => {
+      roadmapService.get(editing).then((data) => {
         setData(data);
       });
     }
@@ -113,24 +111,23 @@ const RoadmapModal: React.FC = () => {
                 })
               }
             />
-            </Form.Item>
-            <Form.Item
+          </Form.Item>
+          <Form.Item
             name="departure_time"
             rules={[{ required: true, message: "Departure time required" }]}
-            >
+          >
             <InputDate
               dateType="time"
-              label="Deaparture time"
-              id="deaparture_time"
+              label="Departure time"
+              id="departure_time"
               currentValue={data.departure_time}
               onChange={(e) =>
                 setData((data) => {
                   return { ...data, departure_time: e.target.value };
                 })
               }
-
             />
-            </Form.Item>
+          </Form.Item>
         </div>
       </Form>
     </Modal>
