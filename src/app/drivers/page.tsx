@@ -1,7 +1,5 @@
 import TableData from "@/components/commons/tables/TableData";
-import { Brand } from "@/interfaces/Brand";
 import { Driver } from "@/interfaces/Driver";
-import brandService from "@/services/tables/brands";
 import driverService from "@/services/tables/drivers";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -48,9 +46,15 @@ const DriverPage = async () => {
   }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <TableData title="Drivers" modal="drivers" data={drivers} {...{ columns }} />
+      <TableData
+        title="Drivers"
+        modal="drivers"
+        data={drivers}
+        {...{ columns }}
+        checkBoxColumns={["is_free_cover"]}
+      />
     </main>
   );
 };
 
-export default DriverPage
+export default DriverPage;

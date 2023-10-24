@@ -1,12 +1,9 @@
-import { Form, FormInstance, Modal, notification, Checkbox  } from "antd";
+import { Form, FormInstance, Modal, notification, Checkbox } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
-import InputNum from "@/components/commons/forms/InputNum";
-import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Driver } from "@/interfaces/Driver";
@@ -24,8 +21,8 @@ const DriverModal: React.FC = () => {
     name: "",
     address: "",
     phone: "",
-    district_name:"",
-    is_free_cover:""
+    district_name: "",
+    is_free_cover: "",
   });
   const handleOk = async () => {
     form.current
@@ -49,12 +46,11 @@ const DriverModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-        driverService.get(editing).then((data) => {
+      driverService.get(editing).then((data) => {
         setData(data);
       });
     }
   }, [editing]);
-
   return (
     <Modal
       centered
@@ -150,25 +146,29 @@ const DriverModal: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="is_free_cover"
+            getValueFromEvent={() => {
+              return !data.is_free_cover;
+            }}
           >
             <Checkbox
               id="is_free_cover"
-              label="Is Free Cover?"
-              currentValue={data.is_free_cover}
+              checked={!!data.is_free_cover}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, is_free_cover: e.target.checked };
+                  return {
+                    ...data,
+                    is_free_cover: e.target.checked ? "true" : "",
+                  };
                 })
               }
             >
-            Is Free Cover?
+              Is Free Cover?
             </Checkbox>
           </Form.Item>
-          
         </div>
       </Form>
     </Modal>
   );
 };
 
-export default DriverModal
+export default DriverModal;

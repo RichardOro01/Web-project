@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, Table } from "antd";
+import { Button, Checkbox, Table } from "antd";
 import Title from "antd/es/typography/Title";
-import { ColumnsType } from "antd/es/table";
+import { ColumnType, ColumnsType } from "antd/es/table";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ interface TableDataProps {
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
   data: any[];
+  checkBoxColumns?: string[];
 }
 
 const TableData: React.FC<TableDataProps> = ({
@@ -29,6 +30,7 @@ const TableData: React.FC<TableDataProps> = ({
   title,
   modal,
   data,
+  checkBoxColumns,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -44,8 +46,26 @@ const TableData: React.FC<TableDataProps> = ({
     dispatch(setCurrentModal(modal));
   };
 
+  const adaptedCheckBox = (): ColumnsType<any> => {
+    if (checkBoxColumns && checkBoxColumns.length > 0) {
+      return columns.map((column) => {
+        if (column.key && checkBoxColumns.includes(column.key.toString())) {
+          const { key } = column;
+          return {
+            ...column,
+            render: (_, record) => {
+              return <Checkbox checked={record[key.toString()]} />;
+            },
+          } as ColumnType<any>;
+        }
+        return column;
+      });
+    }
+    return columns;
+  };
+
   const columnsAdapted: ColumnsType<any> = [
-    ...columns,
+    ...adaptedCheckBox(),
     {
       render: (value) => (
         <div className="flex items-center justify-end gap-2">

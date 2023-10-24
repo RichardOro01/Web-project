@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
 import InputNum from "@/components/commons/forms/InputNum";
-import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
@@ -16,15 +15,15 @@ const CarModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Car]: string }, "key">
-  >({
-    number: "",
-    plate: "",
-    brand: "",
-    driver1: "",
-    driver2: "",
-  });
+  const [data, setData] = useState<Omit<{ [key in keyof Car]: string }, "key">>(
+    {
+      number: "",
+      plate: "",
+      brand: "",
+      driver1: "",
+      driver2: "",
+    }
+  );
   const handleOk = async () => {
     form.current
       ?.validateFields()
@@ -47,7 +46,7 @@ const CarModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-        carService.get(editing).then((data) => {
+      carService.get(editing).then((data) => {
         setData(data);
       });
     }
@@ -153,4 +152,4 @@ const CarModal: React.FC = () => {
   );
 };
 
-export default CarModal
+export default CarModal;

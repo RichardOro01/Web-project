@@ -2,11 +2,8 @@ import { Form, FormInstance, Modal, notification } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
 import InputText from "@/components/commons/forms/InputText";
-import InputNum from "@/components/commons/forms/InputNum";
-import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Couple } from "@/interfaces/Couple";
@@ -21,7 +18,7 @@ const CoupleModal: React.FC = () => {
     Omit<{ [key in keyof Couple]: string }, "key">
   >({
     driver1: "",
-    driver2: ""
+    driver2: "",
   });
   const handleOk = async () => {
     form.current
@@ -100,4 +97,4 @@ const CoupleModal: React.FC = () => {
   );
 };
 
-export default CoupleModal
+export default CoupleModal;
