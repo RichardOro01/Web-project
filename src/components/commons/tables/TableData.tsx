@@ -67,6 +67,8 @@ const TableData: React.FC<TableDataProps> = ({
   const columnsAdapted: ColumnsType<any> = [
     ...adaptedCheckBox(),
     {
+      fixed: "right",
+      width: "64px",
       render: (value) => (
         <div className="flex items-center justify-end gap-2">
           <DeleteOutlined
@@ -82,9 +84,13 @@ const TableData: React.FC<TableDataProps> = ({
     },
   ];
   return (
-    <>
+    <div className="flex flex-col">
       <Title>{title}</Title>
-      <Table columns={columnsAdapted} dataSource={data} />
+      <Table
+        columns={columnsAdapted}
+        dataSource={data}
+        scroll={{ y: 450, x: 700 }}
+      />
       <footer className="flex justify-end gap-2">
         <Button onClick={() => router.push("/", { scroll: false })}>
           Back
@@ -95,7 +101,7 @@ const TableData: React.FC<TableDataProps> = ({
       </footer>
 
       {currentModal && CRUD_Modals[currentModal]}
-    </>
+    </div>
   );
 };
 
