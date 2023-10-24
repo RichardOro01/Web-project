@@ -23,9 +23,10 @@ const RoadmapModal: React.FC = () => {
     date: "",
     fleet_number: "",
     kms: "",
-    deaparture_time: "",
+    departure_time: "",
   });
   const handleOk = async () => {
+    console.log(data)
     form.current
       ?.validateFields()
       .then(async (data) => {
@@ -114,19 +115,20 @@ const RoadmapModal: React.FC = () => {
             />
             </Form.Item>
             <Form.Item
-            name="deaparture_time"
-            rules={[{ required: true, message: "Deaparture time required" }]}
+            name="departure_time"
+            rules={[{ required: true, message: "Departure time required" }]}
             >
             <InputDate
               dateType="time"
               label="Deaparture time"
               id="deaparture_time"
-              currentValue={data.deaparture_time}
+              currentValue={data.departure_time}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, deaparture_time: e.target.value };
+                  return { ...data, departure_time: e.target.value };
                 })
               }
+
             />
             </Form.Item>
         </div>
