@@ -1,7 +1,7 @@
-import { readDB, updateElementDB } from "@/services/json";
+import { readDB, updateElementDB, writeDB } from "@/services/json";
 import { NextResponse } from "next/server";
 import { COLUMN_NAME } from "../route";
-import { Brand } from "@/interfaces/Brand";
+import { Roadmap } from "@/interfaces/Roadmap";
 
 export const GET = async (
   request: Request,
@@ -9,10 +9,10 @@ export const GET = async (
 ) => {
   const db = await readDB();
   if (db[COLUMN_NAME]) {
-    const brand = (db[COLUMN_NAME] as Array<Brand>).find(
-      (brand) => brand.key === params.id
+    const roadmap = (db[COLUMN_NAME] as Array<Roadmap>).find(
+      (roadmap) => roadmap.key === params.id
     );
-    return NextResponse.json(brand);
+    return NextResponse.json(roadmap);
   }
   return NextResponse.error();
 };

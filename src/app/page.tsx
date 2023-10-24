@@ -20,12 +20,8 @@ export default function Home() {
         <>
           <OptionItem name="Contract" img={contract} link="./contracts" />
           <OptionItem name="Service" img={service} link="./services" />
-          <OptionItem
-            name="Discrepancy"
-            img={report}
-            link="./tables/discrepancies.html"
-          />
-          <OptionItem name="Roadmap" img={road} link="./tables/roadmaps.html" />
+          <OptionItem name="Discrepancy" img={report} link="./discrepancies"/>
+          <OptionItem name="Roadmap" img={road} link="./roadmaps"/>
         </>
       </OptionSection>
       <OptionSection name="Services">

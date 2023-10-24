@@ -1,7 +1,7 @@
 import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
 import { COLUMN_NAME } from "../route";
-import { Brand } from "@/interfaces/Brand";
+import { Discrepancy } from "@/interfaces/Discrepancy";
 
 export const GET = async (
   request: Request,
@@ -9,10 +9,10 @@ export const GET = async (
 ) => {
   const db = await readDB();
   if (db[COLUMN_NAME]) {
-    const brand = (db[COLUMN_NAME] as Array<Brand>).find(
-      (brand) => brand.key === params.id
+    const discrepancy = (db[COLUMN_NAME] as Array<Discrepancy>).find(
+      (discrepancy) => discrepancy.key === params.id
     );
-    return NextResponse.json(brand);
+    return NextResponse.json(discrepancy);
   }
   return NextResponse.error();
 };
