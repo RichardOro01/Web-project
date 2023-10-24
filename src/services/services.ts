@@ -11,8 +11,6 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
   contracts: contractService,
   services: servicesService,
-  discrepancies: discrepancyService,
-  roadmaps: roadmapService,
 };
 
 export default services;
