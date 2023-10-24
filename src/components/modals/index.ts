@@ -1,1 +1,1 @@
-export type CRUD_ModalsType = "brands" | "contracts" | "services" | "discrepancies" | "roadmaps";
+export type CRUD_ModalsType = "brands" | "contracts" | "services" | "discrepancies" | "roadmaps"| "drivers" | "cars" | "couples";
