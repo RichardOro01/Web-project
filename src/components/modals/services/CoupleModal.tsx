@@ -62,7 +62,7 @@ const CoupleModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Couple</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="Driver 1"
+            name="driver1"
             rules={[{ required: true, message: "Driver 1 required" }]}
           >
             <InputText
@@ -78,7 +78,7 @@ const CoupleModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Driver 2"
+            name="driver2"
             rules={[{ required: true, message: "Driver 2 required" }]}
           >
             <InputText

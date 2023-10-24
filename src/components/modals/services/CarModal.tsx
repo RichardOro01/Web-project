@@ -64,7 +64,7 @@ const CarModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Car</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="Number"
+            name="number"
             rules={[{ required: true, message: "Number is Required" }]}
           >
             <InputNum
@@ -80,7 +80,7 @@ const CarModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Plate"
+            name="plate"
             rules={[{ required: true, message: "Plate required" }]}
           >
             <InputNum
@@ -96,7 +96,7 @@ const CarModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Brand"
+            name="brand"
             rules={[{ required: true, message: "Brand is required" }]}
           >
             <InputText
@@ -114,7 +114,7 @@ const CarModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Driver1"
+            name="driver1"
             rules={[{ required: true, message: "Driver1 is required" }]}
           >
             <InputText
@@ -131,7 +131,7 @@ const CarModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Driver2"
+            name="driver2"
             rules={[{ required: true, message: "Driver2 is required" }]}
           >
             <InputText

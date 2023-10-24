@@ -66,7 +66,7 @@ const DriverModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Driver</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="ID"
+            name="id"
             rules={[{ required: true, message: "ID code required" }]}
           >
             <InputText
@@ -82,7 +82,7 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Name"
+            name="name"
             rules={[{ required: true, message: "Name is required" }]}
           >
             <InputText
@@ -99,7 +99,7 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Address"
+            name="address"
             rules={[{ required: true, message: "Address is required" }]}
           >
             <InputText
@@ -116,7 +116,7 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Phone"
+            name="phone"
             rules={[{ required: true, message: "Phone is required" }]}
           >
             <InputText
@@ -133,7 +133,7 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="District Name"
+            name="district_name"
             rules={[{ required: true, message: "Phone is required" }]}
           >
             <InputText
@@ -149,7 +149,7 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="Is Free Cover?"
+            name="is_free_cover"
           >
             <Checkbox
               id="is_free_cover"
