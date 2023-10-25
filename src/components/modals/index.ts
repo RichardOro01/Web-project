@@ -7,4 +7,5 @@ export type CRUD_ModalsType =
   | "drivers"
   | "cars"
   | "couples"
-  | "districts";
+  | "districts"
+  | "fuels";

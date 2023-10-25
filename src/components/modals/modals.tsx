@@ -8,6 +8,7 @@ import CarModal from "./services/CarModal";
 import DriverModal from "./services/DriverModal";
 import CoupleModal from "./services/CoupleModal";
 import DistrictModal from "./others/DistrictModal";
+import FuelModal from "./others/FuelModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   brands: <BrandModal />,
@@ -19,4 +20,5 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   discrepancies: <DiscrepancyModal />,
   roadmaps: <RoadmapModal />,
   districts: <DistrictModal />,
+  fuels: <FuelModal />,
 };
