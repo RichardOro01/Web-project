@@ -9,6 +9,7 @@ import DriverModal from "./services/DriverModal";
 import CoupleModal from "./services/CoupleModal";
 import DistrictModal from "./others/DistrictModal";
 import FuelModal from "./others/FuelModal";
+import CountryModal from "./others/CountryModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   brands: <BrandModal />,
@@ -21,4 +22,5 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   roadmaps: <RoadmapModal />,
   districts: <DistrictModal />,
   fuels: <FuelModal />,
+  countries: <CountryModal />,
 };

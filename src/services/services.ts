@@ -10,6 +10,7 @@ import driverService from "./tables/drivers";
 import coupleService from "./tables/couples";
 import districtService from "./tables/districts";
 import fuelService from "./tables/fuels";
+import countryService from "./tables/countries";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
@@ -22,6 +23,7 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   roadmaps: roadmapService,
   districts: districtService,
   fuels: fuelService,
+  countries: countryService,
 };
 
 export default services;
