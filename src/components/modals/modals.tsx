@@ -10,6 +10,7 @@ import CoupleModal from "./services/CoupleModal";
 import DistrictModal from "./others/DistrictModal";
 import FuelModal from "./others/FuelModal";
 import CountryModal from "./others/CountryModal";
+import TourGroupModal from "./others/TourGroupModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   brands: <BrandModal />,
@@ -23,4 +24,5 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   districts: <DistrictModal />,
   fuels: <FuelModal />,
   countries: <CountryModal />,
+  tour_groups: <TourGroupModal />,
 };

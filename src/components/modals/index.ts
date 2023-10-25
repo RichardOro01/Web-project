@@ -9,4 +9,5 @@ export type CRUD_ModalsType =
   | "couples"
   | "districts"
   | "fuels"
-  | "countries";
+  | "countries"
+  | "tour_groups";
