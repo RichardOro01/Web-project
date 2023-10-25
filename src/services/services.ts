@@ -8,6 +8,7 @@ import { Service } from "./IService";
 import carService from "./tables/cars";
 import driverService from "./tables/drivers";
 import coupleService from "./tables/couples";
+import districtService from "./tables/districts";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
@@ -18,6 +19,7 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   couples: coupleService,
   discrepancies: discrepancyService,
   roadmaps: roadmapService,
+  districts: districtService,
 };
 
 export default services;

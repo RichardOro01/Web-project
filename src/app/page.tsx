@@ -20,8 +20,8 @@ export default function Home() {
         <>
           <OptionItem name="Contract" img={contract} link="./contracts" />
           <OptionItem name="Service" img={service} link="./services" />
-          <OptionItem name="Discrepancy" img={report} link="./discrepancies"/>
-          <OptionItem name="Roadmap" img={road} link="./roadmaps"/>
+          <OptionItem name="Discrepancy" img={report} link="./discrepancies" />
+          <OptionItem name="Roadmap" img={road} link="./roadmaps" />
         </>
       </OptionSection>
       <OptionSection name="Services">
@@ -29,19 +29,15 @@ export default function Home() {
           <OptionItem name="Brands" img={brand} link="./brands" />
           <OptionItem name="Cars" img={car} link="./cars" />
           <OptionItem name="Drivers" img={id} link="./drivers" />
-          <OptionItem
-            name="Couples"
-            img={couple}
-            link="./couples"
-          />
+          <OptionItem name="Couples" img={couple} link="./couples" />
         </>
       </OptionSection>
       <OptionSection name="Others">
         <>
-          <OptionItem name="District" img={city} link="./" />
-          <OptionItem name="Fuel" img={fuel} link="./" />
-          <OptionItem name="Country" img={geography} link="./" />
-          <OptionItem name="Tour group" img={tourist} link="./" />
+          <OptionItem name="District" img={city} link="./districts" />
+          <OptionItem name="Fuel" img={fuel} link="./fuels" />
+          <OptionItem name="Country" img={geography} link="./countries" />
+          <OptionItem name="Tour group" img={tourist} link="./tourist_groups" />
         </>
       </OptionSection>
     </main>
