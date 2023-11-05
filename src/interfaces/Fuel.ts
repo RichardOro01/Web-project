@@ -1,5 +1,4 @@
-import { TableData } from "./TableData";
-
-export interface Fuel extends TableData {
+export interface Fuel {
+  fuel_code: number;
   fuel_name: string;
 }

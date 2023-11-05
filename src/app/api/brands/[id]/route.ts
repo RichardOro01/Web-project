@@ -1,7 +1,5 @@
-import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
-import { COLUMN_NAME } from "../route";
-import { prisma } from "../../../../../prisma";
+import prisma from "@/lib/prisma";
 
 export const GET = async (
   request: Request,

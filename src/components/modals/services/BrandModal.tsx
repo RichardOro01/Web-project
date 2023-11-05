@@ -10,7 +10,13 @@ import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Brand } from "@/interfaces/Brand";
-import { brandTypesAdapter } from "@/interfaces/adapters/BrandAdapter";
+import {
+  brandCreateAdapter,
+  brandTypesAdapter,
+} from "@/interfaces/adapters/BrandAdapter";
+import { Fuel } from "@/interfaces/Fuel";
+import fuelService from "@/services/tables/fuels";
+import { fuelOptionsAdapter } from "@/interfaces/adapters/FuelAdapter";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,24 +32,27 @@ const BrandModal: React.FC = () => {
     fuel_code: "",
     spending: "",
   });
+
+  const [fuels, setFuels] = useState<Fuel[]>([]);
   const handleOk = async () => {
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await brandService.update(editing, brandTypesAdapter(data));
-          } else {
-            await brandService.add(brandTypesAdapter(data));
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      if (editing) {
+        await brandService.update(editing, brandTypesAdapter(data));
+      } else {
+        await brandService.add(brandCreateAdapter(data));
+      }
+    } catch (error) {
+      notification.error({ message: error as string });
+    } finally {
+      dispatch(hideCurrentModal());
+      router.refresh();
+    }
+  };
+
+  const updateFuel = async () => {
+    const fuels = await fuelService.get();
+    setFuels(fuels);
   };
 
   useEffect(() => {
@@ -53,6 +62,10 @@ const BrandModal: React.FC = () => {
       });
     }
   }, [editing]);
+
+  useEffect(() => {
+    updateFuel();
+  }, []);
 
   return (
     <Modal
@@ -121,7 +134,7 @@ const BrandModal: React.FC = () => {
             <InputSelect
               id="fuel_code"
               label="Gasoline"
-              options={[{ label: "Gasoline", value: "gasoline" }]}
+              options={fuelOptionsAdapter(fuels)}
               currentValue={data.fuel_code}
               onChange={(e) =>
                 setData((data) => {

@@ -1,5 +1,5 @@
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../prisma";
 
 export const COLUMN_NAME = "brands" as never;
 
@@ -8,8 +8,15 @@ export const GET = async () => {
   return NextResponse.json(brands ?? []);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  console.log(await prisma.brand.create({ data }));
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.brand.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return new Response("Nombre de marca ya usado", { status: 400 });
+    }
+    throw NextResponse.json({ ok: false, data: error });
+  }
 };
