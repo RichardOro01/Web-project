@@ -1,21 +1,15 @@
 import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
+import { prisma } from "../../../../prisma";
 
 export const COLUMN_NAME = "brands" as never;
 
 export const GET = async () => {
-  const db = await readDB();
-  return NextResponse.json(db[COLUMN_NAME] ?? []);
+  const brands = await prisma.brand.findMany();
+  return NextResponse.json(brands ?? []);
 };
 
 export const POST = async (request: Request) => {
   const data = await request.json();
-  await writeDB(COLUMN_NAME, data);
-  return NextResponse.json({ ok: true });
-};
-
-export const DELETE = async (request: Request) => {
-  const key = await request.json();
-  await deleteElementDB(COLUMN_NAME, key);
+  console.log(await prisma.brand.create({ data }));
   return NextResponse.json({ ok: true });
 };

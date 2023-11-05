@@ -15,12 +15,11 @@ export const POST = async (url: string, data: any) => {
   });
 };
 
-export const DELETE = async (url: string, key: string) => {
+export const DELETE = async (url: string) => {
   return fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(key),
   });
 };

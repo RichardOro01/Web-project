@@ -1,9 +1,9 @@
 import { Fuel } from "./Fuel";
-import { TableData } from "./TableData";
 
-export interface Brand extends TableData {
-  name: string;
-  seats: number;
-  fuel: Fuel;
+export interface Brand {
+  brand_code: number;
+  brand_name: string;
+  amo_seats: number;
+  fuel_code: string;
   spending: number;
 }

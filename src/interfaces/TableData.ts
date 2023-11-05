@@ -1,3 +1,1 @@
-export interface TableData {
-  key: string;
-}
+type TableDataType<T> = { [K in keyof T]: T[K] } & { key: number };

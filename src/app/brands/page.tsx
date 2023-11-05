@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Brand } from "@/interfaces/Brand";
+import { brandAdapter } from "@/interfaces/adapters/BrandAdapter";
 import brandService from "@/services/tables/brands";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -7,18 +8,18 @@ import React from "react";
 const columns: ColumnsType<Brand> = [
   {
     title: "Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "brand_name",
+    key: "brand_name",
   },
   {
     title: "Seats",
-    dataIndex: "seats",
-    key: "seats",
+    dataIndex: "amo_seats",
+    key: "amo_seats",
   },
   {
     title: "Fuel Type",
-    dataIndex: "fuel",
-    key: "fuel",
+    dataIndex: "fuel_code",
+    key: "fuel_code",
   },
   {
     title: "Spending",
@@ -36,7 +37,12 @@ const BrandPage = async () => {
   }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <TableData title="Brands" modal="brands" data={brands} {...{ columns }} />
+      <TableData
+        title="Brands"
+        modal="brands"
+        data={brandAdapter(brands)}
+        {...{ columns }}
+      />
     </main>
   );
 };

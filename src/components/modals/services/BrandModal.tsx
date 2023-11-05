@@ -10,6 +10,7 @@ import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Brand } from "@/interfaces/Brand";
+import { brandTypesAdapter } from "@/interfaces/adapters/BrandAdapter";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,10 @@ const BrandModal: React.FC = () => {
   const [data, setData] = useState<
     Omit<{ [key in keyof Brand]: string }, "key">
   >({
-    name: "",
-    seats: "",
-    fuel: "",
+    brand_code: "",
+    brand_name: "",
+    amo_seats: "",
+    fuel_code: "",
     spending: "",
   });
   const handleOk = async () => {
@@ -30,9 +32,9 @@ const BrandModal: React.FC = () => {
       .then(async (data) => {
         try {
           if (editing) {
-            await brandService.update(editing, data);
+            await brandService.update(editing, brandTypesAdapter(data));
           } else {
-            await brandService.add(data);
+            await brandService.add(brandTypesAdapter(data));
           }
         } catch (error) {
           notification.error({ message: error as string });
@@ -63,35 +65,35 @@ const BrandModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Brand</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="name"
+            name="brand_name"
             rules={[{ required: true, message: "Brand name required" }]}
           >
             <InputText
               label="Brand"
-              id="name"
+              id="brand_name"
               maxLength={50}
-              currentValue={data.name}
+              currentValue={data.brand_name}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, name: e.target.value };
+                  return { ...data, brand_name: e.target.value };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="seats"
+            name="amo_seats"
             rules={[{ required: true, message: "Seats required" }]}
           >
             <InputText
               label="Seats"
-              id="seats"
+              id="amo_seats"
               type="number"
               min={1}
               max={200}
-              currentValue={data.seats}
+              currentValue={data.amo_seats}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, seats: e.target.value };
+                  return { ...data, amo_seats: e.target.value };
                 })
               }
             />
@@ -113,17 +115,17 @@ const BrandModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="fuel"
+            name="fuel_code"
             rules={[{ required: true, message: "Fuel required" }]}
           >
             <InputSelect
-              id="fuel"
+              id="fuel_code"
               label="Gasoline"
               options={[{ label: "Gasoline", value: "gasoline" }]}
-              currentValue={data.fuel}
+              currentValue={data.fuel_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, fuel: e.target.value };
+                  return { ...data, fuel_code: e.target.value };
                 })
               }
             />

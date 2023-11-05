@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model brand {
+  brand_name String       @unique(map: "brand_name") @db.VarChar
+  amo_seats  Int?
+  spending   Float?
+  brand_code Int          @id @default(autoincrement())
+  fuel_code  Int?
+  fuel       fuel?        @relation(fields: [fuel_code], references: [fuel_code], map: "fuel_code")
+  car        car[]
+  free_cover free_cover[]
+
+  @@index([fuel_code], map: "fki_fuel_type")
+}
+
+model car {
+  fleet_number Int           @unique(map: "fleet_number")
+  plate        String?       @db.VarChar
+  couple_code  Int?
+  car_code     Int           @id @default(autoincrement())
+  brand_code   Int?
+  brand        brand?        @relation(fields: [brand_code], references: [brand_code], map: "brand_code")
+  contract     contract[]
+  discrepancy  discrepancy[]
+  roadmap      roadmap[]
+
+  @@index([brand_code], map: "fki_brand_name")
+  @@index([couple_code], map: "fki_couple_code")
+}
+
+model contract {
+  contract_code    Int       @id(map: "Contract_pkey") @default(autoincrement())
+  applicant_name   String?   @db.VarChar
+  start_date       DateTime? @db.Date
+  end_date         DateTime? @db.Date
+  contract_kms     Float?
+  contract_amount  Float?
+  contract_country String?   @db.VarChar
+  car_code         Int?
+  car              car?      @relation(fields: [car_code], references: [car_code], onDelete: Cascade, map: "car_code")
+  country          country?  @relation(fields: [contract_country], references: [country_code], map: "contract_country")
+
+  @@index([contract_country], map: "fki_contract_country")
+}
+
+model country {
+  country_name String     @db.VarChar(50)
+  country_code String     @id @db.VarChar(2)
+  contract     contract[]
+  service      service[]
+}
+
+model couple {
+  couple_code                    Int     @id @default(autoincrement())
+  driver_1                       Int?
+  driver_2                       Int?
+  driver_couple_driver_1Todriver driver? @relation("couple_driver_1Todriver", fields: [driver_1], references: [driver_code], map: "driver_1")
+  driver_couple_driver_2Todriver driver? @relation("couple_driver_2Todriver", fields: [driver_2], references: [driver_code], onDelete: Cascade, map: "driver_2")
+
+  @@index([driver_1], map: "fki_driver_1")
+  @@index([driver_2], map: "fki_driver_2")
+}
+
+model discrepancy {
+  car_code          Int
+  planned_kms       Float?
+  tours_kms         Float?
+  difference_kms    Float?
+  planned_fuel      Float?
+  consumed_fuel     Float?
+  dif_spending_fuel Float?
+  month_code        DateTime @db.Date
+  car               car      @relation(fields: [car_code], references: [car_code], onDelete: SetNull, map: "car_code")
+  months            months   @relation(fields: [month_code], references: [month_code], onDelete: SetNull, map: "month_code")
+
+  @@id([month_code, car_code])
+  @@index([car_code], map: "fki_fleet_number")
+  @@index([month_code], map: "fki_month_code")
+}
+
+model district {
+  district_code Int      @id(map: "District_pkey") @default(autoincrement())
+  district_name String?  @db.VarChar
+  driver        driver[]
+}
+
+model driver {
+  id_driver                      String      @unique(map: "id_driver") @db.VarChar
+  driver_name                    String?     @db.VarChar
+  address                        String?     @db.VarChar
+  phone                          String?     @db.VarChar
+  district_code                  Int?
+  is_free_cover                  Boolean?
+  driver_code                    Int         @id @default(autoincrement())
+  couple_couple_driver_1Todriver couple[]    @relation("couple_driver_1Todriver")
+  couple_couple_driver_2Todriver couple[]    @relation("couple_driver_2Todriver")
+  district                       district?   @relation(fields: [district_code], references: [district_code], map: "distric_code")
+  free_cover                     free_cover?
+
+  @@index([district_code], map: "fki_distric_code")
+}
+
+model free_cover {
+  brand_code  Int?
+  driver_code Int    @id
+  brand       brand? @relation(fields: [brand_code], references: [brand_code], map: "brand_code")
+  driver      driver @relation(fields: [driver_code], references: [driver_code], onDelete: Cascade, map: "driver_code")
+
+  @@index([brand_code], map: "fki_d")
+  @@index([driver_code], map: "fki_driver_code")
+}
+
+model fuel {
+  fuel_name String  @db.VarChar
+  fuel_code Int     @id @default(autoincrement())
+  brand     brand[]
+}
+
+model months {
+  report_code Int?
+  month_code  DateTime      @id @db.Date
+  discrepancy discrepancy[]
+  report      report?       @relation(fields: [report_code], references: [report_code], onDelete: NoAction, onUpdate: NoAction, map: "report_code")
+}
+
+model relation_service_roadmap {
+  service_code Int
+  roadmap_date DateTime @db.Date
+  car_code     Int
+  roadmap      roadmap  @relation(fields: [roadmap_date, car_code], references: [roadmap_date, car_code], onDelete: Cascade, map: "roadmap_code")
+  service      service  @relation(fields: [service_code], references: [service_code], onDelete: Cascade, map: "service_code")
+
+  @@id([service_code, roadmap_date, car_code])
+  @@index([roadmap_date, car_code], map: "fki_roadmap_code")
+  @@index([service_code], map: "fki_service_code")
+}
+
+model report {
+  report_code   Int      @id(map: "Report_pkey") @default(autoincrement())
+  amo_services  Int?
+  amo_rents     Int?
+  income_rents  Float?
+  amo_others    Int?
+  income_others Float?
+  income_total  Float?
+  months        months[]
+}
+
+model roadmap {
+  roadmap_date             DateTime                   @db.Date
+  car_code                 Int
+  kms                      Float?
+  departure_time           DateTime?                  @db.Time(6)
+  relation_service_roadmap relation_service_roadmap[]
+  car                      car                        @relation(fields: [car_code], references: [car_code], onDelete: Cascade, map: "car_code")
+
+  @@id([roadmap_date, car_code], map: "Roadmap_pkey")
+}
+
+model role {
+  role_code   Int     @id @default(autoincrement())
+  description String  @db.VarChar
+  users       users[]
+}
+
+model service {
+  service_code             Int                        @id(map: "Service_pkey") @default(autoincrement())
+  service_name             String?                    @db.VarChar
+  tour_group_code          String?                    @db.VarChar
+  country_code             String?                    @db.VarChar
+  pickup_place             String?                    @db.VarChar
+  pickup_time              DateTime?                  @db.Time(6)
+  pax                      Int?
+  service_kms              Float?
+  amount                   Float?
+  request_number           Int?
+  relation_service_roadmap relation_service_roadmap[]
+  country                  country?                   @relation(fields: [country_code], references: [country_code], map: "country_code")
+  tourist_group            tourist_group?             @relation(fields: [tour_group_code], references: [group_code], map: "tourist_group")
+
+  @@index([tour_group_code], map: "fki_c")
+  @@index([country_code], map: "fki_country")
+  @@index([country_code], map: "fki_country_code")
+}
+
+model tourist_group {
+  group_code String    @id @db.VarChar(10)
+  group_name String?   @db.VarChar(50)
+  service    service[]
+}
+
+model users {
+  id        Int     @default(autoincrement())
+  username  String  @id(map: "user_pkey") @db.VarChar
+  password  String? @db.VarChar
+  name      String? @db.VarChar
+  role_code Int?
+  role      role?   @relation(fields: [role_code], references: [role_code], map: "role_code")
+
+  @@index([role_code], map: "fki_role_code")
+}
