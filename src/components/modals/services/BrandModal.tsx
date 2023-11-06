@@ -23,6 +23,7 @@ const BrandModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing);
+  const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<
     Omit<{ [key in keyof Brand]: string }, "key">
   >({
@@ -42,11 +43,11 @@ const BrandModal: React.FC = () => {
       } else {
         await brandService.add(brandCreateAdapter(data));
       }
-    } catch (error) {
-      notification.error({ message: error as string });
-    } finally {
+      api.success({ message: "Brand created" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
       router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
     }
   };
 
@@ -68,84 +69,87 @@ const BrandModal: React.FC = () => {
   }, []);
 
   return (
-    <Modal
-      centered
-      open
-      onCancel={() => dispatch(hideCurrentModal())}
-      onOk={handleOk}
-    >
-      <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Brand</h2>
-        <div className={styles.form_container}>
-          <Form.Item
-            name="brand_name"
-            rules={[{ required: true, message: "Brand name required" }]}
-          >
-            <InputText
-              label="Brand"
-              id="brand_name"
-              maxLength={50}
-              currentValue={data.brand_name}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, brand_name: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="amo_seats"
-            rules={[{ required: true, message: "Seats required" }]}
-          >
-            <InputText
-              label="Seats"
-              id="amo_seats"
-              type="number"
-              min={1}
-              max={200}
-              currentValue={data.amo_seats}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, amo_seats: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="spending"
-            rules={[{ required: true, message: "Spending required" }]}
-          >
-            <InputNum
-              label="Spending"
-              id="spending"
-              maxLength={6}
-              currentValue={data.spending}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, spending: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="fuel_code"
-            rules={[{ required: true, message: "Fuel required" }]}
-          >
-            <InputSelect
-              id="fuel_code"
-              label="Gasoline"
-              options={fuelOptionsAdapter(fuels)}
-              currentValue={data.fuel_code}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, fuel_code: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-        </div>
-      </Form>
-    </Modal>
+    <>
+      {contextHolder}
+      <Modal
+        centered
+        open
+        onCancel={() => dispatch(hideCurrentModal())}
+        onOk={handleOk}
+      >
+        <Form className="form" ref={form} method="post">
+          <h2 className="form_title">{editing ? "Edit" : "Insert"} Brand</h2>
+          <div className={styles.form_container}>
+            <Form.Item
+              name="brand_name"
+              rules={[{ required: true, message: "Brand name required" }]}
+            >
+              <InputText
+                label="Brand"
+                id="brand_name"
+                maxLength={50}
+                currentValue={data.brand_name}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, brand_name: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="amo_seats"
+              rules={[{ required: true, message: "Seats required" }]}
+            >
+              <InputText
+                label="Seats"
+                id="amo_seats"
+                type="number"
+                min={1}
+                max={200}
+                currentValue={data.amo_seats}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, amo_seats: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="spending"
+              rules={[{ required: true, message: "Spending required" }]}
+            >
+              <InputNum
+                label="Spending"
+                id="spending"
+                maxLength={6}
+                currentValue={data.spending}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, spending: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="fuel_code"
+              rules={[{ required: true, message: "Fuel required" }]}
+            >
+              <InputSelect
+                id="fuel_code"
+                label="Gasoline"
+                options={fuelOptionsAdapter(fuels)}
+                currentValue={data.fuel_code}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, fuel_code: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+          </div>
+        </Form>
+      </Modal>
+    </>
   );
 };
 

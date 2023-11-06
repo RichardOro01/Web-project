@@ -14,7 +14,7 @@ export const brandTypesAdapter = (brand: {
 export const brandCreateAdapter = (brand: {
   [key in keyof CreateBrand]: string;
 }): CreateBrand => ({
-  ...brand,
+  brand_name: brand.brand_name,
   amo_seats: parseInt(brand.amo_seats),
   spending: parseInt(brand.spending),
   fuel_code: parseInt(brand.fuel_code),

@@ -15,8 +15,8 @@ export const POST = async (request: Request, response: Response) => {
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (error.code === "P2002") {
-      return new Response("Nombre de marca ya usado", { status: 400 });
+      return NextResponse.json("Nombre de marca ya usado", { status: 400 });
     }
-    throw NextResponse.json({ ok: false, data: error });
+    return NextResponse.json("Error creando marca", { status: 400 });
   }
 };
