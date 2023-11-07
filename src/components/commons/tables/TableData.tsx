@@ -41,7 +41,7 @@ const TableData: React.FC<TableDataProps> = ({
   };
 
   const handleEdit = (value: TableDataType<any>) => {
-    dispatch(setEditingModal(value.key.toString()));
+    dispatch(setEditingModal(value));
     dispatch(setCurrentModal(modal));
   };
 

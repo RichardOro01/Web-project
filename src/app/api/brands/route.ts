@@ -1,11 +1,18 @@
+import { Brand } from "@/interfaces/Brand";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export const COLUMN_NAME = "brands" as never;
-
 export const GET = async () => {
   const brands = await prisma.brand.findMany();
-  return NextResponse.json(brands ?? []);
+  const fuels = await prisma.fuel.findMany();
+  const result: Brand[] = brands.map((brand) => ({
+    brand_code: brand.brand_code,
+    brand_name: brand.brand_name,
+    amo_seats: brand.amo_seats,
+    spending: brand.spending,
+    fuel: fuels.find((fuel) => fuel.fuel_code === brand.fuel_code),
+  }));
+  return NextResponse.json(result ?? []);
 };
 
 export const POST = async (request: Request, response: Response) => {

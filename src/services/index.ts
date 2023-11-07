@@ -6,7 +6,7 @@ export const GET = async (url: string, cache: RequestCache = "no-store") => {
     const json = await response.json();
     return Promise.reject({ detail: json });
   }
-  return response.json();
+  return Promise.resolve(response.json());
 };
 
 export const POST = async (url: string, data: any) => {

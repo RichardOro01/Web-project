@@ -9,10 +9,10 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Brand } from "@/interfaces/Brand";
+import { Brand, EditBrand } from "@/interfaces/Brand";
 import {
   brandCreateAdapter,
-  brandTypesAdapter,
+  brandFormAdapter,
 } from "@/interfaces/adapters/BrandAdapter";
 import { Fuel } from "@/interfaces/Fuel";
 import fuelService from "@/services/tables/fuels";
@@ -22,16 +22,17 @@ const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<Brand> | undefined
+  );
   const [api, contextHolder] = notification.useNotification();
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Brand]: string }, "key">
-  >({
-    brand_code: "",
+  const [data, setData] = useState<EditBrand>({
+    brand_code: 0,
     brand_name: "",
-    amo_seats: "",
-    fuel_code: "",
-    spending: "",
+    amo_seats: 0,
+    fuel_code: 0,
+    spending: 0,
   });
 
   const [fuels, setFuels] = useState<Fuel[]>([]);
@@ -39,7 +40,7 @@ const BrandModal: React.FC = () => {
     try {
       await form.current?.validateFields();
       if (editing) {
-        await brandService.update(editing, brandTypesAdapter(data));
+        await brandService.update(data.brand_code.toString(), data);
       } else {
         await brandService.add(brandCreateAdapter(data));
       }
@@ -58,9 +59,7 @@ const BrandModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      brandService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(brandFormAdapter(editing));
     }
   }, [editing]);
 
@@ -106,10 +105,10 @@ const BrandModal: React.FC = () => {
                 type="number"
                 min={1}
                 max={200}
-                currentValue={data.amo_seats}
+                currentValue={data.amo_seats?.toString()}
                 onChange={(e) =>
                   setData((data) => {
-                    return { ...data, amo_seats: e.target.value };
+                    return { ...data, amo_seats: parseInt(e.target.value) };
                   })
                 }
               />
@@ -122,10 +121,10 @@ const BrandModal: React.FC = () => {
                 label="Spending"
                 id="spending"
                 maxLength={6}
-                currentValue={data.spending}
+                currentValue={data.spending?.toString()}
                 onChange={(e) =>
                   setData((data) => {
-                    return { ...data, spending: e.target.value };
+                    return { ...data, spending: parseInt(e.target.value) };
                   })
                 }
               />
@@ -138,10 +137,10 @@ const BrandModal: React.FC = () => {
                 id="fuel_code"
                 label="Gasoline"
                 options={fuelOptionsAdapter(fuels)}
-                currentValue={data.fuel_code}
+                currentValue={data.fuel_code?.toString()}
                 onChange={(e) =>
                   setData((data) => {
-                    return { ...data, fuel_code: e.target.value };
+                    return { ...data, fuel_code: parseInt(e.target.value) };
                   })
                 }
               />

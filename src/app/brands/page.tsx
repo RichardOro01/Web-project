@@ -18,8 +18,8 @@ const columns: ColumnsType<Brand> = [
   },
   {
     title: "Fuel Type",
-    dataIndex: "fuel_code",
-    key: "fuel_code",
+    dataIndex: "fuel_name",
+    key: "fuel_name",
   },
   {
     title: "Spending",
