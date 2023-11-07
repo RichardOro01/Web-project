@@ -8,12 +8,24 @@ export const brandAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
   }));
 };
 
-export const brandFormAdapter = (brand: TableDataType<Brand>): EditBrand => ({
-  brand_code: brand.brand_code,
+export const brandFormAdapter = (
+  brand: TableDataType<Brand>
+): FormDataType<EditBrand> => ({
+  brand_code: brand.brand_code.toString(),
   brand_name: brand.brand_name,
-  amo_seats: brand.amo_seats,
-  spending: brand.spending,
-  fuel_code: brand.fuel?.fuel_code,
+  amo_seats: brand.amo_seats?.toString() ?? "",
+  spending: brand.spending?.toString() ?? "",
+  fuel_code: brand.fuel?.fuel_code.toString() ?? "",
+});
+
+export const brandTypesAdapter = (
+  brand: FormDataType<EditBrand>
+): EditBrand => ({
+  brand_code: parseInt(brand.brand_code),
+  brand_name: brand.brand_name,
+  amo_seats: parseInt(brand.amo_seats),
+  spending: parseInt(brand.spending),
+  fuel_code: parseInt(brand.fuel_code ?? ""),
 });
 
 export const brandCreateAdapter = (brand: EditBrand): CreateBrand => ({
