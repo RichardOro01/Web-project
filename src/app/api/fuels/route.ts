@@ -1,16 +1,27 @@
-import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
+import { Fuel } from "@/interfaces/Fuel";
 import prisma from "@/lib/prisma";
-
-export const COLUMN_NAME = "fuels" as never;
+import { NextResponse } from "next/server";
 
 export const GET = async () => {
   const fuels = await prisma.fuel.findMany();
-  return NextResponse.json(fuels ?? []);
+  const result: Fuel[] = fuels.map((fuel) => ({
+    fuel_code: fuel.fuel_code,
+    fuel_name: fuel.fuel_name,
+  }));
+  return NextResponse.json(result ?? []);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  await prisma.fuel.create({ data });
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.fuel.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return NextResponse.json("Nombre de combustible ya usado", {
+        status: 400,
+      });
+    }
+    return NextResponse.json("Error creando combustible", { status: 400 });
+  }
 };

@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Fuel } from "@/interfaces/Fuel";
+import { fuelAdapter } from "@/interfaces/adapters/FuelAdapter";
 import fuelService from "@/services/tables/fuels";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -21,7 +22,12 @@ const FuelPage = async () => {
   }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <TableData title="Fuels" modal="fuels" data={fuels} {...{ columns }} />
+      <TableData
+        title="Fuels"
+        modal="fuels"
+        data={fuelAdapter(fuels)}
+        {...{ columns }}
+      />
     </main>
   );
 };

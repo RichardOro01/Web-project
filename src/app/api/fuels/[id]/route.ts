@@ -7,9 +7,9 @@ export const GET = async (
 ) => {
   const { id } = params;
   const fuel_code = parseInt(id);
-  const brand = await prisma.fuel.findFirst({ where: { fuel_code } });
-  if (brand) {
-    return NextResponse.json(brand);
+  const fuel = await prisma.fuel.findFirst({ where: { fuel_code } });
+  if (fuel) {
+    return NextResponse.json(fuel);
   }
   return NextResponse.error();
 };
