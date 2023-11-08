@@ -1,17 +1,16 @@
-import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
-import { COLUMN_NAME } from "../route";
-import { District } from "@/interfaces/District";
+import prisma from "@/lib/prisma";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const db = await readDB();
-  if (db[COLUMN_NAME]) {
-    const district = (db[COLUMN_NAME] as Array<District>).find(
-      (district) => district.key === params.id
-    );
+  const { id } = params;
+  const district_code = parseInt(id);
+  const district = await prisma.district.findFirst({
+    where: { district_code },
+  });
+  if (district) {
     return NextResponse.json(district);
   }
   return NextResponse.error();
@@ -22,6 +21,18 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  await updateElementDB(COLUMN_NAME, params.id, data);
+  const { id } = params;
+  const district_code = parseInt(id);
+  await prisma.district.update({ where: { district_code }, data });
+  return NextResponse.json({ ok: true });
+};
+
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const { id } = params;
+  const district_code = parseInt(id);
+  await prisma.district.delete({ where: { district_code } });
   return NextResponse.json({ ok: true });
 };

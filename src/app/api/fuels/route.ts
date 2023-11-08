@@ -1,14 +1,9 @@
-import { Fuel } from "@/interfaces/Fuel";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
   const fuels = await prisma.fuel.findMany();
-  const result: Fuel[] = fuels.map((fuel) => ({
-    fuel_code: fuel.fuel_code,
-    fuel_name: fuel.fuel_name,
-  }));
-  return NextResponse.json(result ?? []);
+  return NextResponse.json(fuels);
 };
 
 export const POST = async (request: Request, response: Response) => {
