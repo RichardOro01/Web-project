@@ -13,38 +13,34 @@ const CountryModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Country]: string }, "key">
-  >({
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<Country> | undefined
+  );
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<Country>>({
+    country_code: "",
     country_name: "",
   });
   const handleOk = async () => {
-    console.log(data);
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await countryService.update(editing, data);
-          } else {
-            await countryService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      if (editing) {
+        await countryService.update(data.country_code, data);
+      } else {
+        await countryService.add(data);
+      }
+      api.success({ message: "Country created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
   };
 
   useEffect(() => {
     if (editing) {
-      countryService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(editing);
     }
   }, [editing]);
 
@@ -58,6 +54,22 @@ const CountryModal: React.FC = () => {
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Country</h2>
         <div className={styles.form_container}>
+          <Form.Item
+            name="country_name"
+            rules={[{ required: true, message: "Country code required" }]}
+          >
+            <InputText
+              label="Code"
+              id="country_code"
+              maxLength={2}
+              currentValue={data.country_code}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, country_code: e.target.value };
+                })
+              }
+            />
+          </Form.Item>
           <Form.Item
             name="country_name"
             rules={[{ required: true, message: "District name required" }]}

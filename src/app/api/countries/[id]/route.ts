@@ -1,18 +1,15 @@
-import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
-import { COLUMN_NAME } from "../route";
-import { Country } from "@/interfaces/Country";
+import prisma from "@/lib/prisma";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const db = await readDB();
-  if (db[COLUMN_NAME]) {
-    const district = (db[COLUMN_NAME] as Array<Country>).find(
-      (district) => district.key === params.id
-    );
-    return NextResponse.json(district);
+  const { id } = params;
+  const country_code = id;
+  const country = await prisma.country.findFirst({ where: { country_code } });
+  if (country) {
+    return NextResponse.json(country);
   }
   return NextResponse.error();
 };
@@ -22,6 +19,18 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  await updateElementDB(COLUMN_NAME, params.id, data);
+  const { id } = params;
+  const country_code = id;
+  await prisma.country.update({ where: { country_code }, data });
+  return NextResponse.json({ ok: true });
+};
+
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const { id } = params;
+  const country_code = id;
+  await prisma.country.delete({ where: { country_code } });
   return NextResponse.json({ ok: true });
 };
