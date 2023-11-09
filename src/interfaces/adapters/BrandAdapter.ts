@@ -1,4 +1,11 @@
 import { Brand, CreateBrand, EditBrand } from "../Brand";
+import { Option } from "@/components/commons/forms/InputSelect";
+
+export const brandOptionsAdapter = (brands: Brand[]): Option[] =>
+  brands.map((brand) => ({
+    label: brand.brand_name,
+    value: brand.brand_code.toString(),
+  }));
 
 export const brandAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
   return brands.map((brand) => ({
