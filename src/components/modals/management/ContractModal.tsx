@@ -9,52 +9,85 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import contractService from "@/services/tables/contracts";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Contract } from "@/interfaces/Contract";
+import { Contract, EditContract } from "@/interfaces/Contract";
+import {
+  contractCreateAdapter,
+  contractFormAdapter,
+  contractTypesAdapter,
+} from "@/interfaces/adapters/ContractAdapter";
 import InputDate from "@/components/commons/forms/InputDate";
+import { Car } from "@/interfaces/Car";
+import carService from "@/services/tables/cars";
+import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
+import { Country } from "@/interfaces/Country";
+import countryService from "@/services/tables/countries";
+import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
 
 const ContractModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Contract]: string }, "key">
-  >({
-    applicant: "",
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<Contract> | undefined
+  );
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<EditContract>>({
+    contract_code: "",
+    applicant_name: "",
     start_date: "",
     end_date: "",
-    kms: "",
-    amount: "",
-    country: "",
-    fleet_number: "",
+    contract_kms: "",
+    contract_amount: "",
+    country_code: "",
+    car_code: "",
   });
+
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [cars, setCars] = useState<Car[]>([]);
   const handleOk = async () => {
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await contractService.update(editing, data);
-          } else {
-            await contractService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      const adaptedTypesData = contractTypesAdapter(data);
+      if (editing) {
+        await contractService.update(
+          data.contract_code.toString(),
+          adaptedTypesData
+        );
+      } else {
+        await contractService.add(contractCreateAdapter(adaptedTypesData));
+      }
+      api.success({ message: "Contract created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
+  };
+
+  const updateCountry = async () => {
+    const countries = await countryService.get();
+    setCountries(countries);
+  };
+
+  const updateCar = async () => {
+    const cars = await carService.get();
+    setCountries(cars);
   };
 
   useEffect(() => {
     if (editing) {
-      contractService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(contractFormAdapter(editing));
     }
   }, [editing]);
+
+  useEffect(() => {
+    updateCountry();
+  }, []);
+
+  useEffect(() => {
+    updateCar();
+  }, []);
 
   return (
     <Modal
@@ -67,17 +100,17 @@ const ContractModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Contract</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="applicant"
+            name="applicant_name"
             rules={[{ required: true, message: "Applicant required" }]}
           >
             <InputText
               label="Applicant"
-              id="applicant"
+              id="applicant_name"
               maxLength={50}
-              currentValue={data.applicant}
+              currentValue={data.applicant_name}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, applicant: e.target.value };
+                  return { ...data, applicant_name: e.target.value };
                 })
               }
             />
@@ -115,68 +148,74 @@ const ContractModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="kms"
+            name="contract_kms"
             rules={[{ required: true, message: "Kms required" }]}
           >
             <InputNum
               label="Kms"
-              id="kms"
+              id="contract_kms"
               maxLength={50}
-              currentValue={data.kms}
+              currentValue={data.contract_kms}
               onChange={(e) =>
                 setData((data) => {
                   console.log(data);
-                  return { ...data, kms: e.target.value };
+                  return { ...data, contract_kms: e.target.value };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="amount"
+            name="contract_amount"
             rules={[{ required: true, message: "Amount required" }]}
           >
             <InputText
               label="Amount"
-              id="amount"
+              id="contract_amount"
               type="number"
               min={1}
               max={20}
-              currentValue={data.amount}
+              currentValue={data.contract_amount}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, amount: e.target.value };
+                  return { ...data, contract_amount: e.target.value };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="country"
-            rules={[{ required: true, message: "Country required" }]}
+            name="country_code"
+            rules={[{ required: true, message: "Fuel required" }]}
           >
             <InputSelect
-              id="country"
+              id="country_code"
               label="Country"
-              options={[{ label: "Cuba", value: "cu" }]}
-              currentValue={data.country}
+              options={countryOptionsAdapter(countries)}
+              currentValue={data.country_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, country: e.target.value };
+                  return {
+                    ...data,
+                    country_code: e.target.value,
+                  };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="fleet_number"
-            rules={[{ required: true, message: "Fleet number required" }]}
+            name="car_code"
+            rules={[{ required: true, message: "Fuel required" }]}
           >
-            <InputNum
-              label="Fleet number"
-              id="fleet_number"
-              maxLength={50}
-              currentValue={data.fleet_number}
+            <InputSelect
+              id="car_code"
+              label="Country"
+              options={carOptionsAdapter(cars)}
+              currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, fleet_number: e.target.value };
+                  return {
+                    ...data,
+                    car_code: e.target.value,
+                  };
                 })
               }
             />
