@@ -1,1 +1,1 @@
-type TableDataType<T> = { [K in keyof T]: T[K] } & { key: number };
+type TableDataType<T> = { [K in keyof T]: T[K] } & { key: number | string };

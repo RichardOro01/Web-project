@@ -1,10 +1,10 @@
 import { Option } from "@/components/commons/forms/InputSelect";
-import { CreateCountry, Country } from "../Country";
+import { Country } from "../Country";
 
 export const countryOptionsAdapter = (countries: Country[]): Option[] =>
   countries.map((country) => ({
     label: country.country_name,
-    value: country.country_code.toString(),
+    value: country.country_code,
   }));
 
 export const countryAdapter = (
@@ -12,6 +12,13 @@ export const countryAdapter = (
 ): TableDataType<Country>[] => {
   return countries.map((country) => ({
     ...country,
-    key: parseInt(country.country_code),
+    key: country.country_code,
   }));
 };
+
+export const countryTypesAdapter = (
+  country: FormDataType<Country>
+): Country => ({
+  country_code: country.country_code,
+  country_name: country.country_name,
+});

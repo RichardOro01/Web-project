@@ -8,6 +8,7 @@ import countryService from "@/services/tables/countries";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Country } from "@/interfaces/Country";
+import { countryTypesAdapter } from "@/interfaces/adapters/CountryAdapter";
 
 const CountryModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,7 +27,10 @@ const CountryModal: React.FC = () => {
     try {
       await form.current?.validateFields();
       if (editing) {
-        await countryService.update(data.country_code, data);
+        await countryService.update(
+          data.country_code,
+          countryTypesAdapter(data)
+        );
       } else {
         await countryService.add(data);
       }
