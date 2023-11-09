@@ -7,11 +7,9 @@ export const GET = async (
 ) => {
   const { id } = params;
   const group_code = id;
-  const tourist_group = await prisma.tourist_group.findFirst({
-    where: { group_code },
-  });
-  if (tourist_group) {
-    return NextResponse.json(tourist_group);
+  const group = await prisma.tourist_group.findFirst({ where: { group_code } });
+  if (group) {
+    return NextResponse.json(group);
   }
   return NextResponse.error();
 };

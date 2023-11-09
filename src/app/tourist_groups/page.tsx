@@ -1,19 +1,20 @@
 import TableData from "@/components/commons/tables/TableData";
-import { TourGroup } from "@/interfaces/TourGroup";
+import { Tourist } from "@/interfaces/TourGroup";
+import { touristAdapter } from "@/interfaces/adapters/TouristAdapter";
 import tourService from "@/services/tables/tour_groups";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
-const columns: ColumnsType<TourGroup> = [
+const columns: ColumnsType<Tourist> = [
   {
     title: "Tour group name",
-    dataIndex: "tour_name",
-    key: "tour_name",
+    dataIndex: "group_name",
+    key: "group_name",
   },
 ];
 
 const TourPage = async () => {
-  let tourist_groups: TourGroup[] = [];
+  let tourist_groups: Tourist[] = [];
   try {
     tourist_groups = await tourService.get();
   } catch (error) {
@@ -24,7 +25,7 @@ const TourPage = async () => {
       <TableData
         title="Tourist Groups"
         modal="tour_groups"
-        data={tourist_groups}
+        data={touristAdapter(tourist_groups)}
         {...{ columns }}
       />
     </main>
