@@ -18,7 +18,7 @@ import {
 import InputDate from "@/components/commons/forms/InputDate";
 import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
-import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
+//import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 import { Country } from "@/interfaces/Country";
 import countryService from "@/services/tables/countries";
 import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
