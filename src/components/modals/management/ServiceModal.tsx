@@ -6,57 +6,90 @@ import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
-import servicesService from "@/services/tables/services";
+import servicesAppService from "@/services/tables/services";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { ServiceApp } from "@/interfaces/Service";
+import { ServiceI, EditService } from "@/interfaces/Service";
 import InputDate from "@/components/commons/forms/InputDate";
+import {
+  serviceCreateAdapter,
+  serviceFormAdapter,
+  serviceTypesAdapter,
+} from "@/interfaces/adapters/ServiceAdapter";
+import { Tourist } from "@/interfaces/TourGroup";
+import tourService from "@/services/tables/tour_groups";
+import { touristOptionsAdapter } from "@/interfaces/adapters/TouristAdapter";
+import { Country } from "@/interfaces/Country";
+import countryService from "@/services/tables/countries";
+import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
 
 const ServiceModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof ServiceApp]: string }, "key">
-  >({
-    request_number: "",
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<ServiceI> | undefined
+  );
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<EditService>>({
+    service_code: "",
     service_name: "",
-    tour_group: "",
-    country: "",
     pickup_place: "",
     pickup_time: "",
     pax: "",
     service_kms: "",
     amount: "",
+    request_number: "",
+    country_code: "",
+    group_code: "",
   });
+
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [groups, setGroups] = useState<Tourist[]>([]);
   const handleOk = async () => {
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await servicesService.update(editing, data);
-          } else {
-            await servicesService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      const adaptedTypesData = serviceTypesAdapter(data);
+      if (editing) {
+        await servicesAppService.update(
+          data.service_code.toString(),
+          adaptedTypesData
+        );
+      } else {
+        await servicesAppService.add(serviceCreateAdapter(adaptedTypesData));
+      }
+      api.success({ message: "Service created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
+  };
+
+  const updateCountry = async () => {
+    const countries = await countryService.get();
+    setCountries(countries);
+  };
+
+  const updateGroup = async () => {
+    const groups = await tourService.get();
+    setGroups(groups);
   };
 
   useEffect(() => {
     if (editing) {
-      servicesService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(serviceFormAdapter(editing));
     }
   }, [editing]);
+
+  useEffect(() => {
+    updateCountry();
+  }, []);
+
+  useEffect(() => {
+    updateGroup();
+  }, []);
 
   return (
     <Modal
@@ -101,33 +134,39 @@ const ServiceModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="tour_group"
-            rules={[{ required: true, message: "Tour Group required" }]}
+            name="group_code"
+            rules={[{ required: true, message: "Group required" }]}
           >
             <InputSelect
-              id="tour_group"
-              label="Tour Group"
-              options={[{ label: "Adventure Explorers", value: "TG001" }]}
-              currentValue={data.tour_group}
+              id="group_code"
+              label="Tourist group"
+              options={touristOptionsAdapter(groups)}
+              currentValue={data.group_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, tour_group: e.target.value };
+                  return {
+                    ...data,
+                    group_code: e.target.value,
+                  };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="country"
+            name="country_code"
             rules={[{ required: true, message: "Country required" }]}
           >
             <InputSelect
-              id="country"
+              id="country_code"
               label="Country"
-              options={[{ label: "Cuba", value: "cu" }]}
-              currentValue={data.country}
+              options={countryOptionsAdapter(countries)}
+              currentValue={data.country_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, country: e.target.value };
+                  return {
+                    ...data,
+                    country_code: e.target.value,
+                  };
                 })
               }
             />
