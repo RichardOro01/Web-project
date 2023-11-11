@@ -17,6 +17,7 @@ const CoupleModal: React.FC = () => {
   const [data, setData] = useState<
     Omit<{ [key in keyof Couple]: string }, "key">
   >({
+    id:"",
     driver1: "",
     driver2: "",
   });

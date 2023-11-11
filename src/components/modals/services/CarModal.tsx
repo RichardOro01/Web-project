@@ -7,41 +7,48 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Car } from "@/interfaces/Car";
+import { Car,EditCar } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
+import { InputSelect } from "@/components/commons/forms/InputSelect";
+import useGetCouples from "@/services/hooks/useGetCouples";
+import { coupleOptionsAdapter } from "@/interfaces/adapters/CoupleAdapter";
+import { carCreateAdapter, carTypesAdapter } from "@/interfaces/adapters/CarAdapter";
+import useGetBrands from "@/services/hooks/useGetBrands";
+import { brandOptionsAdapter } from "@/interfaces/adapters/BrandAdapter";
 
 const CarModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<Omit<{ [key in keyof Car]: string }, "key">>(
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<EditCar>>(
     {
       number: "",
       plate: "",
-      brand: "",
-      driver1: "",
-      driver2: "",
+      brand_code: "",
+      couple_code:"",
     }
   );
+
+  const couplesData = useGetCouples()
+  const brandsData = useGetBrands()
+  
   const handleOk = async () => {
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await carService.update(editing, data);
-          } else {
-            await carService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      const adaptedTypesData = carTypesAdapter(data);
+      if (editing) {
+        await carService.update(data.number.toString(), adaptedTypesData);
+      } else {
+        await carService.add(carCreateAdapter(adaptedTypesData));
+      }
+      api.success({ message: "Brand created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
   };
 
   useEffect(() => {
@@ -98,50 +105,30 @@ const CarModal: React.FC = () => {
             name="brand"
             rules={[{ required: true, message: "Brand is required" }]}
           >
-            <InputText
+            <InputSelect
               label="Brand"
               id="brand"
-              type="text"
-              min={1}
-              max={200}
-              currentValue={data.brand}
+              currentValue={data.brand_code}
+              options={brandOptionsAdapter(brandsData.list)}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, brand: e.target.value };
+                  return { ...data, brand_code: e.target.value };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="driver1"
-            rules={[{ required: true, message: "Driver1 is required" }]}
+            name="couple"
+            rules={[{ required: true, message: "Select the Couple" }]}
           >
-            <InputText
-              label="Driver1"
-              id="driver1"
-              min={1}
-              max={200}
-              currentValue={data.driver1}
+            <InputSelect
+              label="Couple"
+              id="couple"
+              currentValue={data.couple_code}
+              options={coupleOptionsAdapter(couplesData.list)}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, driver1: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="driver2"
-            rules={[{ required: true, message: "Driver2 is required" }]}
-          >
-            <InputText
-              label="Driver2"
-              id="driver2"
-              min={1}
-              max={200}
-              currentValue={data.driver2}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, driver2: e.target.value };
+                  return { ...data, couple_code: e.target.value };
                 })
               }
             />
