@@ -42,7 +42,7 @@ const ServiceModal: React.FC = () => {
     amount: "",
     request_number: "",
     country_code: "",
-    group_code: "",
+    tour_group_code: "",
   });
 
   const [countries, setCountries] = useState<Country[]>([]);
@@ -54,7 +54,7 @@ const ServiceModal: React.FC = () => {
       if (editing) {
         await servicesAppService.update(
           data.service_code.toString(),
-          adaptedTypesData
+          serviceCreateAdapter(adaptedTypesData)
         );
       } else {
         await servicesAppService.add(serviceCreateAdapter(adaptedTypesData));
@@ -134,19 +134,19 @@ const ServiceModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="group_code"
+            name="tour_group_code"
             rules={[{ required: true, message: "Group required" }]}
           >
             <InputSelect
-              id="group_code"
+              id="tour_group_code"
               label="Tourist group"
               options={touristOptionsAdapter(groups)}
-              currentValue={data.group_code}
+              currentValue={data.tour_group_code}
               onChange={(e) =>
                 setData((data) => {
                   return {
                     ...data,
-                    group_code: e.target.value,
+                    tour_group_code: e.target.value,
                   };
                 })
               }

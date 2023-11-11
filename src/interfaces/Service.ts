@@ -10,13 +10,12 @@ export interface ServiceI {
   amount: number | null;
   request_number: number | null;
   country?: Country;
-  tourist_group?: Tourist;
+  tour_group?: Tourist;
 }
 
-export interface EditService
-  extends Omit<ServiceI, "country" | "tourist_group"> {
+export interface EditService extends Omit<ServiceI, "country" | "tour_group"> {
   country_code?: string;
-  group_code?: string;
+  tour_group_code?: string;
 }
 
 export interface CreateService extends Omit<EditService, "service_code"> {}

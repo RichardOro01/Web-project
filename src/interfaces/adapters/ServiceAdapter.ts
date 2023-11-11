@@ -7,7 +7,7 @@ export const serviceAdapter = (
     ...service,
     key: service.service_code,
     country_name: service.country?.country_name,
-    group_name: service.tourist_group?.group_name,
+    group_name: service.tour_group?.group_name,
   }));
 };
 
@@ -23,7 +23,7 @@ export const serviceFormAdapter = (
   amount: service.amount?.toString() ?? "",
   request_number: service.request_number?.toString() ?? "",
   country_code: service.country?.country_code,
-  group_code: service.tourist_group?.group_code,
+  tour_group_code: service.tour_group?.group_code,
 });
 
 export const serviceTypesAdapter = (
@@ -38,7 +38,7 @@ export const serviceTypesAdapter = (
   amount: parseFloat(service.amount),
   request_number: parseInt(service.request_number),
   country_code: service.country_code,
-  group_code: service.group_code ?? "",
+  tour_group_code: service.tour_group_code ?? "",
 });
 
 export const serviceCreateAdapter = (service: EditService): CreateService => ({
@@ -50,5 +50,5 @@ export const serviceCreateAdapter = (service: EditService): CreateService => ({
   amount: service.amount,
   request_number: service.request_number,
   country_code: service.country_code,
-  group_code: service.group_code,
+  tour_group_code: service.tour_group_code,
 });
