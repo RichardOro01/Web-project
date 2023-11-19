@@ -1,21 +1,29 @@
+import { Brand } from "@/interfaces/Brand";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
-
-export const COLUMN_NAME = "brands" as never;
 
 export const GET = async () => {
-  const db = await readDB();
-  return NextResponse.json(db[COLUMN_NAME] ?? []);
+  const brands = await prisma.brand.findMany();
+  const fuels = await prisma.fuel.findMany();
+  const result: Brand[] = brands.map((brand) => ({
+    brand_code: brand.brand_code,
+    brand_name: brand.brand_name,
+    amo_seats: brand.amo_seats,
+    spending: brand.spending,
+    fuel: fuels.find((fuel) => fuel.fuel_code === brand.fuel_code),
+  }));
+  return NextResponse.json(result ?? []);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  await writeDB(COLUMN_NAME, data);
-  return NextResponse.json({ ok: true });
-};
-
-export const DELETE = async (request: Request) => {
-  const key = await request.json();
-  await deleteElementDB(COLUMN_NAME, key);
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.brand.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return NextResponse.json("Nombre de marca ya usado", { status: 400 });
+    }
+    return NextResponse.json("Error creando marca", { status: 400 });
+  }
 };

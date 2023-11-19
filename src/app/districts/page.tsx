@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { District } from "@/interfaces/District";
+import { districtAdapter } from "@/interfaces/adapters/DistrictAdapter";
 import districtService from "@/services/tables/districts";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -24,7 +25,7 @@ const DistrictPage = async () => {
       <TableData
         title="Districts"
         modal="districts"
-        data={districts}
+        data={districtAdapter(districts)}
         {...{ columns }}
       />
     </main>

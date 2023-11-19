@@ -1,21 +1,22 @@
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
-
-export const COLUMN_NAME = "countries" as never;
 
 export const GET = async () => {
-  const db = await readDB();
-  return NextResponse.json(db[COLUMN_NAME] ?? []);
+  const countries = await prisma.country.findMany();
+  return NextResponse.json(countries);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  await writeDB(COLUMN_NAME, data);
-  return NextResponse.json({ ok: true });
-};
-
-export const DELETE = async (request: Request) => {
-  const key = await request.json();
-  await deleteElementDB(COLUMN_NAME, key);
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.country.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return NextResponse.json("Nombre de pais ya usado", {
+        status: 400,
+      });
+    }
+    return NextResponse.json("Error creando pais", { status: 400 });
+  }
 };

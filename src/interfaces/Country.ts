@@ -1,5 +1,4 @@
-import { TableData } from "./TableData";
-
-export interface Country extends TableData {
+export interface Country {
+  country_code: string;
   country_name: string;
 }

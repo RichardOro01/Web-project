@@ -1,17 +1,14 @@
-import { readDB, updateElementDB } from "@/services/json";
 import { NextResponse } from "next/server";
-import { COLUMN_NAME } from "../route";
-import { Fuel } from "@/interfaces/Fuel";
+import prisma from "@/lib/prisma";
 
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const db = await readDB();
-  if (db[COLUMN_NAME]) {
-    const fuel = (db[COLUMN_NAME] as Array<Fuel>).find(
-      (fuel) => fuel.key === params.id
-    );
+  const { id } = params;
+  const fuel_code = parseInt(id);
+  const fuel = await prisma.fuel.findFirst({ where: { fuel_code } });
+  if (fuel) {
     return NextResponse.json(fuel);
   }
   return NextResponse.error();
@@ -22,6 +19,18 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  await updateElementDB(COLUMN_NAME, params.id, data);
+  const { id } = params;
+  const fuel_code = parseInt(id);
+  await prisma.fuel.update({ where: { fuel_code }, data });
+  return NextResponse.json({ ok: true });
+};
+
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const { id } = params;
+  const fuel_code = parseInt(id);
+  await prisma.fuel.delete({ where: { fuel_code } });
   return NextResponse.json({ ok: true });
 };

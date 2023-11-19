@@ -15,13 +15,12 @@ import { CRUD_ModalsType } from "@/components/modals";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
-import { TableData } from "@/interfaces/TableData";
 
 interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
-  data: any[];
+  data: TableDataType<any>[];
   checkBoxColumns?: string[];
 }
 
@@ -36,13 +35,13 @@ const TableData: React.FC<TableDataProps> = ({
   const dispatch = useDispatch();
   const currentModal = useSelector((state: RootState) => state.modal.current);
 
-  const handleDelete = (value: TableData) => {
-    Services[modal].delete(value.key);
+  const handleDelete = (value: TableDataType<any>) => {
+    Services[modal].delete(value.key.toString());
     router.refresh();
   };
 
-  const handleEdit = (value: TableData) => {
-    dispatch(setEditingModal(value.key));
+  const handleEdit = (value: TableDataType<any>) => {
+    dispatch(setEditingModal(value));
     dispatch(setCurrentModal(modal));
   };
 

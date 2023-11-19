@@ -5,7 +5,7 @@ import { Couple } from "@/interfaces/Couple";
 const coupleService: Service = {
   get: async (key?: string) => GET(`couples${key ? `/${key}` : ""}`),
   add: async (data: Couple) => POST("couples", data),
-  delete: async (key: string) => DELETE("couples", key),
+  delete: async (key: string) => DELETE(`couples/${key}`),
   update: async (key: string, body: Couple) => POST(`couples/${key}`, body),
 };
 

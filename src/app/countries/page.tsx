@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Country } from "@/interfaces/Country";
+import { countryAdapter } from "@/interfaces/adapters/CountryAdapter";
 import countryService from "@/services/tables/countries";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -24,7 +25,7 @@ const CountryPage = async () => {
       <TableData
         title="Countries"
         modal="countries"
-        data={countries}
+        data={countryAdapter(countries)}
         {...{ columns }}
       />
     </main>

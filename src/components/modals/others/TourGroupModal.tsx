@@ -7,44 +7,41 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import tourService from "@/services/tables/tour_groups";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { TourGroup } from "@/interfaces/TourGroup";
+import { Tourist } from "@/interfaces/TourGroup";
+import { touristTypesAdapter } from "@/interfaces/adapters/TouristAdapter";
 
 const TourGroupModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof TourGroup]: string }, "key">
-  >({
-    tour_name: "",
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<Tourist> | undefined
+  );
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<Tourist>>({
+    group_code: "",
+    group_name: "",
   });
   const handleOk = async () => {
-    console.log(data);
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await tourService.update(editing, data);
-          } else {
-            await tourService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      if (editing) {
+        await tourService.update(data.group_code, touristTypesAdapter(data));
+      } else {
+        await tourService.add(data);
+      }
+      api.success({ message: "Tour group created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
   };
 
   useEffect(() => {
     if (editing) {
-      tourService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(editing);
     }
   }, [editing]);
 
@@ -59,17 +56,33 @@ const TourGroupModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Tour Group</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="tour_name"
+            name="group_code"
+            rules={[{ required: true, message: "Group code required" }]}
+          >
+            <InputText
+              label="Code"
+              id="group_code"
+              maxLength={10}
+              currentValue={data.group_code}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, group_code: e.target.value };
+                })
+              }
+            />
+          </Form.Item>
+          <Form.Item
+            name="group_name"
             rules={[{ required: true, message: "Tour group name required" }]}
           >
             <InputText
               label="Tour group"
-              id="tour_name"
+              id="group_name"
               maxLength={50}
-              currentValue={data.tour_name}
+              currentValue={data.group_name}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, tour_name: e.target.value };
+                  return { ...data, group_name: e.target.value };
                 })
               }
             />

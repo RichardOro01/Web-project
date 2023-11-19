@@ -3,6 +3,7 @@ import { ColumnsType } from "antd/es/table";
 import { Car } from '@/interfaces/Car';
 import carService from '@/services/tables/cars';
 import TableData from '@/components/commons/tables/TableData';
+import { carAdapter } from '@/interfaces/adapters/CarAdapter';
 
 const columns: ColumnsType<Car> = [
     {
@@ -17,18 +18,13 @@ const columns: ColumnsType<Car> = [
     },
     {
       title: "Brand",
-      dataIndex: "brand",
-      key: "brand",
+      dataIndex: "brand_name",
+      key: "brand_name",
     },
     {
-      title: "Driver 1",
-      dataIndex: "driver1",
-      key: "driver1",
-    },
-    {
-      title: "Driver 2",
-      dataIndex: "driver2",
-      key: "driver2",
+      title: "Couple",
+      dataIndex: "couple_name",
+      key: "couple_name",
     },
   ];
 
@@ -36,12 +32,13 @@ const CarPage = async () => {
     let cars: Car[] = [];
     try {
       cars = await carService.get();
+      console.log(cars)
     } catch (error) {
       console.log(error);
     }
     return (
       <main className="flex flex-col gap-8 p-5">
-        <TableData title="Cars" modal="cars" data={cars} {...{ columns }} />
+        <TableData title="Cars" modal="cars" data={carAdapter(cars)} {...{ columns }} />
       </main>
     );
 }

@@ -1,21 +1,24 @@
+import { Couple } from "@/interfaces/Couple"; 
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
-
-export const COLUMN_NAME = "couples" as never;
 
 export const GET = async () => {
-  const db = await readDB();
-  return NextResponse.json(db[COLUMN_NAME] ?? []);
+  const couples = await prisma.couple.findMany();
+  const drivers = await prisma.driver.findMany();
+  const result: Couple[] = couples.map((couple) => ({
+    couple_id: couple.couple_code,
+    driver1: drivers.find((driver) => driver.driver_code === couple.driver_1),
+    driver2: drivers.find((driver) => driver.driver_code === couple.driver_2),
+  }));
+  return NextResponse.json(result ?? []);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  await writeDB(COLUMN_NAME, data);
-  return NextResponse.json({ ok: true });
-};
-
-export const DELETE = async (request: Request) => {
-  const key = await request.json();
-  await deleteElementDB(COLUMN_NAME, key);
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.couple.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    return NextResponse.json("Error creando pareja", { status: 400 });
+  }
 };

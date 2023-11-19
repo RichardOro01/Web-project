@@ -8,43 +8,48 @@ import districtService from "@/services/tables/districts";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { District } from "@/interfaces/District";
+import {
+  districtCreateAdapter,
+  districtFormAdapter,
+  districtTypesAdapter,
+} from "@/interfaces/adapters/DistrictAdapter";
 
 const DistrictModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof District]: string }, "key">
-  >({
+  const editing = useSelector(
+    (state: RootState) =>
+      state.modal.editing as TableDataType<District> | undefined
+  );
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<District>>({
+    district_code: "",
     district_name: "",
   });
   const handleOk = async () => {
-    console.log(data);
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await districtService.update(editing, data);
-          } else {
-            await districtService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      const adaptedTypesData = districtTypesAdapter(data);
+      if (editing) {
+        await districtService.update(
+          data.district_code.toString(),
+          adaptedTypesData
+        );
+      } else {
+        await districtService.add(districtCreateAdapter(adaptedTypesData));
+      }
+      api.success({ message: "District created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
   };
 
   useEffect(() => {
     if (editing) {
-      districtService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(districtFormAdapter(editing));
     }
   }, [editing]);
 
