@@ -32,7 +32,7 @@ const columns: ColumnsType<ServiceI> = [
     key: "pickup_place",
   },
   {
-    title: "Pickup place",
+    title: "Pickup time",
     dataIndex: "pickup_time",
     key: "pickup_time",
   },

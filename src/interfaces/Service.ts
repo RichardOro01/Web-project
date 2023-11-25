@@ -4,7 +4,7 @@ export interface ServiceI {
   service_code: number;
   service_name: string | null;
   pickup_place: string | null;
-  pickup_time: Date | null;
+  pickup_time: string | null;
   pax: number | null;
   service_kms: number | null;
   amount: number | null;
