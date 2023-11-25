@@ -6,7 +6,8 @@ import couple from "@/assets/icons/items/couple-user.svg";
 import fuel from "@/assets/icons/items/fuel-gas-station.svg";
 import geography from "@/assets/icons/items/geography.svg";
 import id from "@/assets/icons/items/id-card.svg";
-import report from "@/assets/icons/items/report-text.svg";
+import discrepancy from "@/assets/icons/items/report-text.svg";
+import report from "@/assets/icons/items/report.svg";
 import road from "@/assets/icons/items/road-map-and-pin.svg";
 import service from "@/assets/icons/items/service.svg";
 import tourist from "@/assets/icons/items/tourist.svg";
@@ -20,8 +21,13 @@ export default function Home() {
         <>
           <OptionItem name="Contract" img={contract} link="./contracts" />
           <OptionItem name="Service" img={service} link="./services" />
-          <OptionItem name="Discrepancy" img={report} link="./discrepancies" />
+          <OptionItem
+            name="Discrepancy"
+            img={discrepancy}
+            link="./discrepancies"
+          />
           <OptionItem name="Roadmap" img={road} link="./roadmaps" />
+          <OptionItem name="Report" img={report} link="./reports" />
         </>
       </OptionSection>
       <OptionSection name="Services">
