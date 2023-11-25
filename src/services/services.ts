@@ -12,6 +12,7 @@ import districtService from "./tables/districts";
 import fuelService from "./tables/fuels";
 import countryService from "./tables/countries";
 import tourService from "./tables/tour_groups";
+import reportService from "./tables/reports";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
@@ -26,6 +27,7 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   fuels: fuelService,
   countries: countryService,
   tour_groups: tourService,
+  reports: reportService,
 };
 
 export default services;
