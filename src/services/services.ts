@@ -14,6 +14,7 @@ import countryService from "./tables/countries";
 import tourService from "./tables/tour_groups";
 import reportService from "./tables/reports";
 import roleService from "./tables/roles";
+import userService from "./tables/users";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
@@ -30,6 +31,7 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   tour_groups: tourService,
   reports: reportService,
   roles: roleService,
+  users: userService,
 };
 
 export default services;
