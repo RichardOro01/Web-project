@@ -1,4 +1,3 @@
-import { Contract } from "../Contract";
 import { Report, CreateReport } from "../Report";
 
 export const reportAdapter = (reports: Report[]): TableDataType<Report>[] => {
@@ -30,7 +29,7 @@ export const reportTypesAdapter = (report: FormDataType<Report>): Report => ({
   income_total: parseFloat(report.income_total),
 });
 
-export const contractCreateAdapter = (report: Report): CreateReport => ({
+export const reportCreateAdapter = (report: Report): CreateReport => ({
   amo_services: report.amo_services,
   amo_rents: report.amo_rents,
   income_rents: report.income_rents,
