@@ -68,7 +68,7 @@ const ReportModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Contract</h2>
+        <h2 className="form_title">{editing ? "Edit" : "Insert"} Report</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="amo_services"
