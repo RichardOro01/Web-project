@@ -13,6 +13,7 @@ import CountryModal from "./others/CountryModal";
 import TourGroupModal from "./others/TourGroupModal";
 import ReportModal from "./management/ReportModal";
 import RoleModal from "./others/RoleModal";
+import UserModal from "./others/UserModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   brands: <BrandModal />,
@@ -29,4 +30,5 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   tour_groups: <TourGroupModal />,
   reports: <ReportModal />,
   roles: <RoleModal />,
+  users: <UserModal />,
 };
