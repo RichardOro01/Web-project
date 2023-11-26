@@ -11,6 +11,8 @@ import report from "@/assets/icons/items/report.svg";
 import road from "@/assets/icons/items/road-map-and-pin.svg";
 import service from "@/assets/icons/items/service.svg";
 import tourist from "@/assets/icons/items/tourist.svg";
+import users from "@/assets/icons/items/user.svg";
+import role from "@/assets/icons/items/role.svg";
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
 
@@ -44,6 +46,8 @@ export default function Home() {
           <OptionItem name="Fuel" img={fuel} link="./fuels" />
           <OptionItem name="Country" img={geography} link="./countries" />
           <OptionItem name="Tour group" img={tourist} link="./tourist_groups" />
+          <OptionItem name="Users" img={users} link="./users" />
+          <OptionItem name="Role" img={role} link="./roles" />
         </>
       </OptionSection>
     </main>
