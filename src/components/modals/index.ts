@@ -11,4 +11,5 @@ export type CRUD_ModalsType =
   | "fuels"
   | "countries"
   | "tour_groups"
-  | "reports";
+  | "reports"
+  | "roles";
