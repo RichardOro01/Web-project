@@ -30,7 +30,6 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   countries: countryService,
   tour_groups: tourService,
   reports: reportService,
-  roles: roleService,
   users: userService,
 };
 

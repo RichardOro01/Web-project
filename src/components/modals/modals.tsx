@@ -12,7 +12,6 @@ import FuelModal from "./others/FuelModal";
 import CountryModal from "./others/CountryModal";
 import TourGroupModal from "./others/TourGroupModal";
 import ReportModal from "./management/ReportModal";
-import RoleModal from "./others/RoleModal";
 import UserModal from "./others/UserModal";
 
 export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
@@ -29,6 +28,5 @@ export const CRUD_Modals: { [key in CRUD_ModalsType]: React.ReactElement } = {
   countries: <CountryModal />,
   tour_groups: <TourGroupModal />,
   reports: <ReportModal />,
-  roles: <RoleModal />,
   users: <UserModal />,
 };

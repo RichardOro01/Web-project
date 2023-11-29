@@ -47,7 +47,6 @@ export default function Home() {
           <OptionItem name="Country" img={geography} link="./countries" />
           <OptionItem name="Tour group" img={tourist} link="./tourist_groups" />
           <OptionItem name="Users" img={users} link="./users" />
-          <OptionItem name="Role" img={role} link="./roles" />
         </>
       </OptionSection>
     </main>

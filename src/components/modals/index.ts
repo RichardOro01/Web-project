@@ -12,5 +12,4 @@ export type CRUD_ModalsType =
   | "countries"
   | "tour_groups"
   | "reports"
-  | "roles"
   | "users";
