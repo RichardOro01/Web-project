@@ -7,7 +7,7 @@ export const touristOptionsAdapter = (tourists: Tourist[]): Option[] =>
     value: tourist.group_code,
   }));
 
-export const touristAdapter = (
+export const touristTableAdapter = (
   tourists: Tourist[]
 ): TableDataType<Tourist>[] => {
   return tourists.map((tourist) => ({
