@@ -14,7 +14,6 @@ import {
   reportTypesAdapter,
 } from "@/interfaces/adapters/ReportAdapter";
 import InputText from "@/components/commons/forms/InputText";
-import { stat } from "fs";
 
 const ReportModal: React.FC = () => {
   const dispatch = useDispatch();
