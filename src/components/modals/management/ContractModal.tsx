@@ -208,7 +208,8 @@ const ContractModal: React.FC = () => {
             <InputSelect
               id="car_code"
               label="Country"
-              options={carOptionsAdapter(cars)}
+              //options={carOptionsAdapter(cars)}
+              options={[]}
               currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {
