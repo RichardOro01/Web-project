@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { ServiceI } from "@/interfaces/Service";
-import { serviceAdapter } from "@/interfaces/adapters/ServiceAdapter";
+import { serviceTableAdapter } from "@/interfaces/adapters/ServiceAdapter";
 import servicesAppService from "@/services/tables/services";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -65,7 +65,8 @@ const ServicePage = async () => {
       <TableData
         title="Services"
         modal="services"
-        data={serviceAdapter(services)}
+        data={services}
+        dataToShow={serviceTableAdapter(services)}
         {...{ columns }}
       />
     </main>

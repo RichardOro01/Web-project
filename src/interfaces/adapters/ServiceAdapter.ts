@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { ServiceI, CreateService, EditService } from "../Service";
 import { convertToMilitaryTime, removeTimeA, timeToDate } from "@/lib/utils";
 
-export const serviceAdapter = (
+export const serviceTableAdapter = (
   services: ServiceI[]
 ): TableDataType<ServiceI>[] => {
   return services.map((service) => ({
@@ -17,7 +17,7 @@ export const serviceAdapter = (
 };
 
 export const serviceFormAdapter = (
-  service: TableDataType<ServiceI>
+  service: ServiceI
 ): FormDataType<EditService> => ({
   service_code: service.service_code.toString(),
   service_name: service.service_name ?? "",
