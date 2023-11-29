@@ -19,7 +19,7 @@ const FuelModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector(
-    (state: RootState) => state.modal.editing as TableDataType<Fuel> | undefined
+    (state: RootState) => state.modal.editing as Fuel | undefined
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<Fuel>>({

@@ -7,16 +7,14 @@ export const fuelOptionsAdapter = (fuels: Fuel[]): Option[] =>
     value: fuel.fuel_code.toString(),
   }));
 
-export const fuelAdapter = (fuels: Fuel[]): TableDataType<Fuel>[] => {
+export const fuelTableAdapter = (fuels: Fuel[]): TableDataType<Fuel>[] => {
   return fuels.map((fuel) => ({
     ...fuel,
     key: fuel.fuel_code,
   }));
 };
 
-export const fuelFormAdapter = (
-  fuel: TableDataType<Fuel>
-): FormDataType<Fuel> => ({
+export const fuelFormAdapter = (fuel: Fuel): FormDataType<Fuel> => ({
   fuel_code: fuel.fuel_code.toString(),
   fuel_name: fuel.fuel_name,
 });
