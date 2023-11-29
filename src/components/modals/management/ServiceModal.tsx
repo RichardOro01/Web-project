@@ -49,9 +49,7 @@ const ServiceModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      console.log(data);
       const adaptedTypesData = serviceTypesAdapter(data);
-      console.log(adaptedTypesData);
 
       if (editing) {
         await servicesAppService.update(
