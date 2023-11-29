@@ -12,7 +12,7 @@ export const contractTableAdapter = (
 };
 
 export const contractFormAdapter = (
-  contract: TableDataType<Contract>
+  contract: Contract
 ): FormDataType<EditContract> => ({
   contract_code: contract.contract_code.toString(),
   applicant_name: contract.applicant_name ?? "",
