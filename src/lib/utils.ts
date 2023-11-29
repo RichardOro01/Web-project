@@ -1,3 +1,5 @@
+import { ErrorDetail } from "@/interfaces/errors/Error";
+import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import dayjs from "dayjs";
 
 export const timeToDate = (time: string) => {
@@ -32,4 +34,15 @@ export const convertToMilitaryTime = (time: string | null) => {
   }
 
   throw new Error("Invalid time");
+};
+
+export const handlePrismaClientUnknownRequestError = (
+  error: PrismaClientUnknownRequestError
+) => {
+  const match = (error.stack as string).match(/PostgresError [^,]*,[^,]*/g);
+  if (match) {
+    return JSON.parse(
+      match[0].replace("PostgresError ", "").replace(/\b(\w+):/g, '"$1":') + "}"
+    ) as ErrorDetail;
+  }
 };
