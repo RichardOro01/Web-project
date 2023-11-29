@@ -24,10 +24,10 @@ export const contractFormAdapter = (
   contract_code: contract.contract_code.toString(),
   applicant_name: contract.applicant_name ?? "",
   start_date: contract.start_date
-    ? dayjs(contract.start_date).format("DD/MM/YYYY")
+    ? dayjs(contract.start_date).format("YYYY-MM-DD")
     : "",
   end_date: contract.end_date
-    ? dayjs(contract.end_date).format("DD/MM/YYYY")
+    ? dayjs(contract.end_date).format("YYYY-MM-DD")
     : "",
   contract_kms: contract.contract_kms?.toString() ?? "",
   contract_amount: contract.contract_amount?.toString() ?? "",
