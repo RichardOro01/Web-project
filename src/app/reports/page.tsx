@@ -33,8 +33,8 @@ const columns: ColumnsType<Report> = [
   },
   {
     title: "Income total",
-    dataIndex: "amo_services",
-    key: "amo_services",
+    dataIndex: "income_total",
+    key: "income_total",
   },
 ];
 
