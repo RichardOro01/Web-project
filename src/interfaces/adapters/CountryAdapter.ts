@@ -7,7 +7,7 @@ export const countryOptionsAdapter = (countries: Country[]): Option[] =>
     value: country.country_code,
   }));
 
-export const countryAdapter = (
+export const countryTableAdapter = (
   countries: Country[]
 ): TableDataType<Country>[] => {
   return countries.map((country) => ({
