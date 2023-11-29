@@ -20,8 +20,9 @@ interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
-  data: TableDataType<any>[];
+  data: any[];
   checkBoxColumns?: string[];
+  dataToShow: TableDataType<any>[];
 }
 
 const TableData: React.FC<TableDataProps> = ({
@@ -30,6 +31,7 @@ const TableData: React.FC<TableDataProps> = ({
   modal,
   data,
   checkBoxColumns,
+  dataToShow,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -40,7 +42,7 @@ const TableData: React.FC<TableDataProps> = ({
     router.refresh();
   };
 
-  const handleEdit = (value: TableDataType<any>) => {
+  const handleEdit = (value: any) => {
     dispatch(setEditingModal(value));
     dispatch(setCurrentModal(modal));
   };
@@ -76,7 +78,7 @@ const TableData: React.FC<TableDataProps> = ({
           />
           <EditOutlined
             className="cursor-pointer"
-            onClick={() => handleEdit(value)}
+            onClick={() => handleEdit(data[dataToShow.indexOf(value)])}
           />
         </div>
       ),
@@ -87,7 +89,7 @@ const TableData: React.FC<TableDataProps> = ({
       <Title>{title}</Title>
       <Table
         columns={columnsAdapted}
-        dataSource={data}
+        dataSource={dataToShow}
         scroll={{ y: 450, x: 700 }}
       />
       <footer className="flex justify-end gap-2">

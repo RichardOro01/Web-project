@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Brand } from "@/interfaces/Brand";
-import { brandAdapter } from "@/interfaces/adapters/BrandAdapter";
+import { brandTableAdapter } from "@/interfaces/adapters/BrandAdapter";
 import brandService from "@/services/tables/brands";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -40,7 +40,8 @@ const BrandPage = async () => {
       <TableData
         title="Brands"
         modal="brands"
-        data={brandAdapter(brands)}
+        data={brands}
+        dataToShow={brandTableAdapter(brands)}
         {...{ columns }}
       />
     </main>

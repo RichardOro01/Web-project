@@ -7,7 +7,7 @@ export const brandOptionsAdapter = (brands: Brand[]): Option[] =>
     value: brand.brand_code.toString(),
   }));
 
-export const brandAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
+export const brandTableAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
   return brands.map((brand) => ({
     ...brand,
     key: brand.brand_code,
@@ -15,9 +15,7 @@ export const brandAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
   }));
 };
 
-export const brandFormAdapter = (
-  brand: TableDataType<Brand>
-): FormDataType<EditBrand> => ({
+export const brandFormAdapter = (brand: Brand): FormDataType<EditBrand> => ({
   brand_code: brand.brand_code.toString(),
   brand_name: brand.brand_name,
   amo_seats: brand.amo_seats?.toString() ?? "",
