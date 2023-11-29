@@ -19,8 +19,7 @@ const DistrictModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector(
-    (state: RootState) =>
-      state.modal.editing as TableDataType<District> | undefined
+    (state: RootState) => state.modal.editing as District | undefined
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<District>>({
