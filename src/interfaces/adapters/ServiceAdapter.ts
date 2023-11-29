@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import { ServiceI, CreateService, EditService } from "../Service";
+import { convertToMilitaryTime, removeTimeA, timeToDate } from "@/lib/utils";
 
 export const serviceAdapter = (
   services: ServiceI[]
@@ -8,6 +10,9 @@ export const serviceAdapter = (
     key: service.service_code,
     country_name: service.country?.country_name,
     group_name: service.tour_group?.group_name,
+    pickup_time: service.pickup_time
+      ? dayjs(service.pickup_time).format("hh:mm A")
+      : null,
   }));
 };
 
@@ -17,7 +22,7 @@ export const serviceFormAdapter = (
   service_code: service.service_code.toString(),
   service_name: service.service_name ?? "",
   pickup_place: service.pickup_place ?? "",
-  pickup_time: service.pickup_time?.toString() ?? "",
+  pickup_time: removeTimeA(service.pickup_time),
   pax: service.pax?.toString() ?? "",
   service_kms: service.service_kms?.toString() ?? "",
   amount: service.amount?.toString() ?? "",
@@ -32,7 +37,7 @@ export const serviceTypesAdapter = (
   service_code: parseInt(service.service_code),
   service_name: service.service_name,
   pickup_place: service.pickup_place,
-  pickup_time: new Date(service.pickup_time),
+  pickup_time: timeToDate(service.pickup_time),
   pax: parseInt(service.pax),
   service_kms: parseFloat(service.service_kms),
   amount: parseFloat(service.amount),

@@ -19,6 +19,8 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
+  console.log(data);
+
   const { id } = params;
   const service_code = parseInt(id);
   await prisma.service.update({ where: { service_code }, data });
