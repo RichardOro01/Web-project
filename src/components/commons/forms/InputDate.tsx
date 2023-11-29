@@ -21,14 +21,12 @@ const InputDate: React.FC<InputTextProps & InputDateProps> = ({
     }
   };
   const switchBackToText = (force = false) => {
-    console.log(value);
     if (!value || force) {
       setType("text");
     }
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(event.target.value);
     onChange && onChange(event);
     setValue(event.target.value);
   };

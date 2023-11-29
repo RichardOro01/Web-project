@@ -22,7 +22,9 @@ export const serviceFormAdapter = (
   service_code: service.service_code.toString(),
   service_name: service.service_name ?? "",
   pickup_place: service.pickup_place ?? "",
-  pickup_time: removeTimeA(service.pickup_time),
+  pickup_time: service.pickup_time
+    ? dayjs(service.pickup_time).format("HH:mm")
+    : "",
   pax: service.pax?.toString() ?? "",
   service_kms: service.service_kms?.toString() ?? "",
   amount: service.amount?.toString() ?? "",

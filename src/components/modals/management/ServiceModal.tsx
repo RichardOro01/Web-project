@@ -22,7 +22,6 @@ import { touristOptionsAdapter } from "@/interfaces/adapters/TouristAdapter";
 import { Country } from "@/interfaces/Country";
 import countryService from "@/services/tables/countries";
 import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
-import { convertToMilitaryTime } from "@/lib/utils";
 
 const ServiceModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -55,9 +54,6 @@ const ServiceModal: React.FC = () => {
       console.log(adaptedTypesData);
 
       if (editing) {
-        adaptedTypesData.pickup_time = convertToMilitaryTime(
-          adaptedTypesData.pickup_time
-        );
         await servicesAppService.update(
           data.service_code.toString(),
           serviceCreateAdapter(adaptedTypesData)
