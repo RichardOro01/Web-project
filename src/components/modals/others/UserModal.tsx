@@ -23,7 +23,7 @@ const UserModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector(
-    (state: RootState) => state.modal.editing as TableDataType<User> | undefined
+    (state: RootState) => state.modal.editing as User | undefined
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditUser>>({

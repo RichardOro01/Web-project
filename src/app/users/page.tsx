@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { User } from "@/interfaces/User";
-import { userAdapter } from "@/interfaces/adapters/UserAdapter";
+import { userTableAdapter } from "@/interfaces/adapters/UserAdapter";
 import userService from "@/services/tables/users";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -40,7 +40,8 @@ const UserPage = async () => {
       <TableData
         title="Users"
         modal="users"
-        data={userAdapter(users)}
+        data={users}
+        dataToShow={userTableAdapter(users)}
         {...{ columns }}
       />
     </main>

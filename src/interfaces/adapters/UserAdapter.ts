@@ -1,6 +1,6 @@
 import { User, CreateUser, EditUser } from "../User";
 
-export const userAdapter = (users: User[]): TableDataType<User>[] => {
+export const userTableAdapter = (users: User[]): TableDataType<User>[] => {
   return users.map((user) => ({
     ...user,
     key: user.user_code,
@@ -8,9 +8,7 @@ export const userAdapter = (users: User[]): TableDataType<User>[] => {
   }));
 };
 
-export const userFormAdapter = (
-  user: TableDataType<User>
-): FormDataType<EditUser> => ({
+export const userFormAdapter = (user: User): FormDataType<EditUser> => ({
   user_code: user.user_code.toString(),
   username: user.username,
   password: user.password ?? "",
