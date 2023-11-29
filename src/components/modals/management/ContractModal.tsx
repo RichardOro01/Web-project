@@ -28,8 +28,7 @@ const ContractModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector(
-    (state: RootState) =>
-      state.modal.editing as TableDataType<Contract> | undefined
+    (state: RootState) => state.modal.editing as Contract | undefined
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditContract>>({

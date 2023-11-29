@@ -14,14 +14,14 @@ import {
   reportTypesAdapter,
 } from "@/interfaces/adapters/ReportAdapter";
 import InputText from "@/components/commons/forms/InputText";
+import { stat } from "fs";
 
 const ReportModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector(
-    (state: RootState) =>
-      state.modal.editing as TableDataType<Report> | undefined
+    (state: RootState) => state.modal.editing as Report | undefined
   );
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<Report>>({

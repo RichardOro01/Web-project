@@ -1,15 +1,15 @@
 import { Report, CreateReport } from "../Report";
 
-export const reportAdapter = (reports: Report[]): TableDataType<Report>[] => {
+export const reportTableAdapter = (
+  reports: Report[]
+): TableDataType<Report>[] => {
   return reports.map((report) => ({
     ...report,
     key: report.report_code,
   }));
 };
 
-export const reportFormAdapter = (
-  report: TableDataType<Report>
-): FormDataType<Report> => ({
+export const reportFormAdapter = (report: Report): FormDataType<Report> => ({
   report_code: report.report_code.toString(),
   income_others: report.income_others?.toString() ?? "",
   amo_others: report.amo_others?.toString() ?? "",

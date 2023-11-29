@@ -1,6 +1,6 @@
 import { Contract, CreateContract, EditContract } from "../Contract";
 
-export const contractAdapter = (
+export const contractTableAdapter = (
   contracts: Contract[]
 ): TableDataType<Contract>[] => {
   return contracts.map((contract) => ({

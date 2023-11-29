@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Report } from "@/interfaces/Report";
-import { reportAdapter } from "@/interfaces/adapters/ReportAdapter";
+import { reportTableAdapter } from "@/interfaces/adapters/ReportAdapter";
 import reportService from "@/services/tables/reports";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -50,7 +50,8 @@ const ReportPage = async () => {
       <TableData
         title="Reports"
         modal="reports"
-        data={reportAdapter(reports)}
+        data={reports}
+        dataToShow={reportTableAdapter(reports)}
         {...{ columns }}
       />
     </main>

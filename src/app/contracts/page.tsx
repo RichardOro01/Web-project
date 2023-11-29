@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Contract } from "@/interfaces/Contract";
-import { contractAdapter } from "@/interfaces/adapters/ContractAdapter";
+import { contractTableAdapter } from "@/interfaces/adapters/ContractAdapter";
 import contractService from "@/services/tables/contracts";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -55,7 +55,8 @@ const ContractPage = async () => {
       <TableData
         title="Contracts"
         modal="contracts"
-        data={contractAdapter(contracts)}
+        data={contracts}
+        dataToShow={contractTableAdapter(contracts)}
         {...{ columns }}
       />
     </main>
