@@ -1,4 +1,5 @@
 import { Contract, CreateContract, EditContract } from "../Contract";
+import dayjs from "dayjs";
 
 export const contractTableAdapter = (
   contracts: Contract[]
@@ -8,6 +9,12 @@ export const contractTableAdapter = (
     key: contract.contract_code,
     country_name: contract.country?.country_name,
     fleet_number: contract.fleet_number?.fleet_number,
+    start_date: contract.start_date
+      ? dayjs(contract.start_date).format("YYYY-MM-DD")
+      : null,
+    end_date: contract.end_date
+      ? dayjs(contract.end_date).format("YYYY-MM-DD")
+      : null,
   }));
 };
 
@@ -16,8 +23,12 @@ export const contractFormAdapter = (
 ): FormDataType<EditContract> => ({
   contract_code: contract.contract_code.toString(),
   applicant_name: contract.applicant_name ?? "",
-  start_date: contract.start_date?.toString() ?? "",
-  end_date: contract.end_date?.toString() ?? "",
+  start_date: contract.start_date
+    ? dayjs(contract.start_date).format("DD/MM/YYYY")
+    : "",
+  end_date: contract.end_date
+    ? dayjs(contract.end_date).format("DD/MM/YYYY")
+    : "",
   contract_kms: contract.contract_kms?.toString() ?? "",
   contract_amount: contract.contract_amount?.toString() ?? "",
   country_code: contract.country?.country_code,
@@ -29,8 +40,8 @@ export const contractTypesAdapter = (
 ): EditContract => ({
   contract_code: parseInt(contract.contract_code),
   applicant_name: contract.applicant_name,
-  start_date: new Date(contract.start_date),
-  end_date: new Date(contract.end_date),
+  start_date: contract.start_date,
+  end_date: contract.end_date,
   contract_kms: parseFloat(contract.contract_kms),
   contract_amount: parseFloat(contract.contract_amount),
   country_code: contract.country_code,

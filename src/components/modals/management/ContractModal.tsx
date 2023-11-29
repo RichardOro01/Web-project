@@ -183,7 +183,7 @@ const ContractModal: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="country_code"
-            rules={[{ required: true, message: "Fuel required" }]}
+            rules={[{ required: true, message: "Country required" }]}
           >
             <InputSelect
               id="country_code"
@@ -202,11 +202,11 @@ const ContractModal: React.FC = () => {
           </Form.Item>
           <Form.Item
             name="car_code"
-            rules={[{ required: true, message: "Fuel required" }]}
+            rules={[{ required: true, message: "Car required" }]}
           >
             <InputSelect
               id="car_code"
-              label="Country"
+              label="Car"
               //options={carOptionsAdapter(cars)}
               options={[]}
               currentValue={data.car_code}
