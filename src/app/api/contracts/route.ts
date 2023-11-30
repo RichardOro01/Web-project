@@ -28,9 +28,15 @@ export const POST = async (request: Request, response: Response) => {
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (error.code === "P2002") {
-      return NextResponse.json("Nombre de contrato ya usado", { status: 400 });
+      return NextResponse.json(
+        { message: "Nombre de contrato ya usado", code: error.code },
+        { status: 400 }
+      );
     }
     console.log(error);
-    return NextResponse.json("Error creando contrato", { status: 400 });
+    return NextResponse.json(
+      { message: "Error creando contrato" },
+      { status: 400 }
+    );
   }
 };
