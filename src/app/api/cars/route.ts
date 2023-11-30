@@ -15,7 +15,7 @@ export const GET = async () => {
     plate: car.plate,
     brand: brands.find((b) => b.brand_code === car.brand_code),
     couple:{
-      couple_id : couples.find((c) => c.couple_code === car.couple_code)?.couple_code,
+      couple_code : Number(couples.find((c) => c.couple_code === car.couple_code)?.couple_code),
       driver1: drivers.find((d) => d.driver_code == couples.find((c) => c.couple_code === car.couple_code)?.driver_1),
       driver2: drivers.find((d) => d.driver_code == couples.find((c) => c.couple_code === car.couple_code)?.driver_2),
     },
@@ -28,7 +28,6 @@ export const POST = async (request: Request, response: Response) => {
   try {
     await prisma.car.create({ data });
     return NextResponse.json({ ok: true });
-    console.log(data)
   } catch (error: any) {
     console.log(error)
     return NextResponse.json("Error creando carro", { status: 400 });

@@ -12,7 +12,7 @@ import carService from "@/services/tables/cars";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import useGetCouples from "@/services/hooks/useGetCouples";
 import { coupleOptionsAdapter } from "@/interfaces/adapters/CoupleAdapter";
-import { carCreateAdapter, carTypesAdapter } from "@/interfaces/adapters/CarAdapter";
+import { carCreateAdapter, carFormAdapter, carTypesAdapter } from "@/interfaces/adapters/CarAdapter";
 import useGetBrands from "@/services/hooks/useGetBrands";
 import { brandOptionsAdapter } from "@/interfaces/adapters/BrandAdapter";
 
@@ -20,7 +20,7 @@ const CarModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
+  const editing = useSelector((state: RootState) => state.modal.editing as TableDataType<Car>|undefined);
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditCar>>(
     {
@@ -41,9 +41,9 @@ const CarModal: React.FC = () => {
       if (editing) {
         await carService.update(data.number.toString(), adaptedTypesData);
       } else {
-        await carService.add(carCreateAdapter(adaptedTypesData));
+        await carService.add(adaptedTypesData);
       }
-      api.success({ message: "Brand created" }); //TODO cuando se cierra el modal no deja ver esto
+      api.success({ message: "Car created" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
       router.refresh();
     } catch (error: any) {
@@ -53,13 +53,13 @@ const CarModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      carService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(carFormAdapter(editing));
     }
   }, [editing]);
 
   return (
+    <>
+    {contextHolder}
     <Modal
       centered
       open
@@ -69,22 +69,6 @@ const CarModal: React.FC = () => {
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Car</h2>
         <div className={styles.form_container}>
-          <Form.Item
-            name="number"
-            rules={[{ required: true, message: "Number is Required" }]}
-          >
-            <InputNum
-              label="Number"
-              id="number"
-              maxLength={6}
-              currentValue={data.number}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, number: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
           <Form.Item
             name="plate"
             rules={[{ required: true, message: "Plate required" }]}
@@ -136,6 +120,7 @@ const CarModal: React.FC = () => {
         </div>
       </Form>
     </Modal>
+    </>
   );
 };
 

@@ -1,7 +1,6 @@
 import { Brand, CreateBrand, EditBrand } from "../Brand";
 import { Option } from "@/components/commons/forms/InputSelect";
 import { Car, CreateCar, EditCar } from "../Car";
-import { car } from "@prisma/client";
 
 export const carAdapter = (cars: Car[]): TableDataType<Car>[] => {
   return cars.map((car) => ({
@@ -18,13 +17,13 @@ export const carFormAdapter = (
   number: car.number.toString(),
   plate: car.plate?.toString() ?? "",
   brand_code: car?.brand?.brand_code.toString(),
-  couple_code: car.couple?.couple_id?.toString() ?? "",
+  couple_code: car.couple?.couple_code?.toString() ?? "",
 });
 
 export const carTypesAdapter = (
   car: FormDataType<EditCar>
-): EditCar => ({
-  number: Number(car.number),
+): CreateCar => ({
+  fleet_number: Number(car.number),
   plate: car.plate,
   brand_code: Number(car.brand_code),
   couple_code: parseInt(car.couple_code ?? ''),

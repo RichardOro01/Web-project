@@ -6,7 +6,7 @@ import { Couple } from "@/interfaces/Couple";
 const driverService: Service = {
   get: async (key?: string) => GET(`drivers${key ? `/${key}` : ""}`),
   add: async (data: Driver) => POST("drivers", data),
-  delete: async (key: string) => DELETE("drivers", key),
+  delete: async (key: string) => DELETE(`drivers/${key}`),
   update: async (key: string, body: Driver) => POST(`drivers/${key}`, body),
 };
 

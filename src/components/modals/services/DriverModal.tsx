@@ -6,52 +6,70 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Driver } from "@/interfaces/Driver";
+import { Driver, EditDriver } from "@/interfaces/Driver";
 import driverService from "@/services/tables/drivers";
+import { InputSelect } from "@/components/commons/forms/InputSelect";
+import districtService from "@/services/tables/districts";
+import { District } from "@/interfaces/District";
+import { districtOptionsAdapter } from "@/interfaces/adapters/DistrictAdapter";
+import { driverFormAdapter, driverTypesAdapter } from "@/interfaces/adapters/DriverAdapter";
 
 const DriverModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const [district,setDistrict] = useState <District[]>([])
   const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Driver]: string }, "key">
-  >({
-    id: "",
-    name: "",
+  const [api, contextHolder] = notification.useNotification();
+  const [data, setData] = useState<FormDataType<EditDriver>>(
+  {
+    id_driver: "",
+    driver_name: "",
     address: "",
     phone: "",
-    district_name: "",
+    district_code: "",
     is_free_cover: "",
+    driver_code:""
   });
   const handleOk = async () => {
     form.current
       ?.validateFields()
-      .then(async (data) => {
+      const adaptedTypesData = driverTypesAdapter(data);
         try {
           if (editing) {
-            await driverService.update(editing, data);
+            await driverService.update(data.driver_code.toString(), adaptedTypesData);
           } else {
-            await driverService.add(data);
+            await driverService.add(adaptedTypesData);
           }
-        } catch (error) {
-          notification.error({ message: error as string });
+          api.success({ message: "Car created" }); //TODO cuando se cierra el modal no deja ver esto
+          dispatch(hideCurrentModal());
+          router.refresh();
+        } catch (error:any) {
+          if (error.detail) api.error({ message: error.detail });
         } finally {
           dispatch(hideCurrentModal());
           router.refresh();
         }
-      })
-      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     if (editing) {
-      driverService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(driverFormAdapter(editing));
     }
   }, [editing]);
+
+  const updateDistrict = async () => {
+    const fuels = await districtService.get();
+    setDistrict(fuels);
+  };
+
+  useEffect(() => {
+    updateDistrict();
+  }, []);
+
   return (
+    <>
+    {contextHolder}
     <Modal
       centered
       open
@@ -62,22 +80,6 @@ const DriverModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Driver</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="id"
-            rules={[{ required: true, message: "ID code required" }]}
-          >
-            <InputText
-              label="ID"
-              id="id"
-              maxLength={50}
-              currentValue={data.id}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, id: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
             name="name"
             rules={[{ required: true, message: "Name is required" }]}
           >
@@ -86,10 +88,10 @@ const DriverModal: React.FC = () => {
               id="name"
               min={1}
               max={200}
-              currentValue={data.name}
+              currentValue={data.driver_name}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, name: e.target.value };
+                  return { ...data, driver_name: e.target.value };
                 })
               }
             />
@@ -129,21 +131,22 @@ const DriverModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-            name="district_name"
-            rules={[{ required: true, message: "Phone is required" }]}
+            name="District"
+            rules={[{ required: true, message: "Select the District" }]}
           >
-            <InputText
-              id="district_name"
-              label="District Name"
-              max={50}
-              currentValue={data.district_name}
+            <InputSelect
+              label="District"
+              id="district"
+              currentValue={data.district_code}
+              options={districtOptionsAdapter(district)}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, district_name: e.target.value };
+                  return { ...data, district_code: e.target.value };
                 })
               }
             />
           </Form.Item>
+            
           <Form.Item
             name="is_free_cover"
             getValueFromEvent={() => {
@@ -168,6 +171,7 @@ const DriverModal: React.FC = () => {
         </div>
       </Form>
     </Modal>
+    </>
   );
 };
 

@@ -32,7 +32,6 @@ const CarPage = async () => {
     let cars: Car[] = [];
     try {
       cars = await carService.get();
-      console.log(cars)
     } catch (error) {
       console.log(error);
     }

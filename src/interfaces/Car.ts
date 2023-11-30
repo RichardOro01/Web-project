@@ -9,6 +9,7 @@ export interface Car {
   }
 
   export interface EditCar extends Omit<Car,'couple' & 'brand'> {
+    fleet_number?:number;
     couple_code?:number;
     brand_code?:number;
   }

@@ -1,19 +1,15 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Driver } from "@/interfaces/Driver";
+import { driverAdapter } from "@/interfaces/adapters/DriverAdapter";
 import driverService from "@/services/tables/drivers";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
 const columns: ColumnsType<Driver> = [
   {
-    title: "ID",
-    dataIndex: "id",
-    key: "id",
-  },
-  {
     title: "Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "driver_name",
+    key: "driver_name",
   },
   {
     title: "Address",
@@ -49,7 +45,7 @@ const DriverPage = async () => {
       <TableData
         title="Drivers"
         modal="drivers"
-        data={drivers}
+        data={driverAdapter(drivers)}
         {...{ columns }}
         checkBoxColumns={["is_free_cover"]}
       />

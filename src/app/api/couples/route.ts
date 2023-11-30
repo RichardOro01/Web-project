@@ -6,7 +6,7 @@ export const GET = async () => {
   const couples = await prisma.couple.findMany();
   const drivers = await prisma.driver.findMany();
   const result: Couple[] = couples.map((couple) => ({
-    couple_id: couple.couple_code,
+    couple_code: couple.couple_code,
     driver1: drivers.find((driver) => driver.driver_code === couple.driver_1),
     driver2: drivers.find((driver) => driver.driver_code === couple.driver_2),
   }));

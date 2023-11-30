@@ -10,6 +10,7 @@ import report from "@/assets/icons/items/report-text.svg";
 import road from "@/assets/icons/items/road-map-and-pin.svg";
 import service from "@/assets/icons/items/service.svg";
 import tourist from "@/assets/icons/items/tourist.svg";
+import free_cover from "@/assets/icons/items/free_cover.svg"
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
 
@@ -30,6 +31,7 @@ export default function Home() {
           <OptionItem name="Cars" img={car} link="./cars" />
           <OptionItem name="Drivers" img={id} link="./drivers" />
           <OptionItem name="Couples" img={couple} link="./couples" />
+          <OptionItem name="Free Cover" img={free_cover} link="" />
         </>
       </OptionSection>
       <OptionSection name="Others">

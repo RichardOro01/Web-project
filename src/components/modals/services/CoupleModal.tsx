@@ -6,48 +6,71 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Couple } from "@/interfaces/Couple";
+import { Couple, CreateCouple } from "@/interfaces/Couple";
 import coupleService from "@/services/tables/couples";
+import { InputSelect } from "@/components/commons/forms/InputSelect";
+import { coupleCreateAdapter, coupleFormAdapter, coupleTypesAdapter } from "@/interfaces/adapters/CoupleAdapter";
+import driverService from "@/services/tables/drivers";
+import { driversOptionAdapter } from "@/interfaces/adapters/DriverAdapter";
+import { Driver, DriverOption } from "@/interfaces/Driver";
 
 const CoupleModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Couple]: string }, "key">
-  >({
-    id:"",
+  const [api, contextHolder] = notification.useNotification();
+
+  const [drivers,setDrivers] = useState<DriverOption[]>([])
+
+  const [data, setData] = useState<FormDataType<CreateCouple>>({
+    couple_code:"",
     driver1: "",
     driver2: "",
   });
+
+
+
   const handleOk = async () => {
     form.current
       ?.validateFields()
-      .then(async (data) => {
+      console.log(data)
+      const adaptedTypesData = coupleTypesAdapter(data);
         try {
           if (editing) {
-            await coupleService.update(editing, data);
+            await coupleService.update(data.couple_code.toString(), adaptedTypesData);
           } else {
-            await coupleService.add(data);
+            await coupleService.add(adaptedTypesData);
           }
+          api.success({ message: "Couple created" }); //TODO cuando se cierra el modal no deja ver esto
+          dispatch(hideCurrentModal());
+          router.refresh();
         } catch (error) {
           notification.error({ message: error as string });
         } finally {
           dispatch(hideCurrentModal());
           router.refresh();
         }
-      })
-      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     if (editing) {
-      coupleService.get(editing).then((data) => {
-        setData(data);
-      });
+      setData(coupleFormAdapter(editing))
     }
   }, [editing]);
+
+  const updateDrivers = async () => {
+    const driver = await driverService.get();
+    setDrivers(driver);
+  };
+
+  useEffect(() => {
+    updateDrivers();
+  }, []);
+
+  // useEffect(()=>{
+  //   setDrivers(drivers.filter((driver:Driver) => driver.driver_code!=Number(data.driver1) && driver.driver_code!=Number(data.driver2)))
+  // },[data.driver1,data.driver2])
 
   return (
     <Modal
@@ -63,11 +86,11 @@ const CoupleModal: React.FC = () => {
             name="driver1"
             rules={[{ required: true, message: "Driver 1 required" }]}
           >
-            <InputText
+            <InputSelect
               label="Driver 1"
               id="driver1"
-              maxLength={50}
               currentValue={data.driver1}
+              options={driversOptionAdapter(drivers)}
               onChange={(e) =>
                 setData((data) => {
                   return { ...data, driver1: e.target.value };
@@ -79,12 +102,11 @@ const CoupleModal: React.FC = () => {
             name="driver2"
             rules={[{ required: true, message: "Driver 2 required" }]}
           >
-            <InputText
+            <InputSelect
               label="Driver 2"
               id="driver2"
-              min={1}
-              max={200}
               currentValue={data.driver2}
+              options={driversOptionAdapter(drivers)}
               onChange={(e) =>
                 setData((data) => {
                   return { ...data, driver2: e.target.value };

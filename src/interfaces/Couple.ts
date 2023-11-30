@@ -1,9 +1,12 @@
 import { Driver } from "./Driver";
 
 export interface Couple {
-    couple_id:number|undefined;
-    driver1: Driver|undefined;
-    driver2: Driver|undefined;
+    couple_code:number;
+    driver1?: Driver;
+    driver2?: Driver;
 }
 
-export interface CreateCouple extends Omit<Couple, "couple_id"> {}
+export interface CreateCouple extends Omit<Couple, "driver1" & "driver2"> {
+    driver1_code?:number;
+    driver2_code?:number;
+}
