@@ -15,7 +15,8 @@ import users from "@/assets/icons/items/user.svg";
 import role from "@/assets/icons/items/role.svg";
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
-import free_code from "@/assets/icons/items/free_cover.svg"
+import bxs from "@/assets/icons/items/bxs-calendar.svg";
+import free_code from "@/assets/icons/items/free_cover.svg";
 
 export default function Home() {
   return (
@@ -47,6 +48,7 @@ export default function Home() {
           <OptionItem name="District" img={city} link="./districts" />
           <OptionItem name="Fuel" img={fuel} link="./fuels" />
           <OptionItem name="Country" img={geography} link="./countries" />
+          <OptionItem name="Month" img={bxs} link="./months" />
           <OptionItem name="Tour group" img={tourist} link="./tourist_groups" />
           <OptionItem name="Users" img={users} link="./users" />
         </>

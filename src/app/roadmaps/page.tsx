@@ -1,19 +1,20 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Roadmap } from "@/interfaces/Roadmap";
+import { roadmapTableAdapter } from "@/interfaces/adapters/RoadmapAdapter";
 import roadmapService from "@/services/tables/roadmaps";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
 const columns: ColumnsType<Roadmap> = [
   {
-    title: "Date",
-    dataIndex: "date",
-    key: "date",
+    title: "Roadmap date",
+    dataIndex: "roadmap_date",
+    key: "roadmap_date",
   },
   {
-    title: "Fleet number",
-    dataIndex: "fleet_number",
-    key: "fleet_number",
+    title: "Car code",
+    dataIndex: "car_code",
+    key: "car_code",
   },
   {
     title: "Kms",
@@ -36,7 +37,13 @@ const RoadmapPage = async () => {
   }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <TableData title="Roadmaps" modal="roadmaps" data={roadmaps} {...{ columns }} />
+      <TableData
+        title="Roadmaps"
+        modal="roadmaps"
+        data={roadmaps}
+        dataToShow={roadmapTableAdapter(roadmaps)}
+        {...{ columns }}
+      />
     </main>
   );
 };
