@@ -20,13 +20,11 @@ export const carFormAdapter = (
   couple_code: car.couple?.couple_code?.toString() ?? "",
 });
 
-export const carTypesAdapter = (
-  car: FormDataType<EditCar>
-): CreateCar => ({
+export const carTypesAdapter = (car: FormDataType<EditCar>): CreateCar => ({
   fleet_number: Number(car.number),
   plate: car.plate,
   brand_code: Number(car.brand_code),
-  couple_code: parseInt(car.couple_code ?? ''),
+  couple_code: parseInt(car.couple_code ?? ""),
 });
 
 export const carCreateAdapter = (car: EditCar): CreateCar => ({
@@ -35,3 +33,9 @@ export const carCreateAdapter = (car: EditCar): CreateCar => ({
   brand_code: car.brand_code,
   couple_code: car.couple_code,
 });
+
+export const carOptionsAdapter = (cars: Car[]): Option[] =>
+  cars.map((car) => ({
+    label: car.plate as string,
+    value: car.number.toString(),
+  }));
