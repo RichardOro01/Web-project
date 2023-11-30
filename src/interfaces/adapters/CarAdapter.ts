@@ -14,6 +14,7 @@ export const carAdapter = (cars: Car[]): TableDataType<Car>[] => {
 export const carFormAdapter = (
   car: TableDataType<Car>
 ): FormDataType<EditCar> => ({
+  car_code: car.car_code?.toString(),
   number: car.number.toString(),
   plate: car.plate?.toString() ?? "",
   brand_code: car?.brand?.brand_code.toString(),
@@ -37,5 +38,5 @@ export const carCreateAdapter = (car: EditCar): CreateCar => ({
 export const carOptionsAdapter = (cars: Car[]): Option[] =>
   cars.map((car) => ({
     label: car.plate as string,
-    value: car.number.toString(),
+    value: car.car_code.toString(),
   }));
