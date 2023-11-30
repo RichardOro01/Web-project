@@ -16,7 +16,6 @@ import role from "@/assets/icons/items/role.svg";
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
 import bxs from "@/assets/icons/items/bxs-calendar.svg";
-import report from "@/assets/icons/items/report-text.svg";
 
 export default function Home() {
   return (
