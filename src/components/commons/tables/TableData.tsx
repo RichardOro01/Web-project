@@ -1,9 +1,9 @@
 "use client";
 
-import { Button, Checkbox, Table, notification } from "antd";
+import { Button, Checkbox, Spin, Table, notification } from "antd";
 import Title from "antd/es/typography/Title";
 import { ColumnType, ColumnsType } from "antd/es/table";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/components/core/stores/store";
@@ -12,7 +12,11 @@ import {
   setEditingModal,
 } from "@/components/core/stores/modalSlice";
 import { CRUD_ModalsType } from "@/components/modals";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
 
@@ -37,14 +41,20 @@ const TableData: React.FC<TableDataProps> = ({
   const dispatch = useDispatch();
   const currentModal = useSelector((state: RootState) => state.modal.current);
   const [api, contextHolder] = notification.useNotification();
+  const [deleting, setDeleting] = useState<(string | number)[]>([]);
 
   const handleDelete = async (value: TableDataType<any>) => {
-    try {
-      await Services[modal].delete(value.key.toString());
-      router.refresh();
-      api.success({ message: "Element Successfully Deleted" });
-    } catch (error: any) {
-      api.error({ message: error.detail.message });
+    if (!deleting.includes(value.key)) {
+      addToDeleting(value.key);
+      try {
+        await Services[modal].delete(value.key.toString());
+        router.refresh();
+        api.success({ message: "Element Successfully Deleted" });
+      } catch (error: any) {
+        api.error({ message: error.detail.message });
+      } finally {
+        removeFromDeleting(value.key);
+      }
     }
   };
 
@@ -71,23 +81,41 @@ const TableData: React.FC<TableDataProps> = ({
     return columns;
   };
 
+  const addToDeleting = (value: string | number) => {
+    if (!deleting.includes(value))
+      setDeleting((deleting) => [...deleting, value]);
+  };
+
+  const removeFromDeleting = (value: string | number) => {
+    setDeleting((deleting) => {
+      return deleting.filter((deletingValue) => deletingValue !== value);
+    });
+  };
+
   const columnsAdapted: ColumnsType<any> = [
     ...adaptedCheckBox(),
     {
       fixed: "right",
       width: "64px",
-      render: (value) => (
-        <div className="flex items-center justify-end gap-2">
-          <DeleteOutlined
-            className="cursor-pointer"
-            onClick={() => handleDelete(value)}
-          />
-          <EditOutlined
-            className="cursor-pointer"
-            onClick={() => handleEdit(data[dataToShow.indexOf(value)])}
-          />
-        </div>
-      ),
+      render: (value) => {
+        return (
+          <div className="flex items-center justify-end gap-2">
+            {!deleting.includes(value.key) && (
+              <DeleteOutlined
+                className="cursor-pointer"
+                onClick={() => handleDelete(value)}
+              />
+            )}
+            {deleting.includes(value.key) && (
+              <LoadingOutlined style={{ fontSize: 16 }} spin />
+            )}
+            <EditOutlined
+              className="cursor-pointer"
+              onClick={() => handleEdit(data[dataToShow.indexOf(value)])}
+            />
+          </div>
+        );
+      },
     },
   ];
   return (
