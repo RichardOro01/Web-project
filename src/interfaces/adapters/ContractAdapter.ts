@@ -5,16 +5,18 @@ export const contractTableAdapter = (
   contracts: Contract[]
 ): TableDataType<Contract>[] => {
   return contracts.map((contract) => ({
-    ...contract,
     key: contract.contract_code,
+    applicant_name: contract.applicant_name || "",
+    contract_kms: contract.contract_kms || "",
+    contract_amount: contract.contract_amount || "",
     country_name: contract.country?.country_name,
-    plate: contract.plate?.plate,
+    plate: contract.car?.plate || "",
     start_date: contract.start_date
       ? dayjs(contract.start_date).format("YYYY-MM-DD")
-      : null,
+      : "",
     end_date: contract.end_date
       ? dayjs(contract.end_date).format("YYYY-MM-DD")
-      : null,
+      : "",
   }));
 };
 
@@ -32,7 +34,7 @@ export const contractFormAdapter = (
   contract_kms: contract.contract_kms?.toString() ?? "",
   contract_amount: contract.contract_amount?.toString() ?? "",
   country_code: contract.country?.country_code,
-  car_code: contract.plate?.car_code.toString() ?? "",
+  car_code: contract.car?.car_code.toString() ?? "",
 });
 
 export const contractTypesAdapter = (
