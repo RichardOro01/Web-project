@@ -2,7 +2,7 @@ import { Brand } from "./Brand";
 import { Couple } from "./Couple";
 
 export interface Car {
-    number: number;
+    car_code: number;
     plate: string|null;
     brand?: Brand;
     couple?: Couple;
@@ -13,6 +13,6 @@ export interface Car {
     brand_code?:number;
   }
   
-  export interface CreateCar extends Omit<EditCar, 'number'> {
+  export interface CreateCar extends Omit<EditCar, 'car_code'> {
     fleet_number?:number;
   }

@@ -17,6 +17,7 @@ export const POST = async (url: string, data: any) => {
     },
     body: JSON.stringify(data),
   });
+  console.log(data)
   if (response.status > 300) {
     const json = await response.json();
     return Promise.reject({ detail: json });

@@ -1,8 +1,13 @@
-import { TableData } from "./TableData";
+import { Car } from "./Car";
 
-export interface Roadmap extends TableData {
-  date: Date;
-  fleet_number: number;
-  kms: number;
-  departure_time: Date;
+export interface Roadmap{
+  roadmap_date: Date;
+  car: Car;
+  kms: number | null;
+  departure_time: string | null;
 }
+
+export interface EditRoadmap extends Omit<Roadmap, "car" >{
+  car_code?: number;
+}
+

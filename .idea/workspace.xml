@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="32a53dc3-d6be-451c-bd70-86a4f735d067" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/app/api/discrepancies/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/discrepancies/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/months/[id]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/months/[id]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/months/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/months/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/discrepancies/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/discrepancies/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/months/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/months/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modals/modals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modals/modals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Car.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Car.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Discrepancy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Discrepancy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Month.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Month.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/adapters/MonthAdaparter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/adapters/MonthAdaparter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/services.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2YlvLgqWGbzhkQgVe2e4rbrLsjJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Dario/Desktop/Curso 3 -- 2do periodo/Programacion Web/Web-project/Web-project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "rsyncConfigurable",
+    "ts.external.directory.path": "C:\\Users\\Dario\\Desktop\\Curso 3 -- 2do periodo\\Programacion Web\\Web-project\\Web-project\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.start">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32a53dc3-d6be-451c-bd70-86a4f735d067" name="Changes" comment="" />
+      <created>1701112926676</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701112926676</updated>
+      <workItem from="1701112928155" duration="1636000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/modals/others/MonthsModal.tsx</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
