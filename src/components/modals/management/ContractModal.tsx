@@ -61,7 +61,7 @@ const ContractModal: React.FC = () => {
       dispatch(hideCurrentModal());
       router.refresh();
     } catch (error: any) {
-      if (error.detail) api.error({ message: error.detail });
+      if (error.detail) api.error({ message: error.detail.message });
     }
   };
 
@@ -91,139 +91,142 @@ const ContractModal: React.FC = () => {
   }, []);
 
   return (
-    <Modal
-      centered
-      open
-      onCancel={() => dispatch(hideCurrentModal())}
-      onOk={handleOk}
-    >
-      <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Contract</h2>
-        <div className={styles.form_container}>
-          <Form.Item
-            name="applicant_name"
-            rules={[{ required: true, message: "Applicant required" }]}
-          >
-            <InputText
-              label="Applicant"
-              id="applicant_name"
-              maxLength={50}
-              currentValue={data.applicant_name}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, applicant_name: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="start_date"
-            rules={[{ required: true, message: "Start date required" }]}
-          >
-            <InputDate
-              dateType="date"
-              label="Start date"
-              id="start_date"
-              currentValue={data.start_date}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, start_date: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="end_date"
-            rules={[{ required: true, message: "End date required" }]}
-          >
-            <InputDate
-              dateType="date"
-              label="End date"
-              id="end_date"
-              currentValue={data.end_date}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, end_date: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="contract_kms"
-            rules={[{ required: true, message: "Kms required" }]}
-          >
-            <InputNum
-              label="Kms"
-              id="contract_kms"
-              maxLength={50}
-              currentValue={data.contract_kms}
-              onChange={(e) =>
-                setData((data) => {
-                  console.log(data);
-                  return { ...data, contract_kms: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="contract_amount"
-            rules={[{ required: true, message: "Amount required" }]}
-          >
-            <InputText
-              label="Amount"
-              id="contract_amount"
-              type="number"
-              min={1}
-              max={20}
-              currentValue={data.contract_amount}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, contract_amount: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="country_code"
-            rules={[{ required: true, message: "Country required" }]}
-          >
-            <InputSelect
-              id="country_code"
-              label="Country"
-              options={countryOptionsAdapter(countries)}
-              currentValue={data.country_code}
-              onChange={(e) =>
-                setData((data) => {
-                  return {
-                    ...data,
-                    country_code: e.target.value,
-                  };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="car_code"
-            rules={[{ required: true, message: "Car required" }]}
-          >
-            <InputSelect
-              id="car_code"
-              label="Car"
-              options={carOptionsAdapter(cars)}
-              currentValue={data.car_code}
-              onChange={(e) =>
-                setData((data) => {
-                  return {
-                    ...data,
-                    car_code: e.target.value,
-                  };
-                })
-              }
-            />
-          </Form.Item>
-        </div>
-      </Form>
-    </Modal>
+    <>
+      {contextHolder}
+      <Modal
+        centered
+        open
+        onCancel={() => dispatch(hideCurrentModal())}
+        onOk={handleOk}
+      >
+        <Form className="form" ref={form} method="post">
+          <h2 className="form_title">{editing ? "Edit" : "Insert"} Contract</h2>
+          <div className={styles.form_container}>
+            <Form.Item
+              name="applicant_name"
+              rules={[{ required: true, message: "Applicant required" }]}
+            >
+              <InputText
+                label="Applicant"
+                id="applicant_name"
+                maxLength={50}
+                currentValue={data.applicant_name}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, applicant_name: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="start_date"
+              rules={[{ required: true, message: "Start date required" }]}
+            >
+              <InputDate
+                dateType="date"
+                label="Start date"
+                id="start_date"
+                currentValue={data.start_date}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, start_date: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="end_date"
+              rules={[{ required: true, message: "End date required" }]}
+            >
+              <InputDate
+                dateType="date"
+                label="End date"
+                id="end_date"
+                currentValue={data.end_date}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, end_date: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="contract_kms"
+              rules={[{ required: true, message: "Kms required" }]}
+            >
+              <InputNum
+                label="Kms"
+                id="contract_kms"
+                maxLength={50}
+                currentValue={data.contract_kms}
+                onChange={(e) =>
+                  setData((data) => {
+                    console.log(data);
+                    return { ...data, contract_kms: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="contract_amount"
+              rules={[{ required: true, message: "Amount required" }]}
+            >
+              <InputText
+                label="Amount"
+                id="contract_amount"
+                type="number"
+                min={1}
+                max={20}
+                currentValue={data.contract_amount}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, contract_amount: e.target.value };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="country_code"
+              rules={[{ required: true, message: "Country required" }]}
+            >
+              <InputSelect
+                id="country_code"
+                label="Country"
+                options={countryOptionsAdapter(countries)}
+                currentValue={data.country_code}
+                onChange={(e) =>
+                  setData((data) => {
+                    return {
+                      ...data,
+                      country_code: e.target.value,
+                    };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="car_code"
+              rules={[{ required: true, message: "Car required" }]}
+            >
+              <InputSelect
+                id="car_code"
+                label="Car"
+                options={carOptionsAdapter(cars)}
+                currentValue={data.car_code}
+                onChange={(e) =>
+                  setData((data) => {
+                    return {
+                      ...data,
+                      car_code: e.target.value,
+                    };
+                  })
+                }
+              />
+            </Form.Item>
+          </div>
+        </Form>
+      </Modal>
+    </>
   );
 };
 
