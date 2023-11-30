@@ -1,7 +1,6 @@
 import { Form, FormInstance, Modal, notification } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
-import InputText from "@/components/commons/forms/InputText";
 import InputNum from "@/components/commons/forms/InputNum";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
@@ -11,10 +10,12 @@ import { RootState } from "@/components/core/stores/store";
 import { EditRoadmap, Roadmap } from "@/interfaces/Roadmap";
 import InputDate from "@/components/commons/forms/InputDate";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
-import { roadmapFormAdapter, roadmapTypesAdapter } from "@/interfaces/adapters/RoadmapAdapter";
+import {
+  roadmapFormAdapter,
+  roadmapTypesAdapter,
+} from "@/interfaces/adapters/RoadmapAdapter";
 import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
-import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 
 const RoadmapModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const RoadmapModal: React.FC = () => {
     departure_time: "",
   });
 
-  const [cars, setCars] = useState<Car[]>([])
+  const [cars, setCars] = useState<Car[]>([]);
 
   const handleOk = async () => {
     try {
@@ -133,24 +134,32 @@ const RoadmapModal: React.FC = () => {
             />
           </Form.Item>
           <Form.Item
-              name="car_code"
-              rules={[{ required: true, message: "Car code number required" }]}
-            >
-              <InputSelect
-                id="car_code"
-                label="Car code"
-                options={[{label: "car1", value: "31"},{label: "car2", value: "32"},{label: "car3", value: "33"},{label: "car4", value: "34"},{label: "car5", value: "35"},{label: "car6", value: "36"},{label: "car7", value: "37"}]}
-                currentValue={data.car_code}
-                onChange={(e) =>
-                  setData((data) => {
-                    return {
-                      ...data,
-                      car_code: e.target.value,
-                    };
-                  })
-                }
-              />
-            </Form.Item>
+            name="car_code"
+            rules={[{ required: true, message: "Car code number required" }]}
+          >
+            <InputSelect
+              id="car_code"
+              label="Car code"
+              options={[
+                { label: "car1", value: "31" },
+                { label: "car2", value: "32" },
+                { label: "car3", value: "33" },
+                { label: "car4", value: "34" },
+                { label: "car5", value: "35" },
+                { label: "car6", value: "36" },
+                { label: "car7", value: "37" },
+              ]}
+              currentValue={data.car_code}
+              onChange={(e) =>
+                setData((data) => {
+                  return {
+                    ...data,
+                    car_code: e.target.value,
+                  };
+                })
+              }
+            />
+          </Form.Item>
           <Form.Item
             name="kms"
             rules={[{ required: true, message: "Kms required" }]}

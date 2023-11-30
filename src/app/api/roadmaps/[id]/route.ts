@@ -22,7 +22,6 @@ import prisma from "@/lib/prisma";
   return NextResponse.json({ ok: true });
 }; */
 
-
 export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -41,13 +40,17 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   const { id } = params;
-  const [car_code, month_code]=id.split('-:-')
-  console.log(car_code)
-  console.log(month_code)
+  const [car_code, roadmap_date] = id.split("-:-");
+  console.log(car_code);
+  console.log(roadmap_date);
 
-  
   await prisma.roadmap.delete({
-    where: { month_code_car_code: { month_code, car_code } },
+    where: {
+      roadmap_date_car_code: {
+        roadmap_date: roadmap_date,
+        car_code: parseInt(car_code),
+      },
+    },
   });
   return NextResponse.json({ ok: true });
 };
