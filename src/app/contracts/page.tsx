@@ -37,9 +37,9 @@ const columns: ColumnsType<Contract> = [
     key: "country_name",
   },
   {
-    title: "Fleet number",
-    dataIndex: "fleet_number",
-    key: "fleet_number",
+    title: "Plate",
+    dataIndex: "plate",
+    key: "plate",
   },
 ];
 

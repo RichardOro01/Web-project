@@ -2,14 +2,16 @@ import { ErrorDetail } from "@/interfaces/errors/Error";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import dayjs from "dayjs";
 
-export const timeToDate = (time: string) => {
-  const match = time.match(/\d+/g);
-  if (match?.length === 2) {
-    const [hour, minutes] = match;
-    return dayjs()
-      .set("hour", parseInt(hour))
-      .set("minute", parseInt(minutes))
-      .toISOString();
+export const timeToDate = (time?: string) => {
+  if (time) {
+    const match = time.match(/\d+/g);
+    if (match?.length === 2) {
+      const [hour, minutes] = match;
+      return dayjs()
+        .set("hour", parseInt(hour))
+        .set("minute", parseInt(minutes))
+        .toISOString();
+    }
   }
   throw new Error("Invalid time");
 };
