@@ -9,18 +9,17 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import discrepancyService from "@/services/tables/discrepancies";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Discrepancy } from "@/interfaces/Discrepancy";
+import { Discrepancy, EditDiscrepancy } from "@/interfaces/Discrepancy";
 
 const DiscrepancyModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing);
-  const [data, setData] = useState<
-    Omit<{ [key in keyof Discrepancy]: string }, "key">
-  >({
-    month: "",
-    fleet_number: "",
+  const editing = useSelector((state: RootState) => state.modal.editing as Discrepancy | undefined);
+  
+  const [data, setData] = useState<FormDataType<EditDiscrepancy>>({
+    month_code: "",
+    car_code: "",
     planned_kms: "",
     tours_kms: "",
     difference_kms: "",
@@ -28,14 +27,15 @@ const DiscrepancyModal: React.FC = () => {
     consumed_fuel : "",
     dif_spending_fuel : "",
   });
+
   const handleOk = async () => {
     form.current
       ?.validateFields()
       .then(async (data) => {
         try {
           if (editing) {
-            await discrepancyService.update(editing, data);
-          } else {
+           /*  await discrepancyService.update(editing, data);
+           */} else {
             await discrepancyService.add(data);
           }
         } catch (error) {
@@ -47,14 +47,6 @@ const DiscrepancyModal: React.FC = () => {
       })
       .catch((error) => console.log(error));
   };
-
-  useEffect(() => {
-    if (editing) {
-      discrepancyService.get(editing).then((data) => {
-        setData(data);
-      });
-    }
-  }, [editing]);
 
   return (
     <Modal
@@ -73,40 +65,38 @@ const DiscrepancyModal: React.FC = () => {
             <InputSelect
               id="month"
               label="Month"
-              options={[{ label: "January", value: "January" },
-              { label: "February", value: "February" },
-              { label: "March", value: "March" },
-              { label: "April", value: "April" },
-              { label: "May", value: "May" },
-              { label: "June", value: "June" },
-              { label: "July", value: "July" },
-              { label: "August", value: "August" },
-              { label: "September", value: "September" },
-              { label: "October", value: "October" },
-              { label: "November", value: "November" },
-              { label: "December", value: "December" }]}
-              currentValue={data.month}
+              options={[{ label: "January", value: "January" }]}
+              currentValue={data.month_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, month: e.target.value };
+                  return { ...data, month_code: e.target.value };
                 })
               }
             />
           </Form.Item>
           <Form.Item
-            name="fleet_number"
-            rules={[{ required: true, message: "Fleet number required" }]}
+            name="car_code"
+            rules={[{ required: true, message: "Car code number required" }]}
           >
-            <InputText
-              label="Fleet number"
-              id="fleet_number"
-              type="number"
-              min={1}
-              max={200}
-              currentValue={data.fleet_number}
+            <InputSelect
+              id="car_code"
+              label="Car code"
+              options={[
+                { label: "car1", value: "31" },
+                { label: "car2", value: "32" },
+                { label: "car3", value: "33" },
+                { label: "car4", value: "34" },
+                { label: "car5", value: "35" },
+                { label: "car6", value: "36" },
+                { label: "car7", value: "37" },
+              ]}
+              currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, fleet_number: e.target.value };
+                  return {
+                    ...data,
+                    car_code: e.target.value,
+                  };
                 })
               }
             />

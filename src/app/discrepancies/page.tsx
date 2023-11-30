@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Discrepancy } from "@/interfaces/Discrepancy";
+import { discrepancyTableAdapter } from "@/interfaces/adapters/DiscrepancyAdapter";
 import discrepancyService from "@/services/tables/discrepancies";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -7,13 +8,13 @@ import React from "react";
 const columns: ColumnsType<Discrepancy> = [
   {
     title: "Month",
-    dataIndex: "month",
-    key: "month",
+    dataIndex: "month_code",
+    key: "month_code",
   },
   {
-    title: "Fleet number",
-    dataIndex: "fleet_number",
-    key: "fleet_number",
+    title: "Car code",
+    dataIndex: "car_code",
+    key: "car_code",
   },
   {
     title: "Planned kms",
@@ -56,7 +57,12 @@ const DiscrepancyPage = async () => {
   }
   return (
     <main className="flex flex-col gap-8 p-5">
-      <TableData title="Discrepancies" modal="discrepancies" data={discrepancies} {...{ columns }} />
+      <TableData 
+      title="Discrepancies" 
+      modal="discrepancies" 
+      data={discrepancies}
+      dataToShow={discrepancyTableAdapter(discrepancies)} 
+      {...{ columns }} />
     </main>
   );
 };
