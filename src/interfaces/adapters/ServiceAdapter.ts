@@ -1,18 +1,23 @@
 import dayjs from "dayjs";
 import { ServiceI, CreateService, EditService } from "../Service";
-import { convertToMilitaryTime, removeTimeA, timeToDate } from "@/lib/utils";
+import { timeToDate } from "@/lib/utils";
 
 export const serviceTableAdapter = (
   services: ServiceI[]
 ): TableDataType<ServiceI>[] => {
   return services.map((service) => ({
-    ...service,
     key: service.service_code,
+    service_name: service.service_name || "",
+    pickup_place: service.pickup_place || "",
+    pax: service.pax || "",
+    service_kms: service.service_kms || "",
+    amount: service.amount || "",
+    request_number: service.request_number || "",
     country_name: service.country?.country_name,
     group_name: service.tour_group?.group_name,
     pickup_time: service.pickup_time
       ? dayjs(service.pickup_time).format("hh:mm A")
-      : null,
+      : "",
   }));
 };
 

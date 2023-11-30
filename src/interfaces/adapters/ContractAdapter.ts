@@ -8,7 +8,7 @@ export const contractTableAdapter = (
     ...contract,
     key: contract.contract_code,
     country_name: contract.country?.country_name,
-    fleet_number: contract.fleet_number?.fleet_number,
+    plate: contract.plate?.plate,
     start_date: contract.start_date
       ? dayjs(contract.start_date).format("YYYY-MM-DD")
       : null,
@@ -32,7 +32,7 @@ export const contractFormAdapter = (
   contract_kms: contract.contract_kms?.toString() ?? "",
   contract_amount: contract.contract_amount?.toString() ?? "",
   country_code: contract.country?.country_code,
-  car_code: contract.fleet_number?.number.toString() ?? "",
+  car_code: contract.plate?.car_code.toString() ?? "",
 });
 
 export const contractTypesAdapter = (

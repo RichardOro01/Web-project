@@ -4,7 +4,7 @@ export interface ServiceI {
   service_code: number;
   service_name: string | null;
   pickup_place: string | null;
-  pickup_time: string | null;
+  pickup_time: Date | null;
   pax: number | null;
   service_kms: number | null;
   amount: number | null;
@@ -13,9 +13,11 @@ export interface ServiceI {
   tour_group?: Tourist;
 }
 
-export interface EditService extends Omit<ServiceI, "country" | "tour_group"> {
+export interface EditService
+  extends Omit<ServiceI, "country" | "tour_group" | "pickup_time"> {
   country_code?: string;
   tour_group_code?: string;
+  pickup_time?: string | null;
 }
 
 export interface CreateService extends Omit<EditService, "service_code"> {}

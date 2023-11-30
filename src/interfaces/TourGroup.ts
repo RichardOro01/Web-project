@@ -1,4 +1,4 @@
 export interface Tourist {
   group_code: string;
-  group_name: string;
+  group_name: string | null;
 }
