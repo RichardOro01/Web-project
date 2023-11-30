@@ -45,8 +45,8 @@ const CoupleModal: React.FC = () => {
           api.success({ message: "Couple created" }); //TODO cuando se cierra el modal no deja ver esto
           dispatch(hideCurrentModal());
           router.refresh();
-        } catch (error) {
-          notification.error({ message: error as string });
+        } catch (error:any) {
+          if (error.detail) api.error({ message: error.detail });
         } finally {
           dispatch(hideCurrentModal());
           router.refresh();

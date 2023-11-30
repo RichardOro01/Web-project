@@ -42,6 +42,7 @@ const TableData: React.FC<TableDataProps> = ({
     try {
       await Services[modal].delete(value.key.toString());
       router.refresh();
+      api.success({ message: "Element Successfully Deleted" });
     } catch (error: any) {
       api.error({ message: error.detail.message });
     }
