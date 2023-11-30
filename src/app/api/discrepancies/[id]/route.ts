@@ -41,13 +41,10 @@ export const DELETE = async (
 ) => {
   const { id } = params;
   const [car_code, month_date] = id.split("-:-");
-  console.log(car_code);
-  console.log(month_date);
-
   await prisma.discrepancy.delete({
     where: {
-      month_date_car_code: {
-        month_date: month_date,
+      month_code_car_code: {
+        month_code: month_date,
         car_code: parseInt(car_code),
       },
     },

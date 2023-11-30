@@ -1,12 +1,12 @@
+import dayjs from 'dayjs';
 import { Discrepancy, EditDiscrepancy } from '../Discrepancy'
-import { Option } from "@/components/commons/forms/InputSelect";
 
 export const discrepancyTableAdapter = (discrepancies: Discrepancy[]): TableDataType<Discrepancy>[] =>{
     return discrepancies.map((discrepancy) => ({
         ...discrepancy,
-        key: `${discrepancy.car}-:-${discrepancy.months.month_code}`,
+        key: `${discrepancy.car.car_code}-:-${discrepancy.months.month_code}`,
         car_code: discrepancy.car?.car_code,
-        month_code: discrepancy.months?.month_code,
+        month_code: dayjs( discrepancy.months?.month_code).format('YYYY-MM'),
     }));
 };
 
