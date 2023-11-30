@@ -22,6 +22,7 @@ import carService from "@/services/tables/cars";
 import { Country } from "@/interfaces/Country";
 import countryService from "@/services/tables/countries";
 import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
+import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 
 const ContractModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -208,8 +209,7 @@ const ContractModal: React.FC = () => {
             <InputSelect
               id="car_code"
               label="Car"
-              //options={carOptionsAdapter(cars)}
-              options={[]}
+              options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {
