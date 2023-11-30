@@ -71,7 +71,7 @@ const ContractModal: React.FC = () => {
 
   const updateCar = async () => {
     const cars = await carService.get();
-    setCountries(cars);
+    setCars(cars);
   };
 
   useEffect(() => {
@@ -80,12 +80,13 @@ const ContractModal: React.FC = () => {
     }
   }, [editing]);
 
-  useEffect(() => {
+  const updateAll = async () => {
     updateCountry();
-  }, []);
+    updateCar();
+  };
 
   useEffect(() => {
-    updateCar();
+    updateAll();
   }, []);
 
   return (
