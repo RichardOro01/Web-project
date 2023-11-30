@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, Table } from "antd";
+import { Button, Checkbox, Table, notification } from "antd";
 import Title from "antd/es/typography/Title";
 import { ColumnType, ColumnsType } from "antd/es/table";
 import React from "react";
@@ -20,8 +20,9 @@ interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
-  data: TableDataType<any>[];
+  data: any[];
   checkBoxColumns?: string[];
+  dataToShow: TableDataType<any>[];
 }
 
 const TableData: React.FC<TableDataProps> = ({
@@ -30,17 +31,23 @@ const TableData: React.FC<TableDataProps> = ({
   modal,
   data,
   checkBoxColumns,
+  dataToShow,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentModal = useSelector((state: RootState) => state.modal.current);
+  const [api, contextHolder] = notification.useNotification();
 
-  const handleDelete = (value: TableDataType<any>) => {
-    Services[modal].delete(value.key.toString());
-    router.refresh();
+  const handleDelete = async (value: TableDataType<any>) => {
+    try {
+      await Services[modal].delete(value.key.toString());
+      router.refresh();
+    } catch (error: any) {
+      api.error({ message: error.detail.message });
+    }
   };
 
-  const handleEdit = (value: TableDataType<any>) => {
+  const handleEdit = (value: any) => {
     dispatch(setEditingModal(value));
     dispatch(setCurrentModal(modal));
   };
@@ -76,31 +83,37 @@ const TableData: React.FC<TableDataProps> = ({
           />
           <EditOutlined
             className="cursor-pointer"
-            onClick={() => handleEdit(value)}
+            onClick={() => handleEdit(data[dataToShow.indexOf(value)])}
           />
         </div>
       ),
     },
   ];
   return (
-    <div className="flex flex-col">
-      <Title>{title}</Title>
-      <Table
-        columns={columnsAdapted}
-        dataSource={data}
-        scroll={{ y: 450, x: 700 }}
-      />
-      <footer className="flex justify-end gap-2">
-        <Button onClick={() => router.push("/", { scroll: false })}>
-          Back
-        </Button>
-        <Button onClick={() => dispatch(setCurrentModal(modal))} type="primary">
-          Insert
-        </Button>
-      </footer>
+    <>
+      {contextHolder}
+      <div className="flex flex-col">
+        <Title>{title}</Title>
+        <Table
+          columns={columnsAdapted}
+          dataSource={dataToShow}
+          scroll={{ y: 450, x: 700 }}
+        />
+        <footer className="flex justify-end gap-2">
+          <Button onClick={() => router.push("/", { scroll: false })}>
+            Back
+          </Button>
+          <Button
+            onClick={() => dispatch(setCurrentModal(modal))}
+            type="primary"
+          >
+            Insert
+          </Button>
+        </footer>
 
-      {currentModal && CRUD_Modals[currentModal]}
-    </div>
+        {currentModal && CRUD_Modals[currentModal]}
+      </div>
+    </>
   );
 };
 

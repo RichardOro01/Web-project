@@ -1,10 +1,11 @@
 import TableData from "@/components/commons/tables/TableData";
-import { ServiceApp } from "@/interfaces/Service";
-import servicesService from "@/services/tables/services";
+import { ServiceI } from "@/interfaces/Service";
+import { serviceTableAdapter } from "@/interfaces/adapters/ServiceAdapter";
+import servicesAppService from "@/services/tables/services";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
-const columns: ColumnsType<ServiceApp> = [
+const columns: ColumnsType<ServiceI> = [
   {
     title: "Request number",
     dataIndex: "request_number",
@@ -17,18 +18,23 @@ const columns: ColumnsType<ServiceApp> = [
   },
   {
     title: "Tour group",
-    dataIndex: "tour_group",
-    key: "tour_group",
+    dataIndex: "group_name",
+    key: "group_name",
   },
   {
     title: "Country",
-    dataIndex: "country",
-    key: "country",
+    dataIndex: "country_name",
+    key: "country_name",
   },
   {
     title: "Pickup place",
     dataIndex: "pickup_place",
     key: "pickup_place",
+  },
+  {
+    title: "Pickup time",
+    dataIndex: "pickup_time",
+    key: "pickup_time",
   },
   {
     title: "Pax",
@@ -48,9 +54,9 @@ const columns: ColumnsType<ServiceApp> = [
 ];
 
 const ServicePage = async () => {
-  let services: ServiceApp[] = [];
+  let services: ServiceI[] = [];
   try {
-    services = await servicesService.get();
+    services = await servicesAppService.get();
   } catch (error) {
     console.log(error);
   }
@@ -60,6 +66,7 @@ const ServicePage = async () => {
         title="Services"
         modal="services"
         data={services}
+        dataToShow={serviceTableAdapter(services)}
         {...{ columns }}
       />
     </main>

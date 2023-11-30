@@ -1,5 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Contract } from "@/interfaces/Contract";
+import { contractTableAdapter } from "@/interfaces/adapters/ContractAdapter";
 import contractService from "@/services/tables/contracts";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -7,8 +8,8 @@ import React from "react";
 const columns: ColumnsType<Contract> = [
   {
     title: "Applicant",
-    dataIndex: "applicant",
-    key: "applicant",
+    dataIndex: "applicant_name",
+    key: "applicant_name",
   },
   {
     title: "Start date",
@@ -22,18 +23,18 @@ const columns: ColumnsType<Contract> = [
   },
   {
     title: "Kms",
-    dataIndex: "kms",
-    key: "kms",
+    dataIndex: "contract_kms",
+    key: "contract_kms",
   },
   {
     title: "Amount",
-    dataIndex: "amount",
-    key: "amount",
+    dataIndex: "contract_amount",
+    key: "contract_amount",
   },
   {
     title: "Country",
-    dataIndex: "country",
-    key: "country",
+    dataIndex: "country_name",
+    key: "country_name",
   },
   {
     title: "Fleet number",
@@ -55,6 +56,7 @@ const ContractPage = async () => {
         title="Contracts"
         modal="contracts"
         data={contracts}
+        dataToShow={contractTableAdapter(contracts)}
         {...{ columns }}
       />
     </main>

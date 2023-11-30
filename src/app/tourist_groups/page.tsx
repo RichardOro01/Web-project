@@ -1,6 +1,6 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Tourist } from "@/interfaces/TourGroup";
-import { touristAdapter } from "@/interfaces/adapters/TouristAdapter";
+import { touristTableAdapter } from "@/interfaces/adapters/TouristAdapter";
 import tourService from "@/services/tables/tour_groups";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
@@ -25,7 +25,8 @@ const TourPage = async () => {
       <TableData
         title="Tourist Groups"
         modal="tour_groups"
-        data={touristAdapter(tourist_groups)}
+        data={tourist_groups}
+        dataToShow={touristTableAdapter(tourist_groups)}
         {...{ columns }}
       />
     </main>

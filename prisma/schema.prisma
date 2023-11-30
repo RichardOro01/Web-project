@@ -197,8 +197,8 @@ model tourist_group {
 }
 
 model users {
-  id        Int     @default(autoincrement())
-  username  String  @id(map: "user_pkey") @db.VarChar
+  user_code Int     @id @default(autoincrement())
+  username  String  @unique(map: "user") @db.VarChar
   password  String? @db.VarChar
   name      String? @db.VarChar
   role_code Int?

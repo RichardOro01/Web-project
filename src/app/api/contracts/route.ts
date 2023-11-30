@@ -1,21 +1,35 @@
+import { Contract } from "@/interfaces/Contract";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { deleteElementDB, readDB, writeDB } from "@/services/json";
-
-export const COLUMN_NAME = "contracts" as never;
 
 export const GET = async () => {
-  const db = await readDB();
-  return NextResponse.json(db[COLUMN_NAME] ?? []);
+  const contracts = await prisma.contract.findMany();
+  const cars = await prisma.car.findMany();
+  const countries = await prisma.country.findMany();
+  const result: Contract[] = contracts.map((contract) => ({
+    contract_code: contract.contract_code,
+    applicant_name: contract.applicant_name,
+    start_date: contract.start_date,
+    end_date: contract.end_date,
+    contract_kms: contract.contract_kms,
+    contract_amount: contract.contract_amount,
+    country: countries.find(
+      (country) => country.country_code === contract.contract_country
+    ),
+    car: cars.find((car) => car.car_code === contract.car_code),
+  }));
+  return NextResponse.json(result ?? []);
 };
 
-export const POST = async (request: Request) => {
+export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
-  await writeDB(COLUMN_NAME, data);
-  return NextResponse.json({ ok: true });
-};
-
-export const DELETE = async (request: Request) => {
-  const key = await request.json();
-  await deleteElementDB(COLUMN_NAME, key);
-  return NextResponse.json({ ok: true });
+  try {
+    await prisma.contract.create({ data });
+    return NextResponse.json({ ok: true });
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return NextResponse.json("Nombre de contrato ya usado", { status: 400 });
+    }
+    return NextResponse.json("Error creando contrato", { status: 400 });
+  }
 };

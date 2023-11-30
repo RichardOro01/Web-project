@@ -1,7 +1,7 @@
 import { CRUD_ModalsType } from "@/components/modals";
 import brandService from "./tables/brands";
 import contractService from "./tables/contracts";
-import servicesService from "./tables/services";
+import servicesAppService from "./tables/services";
 import discrepancyService from "./tables/discrepancies";
 import roadmapService from "./tables/roadmaps";
 import { Service } from "./IService";
@@ -12,11 +12,14 @@ import districtService from "./tables/districts";
 import fuelService from "./tables/fuels";
 import countryService from "./tables/countries";
 import tourService from "./tables/tour_groups";
+import reportService from "./tables/reports";
+import roleService from "./tables/roles";
+import userService from "./tables/users";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,
   contracts: contractService,
-  services: servicesService,
+  services: servicesAppService,
   cars: carService,
   drivers: driverService,
   couples: coupleService,
@@ -26,6 +29,8 @@ const services: { [key in CRUD_ModalsType]: Service } = {
   fuels: fuelService,
   countries: countryService,
   tour_groups: tourService,
+  reports: reportService,
+  users: userService,
 };
 
 export default services;

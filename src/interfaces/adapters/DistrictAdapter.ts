@@ -7,7 +7,7 @@ export const districtOptionsAdapter = (districts: District[]): Option[] =>
     value: district.district_code.toString(),
   }));
 
-export const districtAdapter = (
+export const districtTableAdapter = (
   districts: District[]
 ): TableDataType<District>[] => {
   return districts.map((district) => ({
@@ -17,7 +17,7 @@ export const districtAdapter = (
 };
 
 export const districtFormAdapter = (
-  district: TableDataType<District>
+  district: District
 ): FormDataType<District> => ({
   district_code: district.district_code.toString(),
   district_name: district.district_name,
