@@ -37,7 +37,7 @@ const CarPage = async () => {
     }
     return (
       <main className="flex flex-col gap-8 p-5">
-        <TableData title="Cars" modal="cars" data={carAdapter(cars)} {...{ columns }} />
+        <TableData title="Cars" modal="cars" dataToShow={carAdapter(cars)} data={cars} {...{ columns }} />
       </main>
     );
 }

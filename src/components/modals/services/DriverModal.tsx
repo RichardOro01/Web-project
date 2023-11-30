@@ -19,7 +19,7 @@ const DriverModal: React.FC = () => {
   const router = useRouter();
   const form = useRef<FormInstance>(null);
   const [district,setDistrict] = useState <District[]>([])
-  const editing = useSelector((state: RootState) => state.modal.editing);
+  const editing = useSelector((state: RootState) => state.modal.editing as TableDataType<Driver>|undefined);
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditDriver>>(
   {

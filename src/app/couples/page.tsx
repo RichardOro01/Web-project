@@ -30,7 +30,8 @@ const CouplePage = async () => {
       <TableData
         title="Couple"
         modal="couples"
-        data={coupleAdapter(couples)}
+        data={couples}
+        dataToShow={coupleAdapter(couples)}
         {...{ columns }}
       />
     </main>

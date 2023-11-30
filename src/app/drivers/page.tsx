@@ -45,7 +45,8 @@ const DriverPage = async () => {
       <TableData
         title="Drivers"
         modal="drivers"
-        data={driverAdapter(drivers)}
+        dataToShow={driverAdapter(drivers)}
+        data={drivers}
         {...{ columns }}
         checkBoxColumns={["is_free_cover"]}
       />

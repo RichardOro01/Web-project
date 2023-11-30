@@ -15,6 +15,7 @@ import users from "@/assets/icons/items/user.svg";
 import role from "@/assets/icons/items/role.svg";
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
+import free_code from "@/assets/icons/items/free_cover.svg"
 
 export default function Home() {
   return (
@@ -38,7 +39,7 @@ export default function Home() {
           <OptionItem name="Cars" img={car} link="./cars" />
           <OptionItem name="Drivers" img={id} link="./drivers" />
           <OptionItem name="Couples" img={couple} link="./couples" />
-          <OptionItem name="Free Cover" img={free_cover} link="" />
+          <OptionItem name="Free Cover" img={free_code} link="" />
         </>
       </OptionSection>
       <OptionSection name="Others">
