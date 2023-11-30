@@ -8,7 +8,7 @@ export const roadmapTableAdapter = (
 ): TableDataType<Roadmap>[] => {
   return roadmaps.map((roadmap) => ({
     ...roadmap,
-    key: `${roadmap.car.car_code}-:-${roadmap.roadmap_date}`,
+    key: `${roadmap.car}-:-${roadmap.roadmap_date}`,
     car_code: roadmap.car?.car_code,
     departure_time: roadmap.departure_time
       ? dayjs(roadmap.departure_time).format("hh:mm A")

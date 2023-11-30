@@ -10,6 +10,7 @@ import discrepancyService from "@/services/tables/discrepancies";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Discrepancy, EditDiscrepancy } from "@/interfaces/Discrepancy";
+import { discrepancyTypesAdapter } from "@/interfaces/adapters/DiscrepancyAdapter";
 
 const DiscrepancyModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const DiscrepancyModal: React.FC = () => {
   const form = useRef<FormInstance>(null);
   const editing = useSelector((state: RootState) => state.modal.editing as Discrepancy | undefined);
   
+  const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditDiscrepancy>>({
     month_code: "",
     car_code: "",
@@ -29,23 +31,21 @@ const DiscrepancyModal: React.FC = () => {
   });
 
   const handleOk = async () => {
-    form.current
-      ?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-           /*  await discrepancyService.update(editing, data);
-           */} else {
-            await discrepancyService.add(data);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      await form.current?.validateFields();
+      const adaptedTypesData = discrepancyTypesAdapter(data);
+
+      if (editing) {
+        /* await servicesAppService.update(data.roadmap_date y car_code.toString(),adaptedTypesData); */
+      } else {
+        await discrepancyService.add(adaptedTypesData);
+      }
+      api.success({ message: "Discrepancy created" }); //TODO cuando se cierra el modal no deja ver esto
+      dispatch(hideCurrentModal());
+      router.refresh();
+    } catch (error: any) {
+      if (error.detail) api.error({ message: error.detail });
+    }
   };
 
   return (
@@ -59,13 +59,13 @@ const DiscrepancyModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Discrepancy</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="month"
+            name="month_code"
             rules={[{ required: true, message: "Month required" }]}
           >
             <InputSelect
-              id="month"
+              id="month_code"
               label="Month"
-              options={[{ label: "January", value: "January" }]}
+              options={[{ label: "January", value: "2023-01-01" }]}
               currentValue={data.month_code}
               onChange={(e) =>
                 setData((data) => {
