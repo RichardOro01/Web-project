@@ -1,14 +1,13 @@
 import TableData from "@/components/commons/tables/TableData";
 import { Month } from "@/interfaces/Month";
-import { fuelAdapter } from "@/interfaces/adapters/FuelAdapter";
-import { monthAdapter, monthTableAdapter } from "@/interfaces/adapters/MonthAdaparter";
+import { monthTableAdapter } from "@/interfaces/adapters/MonthAdaparter";
 import monthService from "@/services/tables/months";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
 const columns: ColumnsType<Month> = [
   {
-    title: "Month code",
+    title: "Month",
     dataIndex: "month_code",
     key: "month_code",
   },
@@ -16,7 +15,7 @@ const columns: ColumnsType<Month> = [
     title: "Report code",
     dataIndex: "report_code",
     key: "report_code",
-  }, 
+  },
 ];
 
 const MonthPage = async () => {

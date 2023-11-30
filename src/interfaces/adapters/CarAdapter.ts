@@ -10,6 +10,7 @@ cars.map((car) => ({
 
 export const carAdapter = (cars: Car[]): TableDataType<Car>[] => {
   return cars.map((car) => ({
+    number: car.number,
     plate: car.plate || "",
     brand_name: car.brand?.brand_name,
     key: car.car_code,
