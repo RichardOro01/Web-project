@@ -1,39 +1,56 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-/* export const GET = async (request: Request,{ params }: { params: { id: string } }) => {
+export const GET = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
   const { id } = params;
-  const [car__code, month__code]=id.split('-:-')
-  console.log(car__code)
-  console.log(month__code)
-  const roadmap = await prisma.roadmap.findFirst({ where: { month_code_car_code: {car_code: parseInt(car__code), month__code} });
-  
-  if (roadmap) {
-    return NextResponse.json(roadmap);
+  const [car_code, month_date] = id.split("-:-");
+  const record = await prisma.discrepancy.findUnique({
+    where: {
+      month_code_car_code: {
+        month_code: month_date,
+        car_code: parseInt(car_code),
+      },
+    },
+  });
+
+  if (record) {
+    return NextResponse.json({ ok: true, record });
+  } else {
+    return NextResponse.json({ ok: false, message: "Registro no encontrado" });
   }
-  return NextResponse.error();
-}; */
+};
 
-/* export const GET = async (request: Request,{ params }: { params: { id: string } }) => {
-  const data = await request.json();
-  const { id } = params;
-  const [car_code, month_code]=id.split('-:-')
-  await prisma.discrepancy.update({ where: { month_code_car_code: {car_code: parseInt(car_code), month_code} }, data });
-  return NextResponse.json({ ok: true });
-}; */
-
-/* export const POST = async (
+export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  console.log(data);
-
   const { id } = params;
-  const service_code = parseInt(id);
-  await prisma.service.update({ where: { service_code }, data });
+  const [car_code, month_code] = id.split("-:-");
+  
+  await prisma.discrepancy.update({
+    where: {
+      month_code_car_code: {
+        month_code: month_code,
+        car_code: parseInt(car_code),
+      },
+    },
+    data: {
+      planned_kms: data.planned_kms,
+      tours_kms: data.tours_kms,
+      difference_kms: data.difference_kms,
+      planned_fuel: data.planned_fuel,
+      consumed_fuel: data.consumed_fuel,
+      dif_spending_fuel: data.dif_spending_fuel,
+    },
+  });
+
   return NextResponse.json({ ok: true });
-}; */
+};
+
 
 export const DELETE = async (
   request: Request,

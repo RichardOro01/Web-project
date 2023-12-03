@@ -1,4 +1,11 @@
+import { Option } from "@/components/commons/forms/InputSelect";
 import { Report, CreateReport } from "../Report";
+
+export const reportOptionsAdapter = (reports: Report[]): Option[] =>
+  reports.map((report) => ({
+    label: report.report_code.toString(),
+    value: report.report_code.toString(),
+  }));
 
 export const reportTableAdapter = (
   reports: Report[]

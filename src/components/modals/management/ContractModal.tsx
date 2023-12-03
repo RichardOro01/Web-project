@@ -50,10 +50,7 @@ const ContractModal: React.FC = () => {
       await form.current?.validateFields();
       const adaptedTypesData = contractTypesAdapter(data);
       if (editing) {
-        await contractService.update(
-          data.contract_code.toString(),
-          adaptedTypesData
-        );
+        await contractService.update(data.contract_code.toString(),adaptedTypesData);
       } else {
         await contractService.add(contractCreateAdapter(adaptedTypesData));
       }

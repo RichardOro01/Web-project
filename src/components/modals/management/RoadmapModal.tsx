@@ -16,6 +16,7 @@ import {
 } from "@/interfaces/adapters/RoadmapAdapter";
 import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
+import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 
 const RoadmapModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const RoadmapModal: React.FC = () => {
       const adaptedTypesData = roadmapTypesAdapter(data);
 
       if (editing) {
-        /* await servicesAppService.update(data.roadmap_date y car_code.toString(),adaptedTypesData); */
+         await roadmapService.update(`${data.car_code}-:-${data.roadmap_date}`,adaptedTypesData)
       } else {
         await roadmapService.add(adaptedTypesData);
       }
@@ -52,45 +53,6 @@ const RoadmapModal: React.FC = () => {
       if (error.detail) api.error({ message: error.detail });
     }
   };
-
-  /* const handleOk = async () => {
-    const adaptedTypesData = roadmapTypesAdapter(data);
-    await form.current?.validateFields()
-      .then(async (data) => {
-        try {
-          if (editing) {
-            await roadmapService.update(editing, data);
-          } else {
-            await roadmapService.add(adaptedTypesData);
-          }
-        } catch (error) {
-          notification.error({ message: error as string });
-        } finally {
-          api.success({ message: "Roadmap created" });
-          dispatch(hideCurrentModal());
-          router.refresh();
-        }
-      })
-      .catch((error) => console.log(error));
-  }; */
-
-  /* const handleOk = async () => {
-    try {
-      await form.current?.validateFields();
-      const adaptedTypesData = roadmapTypesAdapter(data);
-      if (editing) {
-        await roadmapService.update(editing, data);
-      } else {
-        await roadmapService.add(roadmapCreateAdapter(adaptedTypesData));
-      }
-      api.success({ message: "Roadmap created" }); //TODO cuando se cierra el modal no deja ver esto
-      dispatch(hideCurrentModal());
-      router.refresh();
-    } catch (error: any) {
-      if (error.detail) api.error({ message: error.detail });
-    }
-  };
- */
 
   const updateCar = async () => {
     const cars = await carService.get();
@@ -140,15 +102,7 @@ const RoadmapModal: React.FC = () => {
             <InputSelect
               id="car_code"
               label="Car code"
-              options={[
-                { label: "car1", value: "31" },
-                { label: "car2", value: "32" },
-                { label: "car3", value: "33" },
-                { label: "car4", value: "34" },
-                { label: "car5", value: "35" },
-                { label: "car6", value: "36" },
-                { label: "car7", value: "37" },
-              ]}
+              options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {

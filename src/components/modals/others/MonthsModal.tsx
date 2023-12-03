@@ -1,8 +1,6 @@
 import { Form, FormInstance, Modal, notification } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
-import InputText from "@/components/commons/forms/InputText";
-import InputNum from "@/components/commons/forms/InputNum";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
@@ -16,6 +14,9 @@ import {
   monthTypesAdapter,
 } from "@/interfaces/adapters/MonthAdaparter";
 import InputDate from "@/components/commons/forms/InputDate";
+import reportService from "@/services/tables/reports";
+import { reportOptionsAdapter } from "@/interfaces/adapters/ReportAdapter";
+import { Report } from '@/interfaces/Report'
 
 
 const MonthsModal: React.FC = () => {
@@ -32,17 +33,18 @@ const MonthsModal: React.FC = () => {
     report_code: "",
   });
   
+  const [reports, setReports] = useState<Report[]>([]);
 
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
       const adaptedTypesData = monthTypesAdapter(data);
-      /* if (editing) {
+      if (editing) {
         await monthService.update(data.month_code.toString(), adaptedTypesData);
-      } else  */
-      /* { */
+      } else  
+       { 
         await monthService.add(monthCreateAdapter(adaptedTypesData));
-     /*  } */
+       } 
       api.success({ message: "Month created" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
       router.refresh();
@@ -51,21 +53,22 @@ const MonthsModal: React.FC = () => {
     }
   };
 
-  /* const updateFuel = async () => {
-    const fuels = await fuelService.get();
-    setFuels(fuels);
+  const updateReport = async () => {
+    const reports = await reportService.get();
+    setReports(reports);
   };
 
   useEffect(() => {
     if (editing) {
-      setData(brandFormAdapter(editing));
+      setData(monthFormAdapter(editing));
     }
   }, [editing]);
 
   useEffect(() => {
-    updateFuel();
-  }, []); */
+    updateReport();
+  }, []);
 
+  console.log(reports)
   return (
     <>
       {contextHolder}
@@ -80,7 +83,7 @@ const MonthsModal: React.FC = () => {
           <div className={styles.form_container}>
             <Form.Item
               name="month_code"
-              rules={[{ required: true, message: "Month required" }]}
+              rules={[{ required: true, message: "Month required" }]} 
             >
               <InputDate
               dateType="date"
@@ -101,7 +104,7 @@ const MonthsModal: React.FC = () => {
               <InputSelect
                 id="report_code"
                 label="Report code"
-                options={[{label: 'reporte 1', value: ''}]}
+                options={reportOptionsAdapter(reports)}
                 currentValue={data.report_code}
                 onChange={(e) =>
                   setData((data) => {
