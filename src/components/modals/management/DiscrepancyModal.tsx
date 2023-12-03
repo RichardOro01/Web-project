@@ -10,7 +10,13 @@ import discrepancyService from "@/services/tables/discrepancies";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Discrepancy, EditDiscrepancy } from "@/interfaces/Discrepancy";
-import { discrepancyTypesAdapter } from "@/interfaces/adapters/DiscrepancyAdapter";
+import { discrepancyFormAdapter, discrepancyTypesAdapter } from "@/interfaces/adapters/DiscrepancyAdapter";
+import { Month } from "@/interfaces/Month";
+import { Car } from "@/interfaces/Car";
+import monthService from "@/services/tables/months";
+import carService from "@/services/tables/cars";
+import { monthOptionsAdapter } from "@/interfaces/adapters/MonthAdaparter";
+import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 
 const DiscrepancyModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,13 +36,16 @@ const DiscrepancyModal: React.FC = () => {
     dif_spending_fuel : "",
   });
 
+  const [cars, setCars] = useState<Car[]>([]);
+  const [months, setMonths] = useState<Month[]>([]);
+
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
       const adaptedTypesData = discrepancyTypesAdapter(data);
 
       if (editing) {
-        /* await servicesAppService.update(data.roadmap_date y car_code.toString(),adaptedTypesData); */
+        await discrepancyService.update(`${data.car_code}-:-${data.month_code}`,adaptedTypesData)
       } else {
         await discrepancyService.add(adaptedTypesData);
       }
@@ -47,6 +56,36 @@ const DiscrepancyModal: React.FC = () => {
       if (error.detail) api.error({ message: error.detail });
     }
   };
+
+  const updateCar = async () => {
+    const cars = await carService.get();
+    setCars(cars);
+  };
+
+  useEffect(() => {
+    if (editing) {
+      setData(discrepancyFormAdapter(editing));
+    }
+  }, [editing]);
+
+  useEffect(() => {
+    updateCar();
+  }, []);
+
+  const updateMonth = async () => {
+    const months = await monthService.get();
+    setMonths(months);
+  };
+
+  useEffect(() => {
+    if (editing) {
+      setData(discrepancyFormAdapter(editing));
+    }
+  }, [editing]);
+
+  useEffect(() => {
+    updateMonth();
+  }, []);
 
   return (
     <Modal
@@ -65,7 +104,7 @@ const DiscrepancyModal: React.FC = () => {
             <InputSelect
               id="month_code"
               label="Month"
-              options={[{ label: "January", value: "2023-01-01" }]}
+              options={monthOptionsAdapter(months)}
               currentValue={data.month_code}
               onChange={(e) =>
                 setData((data) => {
@@ -81,15 +120,7 @@ const DiscrepancyModal: React.FC = () => {
             <InputSelect
               id="car_code"
               label="Car code"
-              options={[
-                { label: "car1", value: "31" },
-                { label: "car2", value: "32" },
-                { label: "car3", value: "33" },
-                { label: "car4", value: "34" },
-                { label: "car5", value: "35" },
-                { label: "car6", value: "36" },
-                { label: "car7", value: "37" },
-              ]}
+              options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
                 setData((data) => {

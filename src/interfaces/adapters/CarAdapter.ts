@@ -1,12 +1,6 @@
 import { Option } from "@/components/commons/forms/InputSelect";
 import { Car, CreateCar, EditCar } from "../Car";
 
-/* export const carOptionsAdapter = (cars: Car[]): Option[] =>  
-cars.map((car) => ({
-  label: car.plate ? car.plate.toString() : "",
-  value: car.car_code.toString(),
-}));
- */
 
 export const carAdapter = (cars: Car[]): TableDataType<Car>[] => {
   return cars.map((car) => ({

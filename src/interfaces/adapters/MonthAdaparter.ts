@@ -1,5 +1,12 @@
 import dayjs from "dayjs";
 import { Month } from "../Month";
+import { Option } from "@/components/commons/forms/InputSelect";
+
+export const monthOptionsAdapter = (months: Month[]): Option[] =>
+  months.map((month) => ({
+    label: month.month_code.toString(),
+    value: month.month_code.toString(),
+  }));
 
 export const monthTableAdapter = (months: Month[]): TableDataType<Month>[] => {
   return months.map((month) => ({

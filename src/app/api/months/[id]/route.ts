@@ -21,7 +21,13 @@ export const POST = async (
   const data = await request.json();
   const { id } = params;
   const month_code = id;
-  await prisma.months.update({ where: { month_code }, data });
+  
+  await prisma.months.update({
+    where: { month_code },
+    data: { report_code: data.report_code
+    },
+  });
+
   return NextResponse.json({ ok: true });
 };
 
