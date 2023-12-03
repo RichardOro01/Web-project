@@ -2,8 +2,10 @@ import { User, CreateUser, EditUser } from "../User";
 
 export const userTableAdapter = (users: User[]): TableDataType<User>[] => {
   return users.map((user) => ({
-    ...user,
     key: user.user_code,
+    username: user.username,
+    password: user.password || "",
+    name: user.name || "",
     description: user.role?.description,
   }));
 };
