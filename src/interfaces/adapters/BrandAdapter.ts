@@ -9,8 +9,10 @@ export const brandOptionsAdapter = (brands: Brand[]): Option[] =>
 
 export const brandTableAdapter = (brands: Brand[]): TableDataType<Brand>[] => {
   return brands.map((brand) => ({
-    ...brand,
     key: brand.brand_code,
+    amo_seats: brand.amo_seats || "",
+    brand_name: brand.brand_name,
+    spending: brand.spending || "",
     fuel_name: brand.fuel?.fuel_name,
   }));
 };

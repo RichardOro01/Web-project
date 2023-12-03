@@ -11,8 +11,8 @@ export const districtTableAdapter = (
   districts: District[]
 ): TableDataType<District>[] => {
   return districts.map((district) => ({
-    ...district,
     key: district.district_code,
+    district_name: district.district_name,
   }));
 };
 

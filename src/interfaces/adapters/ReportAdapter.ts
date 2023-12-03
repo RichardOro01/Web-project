@@ -11,8 +11,13 @@ export const reportTableAdapter = (
   reports: Report[]
 ): TableDataType<Report>[] => {
   return reports.map((report) => ({
-    ...report,
     key: report.report_code,
+    amo_services: report.amo_services || "",
+    amo_rents: report.amo_rents || "",
+    income_rents: report.income_rents || "",
+    amo_others: report.amo_others || "",
+    income_others: report.income_others || "",
+    income_total: report.income_total || "",
   }));
 };
 
