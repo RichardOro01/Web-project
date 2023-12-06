@@ -48,6 +48,7 @@ const ContractModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
+      console.log(data)
       const adaptedTypesData = contractTypesAdapter(data);
       if (editing) {
         await contractService.update(data.contract_code.toString(),adaptedTypesData);

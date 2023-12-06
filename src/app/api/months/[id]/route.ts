@@ -24,8 +24,7 @@ export const POST = async (
   
   await prisma.months.update({
     where: { month_code },
-    data: { report_code: data.report_code
-    },
+    data
   });
 
   return NextResponse.json({ ok: true });

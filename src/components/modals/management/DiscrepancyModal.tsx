@@ -25,6 +25,17 @@ const DiscrepancyModal: React.FC = () => {
   const editing = useSelector((state: RootState) => state.modal.editing as Discrepancy | undefined);
   
   const [api, contextHolder] = notification.useNotification();
+  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<EditDiscrepancy>>({
+    month_code: "",
+    car_code: "",
+    planned_kms: "",
+    tours_kms: "",
+    difference_kms: "",
+    planned_fuel: "",
+    consumed_fuel : "",
+    dif_spending_fuel : "",
+  });
+  
   const [data, setData] = useState<FormDataType<EditDiscrepancy>>({
     month_code: "",
     car_code: "",
@@ -36,6 +47,8 @@ const DiscrepancyModal: React.FC = () => {
     dif_spending_fuel : "",
   });
 
+  
+  
   const [cars, setCars] = useState<Car[]>([]);
   const [months, setMonths] = useState<Month[]>([]);
 
@@ -45,7 +58,8 @@ const DiscrepancyModal: React.FC = () => {
       const adaptedTypesData = discrepancyTypesAdapter(data);
 
       if (editing) {
-        await discrepancyService.update(`${data.car_code}-:-${data.month_code}`,adaptedTypesData)
+        console.log(currentTupleData)
+        await discrepancyService.update(`${currentTupleData.car_code}-:-${currentTupleData.month_code}`,adaptedTypesData)
       } else {
         await discrepancyService.add(adaptedTypesData);
       }
@@ -65,8 +79,11 @@ const DiscrepancyModal: React.FC = () => {
   useEffect(() => {
     if (editing) {
       setData(discrepancyFormAdapter(editing));
+      setCurrentTupleData(discrepancyFormAdapter(editing));
     }
   }, [editing]);
+
+  console.log(currentTupleData)
 
   useEffect(() => {
     updateCar();
