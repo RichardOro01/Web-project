@@ -17,6 +17,7 @@ import InputDate from "@/components/commons/forms/InputDate";
 import reportService from "@/services/tables/reports";
 import { reportOptionsAdapter } from "@/interfaces/adapters/ReportAdapter";
 import { Report } from '@/interfaces/Report'
+import dayjs from "dayjs";
 
 
 const MonthsModal: React.FC = () => {
@@ -28,6 +29,12 @@ const MonthsModal: React.FC = () => {
   );
   
   const [api, contextHolder] = notification.useNotification();
+
+  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<Month>>({
+    month_code: "",
+    report_code: "",
+  });
+
   const [data, setData] = useState<FormDataType<Month>>({
     month_code: "",
     report_code: "",
@@ -39,8 +46,9 @@ const MonthsModal: React.FC = () => {
     try {
       await form.current?.validateFields();
       const adaptedTypesData = monthTypesAdapter(data);
+      console.log(data)
       if (editing) {
-        await monthService.update(data.month_code.toString(), adaptedTypesData);
+        await monthService.update(dayjs(currentTupleData.month_code).toISOString(), adaptedTypesData);
       } else  
        { 
         await monthService.add(monthCreateAdapter(adaptedTypesData));
@@ -61,6 +69,7 @@ const MonthsModal: React.FC = () => {
   useEffect(() => {
     if (editing) {
       setData(monthFormAdapter(editing));
+      setCurrentTupleData(monthFormAdapter(editing));
     }
   }, [editing]);
 
