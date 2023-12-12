@@ -37,6 +37,7 @@ const CarModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
+      console.log(data)
       const adaptedTypesData = carTypesAdapter(data);
       if (editing) {
         await carService.update(data.number.toString(), adaptedTypesData);
@@ -72,11 +73,28 @@ const CarModal: React.FC = () => {
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Car</h2>
         <div className={styles.form_container}>
+        <Form.Item
+            name="number"
+            rules={[{ required: true, message: "Number required" }]}
+          >
+            <InputNum
+              label="Number"
+              id="number"
+              maxLength={6}
+              currentValue={data.number}
+              onChange={(e) =>
+                setData((data) => {
+                  return { ...data, number: e.target.value };
+                })
+              }
+            />
+          </Form.Item>
+
           <Form.Item
             name="plate"
             rules={[{ required: true, message: "Plate required" }]}
           >
-            <InputNum
+            <InputText
               label="Plate"
               id="plate"
               maxLength={6}
@@ -88,6 +106,7 @@ const CarModal: React.FC = () => {
               }
             />
           </Form.Item>
+
           <Form.Item
             name="brand"
             rules={[{ required: true, message: "Brand is required" }]}
@@ -104,6 +123,7 @@ const CarModal: React.FC = () => {
               }
             />
           </Form.Item>
+
           <Form.Item
             name="couple"
             rules={[{ required: true, message: "Select the Couple" }]}
