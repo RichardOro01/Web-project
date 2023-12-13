@@ -18,5 +18,4 @@ export interface EditContract
   start_date?: string | null;
   end_date?: string | null;
 }
-
-export interface CreateContract extends Omit<EditContract, "contract_code"> {}
+export interface CreateContract extends Omit<Contract, "contract_code"> {}

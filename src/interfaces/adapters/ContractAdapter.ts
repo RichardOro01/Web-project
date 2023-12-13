@@ -50,14 +50,12 @@ export const contractTypesAdapter = (
   car_code: parseInt(contract.car_code ?? ""),
 });
 
-export const contractCreateAdapter = (
-  contract: EditContract
-): CreateContract => ({
+export const contractCreateAdapter = (contract: Contract): CreateContract => ({
   applicant_name: contract.applicant_name,
-  start_date: contract.start_date,
-  end_date: contract.end_date,
+  start_date: contract.start_date ? new Date(contract.start_date) : null,
+  end_date: contract.end_date ? new Date(contract.end_date) : null,
   contract_kms: contract.contract_kms,
   contract_amount: contract.contract_amount,
-  country_code: contract.country_code,
-  car_code: contract.car_code,
+  country: contract.country,
+  car: contract.car,
 });
