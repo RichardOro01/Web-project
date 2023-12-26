@@ -20,6 +20,8 @@ import {
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
 import { downloadPDF, mapData} from "@/lib/utils";
+import { useTranslation } from "react-i18next";
+
 interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
@@ -37,6 +39,7 @@ const TableData: React.FC<TableDataProps> = ({
   checkBoxColumns,
   dataToShow,
 }) => {
+  const {t} = useTranslation([title])
   const router = useRouter();
   const dispatch = useDispatch();
   const currentModal = useSelector((state: RootState) => state.modal.current);
@@ -57,6 +60,32 @@ const TableData: React.FC<TableDataProps> = ({
       }
     }
   };
+
+  const translateColumns = () =>{
+    return columns.map((item:any) =>{return {...item, title:t(item.title,{ns:title})}})
+  }
+
+  const translateData = () =>{
+    if(title=="Fuels"){
+      return dataToShow.map((item:any) =>{return {...item, fuel_name:t(item?.fuel_name,{ns:title})}})
+    }
+    else if(title=="Services"){
+      return dataToShow.map((item:any)=>{
+        return {
+          ...item,
+          service_name:t(item?.service_name,{ns:title}),
+          pickup_place:t(item?.pickup_place,{ns:title}),
+          country_name:t(item?.country_name,{ns:'Countries'}),
+          group_name:t(item?.group_name,{ns:'Groups'}),
+        }
+      })
+    }
+    else if(title=="Countries"){return dataToShow.map((item:any) =>{return {...item, country_name:t(item?.country_name,{ns:title})}})}
+    else if(title=="Groups"){return dataToShow.map((item:any) =>{return {...item, group_name:t(item?.group_name,{ns:title})}})}
+    else{
+      return dataToShow
+    }
+  }
 
   const handleEdit = (value: any) => {
     dispatch(setEditingModal(value));
@@ -123,22 +152,22 @@ const TableData: React.FC<TableDataProps> = ({
     <>
       {contextHolder}
       <div className="flex flex-col">
-        <Title>{title}</Title>
+        <Title>{t(title,{ns:title})}</Title>
         <Table
-          columns={columnsAdapted}
-          dataSource={dataToShow}
+          columns={translateColumns()}
+          dataSource={translateData()}
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
           <Button onClick={() => downloadPDF(mapData(dataToShow,columns),columns,title)}>Download PDF</Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
-            Back
+            {t("Back",{ns:"translation"})}
           </Button>
           <Button
             onClick={() => dispatch(setCurrentModal(modal))}
             type="primary"
           >
-            Insert
+            {t("Insert",{ns:"translation"})}
           </Button>
         </footer>
 

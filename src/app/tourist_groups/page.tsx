@@ -23,7 +23,7 @@ const TourPage = async () => {
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData
-        title="Tourist Groups"
+        title="Groups"
         modal="tour_groups"
         data={tourist_groups}
         dataToShow={touristTableAdapter(tourist_groups)}
