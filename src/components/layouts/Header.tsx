@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import bus from "@/assets/bus.svg";
 import Image from "next/image";
 import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import i18n from "@/app/i18n";
+import { useTranslation } from "react-i18next";
 
 const items: MenuProps["items"] = [
   {
@@ -56,6 +58,13 @@ const scrollItems: MenuProps["items"] = [
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
+
+  useEffect(()=>{
+    i18n.changeLanguage("es")
+  },[])
+
+  const {t} = useTranslation(["es"])
+
   return (
     <>
       {pathname !== "/login" && (
@@ -67,7 +76,7 @@ const Header = () => {
             <Image src={bus} alt="bus" width={50} className="invert-[1]" />
             <div className="flex flex-col">
               <h3 className="text-xl">Transbus</h3>
-              <h5 className="text-base text-blue-100">An effective bus</h5>
+              <h5 className="text-base text-blue-100">{t("An effective bus",{ns:"translation"})}</h5>
             </div>
           </div>
 
@@ -79,19 +88,19 @@ const Header = () => {
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}
                   >
-                    Management
+                    {t("Management",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("services")}
                   >
-                    Services
+                    {t("Services",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("others")}
                   >
-                    Others
+                    {t("Others",{ns:"translation"})}
                   </span>
                 </nav>
                 <Dropdown
@@ -120,7 +129,7 @@ const Header = () => {
                 </Space>
               </Dropdown>
             )}
-            <span>User</span>
+            <span>{t("User",{ns:"translation"})}</span>
           </div>
         </header>
       )}

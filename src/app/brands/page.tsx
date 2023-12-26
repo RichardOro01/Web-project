@@ -4,6 +4,7 @@ import { brandTableAdapter } from "@/interfaces/adapters/BrandAdapter";
 import brandService from "@/services/tables/brands";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const columns: ColumnsType<Brand> = [
   {
