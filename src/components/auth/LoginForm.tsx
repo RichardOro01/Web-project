@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import user from "@/assets/icons/user.svg";
 import lock from "@/assets/icons/lock.svg";
@@ -13,6 +13,7 @@ const LoginForm = () => {
   const formRef = useRef<FormInstance>(null);
   const params = useSearchParams();
   const [api, contextHolder] = notification.useNotification();
+  const [callbackUrl, setCallbackUrl] = useState("/");
 
   const handleSignIn: React.MouseEventHandler<HTMLElement> = async (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const LoginForm = () => {
       const { password, username }: signInCredentials =
         formRef.current?.getFieldsValue();
       const res = await signIn("credentials", {
-        callbackUrl: "/",
+        callbackUrl: callbackUrl,
         redirect: true,
         username,
         password,
@@ -34,6 +35,10 @@ const LoginForm = () => {
     const error = params.get("error");
     if (error === "CredentialsSignin") {
       api.error({ message: "Por favor, revise las credenciales" });
+    }
+    const callbackUrl = params.get("callbackUrl");
+    if (callbackUrl) {
+      setCallbackUrl(callbackUrl);
     }
   }, [params]);
 
