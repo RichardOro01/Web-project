@@ -7,6 +7,7 @@ import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import UserOptions from "../navbar/UserOptions";
 
 const items: MenuProps["items"] = [
   {
@@ -120,7 +121,7 @@ const Header = () => {
                 </Space>
               </Dropdown>
             )}
-            <span>User</span>
+            <UserOptions />
           </div>
         </header>
       )}
