@@ -1,6 +1,8 @@
 import { ErrorDetail } from "@/interfaces/errors/Error";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import dayjs from "dayjs";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export const timeToDate = (time?: string) => {
   if (time) {
@@ -48,3 +50,10 @@ export const handlePrismaClientUnknownRequestError = (
     ) as ErrorDetail;
   }
 };
+
+export const handleDownloadPDF = (data: any[], headers:any[], tableName: string) => {
+  let doc = new jsPDF();
+  console.log(data);
+  autoTable(doc, { head: [headers], body: data });
+  doc.save(`${tableName}.pdf`);
+}
