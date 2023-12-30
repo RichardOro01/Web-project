@@ -18,7 +18,7 @@ const CoupleModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing as TableDataType<Couple>|undefined);
+  const editing = useSelector((state: RootState) => state.modal.editing as CreateCouple|undefined);
   const [api, contextHolder] = notification.useNotification();
 
   const [drivers,setDrivers] = useState<DriverOption[]>([])

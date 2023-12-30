@@ -20,14 +20,15 @@ const CarModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const editing = useSelector((state: RootState) => state.modal.editing as TableDataType<Car>|undefined);
+  const editing = useSelector((state: RootState) => state.modal.editing as EditCar|undefined);
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditCar>>(
     {
-      number: "",
+      fleet_number: "",
       plate: "",
       brand_code: "",
       couple_code:"",
+      car_code:""
     }
   );
 
@@ -40,9 +41,9 @@ const CarModal: React.FC = () => {
       console.log(data)
       const adaptedTypesData = carTypesAdapter(data);
       if (editing) {
-        await carService.update(data.number.toString(), adaptedTypesData);
+        await carService.update(data.car_code?.toString(), adaptedTypesData);
       } else {
-        await carService.add(adaptedTypesData);
+        await carService.add(carCreateAdapter(adaptedTypesData));
       }
       api.success({ message: "Car created" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
@@ -74,17 +75,17 @@ const CarModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Car</h2>
         <div className={styles.form_container}>
         <Form.Item
-            name="number"
+            name="fleet_number"
             rules={[{ required: true, message: "Number required" }]}
           >
             <InputNum
-              label="Number"
-              id="number"
+              label="Fleet Number"
+              id="fleet_number"
               maxLength={6}
-              currentValue={data.number}
+              currentValue={data.fleet_number}
               onChange={(e) =>
                 setData((data) => {
-                  return { ...data, number: e.target.value };
+                  return { ...data, fleet_number: e.target.value };
                 })
               }
             />

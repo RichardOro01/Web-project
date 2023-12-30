@@ -96,6 +96,7 @@ const TableData: React.FC<TableDataProps> = ({
       return columns.map((column) => {
         if (column.key && checkBoxColumns.includes(column.key.toString())) {
           const { key } = column;
+          console.log(column)
           return {
             ...column,
             render: (_, record) => {
@@ -121,7 +122,7 @@ const TableData: React.FC<TableDataProps> = ({
   };
 
   const columnsAdapted: ColumnsType<any> = [
-    ...adaptedCheckBox(),
+    ...translateColumns(),
     {
       fixed: "right",
       width: "64px",
@@ -152,7 +153,7 @@ const TableData: React.FC<TableDataProps> = ({
       <div className="flex flex-col">
         <Title>{t(title,{ns:title})}</Title>
         <Table
-          columns={translateColumns()}
+          columns={columnsAdapted}
           dataSource={translateData()}
           scroll={{ y: 450, x: 700 }}
         />

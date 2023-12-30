@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 const columns: ColumnsType<Car> = [
   {
     title: "Fleet number",
-    dataIndex: "number",
-    key: "number",
+    dataIndex: "fleet_number",
+    key: "fleet_number",
   },
   {
     title: "Plate",
