@@ -20,8 +20,9 @@ export const POST = async (
 ) => {
   const data = await request.json();
   const { id } = params;
-  const fleet_number = parseInt(id);
-  await prisma.car.update({ where: { fleet_number }, data });
+  const car_code = parseInt(id);
+  console.log(car_code)
+  await prisma.car.update({ where: { car_code }, data });
   return NextResponse.json({ ok: true });
 };
 

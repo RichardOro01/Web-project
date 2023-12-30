@@ -11,7 +11,7 @@ export const GET = async () => {
   const drivers = await prisma.driver.findMany();
   const result: Car[] = cars.map((car) => ({
     car_code: car.car_code,
-    number: car.fleet_number,
+    fleet_number: car.fleet_number,
     plate: car.plate,
     brand: brands.find((b) => b.brand_code === car.brand_code),
     couple: {
