@@ -43,6 +43,11 @@ export default function Home() {
           <OptionItem name="Free Cover" img={free_code} link="" />
         </>
       </OptionSection>
+      <OptionSection name="Reports">
+        <>
+          <OptionItem name="Top 3 groups activity" img={city} link="./top_3_groups" />
+        </>
+      </OptionSection>
       <OptionSection name="Others">
         <>
           <OptionItem name="District" img={city} link="./districts" />
