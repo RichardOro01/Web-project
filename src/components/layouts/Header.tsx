@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bus from "@/assets/bus.svg";
 import Image from "next/image";
 import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import i18n from "@/app/i18n";
 import { useTranslation } from "react-i18next";
+import i18n from "@/app/i18n";
+import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
 
 const items: MenuProps["items"] = [
   {
@@ -58,13 +59,24 @@ const scrollItems: MenuProps["items"] = [
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [languajeTransBus,setLanguajeTransBus] = useState('')
 
   useEffect(()=>{
-    i18n.changeLanguage("es")
+    const language = getCookie("languageTransBus")?.toString()
+  i18n.changeLanguage(getCookie("languageTransBus")?.toString() || 'en');
+  if (language) {
+    setCookie("languageTransBus", language, 365,'');
+  }
+  setLanguajeTransBus(language||'en')
   },[])
 
-  const {t} = useTranslation(["es"])
+  useEffect(()=>{
+    i18n.changeLanguage(languajeTransBus);
+    setCookie("languageTransBus", languajeTransBus?.toString(), 365,'');
+    router.refresh()
+  },[languajeTransBus])
 
+  const {t} = useTranslation(["translation"])
   return (
     <>
       {pathname !== "/login" && (
@@ -84,6 +96,13 @@ const Header = () => {
             {pathname === "/" && (
               <>
                 <nav className="sm:flex gap-2 hidden">
+                <select className="cursor-pointer" value={languajeTransBus} onChange={(e)=>{
+                    e.preventDefault()
+                    setLanguajeTransBus(e.target.value)
+                  }}>
+                    <option value={'en'}>En</option>
+                    <option value={'es'}>Es</option>
+                  </select>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}

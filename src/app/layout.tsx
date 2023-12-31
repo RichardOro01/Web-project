@@ -6,6 +6,8 @@ import { ConfigProvider } from "antd";
 import "@/styles/global.css";
 import StyledComponentsRegistry from "@/components/antd/AntdRegistry";
 import StoreProvider from "@/components/core/stores/StoreProvider";
+import { useEffect } from "react";
+import i18n from "../app/i18n"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en">
       <body className={`font-sans m-0 min-h-screen flex flex-col`}>

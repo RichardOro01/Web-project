@@ -20,6 +20,7 @@ import {
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
 import { useTranslation } from "react-i18next";
+import useTranslationData from "@/services/hooks/useTranslationData";
 
 interface TableDataProps {
   title: string;
@@ -44,6 +45,7 @@ const TableData: React.FC<TableDataProps> = ({
   const currentModal = useSelector((state: RootState) => state.modal.current);
   const [api, contextHolder] = notification.useNotification();
   const [deleting, setDeleting] = useState<(string | number)[]>([]);
+  const translatedData = useTranslationData(title,dataToShow)
 
   const handleDelete = async (value: TableDataType<any>) => {
     if (!deleting.includes(value.key)) {
@@ -60,30 +62,8 @@ const TableData: React.FC<TableDataProps> = ({
     }
   };
 
-  const translateColumns = () =>{
-    return columns.map((item:any) =>{return {...item, title:t(item.title,{ns:title})}})
-  }
-
-  const translateData = () =>{
-    if(title=="Fuels"){
-      return dataToShow.map((item:any) =>{return {...item, fuel_name:t(item?.fuel_name,{ns:title})}})
-    }
-    else if(title=="Services"){
-      return dataToShow.map((item:any)=>{
-        return {
-          ...item,
-          service_name:t(item?.service_name,{ns:title}),
-          pickup_place:t(item?.pickup_place,{ns:title}),
-          country_name:t(item?.country_name,{ns:'Countries'}),
-          group_name:t(item?.group_name,{ns:'Groups'}),
-        }
-      })
-    }
-    else if(title=="Countries"){return dataToShow.map((item:any) =>{return {...item, country_name:t(item?.country_name,{ns:title})}})}
-    else if(title=="Groups"){return dataToShow.map((item:any) =>{return {...item, group_name:t(item?.group_name,{ns:title})}})}
-    else{
-      return dataToShow
-    }
+  const translateColumns = (adaptedCheckBox:ColumnsType<any>) =>{
+    return adaptedCheckBox.map((item:any) =>{return {...item, title:t(item.title,{ns:title})}})
   }
 
   const handleEdit = (value: any) => {
@@ -96,7 +76,6 @@ const TableData: React.FC<TableDataProps> = ({
       return columns.map((column) => {
         if (column.key && checkBoxColumns.includes(column.key.toString())) {
           const { key } = column;
-          console.log(column)
           return {
             ...column,
             render: (_, record) => {
@@ -122,7 +101,7 @@ const TableData: React.FC<TableDataProps> = ({
   };
 
   const columnsAdapted: ColumnsType<any> = [
-    ...translateColumns(),
+    ...translateColumns(adaptedCheckBox()),
     {
       fixed: "right",
       width: "64px",
@@ -154,7 +133,7 @@ const TableData: React.FC<TableDataProps> = ({
         <Title>{t(title,{ns:title})}</Title>
         <Table
           columns={columnsAdapted}
-          dataSource={translateData()}
+          dataSource={translatedData.data}
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
