@@ -24,11 +24,7 @@ import { useEffect } from "react";
 
 export default function Home() {
 
-  useEffect(()=>{
-    i18n.changeLanguage("es")
-  },[])
-
-  const {t} = useTranslation(["es"])
+  const {t} = useTranslation(["translation"])
   
   return (
     <main className="flex flex-col items-center gap-6 ml-3  p-5">

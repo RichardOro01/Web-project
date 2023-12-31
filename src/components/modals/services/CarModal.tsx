@@ -38,7 +38,6 @@ const CarModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      console.log(data)
       const adaptedTypesData = carTypesAdapter(data);
       if (editing) {
         await carService.update(data.car_code?.toString(), adaptedTypesData);
