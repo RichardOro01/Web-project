@@ -33,7 +33,7 @@ export const contractFormAdapter = (
     : "",
   contract_kms: contract.contract_kms?.toString() ?? "",
   contract_amount: contract.contract_amount?.toString() ?? "",
-  country_code: contract.country?.country_code,
+  contract_country: contract.country?.country_code,
   car_code: contract.car?.car_code.toString() ?? "",
 });
 
@@ -46,16 +46,18 @@ export const contractTypesAdapter = (
   end_date: contract.end_date,
   contract_kms: parseFloat(contract.contract_kms),
   contract_amount: parseFloat(contract.contract_amount),
-  country_code: contract.country_code,
+  contract_country: contract.contract_country,
   car_code: parseInt(contract.car_code ?? ""),
 });
 
-export const contractCreateAdapter = (contract: Contract): CreateContract => ({
+export const contractCreateAdapter = (
+  contract: EditContract
+): CreateContract => ({
   applicant_name: contract.applicant_name,
-  start_date: contract.start_date ? new Date(contract.start_date) : null,
-  end_date: contract.end_date ? new Date(contract.end_date) : null,
+  start_date: dayjs(contract.start_date).toISOString(),
+  end_date: dayjs(contract.end_date).toISOString(),
   contract_kms: contract.contract_kms,
   contract_amount: contract.contract_amount,
-  country: contract.country,
-  car: contract.car,
+  contract_country: contract.contract_country,
+  car_code: contract.car_code,
 });
