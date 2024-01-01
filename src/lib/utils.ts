@@ -51,9 +51,8 @@ export const handlePrismaClientUnknownRequestError = (
   }
 };
 
-export const handleDownloadPDF = (data: any[], headers:any[], tableName: string) => {
+export const downloadPDF = (data: any[], headers: any[], tableName: string) => {
   let doc = new jsPDF();
-  console.log(data);
   autoTable(doc, { head: [headers], body: data });
   doc.save(`${tableName}.pdf`);
-}
+};

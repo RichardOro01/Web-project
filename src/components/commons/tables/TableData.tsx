@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
-import { handleDownloadPDF } from "@/lib/utils";
+import { downloadPDF } from "@/lib/utils";
 interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
@@ -118,7 +118,17 @@ const TableData: React.FC<TableDataProps> = ({
       },
     },
   ];
-  
+
+  const handleDownloadPDF = () => {
+    downloadPDF(
+      dataToShow.map((row) =>
+        columns.map((column) => row[column.key as string])
+      ),
+      columns,
+      title
+    );
+  };
+
   return (
     <>
       {contextHolder}
@@ -130,7 +140,7 @@ const TableData: React.FC<TableDataProps> = ({
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
-          <Button onClick={() => handleDownloadPDF(dataToShow.map(row => columns.map(column => row[column.key as string])), columns, title)}>Download PDF</Button>
+          <Button onClick={handleDownloadPDF}>Download PDF</Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
             Back
           </Button>
