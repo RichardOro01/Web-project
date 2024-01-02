@@ -5,7 +5,7 @@ import { downloadPDF, mapData } from "@/lib/utils";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import Title from "antd/es/typography/Title";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Top3GroupsProps {
@@ -14,6 +14,7 @@ interface Top3GroupsProps {
 }
 
 const Top3Groups: React.FC<Top3GroupsProps> = ({ columns, data }) => {
+  const router = useRouter()
   return (
     <>
       <div className="flex flex-col">
