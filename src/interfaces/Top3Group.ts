@@ -1,4 +1,4 @@
-export interface top3Group {
+export interface Top3Group {
     group_name: string;
     activity_count: number;
 }
