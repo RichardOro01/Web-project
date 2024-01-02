@@ -140,7 +140,7 @@ const TableData: React.FC<TableDataProps> = ({
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
-          <Button onClick={() => handleDownloadPDF(mapData(dataToShow,columns), columns, title)}>Download PDF</Button>
+          <Button onClick={() => handleDownloadPDF}>Download PDF</Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
             Back
           </Button>
