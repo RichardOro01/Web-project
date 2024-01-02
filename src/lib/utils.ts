@@ -57,3 +57,9 @@ export const handleDownloadPDF = (data: any[], headers:any[], tableName: string)
   autoTable(doc, { head: [headers], body: data });
   doc.save(`${tableName}.pdf`);
 }
+
+export const mapData = (data: any[], columns: any[]) => {
+  return data.map((row) =>
+    columns.map((column) => row[column.key])
+  );
+}
