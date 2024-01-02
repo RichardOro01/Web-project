@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
-import { downloadPDF, mapData} from "@/lib/utils";
+import { downloadPDF} from "@/lib/utils";
 interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
