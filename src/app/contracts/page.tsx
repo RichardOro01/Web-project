@@ -50,8 +50,6 @@ const ContractPage = async () => {
   } catch (error) {
     console.log(error);
   }
-  console.log(contracts);
-  console.log(contractTableAdapter(contracts));
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData

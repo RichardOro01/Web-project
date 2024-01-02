@@ -1,6 +1,8 @@
 import { ErrorDetail } from "@/interfaces/errors/Error";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import dayjs from "dayjs";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export const timeToDate = (time?: string) => {
   if (time) {
@@ -47,4 +49,10 @@ export const handlePrismaClientUnknownRequestError = (
       match[0].replace("PostgresError ", "").replace(/\b(\w+):/g, '"$1":') + "}"
     ) as ErrorDetail;
   }
+};
+
+export const downloadPDF = (data: any[], headers: any[], tableName: string) => {
+  let doc = new jsPDF();
+  autoTable(doc, { head: [headers], body: data });
+  doc.save(`${tableName}.pdf`);
 };

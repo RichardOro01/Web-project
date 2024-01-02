@@ -31,7 +31,7 @@ export const POST = async (
   const data = await request.json();
   const { id } = params;
   const [car_code, roadmap_date] = id.split("-:-");
-  
+  console.log(data)
   await prisma.roadmap.update({
     where: {
       roadmap_date_car_code: {
@@ -39,10 +39,7 @@ export const POST = async (
         car_code: parseInt(car_code),
       },
     },
-    data: {
-      kms: data.kms,
-      departure_time: data.departure_time
-    },
+    data
   });
 
   return NextResponse.json({ ok: true });

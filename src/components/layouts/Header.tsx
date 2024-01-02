@@ -7,6 +7,7 @@ import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import UserOptions from "../navbar/UserOptions";
 import { useTranslation } from "react-i18next";
 import i18n from "@/app/i18n";
 import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
@@ -148,7 +149,7 @@ const Header = () => {
                 </Space>
               </Dropdown>
             )}
-            <span>{t("User",{ns:"translation"})}</span>
+            <span>User</span>
           </div>
         </header>
       )}

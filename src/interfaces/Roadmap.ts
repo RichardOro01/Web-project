@@ -7,7 +7,7 @@ export interface Roadmap{
   departure_time: string | null;
 }
 
-export interface EditRoadmap extends Omit<Roadmap, "car" >{
+export interface EditRoadmap extends Omit<Roadmap, "car">{
   car_code?: number;
 }
 

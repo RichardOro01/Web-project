@@ -20,7 +20,7 @@ export const roadmapTableAdapter = (
 export const roadmapFormAdapter = (
   roadmap: Roadmap
 ): FormDataType<EditRoadmap> => ({
-  roadmap_date: roadmap.roadmap_date.toString() ?? "",
+  roadmap_date: roadmap.roadmap_date.toString(),
   car_code: roadmap.car.car_code.toString() ?? "",
   kms: roadmap.kms?.toString() ?? "",
   departure_time: roadmap.departure_time
@@ -31,9 +31,7 @@ export const roadmapFormAdapter = (
 export const roadmapTypesAdapter = (
   roadmap: FormDataType<EditRoadmap>
 ): EditRoadmap => ({
-  roadmap_date: roadmap.roadmap_date
-    ? new Date(roadmap.roadmap_date)
-    : new Date(),
+  roadmap_date: new Date(roadmap.roadmap_date),
   car_code: parseInt(roadmap.car_code ?? ""),
   kms: parseFloat(roadmap.kms),
   departure_time: timeToDate(roadmap.departure_time),

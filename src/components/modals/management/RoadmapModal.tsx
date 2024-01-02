@@ -17,6 +17,7 @@ import {
 import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
 import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
+import dayjs from "dayjs";
 
 const RoadmapModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,13 @@ const RoadmapModal: React.FC = () => {
   );
 
   const [api, contextHolder] = notification.useNotification();
+  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<EditRoadmap>>({
+    roadmap_date: "",
+    car_code: "",
+    kms: "",
+    departure_time: "",
+  });
+
   const [data, setData] = useState<FormDataType<EditRoadmap>>({
     roadmap_date: "",
     car_code: "",
@@ -39,10 +47,12 @@ const RoadmapModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
+      console.log(data)
       const adaptedTypesData = roadmapTypesAdapter(data);
+      console.log(editing)
 
       if (editing) {
-         await roadmapService.update(`${data.car_code}-:-${data.roadmap_date}`,adaptedTypesData)
+         await roadmapService.update(`${currentTupleData.car_code}-:-${currentTupleData.roadmap_date}`,adaptedTypesData)
       } else {
         await roadmapService.add(adaptedTypesData);
       }
@@ -62,6 +72,8 @@ const RoadmapModal: React.FC = () => {
   useEffect(() => {
     if (editing) {
       setData(roadmapFormAdapter(editing));
+      setCurrentTupleData(roadmapFormAdapter(editing));
+      console.log(editing)
     }
   }, [editing]);
 

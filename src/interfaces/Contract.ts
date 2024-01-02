@@ -13,10 +13,9 @@ export interface Contract {
 
 export interface EditContract
   extends Omit<Contract, "country" | "plate" | "end_date" | "start_date"> {
-  country_code?: string;
+  contract_country?: string;
   car_code?: number;
   start_date?: string | null;
   end_date?: string | null;
 }
-
 export interface CreateContract extends Omit<EditContract, "contract_code"> {}

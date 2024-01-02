@@ -39,7 +39,7 @@ const ContractModal: React.FC = () => {
     end_date: "",
     contract_kms: "",
     contract_amount: "",
-    country_code: "",
+    contract_country: "",
     car_code: "",
   });
 
@@ -48,9 +48,14 @@ const ContractModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
+      console.log(data);
       const adaptedTypesData = contractTypesAdapter(data);
+      console.log("adapted ", contractCreateAdapter(adaptedTypesData));
       if (editing) {
-        await contractService.update(data.contract_code.toString(),adaptedTypesData);
+        await contractService.update(
+          data.contract_code.toString(),
+          adaptedTypesData
+        );
       } else {
         await contractService.add(contractCreateAdapter(adaptedTypesData));
       }
@@ -158,7 +163,6 @@ const ContractModal: React.FC = () => {
                 currentValue={data.contract_kms}
                 onChange={(e) =>
                   setData((data) => {
-                    console.log(data);
                     return { ...data, contract_kms: e.target.value };
                   })
                 }
@@ -183,19 +187,19 @@ const ContractModal: React.FC = () => {
               />
             </Form.Item>
             <Form.Item
-              name="country_code"
+              name="contract_country"
               rules={[{ required: true, message: "Country required" }]}
             >
               <InputSelect
-                id="country_code"
+                id="contract_country"
                 label="Country"
                 options={countryOptionsAdapter(countries)}
-                currentValue={data.country_code}
+                currentValue={data.contract_country}
                 onChange={(e) =>
                   setData((data) => {
                     return {
                       ...data,
-                      country_code: e.target.value,
+                      contract_country: e.target.value,
                     };
                   })
                 }
