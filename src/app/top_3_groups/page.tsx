@@ -31,6 +31,10 @@ const top3GroupPage = async () => {
     console.log(error);
   }
 
-  return <Top3Groups {...{ data, columns }} />;
+  return (
+    <main className="flex flex-col gap-8 p-5">
+      <Top3Groups {...{ data, columns }} />;
+    </main>
+  )
 };
 export default top3GroupPage;
