@@ -49,6 +49,7 @@ export default function Home() {
           <OptionItem name="Top 5 drivers activity" img={city} link="./top_5_drivers" />
           <OptionItem name="Top 3 countries activity" img={city} link="./top_3_countries" />
           <OptionItem name="Drivers worked group tour" img={city} link="./drivers_worked_group_tour" />
+          <OptionItem name="Contracts in period" img={city} link="./contracts_in_period" />
         </>
       </OptionSection>
       <OptionSection name="Others">
