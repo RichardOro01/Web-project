@@ -1,10 +1,10 @@
 import Top3Groups from "@/components/reports/Top3Groups";
-import { top3Group } from "@/interfaces/Top3Group";
+import { Top3Group } from "@/interfaces/Top3Group";
 import prisma from "@/lib/prisma";
 import { ColumnsType } from "antd/es/table";
 import React from "react";
 
-const columns: ColumnsType<top3Group> = [
+const columns: ColumnsType<Top3Group> = [
   {
     title: "Group name",
     dataIndex: "group_name",
@@ -17,7 +17,7 @@ const columns: ColumnsType<top3Group> = [
   },
 ];
 const top3GroupPage = async () => {
-  let data: top3Group[] = [];
+  let data: Top3Group[] = [];
   try {
     data =
       await prisma.$queryRaw`SELECT * FROM top_3_tour_groups_by_activity_count()`;
@@ -31,6 +31,10 @@ const top3GroupPage = async () => {
     console.log(error);
   }
 
-  return <Top3Groups {...{ data, columns }} />;
+  return (
+    <main className="flex flex-col gap-8 p-5">
+      <Top3Groups {...{ data, columns }} />;
+    </main>
+  )
 };
 export default top3GroupPage;

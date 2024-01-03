@@ -19,8 +19,8 @@ import {
 } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
-import { downloadPDF } from "@/lib/utils";import { useTranslation } from "react-i18next";
-import useTranslationData from "@/services/hooks/useTranslationData";
+import { downloadPDF} from "@/lib/utils";import { useTranslation } from "react-i18next";
+import useTranslationData from "../../../../i18n/hooks/useTranslationData";
 
 interface TableDataProps {
   title: string;
@@ -144,11 +144,11 @@ const TableData: React.FC<TableDataProps> = ({
         <Title>{t(title,{ns:title})}</Title>
         <Table
           columns={columnsAdapted}
-          dataSource={translatedData.data}
+          dataSource={dataToShow}
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
-          <Button onClick={handleDownloadPDF}>Download PDF</Button>
+          <Button onClick={() => handleDownloadPDF}>Download PDF</Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
             {t("Back",{ns:"translation"})}
           </Button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Top3Group } from "@/interfaces/Top3Group";
+import { Top5Driver} from "@/interfaces/Top5Driver";
 import { downloadPDF, mapData } from "@/lib/utils";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
@@ -8,16 +8,16 @@ import Title from "antd/es/typography/Title";
 import router, { useRouter } from "next/router";
 import React from "react";
 
-interface Top3GroupsProps {
-  columns: ColumnsType<Top3Group>;
-  data: Top3Group[];
+interface Top5DriversProps {
+  columns: ColumnsType<Top5Driver>;
+  data: Top5Driver[];
 }
 
-const Top3Groups: React.FC<Top3GroupsProps> = ({ columns, data }) => {
+const Top5Drivers: React.FC<Top5DriversProps> = ({ columns, data }) => {
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Top Groups"}</Title>
+        <Title>{"Top Drivers"}</Title>
         <Table columns={columns} dataSource={data} />
         <footer className="flex justify-end gap-2">
           <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top")}>
@@ -33,4 +33,4 @@ const Top3Groups: React.FC<Top3GroupsProps> = ({ columns, data }) => {
   );
 };
 
-export default Top3Groups;
+export default Top5Drivers;

@@ -19,7 +19,7 @@ import OptionItem from "@/components/main/OptionItem";
 import bxs from "@/assets/icons/items/bxs-calendar.svg";
 import free_code from "@/assets/icons/items/free_cover.svg";
 import { useTranslation } from "react-i18next";
-import i18n from "../app/i18n"
+import i18n from "../../i18n/i18n"
 import { useEffect } from "react";
 
 export default function Home() {
@@ -53,6 +53,8 @@ export default function Home() {
       <OptionSection name="Reports">
         <>
           <OptionItem name="Top 3 groups activity" img={city} link="./top_3_groups" />
+          <OptionItem name="Top 5 drivers activity" img={city} link="./top_5_drivers" />
+          <OptionItem name="Top 3 countries activity" img={city} link="./top_3_countries" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>

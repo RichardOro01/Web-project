@@ -9,8 +9,9 @@ import { Dropdown, MenuProps, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import UserOptions from "../navbar/UserOptions";
 import { useTranslation } from "react-i18next";
-import i18n from "@/app/i18n";
+import i18n from "../../../i18n/i18n";
 import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
+import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
 
 const items: MenuProps["items"] = [
   {
@@ -61,21 +62,7 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [languajeTransBus,setLanguajeTransBus] = useState('')
-
-  useEffect(()=>{
-    const language = getCookie("languageTransBus")?.toString()
-  i18n.changeLanguage(getCookie("languageTransBus")?.toString() || 'en');
-  if (language) {
-    setCookie("languageTransBus", language, 365,'');
-  }
-  setLanguajeTransBus(language||'en')
-  },[])
-
-  useEffect(()=>{
-    i18n.changeLanguage(languajeTransBus);
-    setCookie("languageTransBus", languajeTransBus?.toString(), 365,'');
-    router.refresh()
-  },[languajeTransBus])
+  useLanguageControl(languajeTransBus,setLanguajeTransBus)
 
   const {t} = useTranslation(["translation"])
   return (
@@ -149,7 +136,7 @@ const Header = () => {
                 </Space>
               </Dropdown>
             )}
-            <span>User</span>
+            <span>{t("User",{ns:"translation"})}</span>
           </div>
         </header>
       )}
