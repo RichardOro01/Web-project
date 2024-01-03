@@ -1,6 +1,6 @@
 "use client";
 import { Select } from "antd";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DriverWorkedTourGroup } from "@/interfaces/DriverWorkedTourGroup";
 import { downloadPDF, mapData } from "@/lib/utils";
 import { Button, Table } from "antd";
@@ -10,16 +10,41 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Tourist } from "@/interfaces/TourGroup";
 import { touristOptionsAdapter } from "@/interfaces/adapters/TouristAdapter";
+import { reportsService } from "@/services/reports";
 
 interface DriversWorkedTourProps {
   columns: ColumnsType<DriverWorkedTourGroup>;
   data: DriverWorkedTourGroup[];
   groups: Tourist[];
-  setSelectedTourGroup: Dispatch<SetStateAction<string>>; 
 }
 
-const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({ columns, groups, data, setSelectedTourGroup }) => {
+const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({
+  columns,
+  groups,
+  data,
+}) => {
   const router = useRouter();
+  const initialGroup = groups.length > 0 ? groups[0].group_code : "";
+  const [selectedGroup, setSelectedGroup] = useState(initialGroup);
+  const [loading, setLoading] = useState(false);
+  const [dataToShow, setDataToShow] = useState(data);
+
+  const updateDataToShow = async () => {
+    setLoading(true);
+    try {
+      const data = await reportsService.getDriversWorkedGroupTour(
+        selectedGroup
+      );
+      setDataToShow(data);
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    updateDataToShow();
+  }, [selectedGroup]);
 
   return (
     <>
@@ -28,15 +53,26 @@ const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({ columns, groups, 
         <Select
           placeholder="Select Toursit Group"
           style={{ width: 200, marginBottom: 16 }}
-          onChange={setSelectedTourGroup}
+          onChange={setSelectedGroup}
           options={touristOptionsAdapter(groups)}
+          value={selectedGroup}
         />
-        <Table columns={columns} dataSource={data} />
+        <Table loading={loading} columns={columns} dataSource={dataToShow} />
         <footer className="flex justify-end gap-2">
-          <Button onClick={() => downloadPDF(mapData(data, columns), columns, "Drivers worked group tour")}>
+          <Button
+            onClick={() =>
+              downloadPDF(
+                mapData(data, columns),
+                columns,
+                "Drivers worked group tour"
+              )
+            }
+          >
             Download PDF
           </Button>
-          <Button onClick={() => router.push("/", { scroll: false })}>Back</Button>
+          <Button onClick={() => router.push("/", { scroll: false })}>
+            Back
+          </Button>
         </footer>
       </div>
     </>
