@@ -2,8 +2,9 @@ import DriversWorkedTour from "@/components/reports/DriversWorkedTour";
 import { DriverWorkedTourGroup } from "@/interfaces/DriverWorkedTourGroup";
 import { Tourist } from "@/interfaces/TourGroup";
 import prisma from "@/lib/prisma";
+import { reportsService } from "@/services/reports";
 import { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import React from "react";
 
 const columns: ColumnsType<DriverWorkedTourGroup> = [
   {
@@ -38,22 +39,24 @@ const columns: ColumnsType<DriverWorkedTourGroup> = [
   },
 ];
 const DriverWorkedTourPage = async () => {
-    const [selectedTourGroup, setSelectedTourGroup] = useState('')
-    let groups: Tourist[] = [];
-    let data: DriverWorkedTourGroup[] = [];
-  
-    try {
-      groups = await prisma.tourist_group.findMany();
-      data = await prisma.$queryRaw`SELECT * FROM drivers_worked_tour_group(${selectedTourGroup})`;
-    } catch (error) {
-      console.log(error);
-    }
-  
-    return (
-      <main className="flex flex-col gap-8 p-5">
-        <DriversWorkedTour columns={columns} groups={groups} data={data} setSelectedTourGroup = {setSelectedTourGroup} />
-      </main>
-    );
-  };
-  
-  export default DriverWorkedTourPage;
+  let groups: Tourist[] = [];
+  let data: DriverWorkedTourGroup[] = [];
+
+  try {
+    groups = await prisma.tourist_group.findMany();
+    if (groups.length > 0)
+      data = await reportsService.getDriversWorkedGroupTour(
+        groups[0].group_code
+      );
+  } catch (error) {
+    console.log(error);
+  }
+
+  return (
+    <main className="flex flex-col gap-8 p-5">
+      <DriversWorkedTour columns={columns} groups={groups} data={data} />
+    </main>
+  );
+};
+
+export default DriverWorkedTourPage;
