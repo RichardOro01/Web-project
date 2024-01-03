@@ -35,7 +35,11 @@ const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({
       const data = await reportsService.getDriversWorkedGroupTour(
         selectedGroup
       );
-      setDataToShow(data);
+      const booleanToString = data.map((item: DriverWorkedTourGroup )=>({
+        ...item,
+        is_free_cover: item.is_free_cover ? 'true' : 'false'
+      }));
+      setDataToShow(booleanToString);
     } catch (e) {
       console.log(e);
     }
