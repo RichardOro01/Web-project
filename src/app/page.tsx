@@ -56,6 +56,7 @@ export default function Home() {
           <OptionItem name={t("Top 3 countries activity",{ns:"translation"})} img={city} link="./top_3_countries" />
           <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
           <OptionItem name={"Driver worked"} img={city} link="/drivers_worked_group_tour"/>
+          <OptionItem name="Contracts in period" img={city} link="./contracts_in_period" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>
