@@ -169,24 +169,6 @@ const ContractModal: React.FC = () => {
               />
             </Form.Item>
             <Form.Item
-              name="contract_amount"
-              rules={[{ required: true, message: "Amount required" }]}
-            >
-              <InputText
-                label="Amount"
-                id="contract_amount"
-                type="number"
-                min={1}
-                max={20}
-                currentValue={data.contract_amount}
-                onChange={(e) =>
-                  setData((data) => {
-                    return { ...data, contract_amount: e.target.value };
-                  })
-                }
-              />
-            </Form.Item>
-            <Form.Item
               name="contract_country"
               rules={[{ required: true, message: "Country required" }]}
             >
