@@ -21,7 +21,7 @@ const Top3Countries: React.FC<Top3CountriesProps> = ({ columns, data }) => {
         <Title>{"Top Countries"}</Title>
         <Table columns={columns} dataSource={data} />
         <footer className="flex justify-end gap-2">
-          <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top")}>
+          <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top 3 Countries")}>
             Download PDF
           </Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
