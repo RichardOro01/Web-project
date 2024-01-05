@@ -70,27 +70,6 @@ const ReportModal: React.FC = () => {
         <h2 className="form_title">{editing ? "Edit" : "Insert"} Report</h2>
         <div className={styles.form_container}>
           <Form.Item
-            name="amo_services"
-            rules={[{ required: true, message: "Amount services required" }]}
-          >
-            <InputText
-              label="Amount services"
-              id="amo_services"
-              type="number"
-              min={1}
-              max={1000}
-              currentValue={data.amo_services}
-              onChange={(e) =>
-                setData((data) => {
-                  return {
-                    ...data,
-                    amo_services: e.target.value,
-                  };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
             name="amo_rents"
             rules={[{ required: true, message: "Amount rents required" }]}
           >
@@ -162,23 +141,6 @@ const ReportModal: React.FC = () => {
                 setData((data) => {
                   console.log(data);
                   return { ...data, income_others: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name="income_total"
-            rules={[{ required: true, message: "Income total required" }]}
-          >
-            <InputNum
-              label="Income total"
-              id="income_total"
-              maxLength={50}
-              currentValue={data.income_total}
-              onChange={(e) =>
-                setData((data) => {
-                  console.log(data);
-                  return { ...data, income_total: e.target.value };
                 })
               }
             />
