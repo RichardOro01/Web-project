@@ -7,14 +7,7 @@ import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Select, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { useTranslation } from "react-i18next";
-import i18n from "@/app/i18n";
-import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
-import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
-import { SmileOutlined } from '@ant-design/icons';
-import { Option } from "antd/es/mentions";
-import UK from '@/assets/icons/items/uk.svg'
-import Spain from '@/assets/icons/items/spain.svg'
+import UserOptions from "../navbar/UserOptions";
 
 const items: MenuProps["items"] = [
   {
@@ -82,6 +75,10 @@ const Header = () => {
   },[languajeTransBus])
 
   const {t} = useTranslation(["translation"])
+  const [languajeTransBus,setLanguajeTransBus] = useState('')
+  useLanguageControl(languajeTransBus,setLanguajeTransBus)
+
+  const {t} = useTranslation(["translation"])
   return (
     <>
       {pathname !== "/login" && (
@@ -115,23 +112,37 @@ const Header = () => {
                   </Select.Option>
 
                   </Select>
+                  <Select
+                    value={languajeTransBus}
+                    style={{ width: 90 }}
+                    onChange={e => setLanguajeTransBus(e)}
+                  >
+                  <Select.Option value="en">
+                    EN <Image src={UK} alt="uk" width={22}/>
+                  </Select.Option>
+
+                  <Select.Option value="es">
+                    ES <Image src={Spain} alt="spain" width={22} height={18}/>
+                  </Select.Option>
+
+                  </Select>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}
                   >
-                    {t("Management",{ns:"translation"})}
+                    {t("{t("Management",{ns:"translation"})}",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("services")}
                   >
-                    {t("Services",{ns:"translation"})}
+                    {t("{t("Services",{ns:"translation"})}",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("others")}
                   >
-                    {t("Others",{ns:"translation"})}
+                    {t("{t("Others",{ns:"translation"})}",{ns:"translation"})}
                   </span>
                 </nav>
                 <Dropdown
@@ -161,7 +172,7 @@ const Header = () => {
               </Dropdown>
             )}
             <span>{t("User",{ns:"translation"})}</span>
-            <UserOptions />
+            <UserOptions/>
           </div>
         </header>
       )}

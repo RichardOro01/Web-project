@@ -9,6 +9,8 @@ import StoreProvider from "@/components/core/stores/StoreProvider";
 import { useEffect } from "react";
 import i18n from "../app/i18n"
 import AuthProvider from "@/components/auth/AuthProvider";
+import { useEffect } from "react";
+import i18n from "../../i18n/i18n"
 
 const inter = Inter({ subsets: ["latin"] });
 
