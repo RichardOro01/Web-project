@@ -7,17 +7,19 @@ import prisma from "@/lib/prisma";
  *    get:
  *      tags:
  *        - Tour groups
- *      summary: Get a tour group by id.
+ *      summary: Get a tour group by code.
  *      description: Get a tour group from database.
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the tour group to obtain.
+ *            type: string
+ *          description: The code of the tour group to obtain.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -45,8 +47,8 @@ export const GET = async (
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the tour group to update.
+ *            type: string
+ *          description: The code of the tour group to update.
  *      requestBody:
  *        content:
  *          application/json:
@@ -57,6 +59,8 @@ export const GET = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -76,17 +80,19 @@ export const POST = async (
  *    delete:
  *      tags:
  *        - Tour groups
- *      summary: Delete tour group by id.
+ *      summary: Delete tour group by code.
  *      description: Delete tour group from database.
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the tour group to delete.
+ *            type: string
+ *          description: The code of the tour group to delete.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

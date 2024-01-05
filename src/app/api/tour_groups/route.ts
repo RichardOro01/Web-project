@@ -34,8 +34,10 @@ export const GET = async () => {
  *          application/json:
  *            schema:
  *              group_name: string
+ *              group_code: string
  *            example:
  *              group_name: City Explorers
+ *              group_code: TG265
  *      responses:
  *        '200':
  *          description: OK

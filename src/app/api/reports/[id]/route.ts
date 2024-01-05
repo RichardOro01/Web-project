@@ -18,6 +18,8 @@ import prisma from "@/lib/prisma";
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -69,6 +71,8 @@ export const GET = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -99,6 +103,8 @@ export const POST = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

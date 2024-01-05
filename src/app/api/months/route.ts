@@ -37,7 +37,7 @@ export const GET = async () => {
  *              month_code: date
  *            example:
  *              report_code: 1
- *              month_code: 2020-06-06
+ *              month_code: 2027-01-01T00:00:00.000Z
  *      responses:
  *        '200':
  *          description: OK

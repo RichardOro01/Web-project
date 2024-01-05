@@ -51,10 +51,10 @@ export const GET = async () => {
  *              district_code: integer
  *              is_free_cover: boolean
  *            example:
- *              id_driver: 01091687492
+ *              id_driver: "01091687492"
  *              driver_name: Miguel
  *              address: calle linea y G
- *              phone: 54632049
+ *              phone: "54632049"
  *              district_code: 1
  *              is_free_cover: true
  *      responses:

@@ -18,6 +18,8 @@ import prisma from "@/lib/prisma";
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 
@@ -66,7 +68,7 @@ export const GET = async (
  *              tour_group_code: TG001
  *              country_code: US
  *              pickup_place: Coppelia
- *              pickup_time: 10:00
+ *              pickup_time: 1970-01-01T11:00:00.000Z
  *              pax: 10
  *              service_kms: 50
  *              amount: 3
@@ -74,6 +76,8 @@ export const GET = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -106,6 +110,8 @@ export const POST = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

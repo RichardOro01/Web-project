@@ -7,17 +7,19 @@ import prisma from "@/lib/prisma";
  *    get:
  *      tags:
  *        - Months
- *      summary: Get a month by id.
+ *      summary: Get a month by date.
  *      description: Get a month from database.
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the month to obtain.
+ *            type: date
+ *          description: The date of the month to obtain.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -45,8 +47,8 @@ export const GET = async (
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the month to update.
+ *            type: date
+ *          description: The date of the month to update.
  *      requestBody:
  *        content:
  *          application/json:
@@ -55,10 +57,12 @@ export const GET = async (
  *              month_code: date
  *            example:
  *              report_code: 1
- *              month_code: 2020-06-06
+ *              month_code: 2026-01-01T00:00:00.000Z
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -83,17 +87,19 @@ export const POST = async (
  *    delete:
  *      tags:
  *        - Months
- *      summary: Delete a month by id.
+ *      summary: Delete a month by date.
  *      description: Delete a month from database.
  *      parameters:
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the month to delete.
+ *            type: date
+ *          description: The date of the month to delete.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

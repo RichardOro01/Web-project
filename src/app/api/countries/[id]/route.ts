@@ -13,11 +13,13 @@ import prisma from "@/lib/prisma";
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the country to obtain.
+ *            type: string
+ *          description: The code of the country to obtain.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -46,19 +48,19 @@ export const GET = async (
  *          name: id
  *          schema:
  *            type: string
- *          description: The id of the country to update.
+ *          description: The code of the country to update.
  *      requestBody:
  *        content:
  *          application/json:
  *            schema:
  *              country_name: string
- *              country_code: string
  *            example:
  *              country_name: Cuba
- *              country_code: CU
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -84,11 +86,13 @@ export const POST = async (
  *        - in: path
  *          name: id
  *          schema:
- *            type: integer
- *          description: The id of the country to delete.
+ *            type: string
+ *          description: The code of the country to delete.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

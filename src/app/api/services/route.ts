@@ -66,7 +66,7 @@ export const GET = async () => {
  *              tour_group_code: TG001
  *              country_code: US
  *              pickup_place: Coppelia
- *              pickup_time: 10:00
+ *              pickup_time: 1970-01-01T12:00:00.000Z
  *              pax: 10
  *              service_kms: 50
  *              amount: 3

@@ -57,8 +57,8 @@ export const GET = async () => {
  *              car_code: integer
  *            example:
  *              applicant_name: Pepe
- *              start_date: 2024-02-02
- *              end_date: 2024-02-07
+ *              start_date: 2024-02-02T00:00:00.000Z
+ *              end_date: 2024-02-07T00:00:00.000Z
  *              contract_kms: 10
  *              contract_amount: 20
  *              contract_country: US

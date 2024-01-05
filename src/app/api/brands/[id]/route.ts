@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
+import { notFound } from "next/navigation"
+import {not} from "types-ramda";
 
 /**
  * @swagger
@@ -20,6 +22,8 @@ import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
  *      responses:
  *        '200':
  *          description: OK
+ *        404:
+ *          description: Not found
  */
 
 
@@ -32,6 +36,9 @@ export const GET = async (
   const brand = await prisma.brand.findFirst({ where: { brand_code } });
   if (brand) {
     return NextResponse.json(brand);
+  }
+  if (!brand){
+    notFound();
   }
   return NextResponse.error();
 };
@@ -66,6 +73,8 @@ export const GET = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -96,6 +105,8 @@ export const POST = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

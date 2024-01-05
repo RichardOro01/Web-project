@@ -65,7 +65,7 @@ export const GET = async () => {
  *              planned_fuel: 10
  *              consumed_fuel: 9
  *              dif_spending_fuel: 1
- *              month_code: 2023-05-09
+ *              month_code: 2027-01-01T00:00:00.000Z
  *      responses:
  *        '200':
  *          description: OK

@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 
 /**
  * @swagger
- *  /api/discrepancies/{car_code-:-month_date}:
+ *  /api/discrepancies/{car_code}-:-{month_date}:
  *    get:
  *      tags:
  *        - Discrepancies
@@ -23,6 +23,8 @@ import prisma from "@/lib/prisma";
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -48,7 +50,7 @@ export const GET = async (
 
 /**
  * @swagger
- *  /api/discrepancies/{car_code-:-month_date}:
+ *  /api/discrepancies/{car_code}-:-{month_date}:
  *    post:
  *      tags:
  *        - Discrepancies
@@ -85,10 +87,12 @@ export const GET = async (
  *              planned_fuel: 10
  *              consumed_fuel: 9
  *              dif_spending_fuel: 1
- *              month_code: 2024-05-09
+ *              month_code: 2027-01-01T00:00:00.000Z
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -115,7 +119,7 @@ export const POST = async (
 
 /**
  * @swagger
- *  /api/discrepancies/{car_code-:-month_date}:
+ *  /api/discrepancies/{car_code}-:-{month_date}:
  *    delete:
  *      tags:
  *        - Discrepancies
@@ -135,6 +139,8 @@ export const POST = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

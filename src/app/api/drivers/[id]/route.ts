@@ -16,10 +16,12 @@ import prisma from "@/lib/prisma";
  *          name: id
  *          schema:
  *            type: integer
- *          description: The id of the brand to obtain.
+ *          description: The id of the driver to obtain.
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const GET = async (
@@ -60,15 +62,17 @@ export const GET = async (
  *              district_code: integer
  *              is_free_cover: boolean
  *            example:
- *              id_driver: 01091687492
+ *              id_driver: "01091687492"
  *              driver_name: Miguel
  *              address: calle linea y G
- *              phone: 54632049
+ *              phone: "54632049"
  *              district_code: 1
  *              is_free_cover: true
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const POST = async (
@@ -99,6 +103,8 @@ export const POST = async (
  *      responses:
  *        '200':
  *          description: OK
+ *        '400':
+ *          description: Not found
  */
 
 export const DELETE = async (

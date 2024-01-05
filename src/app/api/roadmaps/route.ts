@@ -47,10 +47,10 @@ export const GET = async () => {
  *              kms: double
  *              departure_time: time
  *            example:
- *              roadmap_date: 2025-01-01
+ *              roadmap_date: 2025-01-01T00:00:00.000Z
  *              car_code: 35
  *              kms: 62
- *              departure_time: 11:06
+ *              departure_time: 1970-01-01T09:00:00.000Z
  *      responses:
  *        '200':
  *          description: OK
