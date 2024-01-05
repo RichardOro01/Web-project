@@ -5,6 +5,9 @@ import { NextResponse } from "next/server";
  * @swagger
  * /api/fuels:
  *  get:
+ *    tags:
+ *      - Fuels
+ *    summary: Returns the fuels
  *    description: Returns the fuels
  *    responses:
  *      200:
@@ -12,6 +15,7 @@ import { NextResponse } from "next/server";
  *      400:
  *        description: Not found
  */
+
 export const GET = async () => {
   const fuels = await prisma.fuel.findMany();
   return NextResponse.json(fuels);
@@ -19,13 +23,25 @@ export const GET = async () => {
 
 /**
  * @swagger
- * /api/fuels:
- *  post:
- *    description: insert a new fuel
- *    responses:
- *      200:
- *        description: Success
+ *  /api/fuels:
+ *    post:
+ *      tags:
+ *        - Fuels
+ *      summary: Insert a fuel
+ *      description: Insert a fuel
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              fuel_name: string
+ *            example:
+ *              fuel_name: Gasoline
+ *      responses:
+ *        '200':
+ *          description: OK
  */
+
+
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
   try {

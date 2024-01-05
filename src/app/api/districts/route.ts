@@ -1,10 +1,45 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/districts:
+ *  get:
+ *    tags:
+ *      - Districts
+ *    summary: Returns the districts
+ *    description: Returns the districts
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const districts = await prisma.district.findMany();
   return NextResponse.json(districts);
 };
+
+/**
+ * @swagger
+ *  /api/districts:
+ *    post:
+ *      tags:
+ *        - Districts
+ *      summary: Insert a district
+ *      description: Insert a district
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              district_name: string
+ *            example:
+ *              district_name: Cerro
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

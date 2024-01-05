@@ -1,6 +1,30 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * @swagger
+ *  /api/roadmaps/{car_code-:-roadmap_date}:
+ *    get:
+ *      tags:
+ *        - Roadmaps
+ *      summary: Get roadmap by id.
+ *      description: Get roadmap from database.
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: roadmap_date
+ *          schema:
+ *            type: date
+ *          description: The date of the roadmap.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -22,6 +46,43 @@ export const GET = async (
     return NextResponse.json({ ok: false, message: "Registro no encontrado" });
   }
 };
+
+/**
+ * @swagger
+ *  /api/roadmaps/{car_code-:-roadmap_date}:
+ *    post:
+ *      tags:
+ *        - Roadmaps
+ *      summary: Update a roadmap.
+ *      description: Update a roadmap.
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: roadmap_date
+ *          schema:
+ *            type: date
+ *          description: The date of the roadmap.
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              roadmap_date: date
+ *              car_code: integer
+ *              kms: double
+ *              departure_time: time
+ *            example:
+ *              roadmap_date: 2025-01-01
+ *              car_code: 35
+ *              kms: 62
+ *              departure_time: 11:06
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 
 export const POST = async (
@@ -45,6 +106,30 @@ export const POST = async (
   return NextResponse.json({ ok: true });
 };
 
+
+/**
+ * @swagger
+ *  /api/roadmaps/{car_code-:-roadmap_date}:
+ *    delete:
+ *      tags:
+ *        - Roadmaps
+ *      summary: Delete roadmap by id.
+ *      description: Delete roadmap from database.
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: roadmap_date
+ *          schema:
+ *            type: date
+ *          description: The date of the roadmap.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 
 export const DELETE = async (

@@ -1,6 +1,25 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * @swagger
+ *  /api/countries/{id}:
+ *    get:
+ *      tags:
+ *        - Countries
+ *      summary: Get a country by id.
+ *      description: Get a country from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: integer
+ *          description: The id of the country to obtain.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -14,6 +33,34 @@ export const GET = async (
   return NextResponse.error();
 };
 
+/**
+ * @swagger
+ *  /api/countries/{id}:
+ *    post:
+ *      tags:
+ *        - Countries
+ *      summary: Update a country.
+ *      description: Update a country.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          description: The id of the country to update.
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              country_name: string
+ *              country_code: string
+ *            example:
+ *              country_name: Cuba
+ *              country_code: CU
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
 export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -24,6 +71,25 @@ export const POST = async (
   await prisma.country.update({ where: { country_code }, data });
   return NextResponse.json({ ok: true });
 };
+
+/**
+ * @swagger
+ *  /api/countries/{id}:
+ *    delete:
+ *      tags:
+ *        - Countries
+ *      summary: Delete a country by id.
+ *      description: Delete a country from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: integer
+ *          description: The id of the country to delete.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const DELETE = async (
   request: Request,

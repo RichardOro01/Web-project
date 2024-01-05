@@ -1,6 +1,30 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * @swagger
+ *  /api/discrepancies/{car_code-:-month_date}:
+ *    get:
+ *      tags:
+ *        - Discrepancies
+ *      summary: get a discrepancy
+ *      description: get a discrepancy
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: month_date
+ *          schema:
+ *            type: date
+ *          description: The date of the month.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -15,13 +39,57 @@ export const GET = async (
       },
     },
   });
-
   if (record) {
     return NextResponse.json({ ok: true, record });
   } else {
     return NextResponse.json({ ok: false, message: "Registro no encontrado" });
   }
 };
+
+/**
+ * @swagger
+ *  /api/discrepancies/{car_code-:-month_date}:
+ *    post:
+ *      tags:
+ *        - Discrepancies
+ *      summary: update a discrepancy
+ *      description: update a discrepancy
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: month_date
+ *          schema:
+ *            type: date
+ *          description: The date of the month.
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              car_code: integer
+ *              planned_kms: double
+ *              tours_kms: double
+ *              difference_kms: double
+ *              planned_fuel: double
+ *              consumed_fuel: double
+ *              dif_spending_fuel: double
+ *              month_code: date
+ *            example:
+ *              car_code: 1
+ *              planned_kms: 10
+ *              tours_kms: 5
+ *              difference_kms: 5
+ *              planned_fuel: 10
+ *              consumed_fuel: 9
+ *              dif_spending_fuel: 1
+ *              month_code: 2024-05-09
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (
   request: Request,
@@ -45,6 +113,29 @@ export const POST = async (
   return NextResponse.json({ ok: true });
 };
 
+/**
+ * @swagger
+ *  /api/discrepancies/{car_code-:-month_date}:
+ *    delete:
+ *      tags:
+ *        - Discrepancies
+ *      summary: delete a discrepancy
+ *      description: delete a discrepancy
+ *      parameters:
+ *        - in: path
+ *          name: car_code
+ *          schema:
+ *            type: integer
+ *          description: The id of the car.
+ *        - in: path
+ *          name: month_date
+ *          schema:
+ *            type: date
+ *          description: The date of the month.
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const DELETE = async (
   request: Request,

@@ -4,6 +4,21 @@ import prisma from "@/lib/prisma";
 
 export const COLUMN_NAME = "cars" as never;
 
+/**
+ * @swagger
+ * /api/cars:
+ *  get:
+ *    tags:
+ *      - Cars
+ *    summary: Returns the cars
+ *    description: Returns the cars
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const cars = await prisma.car.findMany();
   const couples = await prisma.couple.findMany();
@@ -32,6 +47,32 @@ export const GET = async () => {
   }));
   return NextResponse.json(result ?? []);
 };
+
+/**
+ * @swagger
+ *  /api/cars:
+ *    post:
+ *      tags:
+ *        - Cars
+ *      summary: Insert a car
+ *      description: Insert a car
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              fleet_number: integer
+ *              plate: string
+ *              couple_code: integer
+ *              brand_code: integer
+ *            example:
+ *              fleet_number: 10
+ *              plate: PAA524
+ *              couple_code: 1
+ *              brand_code: 1
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

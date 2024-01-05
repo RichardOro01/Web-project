@@ -2,6 +2,21 @@ import { Brand } from "@/interfaces/Brand";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/brands:
+ *  get:
+ *    tags:
+ *      - Brands
+ *    summary: Returns the brands
+ *    description: Returns the brands
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const brands = await prisma.brand.findMany();
   const fuels = await prisma.fuel.findMany();
@@ -14,6 +29,34 @@ export const GET = async () => {
   }));
   return NextResponse.json(result ?? []);
 };
+
+/**
+ * @swagger
+ *  /api/brands:
+ *    post:
+ *      tags:
+ *        - Brands
+ *      summary: Insert a brand
+ *      description: Insert a brand
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              brand_name: string
+ *              amo_seats: integer
+ *              spending: double
+ *              fuel_code: integer
+ *            example:
+ *              brand_name: Toyota
+ *              amo_seats: 5
+ *              spending: 7.5
+ *              fuel_code: 1
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
+
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

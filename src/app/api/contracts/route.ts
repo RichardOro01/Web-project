@@ -2,6 +2,21 @@ import { Contract } from "@/interfaces/Contract";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/contracts:
+ *  get:
+ *    tags:
+ *      - Contracts
+ *    summary: Returns the contracts
+ *    description: Returns the contracts
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const contracts = await prisma.contract.findMany();
   const cars = await prisma.car.findMany();
@@ -20,6 +35,39 @@ export const GET = async () => {
   }));
   return NextResponse.json(result ?? []);
 };
+
+/**
+ * @swagger
+ *  /api/contracts:
+ *    post:
+ *      tags:
+ *        - Contracts
+ *      summary: Insert a contract
+ *      description: Insert a contract
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              applicant_name: string
+ *              start_date: date
+ *              end_date: date
+ *              contract_kms: double
+ *              contract_amount: double
+ *              contract_country: string
+ *              car_code: integer
+ *            example:
+ *              applicant_name: Pepe
+ *              start_date: 2024-02-02
+ *              end_date: 2024-02-07
+ *              contract_kms: 10
+ *              contract_amount: 20
+ *              contract_country: US
+ *              car_code: 31
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
+
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
