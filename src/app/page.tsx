@@ -2,7 +2,6 @@
 import contract from "@/assets/icons/items/contract-sign-line.svg";
 import brand from "@/assets/icons/items/brand.svg";
 import car from "@/assets/icons/items/car.svg";
-import city from "@/assets/icons/items/city.svg";
 import couple from "@/assets/icons/items/couple-user.svg";
 import fuel from "@/assets/icons/items/fuel-gas-station.svg";
 import geography from "@/assets/icons/items/geography.svg";
@@ -13,7 +12,6 @@ import road from "@/assets/icons/items/road-map-and-pin.svg";
 import service from "@/assets/icons/items/service.svg";
 import tourist from "@/assets/icons/items/tourist.svg";
 import users from "@/assets/icons/items/user.svg";
-import role from "@/assets/icons/items/role.svg";
 import OptionSection from "@/components/main/OptionSection";
 import OptionItem from "@/components/main/OptionItem";
 import bxs from "@/assets/icons/items/bxs-calendar.svg";
@@ -21,6 +19,12 @@ import free_code from "@/assets/icons/items/free_cover.svg";
 import { useTranslation } from "react-i18next";
 import i18n from "../app/i18n"
 import { useEffect } from "react";
+import suitcase from "@/assets/icons/items/suitcase.svg";
+import bus from "@/assets/icons/items/bus.svg";
+import world from "@/assets/icons/items/world.svg";
+import group from "@/assets/icons/items/group.svg";
+import coin from "@/assets/icons/items/coin.svg";
+import district from "@/assets/icons/items/district.svg"
 
 export default function Home() {
 
@@ -51,17 +55,17 @@ export default function Home() {
       </OptionSection>
       <OptionSection name={t("Reports",{ns:"translation"})}>
         <>
-          <OptionItem name={t("Top 3 groups activity",{ns:"translation"})} img={city} link="./top_3_groups" />
-          <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={city} link="./top_5_drivers" />
-          <OptionItem name={t("Top 3 countries activity",{ns:"translation"})} img={city} link="./top_3_countries" />
+          <OptionItem name={t("Top 3 groups activity",{ns:"translation"})} img={suitcase} link="./top_3_groups" />
+          <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={bus} link="./top_5_drivers" />
+          <OptionItem name={t("Top countries activity",{ns:"translation"})} img={world} link="./top_3_countries" />
           <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
-          <OptionItem name={"Driver worked"} img={city} link="/drivers_worked_group_tour"/>
-          <OptionItem name="Contracts in period" img={city} link="./contracts_in_period" />
+          <OptionItem name={"Drivers worked group"} img={group} link="/drivers_worked_group_tour"/>
+          <OptionItem name="Contracts in period" img={coin} link="./contracts_in_period" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>
         <>
-          <OptionItem name={t("District",{ns:'translation'})} img={city} link="./districts" />
+          <OptionItem name={t("District",{ns:'translation'})} img={district} link="./districts" />
           <OptionItem name={t("Fuel",{ns:'translation'})} img={fuel} link="./fuels" />
           <OptionItem name={t("Country",{ns:'translation'})} img={geography} link="./countries" />
           <OptionItem name={t("Month",{ns:'translation'})} img={bxs} link="./months" />

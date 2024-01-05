@@ -36,6 +36,7 @@ const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({
         selectedGroup
       );
       const booleanToString = data.map((item: DriverWorkedTourGroup )=>({
+        key: item.driver_name,
         ...item,
         is_free_cover: item.is_free_cover ? 'true' : 'false'
       }));
