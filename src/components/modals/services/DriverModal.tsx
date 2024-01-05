@@ -21,6 +21,7 @@ const DriverModal: React.FC = () => {
   const [district,setDistrict] = useState <District[]>([])
   const editing = useSelector((state: RootState) => state.modal.editing as EditDriver|undefined);
   const [api, contextHolder] = notification.useNotification();
+  console.log(editing)
   const [data, setData] = useState<FormDataType<EditDriver>>(
   {
     id_driver: "",
@@ -155,7 +156,7 @@ const DriverModal: React.FC = () => {
           >
             <Checkbox
               id="is_free_cover"
-              checked={!!data.is_free_cover}
+              checked={data.is_free_cover=='true'?true:false}
               onChange={(e) =>
                 setData((data) => {
                   return {

@@ -47,14 +47,14 @@ export default function Home() {
           <OptionItem name={t("Cars",{ns:'translation'})} img={car} link="./cars" />
           <OptionItem name={t("Drivers",{ns:'translation'})} img={id} link="./drivers" />
           <OptionItem name={t("Couples",{ns:'translation'})} img={couple} link="./couples" />
-          <OptionItem name={t("Free Cover",{ns:'translation'})} img={free_code} link="" />
         </>
       </OptionSection>
-      <OptionSection name="Reports">
+      <OptionSection name={t("Reports",{ns:"translation"})}>
         <>
-          <OptionItem name="Top 3 groups activity" img={city} link="./top_3_groups" />
-          <OptionItem name="Top 5 drivers activity" img={city} link="./top_5_drivers" />
-          <OptionItem name="Top 3 countries activity" img={city} link="./top_3_countries" />
+          <OptionItem name={t("Top 3 groups activity",{ns:"translation"})} img={city} link="./top_3_groups" />
+          <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={city} link="./top_5_drivers" />
+          <OptionItem name={t("Top 3 countries activity",{ns:"translation"})} img={city} link="./top_3_countries" />
+          <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>

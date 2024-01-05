@@ -8,12 +8,14 @@ import { Button, Form, FormInstance, Input, notification } from "antd";
 import { signInCredentials } from "@/interfaces/Auth";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
   const formRef = useRef<FormInstance>(null);
   const params = useSearchParams();
   const [api, contextHolder] = notification.useNotification();
   const [callbackUrl, setCallbackUrl] = useState("/");
+  const {t} = useTranslation(["translation"])
 
   const handleSignIn: React.MouseEventHandler<HTMLElement> = async (e) => {
     e.preventDefault();
@@ -52,7 +54,7 @@ const LoginForm = () => {
             name="username"
             rules={[{ required: true, message: "Field required" }]}
           >
-            <Input type="text" placeholder="user" maxLength={100} />
+            <Input type="text" placeholder={t("User",{ns:"translation"})} maxLength={100} />
           </Form.Item>
         </div>
         <div className="flex gap-1">
@@ -65,7 +67,7 @@ const LoginForm = () => {
           </Form.Item>
         </div>
         <Button onClick={handleSignIn} type="primary">
-          Login
+          {t("Login",{ns:"translation"})}
         </Button>
       </Form>
     </>

@@ -21,6 +21,11 @@
     "User": "User",
     "An effective bus": "An effective bus",
     "Back": "Back",
-    "Insert": "Insert"
+    "Insert": "Insert",
+    "Access control":"Access control",
+    "Login":"Login",
+    "Sign Out":"Sign Out",
+    "Element Successfully Deleted":"Element Successfully Deleted",
+    "Download PDF":"Download PDF"
 }
    

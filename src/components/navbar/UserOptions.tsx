@@ -2,8 +2,11 @@ import React from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Dropdown, MenuProps, Space } from "antd";
 import { signOut } from "next-auth/react";
+import { useTranslation } from "react-i18next";
 
 const UserOptions = () => {
+  const {t} = useTranslation(['translation'])
+
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -15,7 +18,7 @@ const UserOptions = () => {
   const menu: MenuProps["items"] = [
     {
       key: "signOut",
-      label: "Sign Out",
+      label: t("Sign Out",{ns:'translation'}),
       onClick: handleSignOut,
     },
   ];

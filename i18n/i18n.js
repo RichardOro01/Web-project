@@ -16,6 +16,9 @@ import userEn from "./lang/users/en.json"
 import serviceEn from "./lang/services/en.json"
 import reportEn from "./lang/report/en.json"
 import contractEn from "./lang/contract/en.json"
+import discrepanciesEn from "./lang/discrepancies/en.json"
+import roadmapsEn from "./lang/roadmaps/en.json"
+import free_coverEn from "./lang/free_cover/en.json"
 
 //Español
 import es from "./lang/es.json"
@@ -32,6 +35,9 @@ import userEs from "./lang/users/es.json"
 import serviceEs from "./lang/services/es.json"
 import reportEs from "./lang/report/es.json"
 import contractEs from "./lang/contract/es.json"
+import discrepanciesEs from "./lang/discrepancies/es.json"
+import roadmapsEs from "./lang/roadmaps/es.json"
+import free_coversEs from "./lang/free_cover/es.json"
 
 const resources = {
     en:{
@@ -39,7 +45,7 @@ const resources = {
       Brands:brandEn,
       Cars:carEn,
       Drivers:driverEn,
-      Couple:coupleEn,
+      Couples:coupleEn,
       Districts:districtsEn,
       Fuels:fuelEn,
       Countries:countryEn,
@@ -48,14 +54,17 @@ const resources = {
       Users:userEn,
       Services:serviceEn,
       Reports:reportEn,
-      Contracts:contractEn
+      Contracts:contractEn,
+      Discrepancies:discrepanciesEn,
+      Roadmaps:roadmapsEn,
+      free_covers:free_coverEn
     },
     es: {
       translation: es,
       Brands:brandEs,
       Cars:carEs,
       Drivers:driverEs,
-      Couple:coupleEs,
+      Couples:coupleEs,
       Districts:districtsEs,
       Fuels:fuelEs,
       Countries:countryEs,
@@ -64,7 +73,10 @@ const resources = {
       Users:userEs,
       Services:serviceEs,
       Reports:reportEs,
-      Contracts:contractEs
+      Contracts:contractEs,
+      Discrepancies:discrepanciesEs,
+      Roadmaps:roadmapsEs,
+      free_covers:free_coversEs
     }
   };
 
