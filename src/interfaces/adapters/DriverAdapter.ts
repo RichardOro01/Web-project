@@ -6,6 +6,7 @@ export const driverAdapter = (drivers: Driver[]): TableDataType<Driver>[] => {
     driver_name: driver.driver_name?.toString(),
     address: driver.address?.toString(),
     phone: driver.phone?.toString(),
+    is_free_cover:driver.is_free_cover==true?1:0,
     district_name: driver.district?.district_name || "",
     key: driver.driver_code,
   }));

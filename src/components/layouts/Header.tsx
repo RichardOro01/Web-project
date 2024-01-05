@@ -5,12 +5,16 @@ import bus from "@/assets/bus.svg";
 import Image from "next/image";
 import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
-import { Dropdown, MenuProps, Space } from "antd";
+import { Dropdown, MenuProps, Select, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import i18n from "@/app/i18n";
 import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
-import UserOptions from "../navbar/UserOptions";
+import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
+import { SmileOutlined } from '@ant-design/icons';
+import { Option } from "antd/es/mentions";
+import UK from '@/assets/icons/items/uk.svg'
+import Spain from '@/assets/icons/items/spain.svg'
 
 const items: MenuProps["items"] = [
   {
@@ -97,13 +101,20 @@ const Header = () => {
             {pathname === "/" && (
               <>
                 <nav className="sm:flex gap-2 hidden">
-                <select className="cursor-pointer" value={languajeTransBus} onChange={(e)=>{
-                    e.preventDefault()
-                    setLanguajeTransBus(e.target.value)
-                  }}>
-                    <option value={'en'}>En</option>
-                    <option value={'es'}>Es</option>
-                  </select>
+                  <Select
+                    value={languajeTransBus}
+                    style={{ width: 90 }}
+                    onChange={e => setLanguajeTransBus(e)}
+                  >
+                  <Select.Option value="en">
+                    EN <Image src={UK} alt="uk" width={22}/>
+                  </Select.Option>
+
+                  <Select.Option value="es">
+                    ES <Image src={Spain} alt="spain" width={22} height={18}/>
+                  </Select.Option>
+
+                  </Select>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}

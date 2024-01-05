@@ -28,7 +28,7 @@ const CouplePage = async () => {
   return (
     <main className="flex flex-col gap-8 p-5">
       <TableData
-        title="Couple"
+        title="Couples"
         modal="couples"
         data={couples}
         dataToShow={coupleAdapter(couples)}
