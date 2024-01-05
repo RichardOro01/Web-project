@@ -8,6 +8,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { Dropdown, MenuProps, Select, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import UserOptions from "../navbar/UserOptions";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n/i18n";
+import { deleteCookie, getCookie, setCookie } from "@/services/utils/cookies";
+import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
+import { SmileOutlined } from '@ant-design/icons';
+import { Option } from "antd/es/mentions";
+import UK from '@/assets/icons/items/uk.svg'
+import Spain from '@/assets/icons/items/spain.svg'
 
 const items: MenuProps["items"] = [
   {
@@ -58,24 +66,6 @@ const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [languajeTransBus,setLanguajeTransBus] = useState('')
-
-  useEffect(()=>{
-    const language = getCookie("languageTransBus")?.toString()
-  i18n.changeLanguage(getCookie("languageTransBus")?.toString() || 'en');
-  if (language) {
-    setCookie("languageTransBus", language, 365,'');
-  }
-  setLanguajeTransBus(language||'en')
-  },[])
-
-  useEffect(()=>{
-    i18n.changeLanguage(languajeTransBus);
-    setCookie("languageTransBus", languajeTransBus?.toString(), 365,'');
-    router.refresh()
-  },[languajeTransBus])
-
-  const {t} = useTranslation(["translation"])
-  const [languajeTransBus,setLanguajeTransBus] = useState('')
   useLanguageControl(languajeTransBus,setLanguajeTransBus)
 
   const {t} = useTranslation(["translation"])
@@ -112,37 +102,23 @@ const Header = () => {
                   </Select.Option>
 
                   </Select>
-                  <Select
-                    value={languajeTransBus}
-                    style={{ width: 90 }}
-                    onChange={e => setLanguajeTransBus(e)}
-                  >
-                  <Select.Option value="en">
-                    EN <Image src={UK} alt="uk" width={22}/>
-                  </Select.Option>
-
-                  <Select.Option value="es">
-                    ES <Image src={Spain} alt="spain" width={22} height={18}/>
-                  </Select.Option>
-
-                  </Select>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}
                   >
-                    {t("{t("Management",{ns:"translation"})}",{ns:"translation"})}
+                    {t("Management",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("services")}
                   >
-                    {t("{t("Services",{ns:"translation"})}",{ns:"translation"})}
+                    {t("Services",{ns:"translation"})}
                   </span>
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("others")}
                   >
-                    {t("{t("Others",{ns:"translation"})}",{ns:"translation"})}
+                    {t("Others",{ns:"translation"})}
                   </span>
                 </nav>
                 <Dropdown
@@ -171,7 +147,6 @@ const Header = () => {
                 </Space>
               </Dropdown>
             )}
-            <span>{t("User",{ns:"translation"})}</span>
             <UserOptions/>
           </div>
         </header>
