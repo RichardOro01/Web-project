@@ -9,7 +9,7 @@ import Title from "antd/es/typography/Title";
 import { useRouter } from "next/navigation";
 import React from "react"; "@/interfaces/adapters/TouristAdapter";
 import { reportsService } from "@/services/reports";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { RangeValue } from "rc-picker/lib/interface";
 
 interface ContractsInPeriodProps {
@@ -26,16 +26,24 @@ const ContractsInPeriod: React.FC<ContractsInPeriodProps> = ({
   const [dataToShow, setDataToShow] = useState<ContractInPeriod[]>([]);
   const [dateRange, setDateRange] = useState<RangeValue<Dayjs>>([null, null]);
 
+
   const updateDataToShow = async () => {
     setLoading(true);
     try {
         if(dateRange && dateRange[0] && dateRange[1]){
-            const data = await reportsService.getContractsInPeriod(
-                dateRange[0].toISOString(),
-                dateRange[1].toISOString()
-            );    
-            setDataToShow(data);
-        }
+            const start_date: string = dateRange[0].format("YYYY-MM-DD")
+            const end_date: string = dateRange[1].format("YYYY-MM-DD")
+            console.log(start_date)
+            console.log(end_date)
+            const data = await reportsService.getContractsInPeriod(start_date, end_date);
+            const formatDateToString = data.map((item: ContractInPeriod)  => ({
+              ...item,
+              start_date: item.start_date ? dayjs(item.start_date).format("YYYY-MM-DD") : null,
+              end_date: item.end_date ? dayjs(item.end_date).format("YYYY-MM-DD") : null,
+            }));
+            console.log("data transformada: ",formatDateToString)
+            setDataToShow(formatDateToString);
+        };
     } catch (e) {
       console.log(e);
     }
@@ -61,7 +69,7 @@ const ContractsInPeriod: React.FC<ContractsInPeriodProps> = ({
               downloadPDF(
                 mapData(data, columns),
                 columns,
-                "Drivers worked group tour"
+                "Contracts in period"
               )
             }
           >

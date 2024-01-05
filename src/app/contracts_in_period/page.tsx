@@ -45,7 +45,9 @@ const ContractInPeriodPage = async () => {
   let data: ContractInPeriod[] = [];
 
   try {
-      data = await reportsService.getContractsInPeriod("","");
+    const startDate = "2023-01-01"
+    const endDate = "2023-01-02"
+      data = await reportsService.getContractsInPeriod(startDate,endDate);
   } catch (error) {
     console.log(error);
   }
