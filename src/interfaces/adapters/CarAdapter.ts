@@ -38,5 +38,5 @@ export const carCreateAdapter = (car: EditCar): CreateCar => ({
 export const carOptionsAdapter = (cars: Car[]): Option[] =>
   cars.map((car) => ({
     label: car.plate as string,
-    value: car.fleet_number?.toString(),
+    value: car.car_code?.toString(),
   }));
