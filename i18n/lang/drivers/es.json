@@ -1,8 +1,11 @@
 {
+    "Insert Driver":"Insertar Conductor",
+    "Edit Driver":"Editar Conductor",
     "Drivers":"Conductores",
     "Name":"Nombre",
     "Address":"Dirección",
     "Phone":"Teléfono",
     "District name":"Distrito",
-    "Is free cover":"libre de costo"
+    "Is Free Cover":"Libre de Costo",
+    "Is Free Cover?":"Libre de Costo?"
 }

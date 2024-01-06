@@ -18,11 +18,13 @@ import {
 import { Fuel } from "@/interfaces/Fuel";
 import fuelService from "@/services/tables/fuels";
 import { fuelOptionsAdapter } from "@/interfaces/adapters/FuelAdapter";
+import { useTranslation } from "react-i18next";
 
 const BrandModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Brands'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as EditBrand | undefined
   );
@@ -78,14 +80,14 @@ const BrandModal: React.FC = () => {
         onOk={handleOk}
       >
         <Form className="form" ref={form} method="post">
-          <h2 className="form_title">{editing ? "Edit" : "Insert"} Brand</h2>
+          <h2 className="form_title">{t(editing ? "Edit Brand" : "Insert Brand",{ns:"Brands"})}</h2>
           <div className={styles.form_container}>
             <Form.Item
               name="brand_name"
               rules={[{ required: true, message: "Brand name required" }]}
             >
               <InputText
-                label="Brand"
+                label={t("Brand",{ns:"Brands"})}
                 id="brand_name"
                 maxLength={50}
                 currentValue={data.brand_name}
@@ -101,7 +103,7 @@ const BrandModal: React.FC = () => {
               rules={[{ required: true, message: "Seats required" }]}
             >
               <InputText
-                label="Seats"
+                label={t("Seats",{ns:"Brands"})}
                 id="amo_seats"
                 type="number"
                 min={1}
@@ -122,7 +124,7 @@ const BrandModal: React.FC = () => {
               rules={[{ required: true, message: "Spending required" }]}
             >
               <InputNum
-                label="Spending"
+                label={t("Spending",{ns:"Brands"})}
                 id="spending"
                 maxLength={6}
                 currentValue={data.spending}
@@ -142,7 +144,7 @@ const BrandModal: React.FC = () => {
             >
               <InputSelect
                 id="fuel_code"
-                label="Gasoline"
+                label={t("Fuel Type",{ns:"Brands"})}
                 options={fuelOptionsAdapter(fuels)}
                 currentValue={data.fuel_code}
                 onChange={(e) =>

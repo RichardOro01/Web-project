@@ -1,4 +1,5 @@
 {
+    "Tables":"Tables",
     "Management": "Management",
     "Contract": "Contract",
     "Service": "Service",
@@ -26,6 +27,13 @@
     "Login":"Login",
     "Sign Out":"Sign Out",
     "Element Successfully Deleted":"Element Successfully Deleted",
-    "Download PDF":"Download PDF"
+    "Top 3 groups activity":"Top 3 groups activity",
+    "Top 5 drivers activity":"Top 5 drivers activity",
+    "Top 3 countries":"Top 3 countries",
+    "Free cover drivers":"Free cover drivers",
+    "Download PDF":"Download PDF",
+    "Drivers worked group":"Drivers worked group",
+    "Contracts in period":"Contracts in period",
+    "Tourist group activities":"Tourist group activities"
 }
    

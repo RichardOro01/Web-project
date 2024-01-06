@@ -14,11 +14,13 @@ import {
   reportTypesAdapter,
 } from "@/interfaces/adapters/ReportAdapter";
 import InputText from "@/components/commons/forms/InputText";
+import { useTranslation } from "react-i18next";
 
 const ReportModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Reports'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Report | undefined
   );
@@ -67,14 +69,14 @@ const ReportModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Report</h2>
+        <h2 className="form_title">{t(editing ? "Edit Report" : "Insert Report",{ns:"Reports"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="amo_rents"
             rules={[{ required: true, message: "Amount rents required" }]}
           >
             <InputText
-              label="Amount rents"
+              label={t("Amount rents",{ns:"Reports"})}
               id="amo_rents"
               type="number"
               min={1}
@@ -95,7 +97,7 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Income rents required" }]}
           >
             <InputNum
-              label="Income rents"
+              label={t("Income rents",{ns:"Reports"})}
               id="income_rents"
               maxLength={50}
               currentValue={data.income_rents}
@@ -112,7 +114,7 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Amount others required" }]}
           >
             <InputText
-              label="Amount others"
+              label={t("Amount others",{ns:"Reports"})}
               id="amo_others"
               type="number"
               min={1}
@@ -133,7 +135,7 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Income others required" }]}
           >
             <InputNum
-              label="Income others"
+              label={t("Income others",{ns:"Reports"})}
               id="income_others"
               maxLength={50}
               currentValue={data.income_others}

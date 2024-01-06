@@ -1,8 +1,11 @@
 {
+    "Insert Driver":"Insert Driver",
+    "Edit Driver":"Edit Driver",
     "Drivers":"Drivers",
     "Name": "Name",
     "Address": "Address",
     "Phone": "Phone",
     "District name": "District name",
-    "Is free cover": "Is free cover"
+    "Is Free Cover":"Is Free Cover",
+    "Is free cover?": "Is free cover?"
    }

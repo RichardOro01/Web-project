@@ -30,7 +30,7 @@ const LoginForm = () => {
         password,
       });
       console.log(res);
-    } catch (e) {}
+    } catch (e) {console.log(e)}
   };
 
   useEffect(() => {

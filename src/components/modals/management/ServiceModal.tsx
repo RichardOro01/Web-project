@@ -22,11 +22,13 @@ import { touristOptionsAdapter } from "@/interfaces/adapters/TouristAdapter";
 import { Country } from "@/interfaces/Country";
 import countryService from "@/services/tables/countries";
 import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
+import { useTranslation } from "react-i18next";
 
 const ServiceModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Services'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as ServiceI | undefined
   );
@@ -99,14 +101,14 @@ const ServiceModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Service</h2>
+        <h2 className="form_title">{t(editing ? "Edit Service" : "Insert Service",{ns:"Services"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="request_number"
             rules={[{ required: true, message: "Request number required" }]}
           >
             <InputNum
-              label="Request number"
+              label={t("Request number",{ns:'Services'})}
               id="request_number"
               maxLength={50}
               currentValue={data.request_number}
@@ -122,7 +124,7 @@ const ServiceModal: React.FC = () => {
             rules={[{ required: true, message: "Service name required" }]}
           >
             <InputText
-              label="Service name"
+              label={t("Service name",{ns:'Services'})}
               id="service_name"
               maxLength={50}
               currentValue={data.service_name}
@@ -139,7 +141,7 @@ const ServiceModal: React.FC = () => {
           >
             <InputSelect
               id="tour_group_code"
-              label="Tourist group"
+              label={t("Tourist group",{ns:'Services'})}
               options={touristOptionsAdapter(groups)}
               currentValue={data.tour_group_code}
               onChange={(e) =>
@@ -158,7 +160,7 @@ const ServiceModal: React.FC = () => {
           >
             <InputSelect
               id="country_code"
-              label="Country"
+              label={t("Country",{ns:'Services'})}
               options={countryOptionsAdapter(countries)}
               currentValue={data.country_code}
               onChange={(e) =>
@@ -176,7 +178,7 @@ const ServiceModal: React.FC = () => {
             rules={[{ required: true, message: "Pickup place required" }]}
           >
             <InputText
-              label="Pickup place"
+              label={t("Pickup place",{ns:'Services'})}
               id="pickup"
               maxLength={50}
               currentValue={data.pickup_place}
@@ -193,7 +195,7 @@ const ServiceModal: React.FC = () => {
           >
             <InputDate
               dateType="time"
-              label="Pickup time"
+              label={t("Pickup time",{ns:'Services'})}
               id="pickup_time"
               currentValue={data.pickup_time}
               onChange={(e) =>
@@ -208,7 +210,7 @@ const ServiceModal: React.FC = () => {
             rules={[{ required: true, message: "Pax required" }]}
           >
             <InputText
-              label="Pax"
+              label={t("Pax",{ns:'Services'})}
               id="pax"
               type="number"
               min={1}
@@ -226,7 +228,7 @@ const ServiceModal: React.FC = () => {
             rules={[{ required: true, message: "Service required" }]}
           >
             <InputNum
-              label="Service(kms)"
+              label={t("Service(kms)",{ns:'Services'})}
               id="service_kms"
               maxLength={50}
               currentValue={data.service_kms}
@@ -242,7 +244,7 @@ const ServiceModal: React.FC = () => {
             rules={[{ required: true, message: "Amount required" }]}
           >
             <InputText
-              label="Amount"
+              label={t("Amount",{ns:'Services'})}
               id="amount"
               type="number"
               min={1}

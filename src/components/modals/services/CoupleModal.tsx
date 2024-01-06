@@ -13,11 +13,13 @@ import { coupleCreateAdapter, coupleFormAdapter, coupleTypesAdapter } from "@/in
 import driverService from "@/services/tables/drivers";
 import { driversOptionAdapter } from "@/interfaces/adapters/DriverAdapter";
 import { Driver, DriverOption } from "@/interfaces/Driver";
+import { useTranslation } from "react-i18next";
 
 const CoupleModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Couples'])
   const editing = useSelector((state: RootState) => state.modal.editing as CreateCouple|undefined);
   const [api, contextHolder] = notification.useNotification();
 
@@ -80,14 +82,14 @@ const CoupleModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Couple</h2>
+        <h2 className="form_title">{t(editing ? "Edit Couple" : "Insert Couple",{ns:"Couples"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="driver1"
             rules={[{ required: true, message: "Driver 1 required" }]}
           >
             <InputSelect
-              label="Driver 1"
+              label={t("Driver 1",{ns:'Couples'})}
               id="driver1"
               currentValue={data.driver1}
               options={driversOptionAdapter(drivers)}
@@ -103,7 +105,7 @@ const CoupleModal: React.FC = () => {
             rules={[{ required: true, message: "Driver 2 required" }]}
           >
             <InputSelect
-              label="Driver 2"
+              label={t("Driver 2",{ns:'Couples'})}
               id="driver2"
               currentValue={data.driver2}
               options={driversOptionAdapter(drivers)}

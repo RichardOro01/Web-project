@@ -22,11 +22,13 @@ import { Country } from "@/interfaces/Country";
 import countryService from "@/services/tables/countries";
 import { countryOptionsAdapter } from "@/interfaces/adapters/CountryAdapter";
 import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
+import { useTranslation } from "react-i18next";
 
 const ContractModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Contracts'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Contract | undefined
   );
@@ -101,14 +103,14 @@ const ContractModal: React.FC = () => {
         onOk={handleOk}
       >
         <Form className="form" ref={form} method="post">
-          <h2 className="form_title">{editing ? "Edit" : "Insert"} Contract</h2>
+          <h2 className="form_title">{t(editing ? "Edit Contract" : "Insert Contract",{ns:"Contracts"})}</h2>
           <div className={styles.form_container}>
             <Form.Item
               name="applicant_name"
               rules={[{ required: true, message: "Applicant required" }]}
             >
               <InputText
-                label="Applicant"
+                label={t("Applicant",{ns:'Contracts'})}
                 id="applicant_name"
                 maxLength={50}
                 currentValue={data.applicant_name}
@@ -125,7 +127,7 @@ const ContractModal: React.FC = () => {
             >
               <InputDate
                 dateType="date"
-                label="Start date"
+                label={t("Start date",{ns:'Contracts'})}
                 id="start_date"
                 currentValue={data.start_date}
                 onChange={(e) =>
@@ -141,7 +143,7 @@ const ContractModal: React.FC = () => {
             >
               <InputDate
                 dateType="date"
-                label="End date"
+                label={t("End date",{ns:'Contracts'})}
                 id="end_date"
                 currentValue={data.end_date}
                 onChange={(e) =>
@@ -156,7 +158,7 @@ const ContractModal: React.FC = () => {
               rules={[{ required: true, message: "Kms required" }]}
             >
               <InputNum
-                label="Kms"
+                label={t("Kms",{ns:'Contracts'})}
                 id="contract_kms"
                 maxLength={50}
                 currentValue={data.contract_kms}
@@ -173,7 +175,7 @@ const ContractModal: React.FC = () => {
             >
               <InputSelect
                 id="contract_country"
-                label="Country"
+                label={t("Country",{ns:'Contracts'})}
                 options={countryOptionsAdapter(countries)}
                 currentValue={data.contract_country}
                 onChange={(e) =>
@@ -192,7 +194,7 @@ const ContractModal: React.FC = () => {
             >
               <InputSelect
                 id="car_code"
-                label="Car"
+                label={t("Car Plate",{ns:'Contracts'})}
                 options={carOptionsAdapter(cars)}
                 currentValue={data.car_code}
                 onChange={(e) =>

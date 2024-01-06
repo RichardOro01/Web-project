@@ -15,11 +15,13 @@ import { coupleOptionsAdapter } from "@/interfaces/adapters/CoupleAdapter";
 import { carCreateAdapter, carFormAdapter, carTypesAdapter } from "@/interfaces/adapters/CarAdapter";
 import useGetBrands from "@/services/hooks/useGetBrands";
 import { brandOptionsAdapter } from "@/interfaces/adapters/BrandAdapter";
+import { useTranslation } from "react-i18next";
 
 const CarModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Cars'])
   const editing = useSelector((state: RootState) => state.modal.editing as EditCar|undefined);
   const [api, contextHolder] = notification.useNotification();
   const [data, setData] = useState<FormDataType<EditCar>>(
@@ -71,14 +73,14 @@ const CarModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Car</h2>
+        <h2 className="form_title">{t(editing ? "Edit Car" : "Insert Car",{ns:"Cars"})}</h2>
         <div className={styles.form_container}>
         <Form.Item
             name="fleet_number"
             rules={[{ required: true, message: "Number required" }]}
           >
             <InputNum
-              label="Fleet Number"
+              label={t("Fleet number",{ns:"Cars"})}
               id="fleet_number"
               maxLength={6}
               currentValue={data.fleet_number}
@@ -95,7 +97,7 @@ const CarModal: React.FC = () => {
             rules={[{ required: true, message: "Plate required" }]}
           >
             <InputText
-              label="Plate"
+              label={t("Plate",{ns:"Cars"})}
               id="plate"
               maxLength={6}
               currentValue={data.plate}
@@ -112,7 +114,7 @@ const CarModal: React.FC = () => {
             rules={[{ required: true, message: "Brand is required" }]}
           >
             <InputSelect
-              label="Brand"
+              label={t("Brand",{ns:"Cars"})}
               id="brand"
               currentValue={data.brand_code}
               options={brandOptionsAdapter(brandsData.list)}
@@ -129,7 +131,7 @@ const CarModal: React.FC = () => {
             rules={[{ required: true, message: "Select the Couple" }]}
           >
             <InputSelect
-              label="Couple"
+              label={t("Couple",{ns:"Cars"})}
               id="couple"
               currentValue={data.couple_code}
               options={coupleOptionsAdapter(couplesData.list)}

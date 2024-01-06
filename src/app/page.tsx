@@ -23,10 +23,18 @@ import world from "@/assets/icons/items/world.svg";
 import group from "@/assets/icons/items/group.svg";
 import coin from "@/assets/icons/items/coin.svg";
 import district from "@/assets/icons/items/district.svg"
+import { useSession } from "next-auth/react";
 
 export default function Home() {
 
   const {t} = useTranslation(["translation"])
+
+  const {data}=useSession();
+
+  console.log(useSession())
+
+  console.log(data)
+
   
   return (
     <main className="flex flex-col items-center gap-6 ml-3  p-5">
@@ -57,9 +65,9 @@ export default function Home() {
           <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={bus} link="./top_5_drivers" />
           <OptionItem name={t("Top 3 countries",{ns:"translation"})} img={world} link="./top_3_countries" />
           <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
-          <OptionItem name={"Drivers worked group"} img={group} link="/drivers_worked_group_tour"/>
-          <OptionItem name="Contracts in period" img={coin} link="./contracts_in_period" />
-          <OptionItem name="Tourist group activities" img={coin} link="./tourist_groups_activities" />
+          <OptionItem name={t("Drivers worked group",{ns:"translation"})} img={group} link="/drivers_worked_group_tour"/>
+          <OptionItem name={t("Contracts in period",{ns:"translation"})} img={coin} link="./contracts_in_period" />
+          <OptionItem name={t("Tourist group activities",{ns:"translation"})} img={coin} link="./tourist_groups_activities" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>

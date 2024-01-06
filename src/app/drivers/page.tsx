@@ -27,7 +27,7 @@ const columns: ColumnsType<Driver> = [
     key: "district_name",
   },
   {
-    title: "Is free cover",
+    title: "Is Free Cover",
     dataIndex: "is_free_cover",
     key: "is_free_cover",
   },
