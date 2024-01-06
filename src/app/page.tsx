@@ -59,6 +59,7 @@ export default function Home() {
           <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
           <OptionItem name={"Drivers worked group"} img={group} link="/drivers_worked_group_tour"/>
           <OptionItem name="Contracts in period" img={coin} link="./contracts_in_period" />
+          <OptionItem name="Tourist group activities" img={coin} link="./tourist_groups_activities" />
         </>
       </OptionSection>
       <OptionSection name={t("Others",{ns:'translation'})}>
