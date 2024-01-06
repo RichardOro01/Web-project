@@ -18,7 +18,7 @@ const Top3Countries: React.FC<Top3CountriesProps> = ({ columns, data }) => {
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Top Countries"}</Title>
+        <Title>{"Top 3 Countries"}</Title>
         <Table columns={columns} dataSource={data} />
         <footer className="flex justify-end gap-2">
           <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top 3 Countries")}>

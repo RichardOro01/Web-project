@@ -18,7 +18,7 @@ const Top3Groups: React.FC<Top3GroupsProps> = ({ columns, data }) => {
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Top Groups"}</Title>
+        <Title>{"Top 3 Groups"}</Title>
         <Table columns={columns} dataSource={data} />
         <footer className="flex justify-end gap-2">
           <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top 3 Tourist Group")}>

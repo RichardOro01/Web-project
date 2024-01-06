@@ -54,7 +54,7 @@ const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Top Countries"}</Title>
+        <Title>{"Drivers worked tour group"}</Title>
         <Select
           placeholder="Select Toursit Group"
           style={{ width: 200, marginBottom: 16 }}
@@ -69,7 +69,7 @@ const DriversWorkedTour: React.FC<DriversWorkedTourProps> = ({
               downloadPDF(
                 mapData(data, columns),
                 columns,
-                "Drivers worked group tour"
+                "Drivers worked tour group"
               )
             }
           >

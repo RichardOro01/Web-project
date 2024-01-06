@@ -18,7 +18,7 @@ const Top5Drivers: React.FC<Top5DriversProps> = ({ columns, data }) => {
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Top Drivers"}</Title>
+        <Title>{"Top 5 Drivers"}</Title>
         <Table columns={columns} dataSource={data} />
         <footer className="flex justify-end gap-2">
           <Button onClick={() => downloadPDF(mapData(data,columns), columns, "Top 5 Drivers")}>
