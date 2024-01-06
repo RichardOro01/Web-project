@@ -11,8 +11,8 @@ import React from 'react'
 const columns: ColumnsType<Free_cover> = [
     {
       title: "Brand name",
-      dataIndex: "driver_name",
-      key: "country_name",
+      dataIndex: "brand_name",
+      key: "brand_name",
     },
     {
       title: "Driver name",
