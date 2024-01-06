@@ -57,7 +57,7 @@ export default function Home() {
         <>
           <OptionItem name={t("Top 3 groups activity",{ns:"translation"})} img={suitcase} link="./top_3_groups" />
           <OptionItem name={t("Top 5 drivers activity",{ns:"translation"})} img={bus} link="./top_5_drivers" />
-          <OptionItem name={t("Top 3 countries activity",{ns:"translation"})} img={world} link="./top_3_countries" />
+          <OptionItem name={t("Top 3 countries",{ns:"translation"})} img={world} link="./top_3_countries" />
           <OptionItem name={t("Free cover drivers",{ns:"translation"})} img={free_code} link="/free_cover" />
           <OptionItem name={"Drivers worked group"} img={group} link="/drivers_worked_group_tour"/>
           <OptionItem name="Contracts in period" img={coin} link="./contracts_in_period" />
