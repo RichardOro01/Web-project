@@ -1,5 +1,6 @@
+import { EditUser } from "@/interfaces/User";
 import prisma from "@/lib/prisma";
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import CredentialsProvide from "next-auth/providers/credentials";
 const handler = NextAuth({
   // Configure one or more authentication providers
@@ -35,6 +36,20 @@ const handler = NextAuth({
   ],
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    jwt: ({ token, user }) => {
+      const userSession = user as unknown as EditUser;
+      if (userSession && userSession.role_code)
+        token.role_code = userSession.role_code;
+      return token;
+    },
+    session: ({ session, token }) => {
+      const user = session.user as EditUser;
+      if (user && token && token.role_code)
+        user.role_code = token.role_code as number;
+      return user as unknown as Session;
+    },
   },
 });
 export { handler as GET, handler as POST };
