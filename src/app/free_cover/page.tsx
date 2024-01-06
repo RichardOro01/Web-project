@@ -33,7 +33,6 @@ const Free_coverPage = async () => {
         <TableDataReports
           title="free_covers"
           dataToShow={free_coverTableAdapter(free_covers)}
-          data={free_covers}
           {...{ columns }}
         />
       </main>
