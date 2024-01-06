@@ -1,5 +1,7 @@
 import { Contract } from "@/interfaces/Contract";
 import prisma from "@/lib/prisma";
+import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
+import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { NextResponse } from "next/server";
 
 /**
@@ -75,16 +77,13 @@ export const POST = async (request: Request, response: Response) => {
     await prisma.contract.create({ data });
     return NextResponse.json({ ok: true });
   } catch (error: any) {
-    if (error.code === "P2002") {
-      return NextResponse.json(
-        { message: "Nombre de contrato ya usado", code: error.code },
-        { status: 400 }
-      );
+    if (
+      (error as PrismaClientUnknownRequestError).name ===
+      "PrismaClientUnknownRequestError"
+    ) {
+      const bdError = handlePrismaClientUnknownRequestError(error);
+      return NextResponse.json(bdError, { status: 400 });
     }
-    console.log(error);
-    return NextResponse.json(
-      { message: "Error creando contrato" },
-      { status: 400 }
-    );
+    return NextResponse.json(error, { status: 400 });
   }
 };

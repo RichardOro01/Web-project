@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
+import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 
 /**
  * @swagger
@@ -82,10 +84,22 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  const { id } = params;
-  const contract_code = parseInt(id);
-  await prisma.contract.update({ where: { contract_code }, data });
-  return NextResponse.json({ ok: true });
+  try{
+    const { id } = params;
+    const contract_code = parseInt(id);
+    await prisma.contract.update({ where: { contract_code }, data });
+    return NextResponse.json({ ok: true });
+  }catch(error: any){
+    if (
+      (error as PrismaClientUnknownRequestError).name ===
+      "PrismaClientUnknownRequestError"
+    ) {
+      const bdError = handlePrismaClientUnknownRequestError(error);
+      return NextResponse.json(bdError, { status: 400 });
+    }
+    return NextResponse.json(error, { status: 400 });
+  }
+  
 };
 
 /**
