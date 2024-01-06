@@ -4,7 +4,7 @@ import { Option } from "@/components/commons/forms/InputSelect";
 
 export const monthOptionsAdapter = (months: Month[]): Option[] =>
   months.map((month) => ({
-    label: month.month_code.toString(),
+    label: dayjs(month.month_code).format("YYYY-MM-DD"),
     value: month.month_code.toString(),
   }));
 
