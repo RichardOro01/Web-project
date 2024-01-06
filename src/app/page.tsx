@@ -1,5 +1,5 @@
 "use client"
-import contract from "@/assets/icons/items/contract-sign-line.svg";
+import contract from "@/assets/icons/items/contract.svg";
 import brand from "@/assets/icons/items/brand.svg";
 import car from "@/assets/icons/items/car.svg";
 import couple from "@/assets/icons/items/couple-user.svg";
@@ -17,8 +17,6 @@ import OptionItem from "@/components/main/OptionItem";
 import bxs from "@/assets/icons/items/bxs-calendar.svg";
 import free_code from "@/assets/icons/items/free_cover.svg";
 import { useTranslation } from "react-i18next";
-import i18n from "../app/i18n"
-import { useEffect } from "react";
 import suitcase from "@/assets/icons/items/suitcase.svg";
 import bus from "@/assets/icons/items/bus.svg";
 import world from "@/assets/icons/items/world.svg";
