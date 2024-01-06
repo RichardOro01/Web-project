@@ -2,6 +2,21 @@ import { Driver } from "@/interfaces/Driver";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/drivers:
+ *  get:
+ *    tags:
+ *      - Drivers
+ *    summary: Returns the drivers
+ *    description: Returns the drivers
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const drivers = await prisma.driver.findMany();
   const districs = await prisma.district.findMany();
@@ -16,6 +31,36 @@ export const GET = async () => {
   }));
   return NextResponse.json(result ?? []);
 };
+
+/**
+ * @swagger
+ *  /api/drivers:
+ *    post:
+ *      tags:
+ *        - Drivers
+ *      summary: Insert a driver
+ *      description: Insert a driver
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              id_driver: string
+ *              driver_name: string
+ *              address: string
+ *              phone: string
+ *              district_code: integer
+ *              is_free_cover: boolean
+ *            example:
+ *              id_driver: "01091687492"
+ *              driver_name: Miguel
+ *              address: calle linea y G
+ *              phone: "54632049"
+ *              district_code: 1
+ *              is_free_cover: true
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

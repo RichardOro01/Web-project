@@ -1,10 +1,46 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/roles:
+ *  get:
+ *    tags:
+ *      - Roles
+ *    summary: Returns the roles
+ *    description: Returns the roles
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
+
 export const GET = async () => {
   const roles = await prisma.role.findMany();
   return NextResponse.json(roles);
 };
+
+/**
+ * @swagger
+ *  /api/roles:
+ *    post:
+ *      tags:
+ *        - Roles
+ *      summary: Insert a role
+ *      description: Insert a role
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              description: string
+ *            example:
+ *              description: Admin
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

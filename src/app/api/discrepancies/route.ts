@@ -4,6 +4,22 @@ import { NextResponse } from "next/server";
 import { Car } from "@/interfaces/Car";
 import { Month } from "@/interfaces/Month";
 
+/**
+ * @swagger
+ * /api/discrepancies:
+ *  get:
+ *    tags:
+ *      - Discrepancies
+ *    summary: Returns the discrepancies
+ *    description: Returns the discrepancies
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
+
 export const GET = async () => {
   const discrepancies = await prisma.discrepancy.findMany();
   const cars = await prisma.car.findMany();
@@ -20,6 +36,40 @@ export const GET = async () => {
   }));
   return NextResponse.json(result ?? []);
 };
+
+/**
+ * @swagger
+ *  /api/discrepancies:
+ *    post:
+ *      tags:
+ *        - Discrepancies
+ *      summary: Insert a discrepancy
+ *      description: Insert a discrepancy
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              car_code: integer
+ *              planned_kms: double
+ *              tours_kms: double
+ *              difference_kms: double
+ *              planned_fuel: double
+ *              consumed_fuel: double
+ *              dif_spending_fuel: double
+ *              month_code: date
+ *            example:
+ *              car_code: 1
+ *              planned_kms: 10
+ *              tours_kms: 5
+ *              difference_kms: 5
+ *              planned_fuel: 10
+ *              consumed_fuel: 9
+ *              dif_spending_fuel: 1
+ *              month_code: 2027-01-01T00:00:00.000Z
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

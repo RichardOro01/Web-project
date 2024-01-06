@@ -1,10 +1,47 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+/**
+ * @swagger
+ * /api/tour_groups:
+ *  get:
+ *    tags:
+ *      - Tour groups
+ *    summary: Returns the tour groups
+ *    description: Returns the tour groups
+ *    responses:
+ *      200:
+ *        description:
+ *      400:
+ *        description: Not found
+ */
+
 export const GET = async () => {
   const groups = await prisma.tourist_group.findMany();
   return NextResponse.json(groups);
 };
+
+/**
+ * @swagger
+ *  /api/tour_groups:
+ *    post:
+ *      tags:
+ *        - Tour groups
+ *      summary: Insert a tour group
+ *      description: Insert a tour group
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              group_name: string
+ *              group_code: string
+ *            example:
+ *              group_name: City Explorers
+ *              group_code: TG265
+ *      responses:
+ *        '200':
+ *          description: OK
+ */
 
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();

@@ -3,6 +3,27 @@ import { NextResponse } from "next/server";
 import { Driver } from "@/interfaces/Driver";
 import prisma from "@/lib/prisma";
 
+/**
+ * @swagger
+ *  /api/drivers/{id}:
+ *    get:
+ *      tags:
+ *        - Drivers
+ *      summary: Get driver by id.
+ *      description: Get driver from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: integer
+ *          description: The id of the driver to obtain.
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
+
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -16,6 +37,44 @@ export const GET = async (
   return NextResponse.error();
 };
 
+/**
+ * @swagger
+ *  /api/drivers/{id}:
+ *    post:
+ *      tags:
+ *        - Drivers
+ *      summary: Update a driver.
+ *      description: Update a driver.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: integer
+ *          description: The id of the driver to update.
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              id_driver: string
+ *              driver_name: string
+ *              address: string
+ *              phone: string
+ *              district_code: integer
+ *              is_free_cover: boolean
+ *            example:
+ *              id_driver: "01091687492"
+ *              driver_name: Miguel
+ *              address: calle linea y G
+ *              phone: "54632049"
+ *              district_code: 1
+ *              is_free_cover: true
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
+
 export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -26,6 +85,27 @@ export const POST = async (
   await prisma.driver.update({ where: { driver_code }, data });
   return NextResponse.json({ ok: true });
 };
+
+/**
+ * @swagger
+ *  /api/drivers/{id}:
+ *    delete:
+ *      tags:
+ *        - Drivers
+ *      summary: Delete driver by id.
+ *      description: Delete driver from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: integer
+ *          description: The id of the driver to delete.
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
 
 export const DELETE = async (
   request: Request,

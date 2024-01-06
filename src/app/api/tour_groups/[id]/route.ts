@@ -1,6 +1,27 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+/**
+ * @swagger
+ *  /api/tour_groups/{id}:
+ *    get:
+ *      tags:
+ *        - Tour groups
+ *      summary: Get a tour group by code.
+ *      description: Get a tour group from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          description: The code of the tour group to obtain.
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
+
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -14,6 +35,34 @@ export const GET = async (
   return NextResponse.error();
 };
 
+/**
+ * @swagger
+ *  /api/tour_groups/{id}:
+ *    post:
+ *      tags:
+ *        - Tour groups
+ *      summary: Update a tour group.
+ *      description: Update a tour group.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          description: The code of the tour group to update.
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              group_name: string
+ *            example:
+ *              group_name: City Explorers
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
+
 export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -24,6 +73,27 @@ export const POST = async (
   await prisma.tourist_group.update({ where: { group_code }, data });
   return NextResponse.json({ ok: true });
 };
+
+/**
+ * @swagger
+ *  /api/tour_groups/{id}:
+ *    delete:
+ *      tags:
+ *        - Tour groups
+ *      summary: Delete tour group by code.
+ *      description: Delete tour group from database.
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          description: The code of the tour group to delete.
+ *      responses:
+ *        '200':
+ *          description: OK
+ *        '400':
+ *          description: Not found
+ */
 
 export const DELETE = async (
   request: Request,
