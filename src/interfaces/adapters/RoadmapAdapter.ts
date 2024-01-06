@@ -20,7 +20,9 @@ export const roadmapTableAdapter = (
 export const roadmapFormAdapter = (
   roadmap: Roadmap
 ): FormDataType<EditRoadmap> => ({
-  roadmap_date: roadmap.roadmap_date.toString(),
+  roadmap_date: roadmap.roadmap_date
+    ? dayjs(roadmap.roadmap_date).format("YYYY-MM-DD")
+    : "",
   car_code: roadmap.car.car_code.toString() ?? "",
   kms: roadmap.kms?.toString() ?? "",
   departure_time: roadmap.departure_time

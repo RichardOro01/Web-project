@@ -17,7 +17,9 @@ export const monthTableAdapter = (months: Month[]): TableDataType<Month>[] => {
 };
 
 export const monthFormAdapter = (month: Month): FormDataType<Month> => ({
-  month_code: month.month_code.toString(),
+  month_code: month.month_code
+    ? dayjs(month.month_code).format("YYYY-MM-DD")
+    : "",
   report_code: month.report_code?.toString() ?? "",
 });
 
