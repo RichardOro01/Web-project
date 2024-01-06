@@ -42,8 +42,8 @@ export const contractTypesAdapter = (
 ): EditContract => ({
   contract_code: parseInt(contract.contract_code),
   applicant_name: contract.applicant_name,
-  start_date: contract.start_date,
-  end_date: contract.end_date,
+  start_date: dayjs(contract.start_date).add(1, 'day').toISOString(),
+  end_date: dayjs(contract.end_date).add(1, 'day').toISOString(),
   contract_kms: parseFloat(contract.contract_kms),
   contract_amount: parseFloat(contract.contract_amount),
   contract_country: contract.contract_country,
