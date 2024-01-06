@@ -18,11 +18,13 @@ import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
 import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const RoadmapModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Roadmaps'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Roadmap | undefined
   );
@@ -89,7 +91,7 @@ const RoadmapModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Roadmap</h2>
+        <h2 className="form_title">{t(editing ? "Edit Roadmap" : "Insert Roadmap",{ns:"Roadmaps"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="date"
@@ -97,7 +99,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputDate
               dateType="date"
-              label="Date"
+              label={t("Roadmap date",{ns:'Roadmaps'})}
               id="roadmap_date"
               currentValue={data.roadmap_date}
               onChange={(e) =>
@@ -113,7 +115,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputSelect
               id="car_code"
-              label="Car code"
+              label={t("Car code",{ns:'Roadmaps'})}
               options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
@@ -148,7 +150,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputDate
               dateType="time"
-              label="Departure time"
+              label={t("Departure time",{ns:"Roadmaps"})}
               id="departure_time"
               currentValue={data.departure_time}
               onChange={(e) =>

@@ -13,11 +13,13 @@ import districtService from "@/services/tables/districts";
 import { District } from "@/interfaces/District";
 import { districtOptionsAdapter } from "@/interfaces/adapters/DistrictAdapter";
 import { driverFormAdapter, driverTypesAdapter } from "@/interfaces/adapters/DriverAdapter";
+import { useTranslation } from "react-i18next";
 
 const DriverModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Drivers'])
   const [district,setDistrict] = useState <District[]>([])
   const editing = useSelector((state: RootState) => state.modal.editing as EditDriver|undefined);
   const [api, contextHolder] = notification.useNotification();
@@ -78,14 +80,14 @@ const DriverModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Driver</h2>
+        <h2 className="form_title">{t(editing ? "Edit Driver" : "Insert Driver",{ns:"Drivers"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="name"
             rules={[{ required: true, message: "Name is required" }]}
           >
             <InputText
-              label="Name"
+              label={t("Name",{ns:'Drivers'})}
               id="name"
               min={1}
               max={200}
@@ -102,7 +104,7 @@ const DriverModal: React.FC = () => {
             rules={[{ required: true, message: "Address is required" }]}
           >
             <InputText
-              label="Address"
+              label={t("Address",{ns:'Drivers'})}
               id="address"
               min={1}
               max={200}
@@ -120,7 +122,7 @@ const DriverModal: React.FC = () => {
           >
             <InputText
               id="phone"
-              label="Phone"
+              label={t("Phone",{ns:'Drivers'})}
               type="number"
               maxLength={15}
               currentValue={data.phone}
@@ -136,7 +138,7 @@ const DriverModal: React.FC = () => {
             rules={[{ required: true, message: "Select the District" }]}
           >
             <InputSelect
-              label="District"
+              label={t("District name",{ns:'Drivers'})}
               id="district"
               currentValue={data.district_code}
               options={districtOptionsAdapter(district)}
@@ -166,7 +168,7 @@ const DriverModal: React.FC = () => {
                 })
               }
             >
-              Is Free Cover?
+              {t("Is Free Cover?",{ns:'Drivers'})}
             </Checkbox>
           </Form.Item>
         </div>

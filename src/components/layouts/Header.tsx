@@ -12,88 +12,17 @@ import { useTranslation } from "react-i18next";
 import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
 import UK from '@/assets/icons/items/uk.svg'
 import Spain from '@/assets/icons/items/spain.svg'
-
-const items: MenuProps["items"] = [
-  {
-    key: "tables",
-    type: "group",
-    label: "Tables",
-    children: [
-      {
-        key: "management",
-        label: "Management",
-        children: [
-          { key: "contracts", label: "Contract" },
-          { key: "services", label: "Service" },
-          { key: "discrepancy", label: "Discrepancy" },
-          { key: "roadmap", label: "Roadmap" },
-          { key: "report", label: "Report"},
-        ],
-      },
-      {
-        key: "services",
-        label: "Services",
-        children: [
-          { key: "brands", label: "Brands" },
-          { key: "cars", label: "Cars" },
-          { key: "drivers", label: "Drivers" },
-          { key: "couples", label: "Couples" },
-        ],
-      },
-      {
-        key: "reports",
-        label: "Reports",
-        children: [
-          { key: "top_3_groups", label: "Top 3 groups activity" },
-          { key: "top_5_drivers", label: "Top 5 drivers activity" },
-          { key: "top_3_countries", label: "Top 3 countries" },
-          { key: "free_cover", label: "Free cover drivers" },
-          { key: "drivers_worked_group_tour", label: "Drivers worked group" },
-          { key: "contracts_in_period", label: "Contracts in period" },
-        ],
-      },
-      {
-        key: "others",
-        label: "Others",
-        children: [
-          { key: "districts", label: "District" },
-          { key: "fuels", label: "Fuel" },
-          { key: "countries", label: "Country" },
-          { key: "months", label: "Month" },
-          { key: "tourist_groups", label: "Tour group" },
-          { key: "users", label: "Users" },
-        ],
-      },
-    ],
-  },
-];
-
-const scrollItems: MenuProps["items"] = [
-  {
-    key: "management",
-    label: "Management",
-  },
-  {
-    key: "services",
-    label: "Services",
-  },
-  {
-    key: "reports",
-    label: "Reports",
-  },
-  {
-    key: "others",
-    label: "Others",
-  },
-];
+import useHeaderItems from "@/services/utils/useHeaderItems";
 
 const Header = () => {
+  const {t} = useTranslation(["translation"])
   const router = useRouter();
   const pathname = usePathname();
   const [languajeTransBus,setLanguajeTransBus] = useState('')
   useLanguageControl(languajeTransBus,setLanguajeTransBus)
 
-  const {t} = useTranslation(["translation"])
+  const dataHeader = useHeaderItems()
+
   return (
     <>
       {pathname !== "/login" && (
@@ -154,7 +83,7 @@ const Header = () => {
                 </nav>
                 <Dropdown
                   menu={{
-                    items: scrollItems,
+                    items: dataHeader.scrollItems,
                     onClick: (e) => scrollToId(e.key),
                   }}
                   className="cursor-pointer sm:hidden flex"
@@ -168,7 +97,7 @@ const Header = () => {
             {pathname !== "/" && pathname !== "/login" && (
               <Dropdown
                 menu={{
-                  items,
+                  items:dataHeader.items,
                   onClick: (e) => router.push(`/${e.key}`, { scroll: false }),
                 }}
                 className="cursor-pointer"

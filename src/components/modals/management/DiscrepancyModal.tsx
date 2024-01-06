@@ -17,11 +17,13 @@ import monthService from "@/services/tables/months";
 import carService from "@/services/tables/cars";
 import { monthOptionsAdapter } from "@/interfaces/adapters/MonthAdaparter";
 import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
+import { useTranslation } from "react-i18next";
 
 const DiscrepancyModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Discrepancies'])
   const editing = useSelector((state: RootState) => state.modal.editing as Discrepancy | undefined);
   
   const [api, contextHolder] = notification.useNotification();
@@ -112,7 +114,7 @@ const DiscrepancyModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Discrepancy</h2>
+        <h2 className="form_title">{t(editing ? "Edit Discrepancy" : "Insert Discrepancy",{ns:"Discrepancies"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="month_code"
@@ -120,7 +122,7 @@ const DiscrepancyModal: React.FC = () => {
           >
             <InputSelect
               id="month_code"
-              label="Month"
+              label={t("Month",{ns:"Discrepancies"})}
               options={monthOptionsAdapter(months)}
               currentValue={data.month_code}
               onChange={(e) =>
@@ -136,7 +138,7 @@ const DiscrepancyModal: React.FC = () => {
           >
             <InputSelect
               id="car_code"
-              label="Car code"
+              label={t("Car code",{ns:"Discrepancies"})}
               options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
@@ -154,7 +156,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Planned kms required" }]}
           >
             <InputNum
-              label="Planned kms"
+              label={t("Planned kms",{ns:"Discrepancies"})}
               id="planned_kms"
               maxLength={6}
               currentValue={data.planned_kms}
@@ -170,7 +172,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Tours kms required" }]}
             >
             <InputNum
-              label="Tours kms"
+              label={t("Tours kms",{ns:"Discrepancies"})}
               id="tours_kms"
               maxLength={6}
               currentValue={data.tours_kms}
@@ -186,7 +188,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Difference kms required" }]}
             >
           <InputNum
-              label="Difference kms"
+              label={t("Difference kms",{ns:"Discrepancies"})}
               id="difference_kms"
               maxLength={6}
               currentValue={data.difference_kms}
@@ -202,7 +204,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Planned fuel required" }]}
             >
             <InputNum
-              label="Planned fuel"
+              label={t("Planned fuel",{ns:"Discrepancies"})}
               id="planned_fuel"
               maxLength={6}
               currentValue={data.planned_fuel}
@@ -218,7 +220,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Consumed fuel required" }]}
             >    
             <InputNum
-              label="Consumed fuel"
+              label={t("Consumed fuel",{ns:"Discrepancies"})}
               id="consumed_fuel"
               maxLength={6}
               currentValue={data.consumed_fuel}
@@ -234,7 +236,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Dif spending fuel required" }]}
           >
             <InputNum
-              label="Dif spending fuel"
+              label={t("Dif spending fuel",{ns:"Discrepancies"})}
               id="dif_spending_fuel"
               maxLength={6}
               currentValue={data.dif_spending_fuel}
