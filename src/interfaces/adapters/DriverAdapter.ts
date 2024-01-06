@@ -13,10 +13,12 @@ export const driverAdapter = (drivers: Driver[]): TableDataType<Driver>[] => {
 };
 
 export const driversOptionAdapter = (drivers: DriverOption[]): Option[] =>
-  drivers.map((driver) => ({
-    label: driver.driver_name,
-    value: driver.driver_code.toString(),
-  }));
+  drivers
+    .filter((driver) => !driver.is_free_cover)
+    .map((driver) => ({
+      label: driver.driver_name,
+      value: driver.driver_code.toString(),
+    }));
 
 export const driverFormAdapter = (
   driver: Driver
