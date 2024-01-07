@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
+import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
 
 /**
  * @swagger
@@ -106,10 +108,21 @@ export const DELETE = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const { id } = params;
-  const fleet_number = parseInt(id);
-  await prisma.car.delete({ where: { fleet_number } });
-  return NextResponse.json({ ok: true });
+  try{  
+    const { id } = params;
+    const fleet_number = parseInt(id);
+    await prisma.car.delete({ where: { fleet_number } });
+    return NextResponse.json({ ok: true });
+  }catch(error: any){
+    if (
+      (error as PrismaClientUnknownRequestError).name ===
+      "PrismaClientUnknownRequestError"
+    ) {
+      const bdError = handlePrismaClientUnknownRequestError(error);
+      return NextResponse.json(bdError, { status: 400 });
+    }
+    return NextResponse.json(error, { status: 400 });
+  }
 };
 
 
