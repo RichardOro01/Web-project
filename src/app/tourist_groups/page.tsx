@@ -25,7 +25,7 @@ const TourPage = async () => {
       <TableData
         title="Groups"
         modal="tour_groups"
-        data={tourist_groups}
+        Data={tourist_groups}
         dataToShow={touristTableAdapter(tourist_groups)}
         {...{ columns }}
       />

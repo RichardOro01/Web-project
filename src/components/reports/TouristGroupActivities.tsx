@@ -64,7 +64,7 @@ const TouristGroupActivities: React.FC<TouristGroupActivitiesProps> = ({
   return (
     <>
       <div className="flex flex-col">
-        <Title>{"Tourist group activities"}</Title>
+        <Title>{("Tourist group activities")}</Title>
         <DatePicker.RangePicker 
             onChange={(dates) => setDateRange(dates as RangeValue<Dayjs>)}
             value={dateRange}

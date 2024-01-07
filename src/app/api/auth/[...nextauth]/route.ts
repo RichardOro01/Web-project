@@ -2,6 +2,7 @@ import { EditUser } from "@/interfaces/User";
 import prisma from "@/lib/prisma";
 import NextAuth, { Session } from "next-auth";
 import CredentialsProvide from "next-auth/providers/credentials";
+
 const handler = NextAuth({
   // Configure one or more authentication providers
   providers: [

@@ -1,8 +1,10 @@
 import { MenuProps } from "antd";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "react-i18next";
 
 function useHeaderItems(){
     const {t} = useTranslation(['translation'])
+    const {data} = useSession()
 
     const scrollItems: MenuProps["items"] = [
         {
@@ -17,10 +19,11 @@ function useHeaderItems(){
           key: "reports",
           label: t("Reports",{ns:"translation"}),
         },
-        {
+        data?.role_code==1?{
           key: "others",
           label: t("Others",{ns:"translation"}),
-        },
+        }:{key: "others",
+        label: '',},
       ];
 
       const items: MenuProps["items"] = [
@@ -62,7 +65,7 @@ function useHeaderItems(){
                 { key: "contracts_in_period", label: t("Contracts in period",{ns:"translation"}) },
               ],
             },
-            {
+            data?.role_code==1?{
               key: "others",
               label: t("Others",{ns:"translation"}),
               children: [
@@ -73,7 +76,8 @@ function useHeaderItems(){
                 { key: "tourist_groups", label: t("Tour group",{ns:"translation"}) },
                 { key: "users", label: t("Users",{ns:"translation"}) },
               ],
-            },
+            }:{key: "others",
+            label: '',},
           ],
         },
       ];

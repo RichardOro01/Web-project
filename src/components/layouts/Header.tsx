@@ -13,6 +13,7 @@ import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
 import UK from '@/assets/icons/items/uk.svg'
 import Spain from '@/assets/icons/items/spain.svg'
 import useHeaderItems from "@/services/utils/useHeaderItems";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
   const {t} = useTranslation(["translation"])
@@ -20,6 +21,7 @@ const Header = () => {
   const pathname = usePathname();
   const [languajeTransBus,setLanguajeTransBus] = useState('')
   useLanguageControl(languajeTransBus,setLanguajeTransBus)
+  const {data} = useSession()
 
   const dataHeader = useHeaderItems()
 
@@ -74,12 +76,12 @@ const Header = () => {
                   >
                     {t("Reports")}
                   </span>
-                  <span
+                  {data?.role_code==1 && <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("others")}
                   >
                     {t("Others",{ns:"translation"})}
-                  </span>
+                  </span>}
                 </nav>
                 <Dropdown
                   menu={{

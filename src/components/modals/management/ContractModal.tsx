@@ -99,6 +99,7 @@ const ContractModal: React.FC = () => {
       <Modal
         centered
         open
+        cancelText={t("Cancel",{ns:"translation"})}
         onCancel={() => dispatch(hideCurrentModal())}
         onOk={handleOk}
       >

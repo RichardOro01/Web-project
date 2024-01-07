@@ -42,7 +42,7 @@ const CarPage = async () => {
         title="Cars"
         modal="cars"
         dataToShow={carAdapter(cars)}
-        data={cars}
+        Data={cars}
         {...{ columns }}
       />
     </main>

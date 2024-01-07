@@ -21,12 +21,15 @@ import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
 import { downloadPDF} from "@/lib/utils";import { useTranslation } from "react-i18next";
 import useTranslationData from "../../../../i18n/hooks/useTranslationData";
+import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { authorizeModifyData } from "@/services/utils/Authorization";
 
 interface TableDataProps {
   title: string;
   columns: ColumnsType<any>;
   modal: CRUD_ModalsType;
-  data: any[];
+  Data: any[];
   checkBoxColumns?: string[];
   dataToShow: TableDataType<any>[];
 }
@@ -35,7 +38,7 @@ const TableData: React.FC<TableDataProps> = ({
   columns,
   title,
   modal,
-  data,
+  Data,
   checkBoxColumns,
   dataToShow,
 }) => {
@@ -46,6 +49,7 @@ const TableData: React.FC<TableDataProps> = ({
   const [api, contextHolder] = notification.useNotification();
   const [deleting, setDeleting] = useState<(string | number)[]>([]);
   const translatedData = useTranslationData(title,dataToShow)
+  const {data} = useSession()
 
   const handleDelete = async (value: TableDataType<any>) => {
     if (!deleting.includes(value.key)) {
@@ -108,19 +112,23 @@ const TableData: React.FC<TableDataProps> = ({
       render: (value) => {
         return (
           <div className="flex items-center justify-end gap-2">
-            {!deleting.includes(value.key) && (
+            {!deleting.includes(value.key) &&
+             authorizeModifyData(data?.role_code,title) && (
               <DeleteOutlined
                 className="cursor-pointer"
                 onClick={() => handleDelete(value)}
+                //disabled={!authorizeModifyData(data?.role_code,title)}
               />
             )}
             {deleting.includes(value.key) && (
               <LoadingOutlined style={{ fontSize: 16 }} spin />
             )}
-            <EditOutlined
+            {authorizeModifyData(data?.role_code,title) &&
+              <EditOutlined
               className="cursor-pointer"
-              onClick={() => handleEdit(data[dataToShow.indexOf(value)])}
-            />
+              onClick={() => handleEdit(Data[dataToShow.indexOf(value)])}
+              //disabled={!authorizeModifyData(data?.role_code,title)}
+            />}
           </div>
         );
       },
@@ -155,6 +163,7 @@ const TableData: React.FC<TableDataProps> = ({
           <Button
             onClick={() => dispatch(setCurrentModal(modal))}
             type="primary"
+            disabled={!authorizeModifyData(data?.role_code,title)}
           >
             {t("Insert",{ns:"translation"})}
           </Button>

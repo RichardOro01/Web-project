@@ -40,7 +40,7 @@ const UserPage = async () => {
       <TableData
         title="Users"
         modal="users"
-        data={users}
+        Data={users}
         dataToShow={userTableAdapter(users)}
         {...{ columns }}
       />

@@ -25,7 +25,7 @@ const FuelPage = async () => {
       <TableData
         title="Fuels"
         modal="fuels"
-        data={fuels}
+        Data={fuels}
         dataToShow={fuelTableAdapter(fuels)}
         {...{ columns }}
       />

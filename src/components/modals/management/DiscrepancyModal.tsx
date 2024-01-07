@@ -112,6 +112,7 @@ const DiscrepancyModal: React.FC = () => {
       open
       onCancel={() => dispatch(hideCurrentModal())}
       onOk={handleOk}
+      cancelText={t("Cancel",{ns:"translation"})}
     >
       <Form className="form" ref={form} method="post">
         <h2 className="form_title">{t(editing ? "Edit Discrepancy" : "Insert Discrepancy",{ns:"Discrepancies"})}</h2>

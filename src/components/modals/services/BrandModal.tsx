@@ -78,6 +78,7 @@ const BrandModal: React.FC = () => {
         open
         onCancel={() => dispatch(hideCurrentModal())}
         onOk={handleOk}
+        cancelText={t("Cancel",{ns:"translation"})}
       >
         <Form className="form" ref={form} method="post">
           <h2 className="form_title">{t(editing ? "Edit Brand" : "Insert Brand",{ns:"Brands"})}</h2>

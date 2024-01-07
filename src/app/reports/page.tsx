@@ -50,7 +50,7 @@ const ReportPage = async () => {
       <TableData
         title="Reports"
         modal="reports"
-        data={reports}
+        Data={reports}
         dataToShow={reportTableAdapter(reports)}
         {...{ columns }}
       />

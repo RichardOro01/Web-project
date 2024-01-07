@@ -65,7 +65,7 @@ const ServicePage = async () => {
       <TableData
         title="Services"
         modal="services"
-        data={services}
+        Data={services}
         dataToShow={serviceTableAdapter(services)}
         {...{ columns }}
       />

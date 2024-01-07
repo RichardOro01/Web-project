@@ -46,7 +46,7 @@ const DriverPage = async () => {
         title="Drivers"
         modal="drivers"
         dataToShow={driverAdapter(drivers)}
-        data={drivers}
+        Data={drivers}
         {...{ columns }}
         checkBoxColumns={["is_free_cover"]}
       />

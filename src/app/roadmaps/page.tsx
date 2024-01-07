@@ -40,7 +40,7 @@ const RoadmapPage = async () => {
       <TableData
         title="Roadmaps"
         modal="roadmaps"
-        data={roadmaps}
+        Data={roadmaps}
         dataToShow={roadmapTableAdapter(roadmaps)}
         {...{ columns }}
       />

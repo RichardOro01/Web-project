@@ -30,7 +30,7 @@ const MonthPage = async () => {
       <TableData
         title="Months"
         modal="months"
-        data={months}
+        Data={months}
         dataToShow={monthTableAdapter(months)}
         {...{ columns }}
       />

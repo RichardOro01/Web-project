@@ -25,7 +25,7 @@ const CountryPage = async () => {
       <TableData
         title="Countries"
         modal="countries"
-        data={countries}
+        Data={countries}
         dataToShow={countryTableAdapter(countries)}
         {...{ columns }}
       />

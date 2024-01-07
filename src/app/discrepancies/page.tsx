@@ -60,7 +60,7 @@ const DiscrepancyPage = async () => {
       <TableData 
       title="Discrepancies" 
       modal="discrepancies" 
-      data={discrepancies}
+      Data={discrepancies}
       dataToShow={discrepancyTableAdapter(discrepancies)} 
       {...{ columns }} />
     </main>

@@ -25,7 +25,7 @@ const DistrictPage = async () => {
       <TableData
         title="Districts"
         modal="districts"
-        data={districts}
+        Data={districts}
         dataToShow={districtTableAdapter(districts)}
         {...{ columns }}
       />
