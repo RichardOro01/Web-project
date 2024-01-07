@@ -51,7 +51,7 @@ model contract {
 }
 
 model country {
-  country_name String     @db.VarChar(50)
+  country_name String     @unique(map: "country name") @db.VarChar(50)
   country_code String     @id @db.VarChar(2)
   contract     contract[]
   service      service[]
