@@ -202,6 +202,7 @@ model users {
   password  String? @db.VarChar
   name      String? @db.VarChar
   role_code Int?
+  email     String? @db.VarChar
   role      role?   @relation(fields: [role_code], references: [role_code], map: "role_code")
 
   @@index([role_code], map: "fki_role_code")
