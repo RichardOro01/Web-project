@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import { CRUD_Modals } from "@/components/modals/modals";
 import Services from "@/services/services";
-import { downloadPDF} from "@/lib/utils";import { useTranslation } from "react-i18next";
+import { downloadPDF, mapData} from "@/lib/utils";import { useTranslation } from "react-i18next";
 import useTranslationData from "../../../../i18n/hooks/useTranslationData";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
@@ -135,15 +135,6 @@ const TableData: React.FC<TableDataProps> = ({
     },
   ];
 
-  const handleDownloadPDF = () => {
-    downloadPDF(
-      dataToShow.map((row) =>
-        columns.map((column) => row[column.key as string])
-      ),
-      columns,
-      title
-    );
-  };
 
   return (
     <>
@@ -156,7 +147,17 @@ const TableData: React.FC<TableDataProps> = ({
           scroll={{ y: 450, x: 700 }}
         />
         <footer className="flex justify-end gap-2">
-          <Button onClick={() => handleDownloadPDF}>{t("Download PDF",{ns:"translation"})}</Button>
+          <Button
+            onClick={() =>
+              downloadPDF(
+                mapData(dataToShow, columns),
+                columns,
+                "Contracts in period"
+              )
+            }
+          >
+            Download PDF
+          </Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
             {t("Back",{ns:"translation"})}
           </Button>
