@@ -52,7 +52,7 @@ export const GET = async () => {
  *              username: jorge
  *              password: 12345
  *              name: Jorge
- *              email: paco@gmail.com
+ *              email: jorge@gmail.com
  *              role: 1
  *      responses:
  *        '200':
