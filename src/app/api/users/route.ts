@@ -46,11 +46,13 @@ export const GET = async () => {
  *              username: string
  *              password: string
  *              name: string
+ *              email: string
  *              role: integer
  *            example:
  *              username: jorge
  *              password: 12345
  *              name: Jorge
+ *              email: paco@gmail.com
  *              role: 1
  *      responses:
  *        '200':
