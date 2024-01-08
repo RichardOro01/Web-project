@@ -31,6 +31,11 @@ const columns: ColumnsType<User> = [
     dataIndex: "description",
     key: "description",
   },
+  {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+  },
 ];
 
 const UserPage = async () => {
@@ -42,6 +47,7 @@ const UserPage = async () => {
   let users: User[] = [];
   try {
     users = await userService.get();
+    console.log(users)
   } catch (error) {
     console.log(error);
   }

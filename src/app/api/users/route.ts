@@ -25,6 +25,7 @@ export const GET = async () => {
     username: user.username,
     password: user.password,
     name: user.name,
+    email: user.email,
     role: roles.find((role) => role.role_code === user.role_code),
   }));
   return NextResponse.json(result ?? []);

@@ -31,6 +31,7 @@ const UserModal: React.FC = () => {
     username: "",
     password: "",
     name: "",
+    email: "",
     role_code: "",
   });
 
@@ -142,6 +143,22 @@ const UserModal: React.FC = () => {
                       ...data,
                       role_code: e.target.value,
                     };
+                  })
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: "Email required" }]}
+            >
+              <InputText
+                label="Email"
+                id="email"
+                maxLength={50}
+                currentValue={data.email}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, email: e.target.value };
                   })
                 }
               />
