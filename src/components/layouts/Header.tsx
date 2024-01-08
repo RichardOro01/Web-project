@@ -1,26 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import bus from "@/assets/bus.svg";
 import Image from "next/image";
 import { scrollToId } from "../core/scroll";
 import { usePathname, useRouter } from "next/navigation";
-import { Dropdown, MenuProps, Select, Space } from "antd";
+import { Dropdown, Space } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import UserOptions from "../navbar/UserOptions";
 import { useTranslation } from "react-i18next";
-import useLanguageControl from "../../../i18n/hooks/useLanguageControl";
-import UK from "@/assets/icons/items/uk.svg";
-import Spain from "@/assets/icons/items/spain.svg";
 import useHeaderItems from "@/services/utils/useHeaderItems";
 import { useSession } from "next-auth/react";
+import LanguageSwitcher from "../navbar/LanguageSwitcher";
 
 const Header = () => {
   const { t } = useTranslation(["translation"]);
   const router = useRouter();
   const pathname = usePathname();
-  const [languajeTransBus, setLanguajeTransBus] = useState("");
-  useLanguageControl(languajeTransBus, setLanguajeTransBus);
   const { data } = useSession();
 
   const dataHeader = useHeaderItems();
@@ -44,24 +40,11 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             {pathname === "/" && (
               <>
-                <nav className="sm:flex gap-2 hidden">
-                  <Select
-                    value={languajeTransBus}
-                    style={{ width: 90 }}
-                    onChange={(e) => setLanguajeTransBus(e)}
-                  >
-                    <Select.Option value="en">
-                      EN <Image src={UK} alt="uk" width={22} />
-                    </Select.Option>
-
-                    <Select.Option value="es">
-                      ES{" "}
-                      <Image src={Spain} alt="spain" width={22} height={18} />
-                    </Select.Option>
-                  </Select>
+                <nav className="sm:flex items-center gap-2 hidden">
+                  <LanguageSwitcher />
                   <span
                     className="cursor-pointer"
                     onClick={() => scrollToId("management")}
