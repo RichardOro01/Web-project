@@ -1,4 +1,3 @@
-import { Brand, CreateBrand, EditBrand } from "../Brand";
 import { Free_cover } from "../Free_cover";
 
 export const free_coverTableAdapter = (free_covers: Free_cover[]): TableDataType<Free_cover>[] => {

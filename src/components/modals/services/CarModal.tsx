@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Car,EditCar } from "@/interfaces/Car";
+import { EditCar } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import useGetCouples from "@/services/hooks/useGetCouples";

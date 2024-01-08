@@ -9,7 +9,7 @@ import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import brandService from "@/services/tables/brands";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Brand, EditBrand } from "@/interfaces/Brand";
+import { EditBrand } from "@/interfaces/Brand";
 import {
   brandCreateAdapter,
   brandFormAdapter,

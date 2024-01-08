@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Driver, EditDriver } from "@/interfaces/Driver";
+import { EditDriver } from "@/interfaces/Driver";
 import driverService from "@/services/tables/drivers";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
 import districtService from "@/services/tables/districts";

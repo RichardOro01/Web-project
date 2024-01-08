@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import i18n from "../i18n";
 import { getCookie, setCookie } from "@/services/utils/cookies";
 

@@ -1,4 +1,3 @@
-import { Car } from "@/interfaces/Car";
 import { Service } from "../IService";
 import { DELETE, GET, POST } from "..";
 import { Free_cover } from "@/interfaces/Free_cover";

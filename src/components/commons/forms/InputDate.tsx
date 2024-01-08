@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import InputText, { InputTextProps } from "./InputText";
-import dayjs from "dayjs";
 
 interface InputDateProps {
   dateType: "time" | "date";

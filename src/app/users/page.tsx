@@ -1,5 +1,5 @@
 import TableData from "@/components/commons/tables/TableData";
-import { EditUser, User } from "@/interfaces/User";
+import { User } from "@/interfaces/User";
 import { userTableAdapter } from "@/interfaces/adapters/UserAdapter";
 import userService from "@/services/tables/users";
 import { ColumnsType } from "antd/es/table";

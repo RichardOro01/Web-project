@@ -24,7 +24,6 @@ import group from "@/assets/icons/items/group.svg";
 import coin from "@/assets/icons/items/coin.svg";
 import district from "@/assets/icons/items/district.svg"
 import { useSession } from "next-auth/react";
-import { useState } from "react";
 
 export default function Home() {
 

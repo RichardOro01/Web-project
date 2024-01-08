@@ -1,5 +1,5 @@
 import { Option } from "@/components/commons/forms/InputSelect";
-import { CreateRole, Role } from "../Role";
+import { Role } from "../Role";
 
 export const roleOptionsAdapter = (roles: Role[]): Option[] =>
   roles.map((role) => ({

@@ -1,6 +1,4 @@
-import { readDB, updateElementDB, writeDB } from "@/services/json";
 import { NextResponse } from "next/server";
-import { Driver } from "@/interfaces/Driver";
 import prisma from "@/lib/prisma";
 
 /**

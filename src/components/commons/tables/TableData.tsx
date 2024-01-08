@@ -22,7 +22,6 @@ import Services from "@/services/services";
 import { downloadPDF, mapData} from "@/lib/utils";import { useTranslation } from "react-i18next";
 import useTranslationData from "../../../../i18n/hooks/useTranslationData";
 import { useSession } from "next-auth/react";
-import { Session } from "next-auth";
 import { authorizeModifyData } from "@/services/utils/Authorization";
 
 interface TableDataProps {

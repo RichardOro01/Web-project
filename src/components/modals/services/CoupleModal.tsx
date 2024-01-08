@@ -1,18 +1,17 @@
 import { Form, FormInstance, Modal, notification } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/inputs.module.css";
-import InputText from "@/components/commons/forms/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { hideCurrentModal } from "@/components/core/stores/modalSlice";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
-import { Couple, CreateCouple } from "@/interfaces/Couple";
+import { CreateCouple } from "@/interfaces/Couple";
 import coupleService from "@/services/tables/couples";
 import { InputSelect } from "@/components/commons/forms/InputSelect";
-import { coupleCreateAdapter, coupleFormAdapter, coupleTypesAdapter } from "@/interfaces/adapters/CoupleAdapter";
+import { coupleFormAdapter, coupleTypesAdapter } from "@/interfaces/adapters/CoupleAdapter";
 import driverService from "@/services/tables/drivers";
 import { driversOptionAdapter } from "@/interfaces/adapters/DriverAdapter";
-import { Driver, DriverOption } from "@/interfaces/Driver";
+import { DriverOption } from "@/interfaces/Driver";
 import { useTranslation } from "react-i18next";
 
 const CoupleModal: React.FC = () => {

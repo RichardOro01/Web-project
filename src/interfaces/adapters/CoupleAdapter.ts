@@ -1,7 +1,5 @@
 import { Option } from "@/components/commons/forms/InputSelect";
-import { CreateFuel, Fuel } from "../Fuel";
 import { Couple, CreateCouple } from "../Couple";
-import { Driver } from "../Driver";
 
 export const coupleOptionsAdapter = (couples: Couple[]): Option[] =>
   couples.map((couple) => ({

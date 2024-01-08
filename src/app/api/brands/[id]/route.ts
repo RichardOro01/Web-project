@@ -3,7 +3,6 @@ import prisma from "@/lib/prisma";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library";
 import { handlePrismaClientUnknownRequestError } from "@/lib/utils";
 import { notFound } from "next/navigation"
-import {not} from "types-ramda";
 
 /**
  * @swagger

@@ -1,6 +1,6 @@
 import React from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { Dropdown, MenuProps, Space } from "antd";
+import { Dropdown, MenuProps } from "antd";
 import { signOut } from "next-auth/react";
 import { useTranslation } from "react-i18next";
 

@@ -1,11 +1,8 @@
-import TableData from '@/components/commons/tables/TableData';
 import TableDataReports from '@/components/commons/tables/TablesDataReports';
 import { Free_cover } from '@/interfaces/Free_cover';
 import { free_coverTableAdapter } from '@/interfaces/adapters/Free_coverAdapter';
-import prisma from '@/lib/prisma';
 import free_coverServices from '@/services/tables/free_cover';
-import Title from 'antd/es/skeleton/Title';
-import Table, { ColumnsType } from 'antd/es/table';
+import { ColumnsType } from 'antd/es/table';
 import React from 'react'
 
 const columns: ColumnsType<Free_cover> = [

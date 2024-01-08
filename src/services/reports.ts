@@ -1,4 +1,3 @@
-import { Dayjs } from "dayjs";
 import { GET } from ".";
 
 export const reportsService = {

@@ -17,7 +17,6 @@ import {
 import { Car } from "@/interfaces/Car";
 import carService from "@/services/tables/cars";
 import { carOptionsAdapter } from "@/interfaces/adapters/CarAdapter";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 const RoadmapModal: React.FC = () => {

@@ -1,21 +1,20 @@
 import { CRUD_ModalsType } from "@/components/modals";
-import brandService from "./tables/brands";
-import contractService from "./tables/contracts";
-import servicesAppService from "./tables/services";
-import discrepancyService from "./tables/discrepancies";
-import roadmapService from "./tables/roadmaps";
 import { Service } from "./IService";
+import brandService from "./tables/brands";
 import carService from "./tables/cars";
-import driverService from "./tables/drivers";
-import coupleService from "./tables/couples";
-import districtService from "./tables/districts";
-import fuelService from "./tables/fuels";
+import contractService from "./tables/contracts";
 import countryService from "./tables/countries";
-import tourService from "./tables/tour_groups";
-import reportService from "./tables/reports";
-import roleService from "./tables/roles";
-import userService from "./tables/users";
+import coupleService from "./tables/couples";
+import discrepancyService from "./tables/discrepancies";
+import districtService from "./tables/districts";
+import driverService from "./tables/drivers";
+import fuelService from "./tables/fuels";
 import monthService from "./tables/months";
+import reportService from "./tables/reports";
+import roadmapService from "./tables/roadmaps";
+import servicesAppService from "./tables/services";
+import tourService from "./tables/tour_groups";
+import userService from "./tables/users";
 
 const services: { [key in CRUD_ModalsType]: Service } = {
   brands: brandService,

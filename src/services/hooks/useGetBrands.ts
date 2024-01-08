@@ -1,7 +1,5 @@
-import { Couple } from "@/interfaces/Couple";
-import { useState, useEffect, useCallback } from "react";
-import coupleService from "../tables/couples";
 import { Brand } from "@/interfaces/Brand";
+import { useCallback, useEffect, useState } from "react";
 import brandService from "../tables/brands";
 
 function useGetBrands() {

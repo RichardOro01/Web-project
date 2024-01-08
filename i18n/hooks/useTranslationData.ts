@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 function useTranslationData (title:string,dataToShow:TableDataType<any>[]) {
