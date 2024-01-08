@@ -149,10 +149,9 @@ const TableData: React.FC<TableDataProps> = ({
         <footer className="flex justify-end gap-2">
           <Button
             onClick={() =>
-              downloadPDF(
-                mapData(dataToShow, columns),
+              downloadPDF(mapData(dataToShow,columns),
                 columns,
-                "Contracts in period"
+                title
               )
             }
           >
