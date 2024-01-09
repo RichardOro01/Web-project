@@ -49,9 +49,6 @@ const CoupleModal: React.FC = () => {
           router.refresh();
         } catch (error:any) {
           if (error.detail) api.error({ message: error.detail });
-        } finally {
-          dispatch(hideCurrentModal());
-          router.refresh();
         }
   };
 
