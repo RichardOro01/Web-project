@@ -18,7 +18,7 @@ const columns: ColumnsType<Top5Driver> = [
   {
     title: "Service count",
     dataIndex: "service_count",
-    key: 'service_count',
+    key: "service_count",
   },
 ];
 const top5DriverPage = async () => {
@@ -26,7 +26,6 @@ const top5DriverPage = async () => {
   try {
     data =
       await prisma.$queryRaw`SELECT * FROM top_5_drivers_by_service_count()`;
-    console.log(data);
     data = data.map((item) => ({
       ...item,
       service_count: Number(item.service_count),
@@ -40,6 +39,6 @@ const top5DriverPage = async () => {
     <main className="flex flex-col gap-8 p-5">
       <Top5Drivers {...{ data, columns }} />;
     </main>
-  )
+  );
 };
 export default top5DriverPage;

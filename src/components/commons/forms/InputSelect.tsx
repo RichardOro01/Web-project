@@ -51,13 +51,7 @@ export const InputSelect: React.FC<InputSelectProps> = ({
 
   return (
     <div className={styles.select_group}>
-      <input
-        type="hidden"
-        id="input"
-        ref={inputRef}
-        {...{ onChange }}
-        onChange={(e) => console.log(e)}
-      />
+      <input type="hidden" id="input" ref={inputRef} {...{ onChange }} />
       <select
         {...{ id, onFocus, onBlur }}
         className={`${styles.form_select} ${

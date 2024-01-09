@@ -78,7 +78,6 @@ export const POST = async (
   const data = await request.json();
   const { id } = params;
   const car_code = parseInt(id);
-  console.log(car_code)
   await prisma.car.update({ where: { car_code }, data });
   return NextResponse.json({ ok: true });
 };
@@ -108,12 +107,12 @@ export const DELETE = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  try{  
+  try {
     const { id } = params;
     const fleet_number = parseInt(id);
     await prisma.car.delete({ where: { fleet_number } });
     return NextResponse.json({ ok: true });
-  }catch(error: any){
+  } catch (error: any) {
     if (
       (error as PrismaClientUnknownRequestError).name ===
       "PrismaClientUnknownRequestError"
@@ -124,5 +123,3 @@ export const DELETE = async (
     return NextResponse.json(error, { status: 400 });
   }
 };
-
-

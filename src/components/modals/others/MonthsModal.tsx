@@ -16,9 +16,8 @@ import {
 import InputDate from "@/components/commons/forms/InputDate";
 import reportService from "@/services/tables/reports";
 import { reportOptionsAdapter } from "@/interfaces/adapters/ReportAdapter";
-import { Report } from '@/interfaces/Report'
+import { Report } from "@/interfaces/Report";
 import dayjs from "dayjs";
-
 
 const MonthsModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,32 +26,35 @@ const MonthsModal: React.FC = () => {
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Month | undefined
   );
-  
+
   const [api, contextHolder] = notification.useNotification();
 
-  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<Month>>({
-    month_code: "",
-    report_code: "",
-  });
+  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<Month>>(
+    {
+      month_code: "",
+      report_code: "",
+    }
+  );
 
   const [data, setData] = useState<FormDataType<Month>>({
     month_code: "",
     report_code: "",
   });
-  
+
   const [reports, setReports] = useState<Report[]>([]);
 
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
       const adaptedTypesData = monthTypesAdapter(data);
-      console.log(data)
       if (editing) {
-        await monthService.update(dayjs(currentTupleData.month_code).toISOString(), adaptedTypesData);
-      } else  
-       { 
+        await monthService.update(
+          dayjs(currentTupleData.month_code).toISOString(),
+          adaptedTypesData
+        );
+      } else {
         await monthService.add(monthCreateAdapter(adaptedTypesData));
-       } 
+      }
       api.success({ message: "Month created" }); //TODO cuando se cierra el modal no deja ver esto
       dispatch(hideCurrentModal());
       router.refresh();
@@ -77,7 +79,6 @@ const MonthsModal: React.FC = () => {
     updateReport();
   }, []);
 
-  console.log(reports)
   return (
     <>
       {contextHolder}
@@ -92,19 +93,19 @@ const MonthsModal: React.FC = () => {
           <div className={styles.form_container}>
             <Form.Item
               name="month_code"
-              rules={[{ required: true, message: "Month required" }]} 
+              rules={[{ required: true, message: "Month required" }]}
             >
               <InputDate
-              dateType="date"
-              label="Month"
-              id="month_code"
-              currentValue={data.month_code}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, month_code: e.target.value };
-                })
-              }
-            />
+                dateType="date"
+                label="Month"
+                id="month_code"
+                currentValue={data.month_code}
+                onChange={(e) =>
+                  setData((data) => {
+                    return { ...data, month_code: e.target.value };
+                  })
+                }
+              />
             </Form.Item>
             <Form.Item
               name="report_code"

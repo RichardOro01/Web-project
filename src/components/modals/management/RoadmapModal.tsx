@@ -23,13 +23,15 @@ const RoadmapModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const {t} = useTranslation(['Roadmaps'])
+  const { t } = useTranslation(["Roadmaps"]);
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Roadmap | undefined
   );
 
   const [api, contextHolder] = notification.useNotification();
-  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<EditRoadmap>>({
+  const [currentTupleData, setCurrentTupleData] = useState<
+    FormDataType<EditRoadmap>
+  >({
     roadmap_date: "",
     car_code: "",
     kms: "",
@@ -48,12 +50,13 @@ const RoadmapModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      console.log(data)
       const adaptedTypesData = roadmapTypesAdapter(data);
-      console.log(editing)
 
       if (editing) {
-         await roadmapService.update(`${currentTupleData.car_code}-:-${currentTupleData.roadmap_date}`,adaptedTypesData)
+        await roadmapService.update(
+          `${currentTupleData.car_code}-:-${currentTupleData.roadmap_date}`,
+          adaptedTypesData
+        );
       } else {
         await roadmapService.add(adaptedTypesData);
       }
@@ -74,7 +77,6 @@ const RoadmapModal: React.FC = () => {
     if (editing) {
       setData(roadmapFormAdapter(editing));
       setCurrentTupleData(roadmapFormAdapter(editing));
-      console.log(editing)
     }
   }, [editing]);
 
@@ -88,10 +90,12 @@ const RoadmapModal: React.FC = () => {
       open
       onCancel={() => dispatch(hideCurrentModal())}
       onOk={handleOk}
-      cancelText={t("Cancel",{ns:"translation"})}
+      cancelText={t("Cancel", { ns: "translation" })}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{t(editing ? "Edit Roadmap" : "Insert Roadmap",{ns:"Roadmaps"})}</h2>
+        <h2 className="form_title">
+          {t(editing ? "Edit Roadmap" : "Insert Roadmap", { ns: "Roadmaps" })}
+        </h2>
         <div className={styles.form_container}>
           <Form.Item
             name="date"
@@ -99,7 +103,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputDate
               dateType="date"
-              label={t("Roadmap date",{ns:'Roadmaps'})}
+              label={t("Roadmap date", { ns: "Roadmaps" })}
               id="roadmap_date"
               currentValue={data.roadmap_date}
               onChange={(e) =>
@@ -115,7 +119,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputSelect
               id="car_code"
-              label={t("Car code",{ns:'Roadmaps'})}
+              label={t("Car code", { ns: "Roadmaps" })}
               options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
@@ -150,7 +154,7 @@ const RoadmapModal: React.FC = () => {
           >
             <InputDate
               dateType="time"
-              label={t("Departure time",{ns:"Roadmaps"})}
+              label={t("Departure time", { ns: "Roadmaps" })}
               id="departure_time"
               currentValue={data.departure_time}
               onChange={(e) =>

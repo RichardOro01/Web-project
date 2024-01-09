@@ -102,8 +102,7 @@ export const POST = async (
   const data = await request.json();
   const { id } = params;
   const [car_code, month_code] = id.split("-:-");
-  console.log(data)
-  
+
   await prisma.discrepancy.update({
     where: {
       month_code_car_code: {
@@ -111,7 +110,7 @@ export const POST = async (
         car_code: parseInt(car_code),
       },
     },
-    data
+    data,
   });
 
   return NextResponse.json({ ok: true });

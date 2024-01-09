@@ -15,7 +15,7 @@ const LoginForm = () => {
   const params = useSearchParams();
   const [api, contextHolder] = notification.useNotification();
   const [callbackUrl, setCallbackUrl] = useState("/");
-  const {t} = useTranslation(["translation"])
+  const { t } = useTranslation(["translation"]);
 
   const handleSignIn: React.MouseEventHandler<HTMLElement> = async (e) => {
     e.preventDefault();
@@ -29,8 +29,9 @@ const LoginForm = () => {
         username,
         password,
       });
-      console.log(res);
-    } catch (e) {console.log(e)}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -54,7 +55,11 @@ const LoginForm = () => {
             name="username"
             rules={[{ required: true, message: "Field required" }]}
           >
-            <Input type="text" placeholder={t("User",{ns:"translation"})} maxLength={100} />
+            <Input
+              type="text"
+              placeholder={t("User", { ns: "translation" })}
+              maxLength={100}
+            />
           </Form.Item>
         </div>
         <div className="flex gap-1">
@@ -67,7 +72,7 @@ const LoginForm = () => {
           </Form.Item>
         </div>
         <Button onClick={handleSignIn} type="primary">
-          {t("Login",{ns:"translation"})}
+          {t("Login", { ns: "translation" })}
         </Button>
       </Form>
     </>

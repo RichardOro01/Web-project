@@ -19,9 +19,7 @@ const columns: ColumnsType<Top3Country> = [
 const top3CountryPage = async () => {
   let data: Top3Country[] = [];
   try {
-    data =
-      await prisma.$queryRaw`SELECT * FROM tour_countries()`;
-    console.log(data);
+    data = await prisma.$queryRaw`SELECT * FROM tour_countries()`;
     data = data.map((item) => ({
       ...item,
       services: Number(item.services),
@@ -35,6 +33,6 @@ const top3CountryPage = async () => {
     <main className="flex flex-col gap-8 p-5">
       <Top3Countries {...{ data, columns }} />;
     </main>
-  )
+  );
 };
 export default top3CountryPage;

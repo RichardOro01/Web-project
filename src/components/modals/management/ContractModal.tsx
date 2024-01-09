@@ -28,7 +28,7 @@ const ContractModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const {t} = useTranslation(['Contracts'])
+  const { t } = useTranslation(["Contracts"]);
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Contract | undefined
   );
@@ -49,9 +49,7 @@ const ContractModal: React.FC = () => {
   const handleOk = async () => {
     try {
       await form.current?.validateFields();
-      console.log(data);
       const adaptedTypesData = contractTypesAdapter(data);
-      console.log("adapted ", contractCreateAdapter(adaptedTypesData));
       if (editing) {
         await contractService.update(
           data.contract_code.toString(),
@@ -99,19 +97,23 @@ const ContractModal: React.FC = () => {
       <Modal
         centered
         open
-        cancelText={t("Cancel",{ns:"translation"})}
+        cancelText={t("Cancel", { ns: "translation" })}
         onCancel={() => dispatch(hideCurrentModal())}
         onOk={handleOk}
       >
         <Form className="form" ref={form} method="post">
-          <h2 className="form_title">{t(editing ? "Edit Contract" : "Insert Contract",{ns:"Contracts"})}</h2>
+          <h2 className="form_title">
+            {t(editing ? "Edit Contract" : "Insert Contract", {
+              ns: "Contracts",
+            })}
+          </h2>
           <div className={styles.form_container}>
             <Form.Item
               name="applicant_name"
               rules={[{ required: true, message: "Applicant required" }]}
             >
               <InputText
-                label={t("Applicant",{ns:'Contracts'})}
+                label={t("Applicant", { ns: "Contracts" })}
                 id="applicant_name"
                 maxLength={50}
                 currentValue={data.applicant_name}
@@ -128,7 +130,7 @@ const ContractModal: React.FC = () => {
             >
               <InputDate
                 dateType="date"
-                label={t("Start date",{ns:'Contracts'})}
+                label={t("Start date", { ns: "Contracts" })}
                 id="start_date"
                 currentValue={data.start_date}
                 onChange={(e) =>
@@ -144,7 +146,7 @@ const ContractModal: React.FC = () => {
             >
               <InputDate
                 dateType="date"
-                label={t("End date",{ns:'Contracts'})}
+                label={t("End date", { ns: "Contracts" })}
                 id="end_date"
                 currentValue={data.end_date}
                 onChange={(e) =>
@@ -159,7 +161,7 @@ const ContractModal: React.FC = () => {
               rules={[{ required: true, message: "Kms required" }]}
             >
               <InputNum
-                label={t("Kms",{ns:'Contracts'})}
+                label={t("Kms", { ns: "Contracts" })}
                 id="contract_kms"
                 maxLength={50}
                 currentValue={data.contract_kms}
@@ -176,7 +178,7 @@ const ContractModal: React.FC = () => {
             >
               <InputSelect
                 id="contract_country"
-                label={t("Country",{ns:'Contracts'})}
+                label={t("Country", { ns: "Contracts" })}
                 options={countryOptionsAdapter(countries)}
                 currentValue={data.contract_country}
                 onChange={(e) =>
@@ -195,7 +197,7 @@ const ContractModal: React.FC = () => {
             >
               <InputSelect
                 id="car_code"
-                label={t("Car Plate",{ns:'Contracts'})}
+                label={t("Car Plate", { ns: "Contracts" })}
                 options={carOptionsAdapter(cars)}
                 currentValue={data.car_code}
                 onChange={(e) =>

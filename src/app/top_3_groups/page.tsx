@@ -21,7 +21,6 @@ const top3GroupPage = async () => {
   try {
     data =
       await prisma.$queryRaw`SELECT * FROM top_3_tour_groups_by_activity_count()`;
-    console.log(data);
     data = data.map((item) => ({
       ...item,
       activity_count: Number(item.activity_count),
@@ -35,6 +34,6 @@ const top3GroupPage = async () => {
     <main className="flex flex-col gap-8 p-5">
       <Top3Groups {...{ data, columns }} />;
     </main>
-  )
+  );
 };
 export default top3GroupPage;

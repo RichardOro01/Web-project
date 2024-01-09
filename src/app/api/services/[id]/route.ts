@@ -22,7 +22,6 @@ import prisma from "@/lib/prisma";
  *          description: Not found
  */
 
-
 export const GET = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -85,7 +84,6 @@ export const POST = async (
   { params }: { params: { id: string } }
 ) => {
   const data = await request.json();
-  console.log(data);
 
   const { id } = params;
   const service_code = parseInt(id);

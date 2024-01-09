@@ -20,7 +20,7 @@ const ReportModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const {t} = useTranslation(['Reports'])
+  const { t } = useTranslation(["Reports"]);
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Report | undefined
   );
@@ -67,17 +67,19 @@ const ReportModal: React.FC = () => {
       open
       onCancel={() => dispatch(hideCurrentModal())}
       onOk={handleOk}
-      cancelText={t("Cancel",{ns:"translation"})}
+      cancelText={t("Cancel", { ns: "translation" })}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{t(editing ? "Edit Report" : "Insert Report",{ns:"Reports"})}</h2>
+        <h2 className="form_title">
+          {t(editing ? "Edit Report" : "Insert Report", { ns: "Reports" })}
+        </h2>
         <div className={styles.form_container}>
           <Form.Item
             name="amo_rents"
             rules={[{ required: true, message: "Amount rents required" }]}
           >
             <InputText
-              label={t("Amount rents",{ns:"Reports"})}
+              label={t("Amount rents", { ns: "Reports" })}
               id="amo_rents"
               type="number"
               min={1}
@@ -98,13 +100,12 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Income rents required" }]}
           >
             <InputNum
-              label={t("Income rents",{ns:"Reports"})}
+              label={t("Income rents", { ns: "Reports" })}
               id="income_rents"
               maxLength={50}
               currentValue={data.income_rents}
               onChange={(e) =>
                 setData((data) => {
-                  console.log(data);
                   return { ...data, income_rents: e.target.value };
                 })
               }
@@ -115,7 +116,7 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Amount others required" }]}
           >
             <InputText
-              label={t("Amount others",{ns:"Reports"})}
+              label={t("Amount others", { ns: "Reports" })}
               id="amo_others"
               type="number"
               min={1}
@@ -136,13 +137,12 @@ const ReportModal: React.FC = () => {
             rules={[{ required: true, message: "Income others required" }]}
           >
             <InputNum
-              label={t("Income others",{ns:"Reports"})}
+              label={t("Income others", { ns: "Reports" })}
               id="income_others"
               maxLength={50}
               currentValue={data.income_others}
               onChange={(e) =>
                 setData((data) => {
-                  console.log(data);
                   return { ...data, income_others: e.target.value };
                 })
               }

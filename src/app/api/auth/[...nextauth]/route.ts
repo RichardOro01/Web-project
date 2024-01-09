@@ -25,7 +25,6 @@ const authOptions: NextAuthOptions = {
           // If no error and we have user data, return it
           if (user) {
             const resultUser = { ...user, id: user.user_code.toString() };
-            console.log(resultUser);
             return resultUser;
           }
         } catch (e) {

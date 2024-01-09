@@ -88,7 +88,6 @@ export const GET = async (
  *          description: Not found
  */
 
-
 export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
@@ -96,7 +95,6 @@ export const POST = async (
   const data = await request.json();
   const { id } = params;
   const [car_code, roadmap_date] = id.split("-:-");
-  console.log(data)
   await prisma.roadmap.update({
     where: {
       roadmap_date_car_code: {
@@ -104,12 +102,11 @@ export const POST = async (
         car_code: parseInt(car_code),
       },
     },
-    data
+    data,
   });
 
   return NextResponse.json({ ok: true });
 };
-
 
 /**
  * @swagger
@@ -137,16 +134,20 @@ export const POST = async (
  *          description: Not found
  */
 
-
 export const DELETE = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
   const { id } = params;
   const [car_code, roadmap_date] = id.split("-:-");
-  console.log(car_code);
-  console.log(roadmap_date);
 
-  await prisma.roadmap.delete({ where: { roadmap_date_car_code: { roadmap_date: roadmap_date, car_code: parseInt(car_code), }, }, });
+  await prisma.roadmap.delete({
+    where: {
+      roadmap_date_car_code: {
+        roadmap_date: roadmap_date,
+        car_code: parseInt(car_code),
+      },
+    },
+  });
   return NextResponse.json({ ok: true });
 };

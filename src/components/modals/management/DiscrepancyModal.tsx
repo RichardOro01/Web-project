@@ -10,7 +10,10 @@ import discrepancyService from "@/services/tables/discrepancies";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Discrepancy, EditDiscrepancy } from "@/interfaces/Discrepancy";
-import { discrepancyFormAdapter, discrepancyTypesAdapter } from "@/interfaces/adapters/DiscrepancyAdapter";
+import {
+  discrepancyFormAdapter,
+  discrepancyTypesAdapter,
+} from "@/interfaces/adapters/DiscrepancyAdapter";
 import { Month } from "@/interfaces/Month";
 import { Car } from "@/interfaces/Car";
 import monthService from "@/services/tables/months";
@@ -23,21 +26,25 @@ const DiscrepancyModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
-  const {t} = useTranslation(['Discrepancies'])
-  const editing = useSelector((state: RootState) => state.modal.editing as Discrepancy | undefined);
-  
+  const { t } = useTranslation(["Discrepancies"]);
+  const editing = useSelector(
+    (state: RootState) => state.modal.editing as Discrepancy | undefined
+  );
+
   const [api, contextHolder] = notification.useNotification();
-  const [currentTupleData, setCurrentTupleData] = useState<FormDataType<EditDiscrepancy>>({
+  const [currentTupleData, setCurrentTupleData] = useState<
+    FormDataType<EditDiscrepancy>
+  >({
     month_code: "",
     car_code: "",
     planned_kms: "",
     tours_kms: "",
     difference_kms: "",
     planned_fuel: "",
-    consumed_fuel : "",
-    dif_spending_fuel : "",
+    consumed_fuel: "",
+    dif_spending_fuel: "",
   });
-  
+
   const [data, setData] = useState<FormDataType<EditDiscrepancy>>({
     month_code: "",
     car_code: "",
@@ -45,12 +52,10 @@ const DiscrepancyModal: React.FC = () => {
     tours_kms: "",
     difference_kms: "",
     planned_fuel: "",
-    consumed_fuel : "",
-    dif_spending_fuel : "",
+    consumed_fuel: "",
+    dif_spending_fuel: "",
   });
 
-  
-  
   const [cars, setCars] = useState<Car[]>([]);
   const [months, setMonths] = useState<Month[]>([]);
 
@@ -60,8 +65,10 @@ const DiscrepancyModal: React.FC = () => {
       const adaptedTypesData = discrepancyTypesAdapter(data);
 
       if (editing) {
-        console.log(currentTupleData)
-        await discrepancyService.update(`${currentTupleData.car_code}-:-${currentTupleData.month_code}`,adaptedTypesData)
+        await discrepancyService.update(
+          `${currentTupleData.car_code}-:-${currentTupleData.month_code}`,
+          adaptedTypesData
+        );
       } else {
         await discrepancyService.add(adaptedTypesData);
       }
@@ -84,8 +91,6 @@ const DiscrepancyModal: React.FC = () => {
       setCurrentTupleData(discrepancyFormAdapter(editing));
     }
   }, [editing]);
-
-  console.log(currentTupleData)
 
   useEffect(() => {
     updateCar();
@@ -112,10 +117,14 @@ const DiscrepancyModal: React.FC = () => {
       open
       onCancel={() => dispatch(hideCurrentModal())}
       onOk={handleOk}
-      cancelText={t("Cancel",{ns:"translation"})}
+      cancelText={t("Cancel", { ns: "translation" })}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{t(editing ? "Edit Discrepancy" : "Insert Discrepancy",{ns:"Discrepancies"})}</h2>
+        <h2 className="form_title">
+          {t(editing ? "Edit Discrepancy" : "Insert Discrepancy", {
+            ns: "Discrepancies",
+          })}
+        </h2>
         <div className={styles.form_container}>
           <Form.Item
             name="month_code"
@@ -123,7 +132,7 @@ const DiscrepancyModal: React.FC = () => {
           >
             <InputSelect
               id="month_code"
-              label={t("Month",{ns:"Discrepancies"})}
+              label={t("Month", { ns: "Discrepancies" })}
               options={monthOptionsAdapter(months)}
               currentValue={data.month_code}
               onChange={(e) =>
@@ -139,7 +148,7 @@ const DiscrepancyModal: React.FC = () => {
           >
             <InputSelect
               id="car_code"
-              label={t("Car code",{ns:"Discrepancies"})}
+              label={t("Car code", { ns: "Discrepancies" })}
               options={carOptionsAdapter(cars)}
               currentValue={data.car_code}
               onChange={(e) =>
@@ -157,7 +166,7 @@ const DiscrepancyModal: React.FC = () => {
             rules={[{ required: true, message: "Planned kms required" }]}
           >
             <InputNum
-              label={t("Planned kms",{ns:"Discrepancies"})}
+              label={t("Planned kms", { ns: "Discrepancies" })}
               id="planned_kms"
               maxLength={6}
               currentValue={data.planned_kms}
@@ -167,13 +176,13 @@ const DiscrepancyModal: React.FC = () => {
                 })
               }
             />
-            </Form.Item>
-            <Form.Item
+          </Form.Item>
+          <Form.Item
             name="tours_kms"
             rules={[{ required: true, message: "Tours kms required" }]}
-            >
+          >
             <InputNum
-              label={t("Tours kms",{ns:"Discrepancies"})}
+              label={t("Tours kms", { ns: "Discrepancies" })}
               id="tours_kms"
               maxLength={6}
               currentValue={data.tours_kms}
@@ -183,13 +192,13 @@ const DiscrepancyModal: React.FC = () => {
                 })
               }
             />
-            </Form.Item>
-            <Form.Item
+          </Form.Item>
+          <Form.Item
             name="planned_fuel"
             rules={[{ required: true, message: "Planned fuel required" }]}
-            >
+          >
             <InputNum
-              label={t("Planned fuel",{ns:"Discrepancies"})}
+              label={t("Planned fuel", { ns: "Discrepancies" })}
               id="planned_fuel"
               maxLength={6}
               currentValue={data.planned_fuel}
@@ -199,13 +208,13 @@ const DiscrepancyModal: React.FC = () => {
                 })
               }
             />
-            </Form.Item>
-            <Form.Item
+          </Form.Item>
+          <Form.Item
             name="consumed_fuel"
             rules={[{ required: true, message: "Consumed fuel required" }]}
-            >    
+          >
             <InputNum
-              label={t("Consumed fuel",{ns:"Discrepancies"})}
+              label={t("Consumed fuel", { ns: "Discrepancies" })}
               id="consumed_fuel"
               maxLength={6}
               currentValue={data.consumed_fuel}
@@ -215,7 +224,7 @@ const DiscrepancyModal: React.FC = () => {
                 })
               }
             />
-            </Form.Item>
+          </Form.Item>
         </div>
       </Form>
     </Modal>

@@ -8,7 +8,7 @@ import React from "react";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-const roles = [1]
+const roles = [1];
 
 const columns: ColumnsType<User> = [
   {
@@ -39,15 +39,14 @@ const columns: ColumnsType<User> = [
 ];
 
 const UserPage = async () => {
-  const session = await getServerSession(authOptions)
-  const rol = session?.role_code
-  if (rol&&!roles.includes(rol)) {
+  const session = await getServerSession(authOptions);
+  const rol = session?.role_code;
+  if (rol && !roles.includes(rol)) {
     return redirect("/");
   }
   let users: User[] = [];
   try {
     users = await userService.get();
-    console.log(users)
   } catch (error) {
     console.log(error);
   }
