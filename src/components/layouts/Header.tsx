@@ -41,32 +41,48 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             {pathname === "/" && (
               <>
                 <nav className="sm:flex items-center gap-2 hidden">
-                  <LanguageSwitcher />
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId(t("Management", { ns:"translation"}).toLowerCase())}
+                    onClick={() =>
+                      scrollToId(
+                        t("Management", { ns: "translation" }).toLowerCase()
+                      )
+                    }
                   >
                     {t("Management", { ns: "translation" })}
                   </span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId(t("Services", { ns:"translation"}).toLowerCase())}
+                    onClick={() =>
+                      scrollToId(
+                        t("Services", { ns: "translation" }).toLowerCase()
+                      )
+                    }
                   >
                     {t("Services", { ns: "translation" })}
                   </span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId(t("Reports",{ns:"translation"}).toLowerCase())}
+                    onClick={() =>
+                      scrollToId(
+                        t("Reports", { ns: "translation" }).toLowerCase()
+                      )
+                    }
                   >
-                    {t("Reports",{ns:"translation"})}
+                    {t("Reports", { ns: "translation" })}
                   </span>
                   {data?.role_code == 1 && (
                     <span
                       className="cursor-pointer"
-                      onClick={() => scrollToId(t("Others", { ns: "translation" }).toLowerCase())}
+                      onClick={() =>
+                        scrollToId(
+                          t("Others", { ns: "translation" }).toLowerCase()
+                        )
+                      }
                     >
                       {t("Others", { ns: "translation" })}
                     </span>
