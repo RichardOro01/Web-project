@@ -1,9 +1,9 @@
 import { EditUser } from "@/interfaces/User";
 import prisma from "@/lib/prisma";
-import NextAuth, { Session } from "next-auth";
+import NextAuth, { Session, NextAuthOptions } from "next-auth";
 import CredentialsProvide from "next-auth/providers/credentials";
 
-const authOptions = {
+const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvide({
@@ -25,7 +25,7 @@ const authOptions = {
           // If no error and we have user data, return it
           if (user) {
             const resultUser = { ...user, id: user.user_code.toString() };
-            console.log(resultUser)
+            console.log(resultUser);
             return resultUser;
           }
         } catch (e) {
@@ -54,7 +54,6 @@ const authOptions = {
     },
   },
 };
-
 
 const handler = NextAuth(authOptions);
 
