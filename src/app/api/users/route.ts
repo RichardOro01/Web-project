@@ -64,7 +64,7 @@ export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
   try {
     await prisma.users.create({ data });
-    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@, ${data.name}!`;
+    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@ a TRANSBUS, ${data.name}!`;
     enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
     return NextResponse.json({ ok: true });
   } catch (error: any) {
