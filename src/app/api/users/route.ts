@@ -1,4 +1,5 @@
 import { User } from "@/interfaces/User";
+import { enviarCorreoElectronico } from "@/lib/email";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -63,6 +64,8 @@ export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
   try {
     await prisma.users.create({ data });
+    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@, ${data.name}!`;
+    enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (error.code === "P2002") {
