@@ -13,11 +13,13 @@ import {
   districtFormAdapter,
   districtTypesAdapter,
 } from "@/interfaces/adapters/DistrictAdapter";
+import { useTranslation } from "react-i18next";
 
 const DistrictModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Districts'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as District | undefined
   );
@@ -60,14 +62,14 @@ const DistrictModal: React.FC = () => {
       onOk={handleOk}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} District</h2>
+        <h2 className="form_title">{t(editing ? "Edit District" : "Insert District",{ns:"Districts"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="district_name"
             rules={[{ required: true, message: "District name required" }]}
           >
             <InputText
-              label="District"
+              label={t("District name",{ns:"Districts"})}
               id="district_name"
               maxLength={50}
               currentValue={data.district_name}

@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Country } from "@/interfaces/Country";
 import { countryTypesAdapter } from "@/interfaces/adapters/CountryAdapter";
+import { useTranslation } from "react-i18next";
 
 const CountryModal: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useRef<FormInstance>(null);
+  const {t} = useTranslation(['Contries'])
   const editing = useSelector(
     (state: RootState) => state.modal.editing as Country | undefined
   );
@@ -53,16 +55,17 @@ const CountryModal: React.FC = () => {
       open
       onCancel={() => dispatch(hideCurrentModal())}
       onOk={handleOk}
+      cancelText={t("Cancel",{ns:"translation"})}
     >
       <Form className="form" ref={form} method="post">
-        <h2 className="form_title">{editing ? "Edit" : "Insert"} Country</h2>
+        <h2 className="form_title">{t(editing ? "Edit Country" : "Insert Country",{ns:"Countries"})}</h2>
         <div className={styles.form_container}>
           <Form.Item
             name="country_name"
             rules={[{ required: true, message: "Country code required" }]}
           >
             <InputText
-              label="Code"
+              label={t("Code",{ns:"Countries"})}
               id="country_code"
               maxLength={2}
               currentValue={data.country_code}
@@ -78,7 +81,7 @@ const CountryModal: React.FC = () => {
             rules={[{ required: true, message: "District name required" }]}
           >
             <InputText
-              label="Country"
+              label={t("Country name",{ns:"Countries"})}
               id="country_name"
               maxLength={50}
               currentValue={data.country_name}

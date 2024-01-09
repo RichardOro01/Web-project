@@ -21,8 +21,8 @@ model brand {
 }
 
 model car {
-  fleet_number Int           @unique(map: "fleet_number")
-  plate        String?       @db.VarChar
+  fleet_number Int           @unique(map: "fleet number")
+  plate        String?       @unique(map: "plate") @db.VarChar
   couple_code  Int?
   car_code     Int           @id @default(autoincrement())
   brand_code   Int?
@@ -51,7 +51,7 @@ model contract {
 }
 
 model country {
-  country_name String     @db.VarChar(50)
+  country_name String     @unique(map: "country name") @db.VarChar(50)
   country_code String     @id @db.VarChar(2)
   contract     contract[]
   service      service[]
@@ -202,6 +202,7 @@ model users {
   password  String? @db.VarChar
   name      String? @db.VarChar
   role_code Int?
+  email     String? @db.VarChar
   role      role?   @relation(fields: [role_code], references: [role_code], map: "role_code")
 
   @@index([role_code], map: "fki_role_code")
