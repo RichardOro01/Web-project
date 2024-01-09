@@ -60,11 +60,12 @@ const ContractsInPeriod: React.FC<ContractsInPeriodProps> = ({
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
         <Title>{"Contracts in period"}</Title>
         <DatePicker.RangePicker
           onChange={(dates) => setDateRange(dates as RangeValue<Dayjs>)}
           value={dateRange}
+          className="w-fit"
         />
         <Table loading={loading} columns={columns} dataSource={dataToShow} />
         <footer className="flex justify-end gap-2">

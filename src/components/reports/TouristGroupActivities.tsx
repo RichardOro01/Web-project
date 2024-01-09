@@ -1,5 +1,5 @@
 "use client";
-import { DatePicker, Select} from "antd";
+import { DatePicker, Select } from "antd";
 import { useEffect, useState } from "react";
 import { TouristGroupActivity } from "@/interfaces/TouristGroupActivity";
 import { downloadPDF, mapData } from "@/lib/utils";
@@ -7,7 +7,8 @@ import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import Title from "antd/es/typography/Title";
 import { useRouter } from "next/navigation";
-import React from "react"; "@/interfaces/adapters/TouristAdapter";
+import React from "react";
+("@/interfaces/adapters/TouristAdapter");
 import { reportsService } from "@/services/reports";
 import dayjs, { Dayjs } from "dayjs";
 import { RangeValue } from "rc-picker/lib/interface";
@@ -32,27 +33,32 @@ const TouristGroupActivities: React.FC<TouristGroupActivitiesProps> = ({
   const [dataToShow, setDataToShow] = useState<TouristGroupActivity[]>([]);
   const [dateRange, setDateRange] = useState<RangeValue<Dayjs>>([null, null]);
 
-
   const updateDataToShow = async () => {
     setLoading(true);
     try {
-        if(dateRange && dateRange[0] && dateRange[1]){
-            const start_date: string = dateRange[0].format("YYYY-MM-DD")
-            const end_date: string = dateRange[1].format("YYYY-MM-DD")
+      if (dateRange && dateRange[0] && dateRange[1]) {
+        const start_date: string = dateRange[0].format("YYYY-MM-DD");
+        const end_date: string = dateRange[1].format("YYYY-MM-DD");
 
-            const data = await reportsService.getTouristGroupActivities(start_date, end_date,selectedGroup);
-            const formatDateToHHMM = data.map((item: TouristGroupActivity)=>({
-                ...item,
-                pickup_time: item.pickup_time ? dayjs(item.pickup_time).format("HH:mm") : null,
-            }));
-            setDataToShow(formatDateToHHMM);
-        };
+        const data = await reportsService.getTouristGroupActivities(
+          start_date,
+          end_date,
+          selectedGroup
+        );
+        const formatDateToHHMM = data.map((item: TouristGroupActivity) => ({
+          ...item,
+          pickup_time: item.pickup_time
+            ? dayjs(item.pickup_time).format("HH:mm")
+            : null,
+        }));
+        setDataToShow(formatDateToHHMM);
+      }
     } catch (e) {
       console.log(e);
     }
     setLoading(false);
   };
-  
+
   useEffect(() => {
     updateDataToShow();
   }, [dateRange]);
@@ -63,11 +69,12 @@ const TouristGroupActivities: React.FC<TouristGroupActivitiesProps> = ({
 
   return (
     <>
-      <div className="flex flex-col">
-        <Title>{("Tourist group activities")}</Title>
-        <DatePicker.RangePicker 
-            onChange={(dates) => setDateRange(dates as RangeValue<Dayjs>)}
-            value={dateRange}
+      <div className="flex flex-col gap-4">
+        <Title>{"Tourist group activities"}</Title>
+        <DatePicker.RangePicker
+          onChange={(dates) => setDateRange(dates as RangeValue<Dayjs>)}
+          value={dateRange}
+          className="w-fit"
         />
         <Select
           placeholder="Select Toursit Group"
