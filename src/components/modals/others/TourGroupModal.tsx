@@ -8,7 +8,10 @@ import tourService from "@/services/tables/tour_groups";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/components/core/stores/store";
 import { Tourist } from "@/interfaces/TourGroup";
-import { touristTypesAdapter } from "@/interfaces/adapters/TouristAdapter";
+import {
+  touristFormAdapter,
+  touristTypesAdapter,
+} from "@/interfaces/adapters/TouristAdapter";
 
 const TourGroupModal: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const TourGroupModal: React.FC = () => {
 
   useEffect(() => {
     if (editing) {
-      setData(editing);
+      setData(touristFormAdapter(editing));
     }
   }, [editing]);
 

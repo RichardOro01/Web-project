@@ -4,17 +4,16 @@ import { timeToDate } from "@/lib/utils";
 
 export const roadmapTableAdapter = (
   roadmaps: Roadmap[]
-): TableDataType<Roadmap>[] => {
-  return roadmaps.map((roadmap) => ({
-    ...roadmap,
+): TableDataType<Roadmap>[] =>
+  roadmaps.map((roadmap) => ({
     key: `${roadmap.car.car_code}-:-${roadmap.roadmap_date}`,
     car_code: roadmap.car?.car_code,
     roadmap_date: dayjs(roadmap.roadmap_date).format("YYYY-MM"),
     departure_time: roadmap.departure_time
       ? dayjs(roadmap.departure_time).format("hh:mm A")
-      : null,
+      : "",
+    kms: roadmap.kms || "",
   }));
-};
 
 export const roadmapFormAdapter = (
   roadmap: Roadmap

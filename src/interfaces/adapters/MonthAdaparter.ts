@@ -10,9 +10,9 @@ export const monthOptionsAdapter = (months: Month[]): Option[] =>
 
 export const monthTableAdapter = (months: Month[]): TableDataType<Month>[] => {
   return months.map((month) => ({
-    ...month,
     month_code: dayjs(month.month_code).format("YYYY-MM"),
-    key: month.month_code,
+    key: month.month_code.toString(),
+    report_code: month.report_code || "",
   }));
 };
 

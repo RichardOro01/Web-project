@@ -16,6 +16,13 @@ export const touristTableAdapter = (
   }));
 };
 
+export const touristFormAdapter = (
+  tourist: Tourist
+): FormDataType<Tourist> => ({
+  group_code: tourist.group_code,
+  group_name: tourist.group_name || "",
+});
+
 export const touristTypesAdapter = (
   tourist: FormDataType<Tourist>
 ): Tourist => ({
