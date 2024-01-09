@@ -47,26 +47,26 @@ const Header = () => {
                   <LanguageSwitcher />
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId("management")}
+                    onClick={() => scrollToId(t("Management", { ns:"translation"}).toLowerCase())}
                   >
                     {t("Management", { ns: "translation" })}
                   </span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId("services")}
+                    onClick={() => scrollToId(t("Services", { ns:"translation"}).toLowerCase())}
                   >
                     {t("Services", { ns: "translation" })}
                   </span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => scrollToId("reports")}
+                    onClick={() => scrollToId(t("Reports",{ns:"translation"}).toLowerCase())}
                   >
-                    {t("Reports")}
+                    {t("Reports",{ns:"translation"})}
                   </span>
                   {data?.role_code == 1 && (
                     <span
                       className="cursor-pointer"
-                      onClick={() => scrollToId("others")}
+                      onClick={() => scrollToId(t("Others", { ns: "translation" }).toLowerCase())}
                     >
                       {t("Others", { ns: "translation" })}
                     </span>

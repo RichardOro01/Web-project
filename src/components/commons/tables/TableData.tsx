@@ -114,6 +114,7 @@ const TableData: React.FC<TableDataProps> = ({
             {!deleting.includes(value.key) &&
              authorizeModifyData(data?.role_code,title) && (
               <DeleteOutlined
+                style={{color:'red'}}
                 className="cursor-pointer"
                 onClick={() => handleDelete(value)}
                 //disabled={!authorizeModifyData(data?.role_code,title)}
@@ -154,7 +155,7 @@ const TableData: React.FC<TableDataProps> = ({
               )
             }
           >
-            Download PDF
+            {t("Download PDF",{ns:"translation"})}
           </Button>
           <Button onClick={() => router.push("/", { scroll: false })}>
             {t("Back",{ns:"translation"})}

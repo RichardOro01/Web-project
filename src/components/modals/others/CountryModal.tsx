@@ -29,7 +29,7 @@ const CountryModal: React.FC = () => {
       await form.current?.validateFields();
       if (editing) {
         await countryService.update(
-          data.country_code,
+          data.country_code.toString(),
           countryTypesAdapter(data)
         );
       } else {
@@ -39,6 +39,7 @@ const CountryModal: React.FC = () => {
       dispatch(hideCurrentModal());
       router.refresh();
     } catch (error: any) {
+      console.log(error)
       if (error.detail) api.error({ message: error.detail });
     }
   };
@@ -50,6 +51,8 @@ const CountryModal: React.FC = () => {
   }, [editing]);
 
   return (
+    <>
+    {contextHolder}
     <Modal
       centered
       open
@@ -95,6 +98,7 @@ const CountryModal: React.FC = () => {
         </div>
       </Form>
     </Modal>
+    </>
   );
 };
 
