@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import NextAuth, { Session } from "next-auth";
 import CredentialsProvide from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+const authOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvide({
@@ -53,5 +53,9 @@ const handler = NextAuth({
       return user as unknown as Session;
     },
   },
-});
-export { handler as GET, handler as POST };
+};
+
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST, authOptions };

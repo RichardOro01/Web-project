@@ -3,6 +3,8 @@ import { PrismaClientUnknownRequestError } from "@prisma/client/runtime/library"
 import dayjs from "dayjs";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export const timeToDate = (time?: string) => {
   if (time) {
@@ -61,4 +63,9 @@ export const mapData = (data: any[], columns: any[]) => {
   return data.map((row) =>
     columns.map((column) => row[column.key])
   );
+}
+
+export function isValidEmail(email: string): boolean{
+  const emailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+  return emailRegex.test(email);
 }

@@ -6,6 +6,7 @@ export const userTableAdapter = (users: User[]): TableDataType<User>[] => {
     username: user.username,
     password: user.password || "",
     name: user.name || "",
+    email: user.email || "",
     description: user.role?.description,
   }));
 };
@@ -15,6 +16,7 @@ export const userFormAdapter = (user: User): FormDataType<EditUser> => ({
   username: user.username,
   password: user.password ?? "",
   name: user.name ?? "",
+  email: user.email ?? "",
   role_code: user.role?.role_code.toString() ?? "",
 });
 
@@ -23,6 +25,7 @@ export const userTypesAdapter = (user: FormDataType<EditUser>): EditUser => ({
   username: user.username,
   password: user.password,
   name: user.name,
+  email: user.email,
   role_code: parseInt(user.role_code ?? ""),
 });
 
@@ -30,5 +33,6 @@ export const userCreateAdapter = (user: EditUser): CreateUser => ({
   username: user.username,
   password: user.password,
   name: user.name,
+  email: user.email,
   role_code: user.role_code,
 });

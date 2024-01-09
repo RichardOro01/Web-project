@@ -55,7 +55,7 @@ const InputText: React.FC<InputTextProps> = ({
         ref={input}
         className={styles.form_input}
         placeholder=" "
-        maxLength={20}
+        maxLength={50}
         value={currentValue}
       />
       <label htmlFor={id} className={styles.form_label}>

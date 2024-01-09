@@ -80,7 +80,10 @@ export const POST = async (request: Request, response: Response) => {
     await prisma.car.create({ data });
     return NextResponse.json({ ok: true });
   } catch (error: any) {
-    console.log(error);
-    return NextResponse.json("Error creando carro", { status: 400 });
+    console.log(error.code)
+    if(error.code === "P2002"){
+      return NextResponse.json("Numero de flota o chapa ya usado", { status: 400 });
+    }
+    return NextResponse.json("Error creando marca", { status: 400 }); 
   }
 };

@@ -55,7 +55,7 @@ const ContractPage = async () => {
       <TableData
         title="Contracts"
         modal="contracts"
-        data={contracts}
+        Data={contracts}
         dataToShow={contractTableAdapter(contracts)}
         {...{ columns }}
       />

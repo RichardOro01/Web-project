@@ -1,5 +1,7 @@
 import { User } from "@/interfaces/User";
+import { enviarCorreoElectronico } from "@/lib/email";
 import prisma from "@/lib/prisma";
+import { isValidEmail } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 /**
@@ -25,6 +27,7 @@ export const GET = async () => {
     username: user.username,
     password: user.password,
     name: user.name,
+    email: user.email,
     role: roles.find((role) => role.role_code === user.role_code),
   }));
   return NextResponse.json(result ?? []);
@@ -45,11 +48,13 @@ export const GET = async () => {
  *              username: string
  *              password: string
  *              name: string
+ *              email: string
  *              role: integer
  *            example:
  *              username: jorge
  *              password: 12345
  *              name: Jorge
+ *              email: jorge@gmail.com
  *              role: 1
  *      responses:
  *        '200':
@@ -59,7 +64,12 @@ export const GET = async () => {
 export const POST = async (request: Request, response: Response) => {
   const data = await request.json();
   try {
+    if(!isValidEmail(data.email)){
+      return NextResponse.json("Invalid email", { status: 400 });      
+    }
     await prisma.users.create({ data });
+    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@ a TRANSBUS, ${data.name}!`;
+    enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
     return NextResponse.json({ ok: true });
   } catch (error: any) {
     if (error.code === "P2002") {
