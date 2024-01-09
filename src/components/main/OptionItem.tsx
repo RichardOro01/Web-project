@@ -19,7 +19,7 @@ const OptionItem: React.FC<OptionItemProps> = ({ img, name, link }) => {
   return (
     <Link href={link} className={styles["box-container"]}>
       <Image src={img} {...{ alt }} />
-      <h2 className="text-xl font-semibold">{name}</h2>
+      <h2 className="text-xl font-semibold text-center">{name}</h2>
     </Link>
   );
 };
