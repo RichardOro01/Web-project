@@ -68,7 +68,10 @@ export const POST = async (request: Request, response: Response) => {
       return NextResponse.json("Invalid email", { status: 400 });      
     }
     await prisma.users.create({ data });
-    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@ a TRANSBUS, ${data.name}!`;
+    const mensajeBienvenida = `Usuario creado satisfactoriamente. Bienvenid@ a TRANSBUS, ${data.name}!.
+Nombre de usuario: ${data.username}.
+Contraseña: ${data.password}.
+TRANSBUS: http://localhost:3000`;
     enviarCorreoElectronico(data.email,'Usuario creado', mensajeBienvenida)
     return NextResponse.json({ ok: true });
   } catch (error: any) {
