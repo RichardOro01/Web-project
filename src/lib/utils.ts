@@ -64,6 +64,6 @@ export const mapData = (data: any[], columns: any[]) => {
 }
 
 export function isValidEmail(email: string): boolean{
-  const emailRegex = /\S+@\S+\.\s+/;
+  const emailRegex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
   return emailRegex.test(email);
 }

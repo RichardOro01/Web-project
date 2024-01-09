@@ -75,11 +75,16 @@ export const POST = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  const data = await request.json();
-  const { id } = params;
-  const user_code = parseInt(id);
-  await prisma.users.update({ where: { user_code }, data });
-  return NextResponse.json({ ok: true });
+  try{
+    const data = await request.json();
+    const { id } = params;
+    const user_code = parseInt(id);
+    await prisma.users.update({ where: { user_code }, data });
+    return NextResponse.json({ ok: true });
+  }catch(error: any){
+    return NextResponse.json("Error modificando usuario", { status: 400 });
+  }
+  
 };
 
 /**
