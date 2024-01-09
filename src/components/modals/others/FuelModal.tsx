@@ -13,6 +13,7 @@ import {
   fuelFormAdapter,
   fuelTypesAdapter,
 } from "@/interfaces/adapters/FuelAdapter";
+import { getServerSession } from "next-auth";
 
 const FuelModal: React.FC = () => {
   const dispatch = useDispatch();

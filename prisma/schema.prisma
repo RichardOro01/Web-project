@@ -21,8 +21,8 @@ model brand {
 }
 
 model car {
-  fleet_number Int           @unique(map: "fleet_number")
-  plate        String?       @db.VarChar
+  fleet_number Int           @unique(map: "fleet number")
+  plate        String?       @unique(map: "plate") @db.VarChar
   couple_code  Int?
   car_code     Int           @id @default(autoincrement())
   brand_code   Int?
