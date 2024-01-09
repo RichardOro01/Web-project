@@ -184,22 +184,6 @@ const DiscrepancyModal: React.FC = () => {
               }
             />
             </Form.Item>
-          <Form.Item
-            name="difference_kms"
-            rules={[{ required: true, message: "Difference kms required" }]}
-            >
-          <InputNum
-              label={t("Difference kms",{ns:"Discrepancies"})}
-              id="difference_kms"
-              maxLength={6}
-              currentValue={data.difference_kms}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, difference_kms: e.target.value };
-                })
-              }
-            />
-            </Form.Item>
             <Form.Item
             name="planned_fuel"
             rules={[{ required: true, message: "Planned fuel required" }]}
@@ -232,22 +216,6 @@ const DiscrepancyModal: React.FC = () => {
               }
             />
             </Form.Item>
-          <Form.Item
-            name="dif_spending_fuel"
-            rules={[{ required: true, message: "Dif spending fuel required" }]}
-          >
-            <InputNum
-              label={t("Dif spending fuel",{ns:"Discrepancies"})}
-              id="dif_spending_fuel"
-              maxLength={6}
-              currentValue={data.dif_spending_fuel}
-              onChange={(e) =>
-                setData((data) => {
-                  return { ...data, dif_spending_fuel: e.target.value };
-                })
-              }
-            />
-          </Form.Item>
         </div>
       </Form>
     </Modal>
